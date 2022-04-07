@@ -12,6 +12,6 @@
 
 <IntersectionObserver once={true} let:intersecting>
   {#if intersecting}
-    <Base {alt} {src} class={clazz} />
+    <Base {alt} {src} class={clazz} {...$$restProps} />
   {/if}
 </IntersectionObserver>

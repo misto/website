@@ -16,12 +16,21 @@
 
 <style>
   img {
+    height: 100%;
+    width: 100%;
     opacity: 0;
-    transition: opacity 3200ms ease-out;
+    transition: opacity 1200ms ease-out;
   }
   img.loaded {
     opacity: 1;
   }
 </style>
 
-<img {src} {alt} class:loaded bind:this={image} class={clazz} />
+<img
+  {src}
+  {alt}
+  class:loaded
+  bind:this={image}
+  class={clazz}
+  {...$$restProps}
+/>

@@ -19,7 +19,7 @@
   import Header from "$lib/components/header.svelte";
   import LinkButton from "$lib/components/ui-library/link-button";
   import ButtonsWrapper from "$lib/components/buttons-wrapper.svelte";
-  import Image from "$lib/components/image/image.svelte";
+  import Image from "$lib/components/image/index.svelte";
 
   export let changelogEntries: ChangelogEntryType[];
 </script>
