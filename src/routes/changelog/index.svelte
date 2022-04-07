@@ -19,6 +19,7 @@
   import Header from "$lib/components/header.svelte";
   import LinkButton from "$lib/components/ui-library/link-button";
   import ButtonsWrapper from "$lib/components/buttons-wrapper.svelte";
+  import Image from "$lib/components/image/image.svelte";
 
   export let changelogEntries: ChangelogEntryType[];
 </script>
@@ -76,7 +77,7 @@
         href={`/changelog/${stringToBeautifiedFragment(title)}`}
       />
       <Wrapper class="content-changelog w-full md:w-8/12">
-        <img src="/images/changelog/{image}" class="rounded-3xl" {alt} />
+        <Image src="/images/changelog/{image}" {alt} class="rounded-3xl" />
         <h2>
           <ChangelogLink
             href={`/changelog/${stringToBeautifiedFragment(title)}`}
