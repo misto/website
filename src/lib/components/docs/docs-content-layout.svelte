@@ -29,9 +29,9 @@
     title: title ? title : "Gitpod Documentation",
   }}
 />
-<AnnouncementBanner />
 <div class="flex">
   <div class="content-docs prose md:px-4 max-w-none flex-auto min-w-0 xl:w-2/3">
+    <AnnouncementBanner />
     <slot />
   </div>
   <OnThisPageNav />

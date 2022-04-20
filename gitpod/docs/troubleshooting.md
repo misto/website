@@ -11,36 +11,35 @@ title: Troubleshooting
 
 If you cannot find your issue here or in the documentation, please contact Gitpod via our [Support page](/support).
 
-## Gitpod logs in VSCode Web
+## Gitpod logs in VS Code Web
 
 These logs contain information about the workspace, the session, and the Visual Studio Code environment. They are useful for diagnosing connection issues and other unexpected behavior.
 
-- Open the Visual Studio Code Command Palette (`Shift + Command + P` (Mac) / `Ctrl + Shift + P` (Windows)) and type **Export logs**, select **Developer: Export all logs** from the list to download a zip file containing all the logs.
-
-**Important:** The content of these logs should NOT be shared publicly as it could containt sensitive information from your workspace, instead send it to support@gitpod.io along with a link to a corresponding Github issue if needed.
+- Open the Visual Studio Code Command Palette (<kbd>Shift</kbd> + <kbd>Command</kbd> + <kbd>P</kbd> (Mac) / <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd> (Windows)) and type **Export logs**, select **Developer: Export all logs** from the list to download a zip file containing all of the logs.
+  **Important:** The content of these logs should **NOT** be shared publicly as they could contain sensitive information about your workspace. Instead, send them to support@gitpod.io along with a link to a corresponding GitHub issue if needed.
 
 ## Why doesn't the "ClearURLs" browser extension work with Gitpod?
 
 The ClearURLs browser extension for [Google Chrome](https://chrome.google.com/webstore/detail/clearurls/lckanjgmijmafbedllaakclkaicjfmnk?hl=en) and [Mozilla Firefox](https://addons.mozilla.org/en-US/firefox/addon/clearurls/) inhibits Gitpod workspaces from initialising and the problem manifests with the following symptoms:
 
-- dark theme does not load
-- the bottom left gitpod button is missing
-- the vscode market place does not load
-- settings sync does not work
+- The dark theme doesn't load
+- The bottom left Gitpod button is missing
+- The VS Code Marketplace does not load
+- Settings Sync does not work
 
-This issue can be resolved by disabling "ETag filtering" in ClearURLs’ settings. A [issue has been created](https://gitlab.com/KevinRoebert/ClearUrls/-/issues/977) that requests to whitelist Gitpod by default and we would apprciate your upvotes on the issue.
+This issue can be resolved by disabling "ETag filtering" in ClearURLs’ settings. An [issue has been created](https://gitlab.com/KevinRoebert/ClearUrls/-/issues/977) that requests to whitelist Gitpod by default and we would appreciate your upvotes on the issue.
 
 ## Is there a limit of IDE/editor connections to Gitpod?
 
-There is no hard-limit about how many IDE/editors can be connected to a running Gitpod workspace. All connected IDE/editors will have access to the same underlying file system and directories.
+There is no hard-limit about how many IDE/editors can be connected to a running Gitpod workspace. All connected IDEs/editors will have access to the same underlying file system and directories.
 
 ## What version of VS Code runs in Gitpod (in the browser)?
 
-VS Code in the browser in Gitpod uses a fork of [VS Code](https://github.com/microsoft/vscode) called [openvscode-server](https://github.com/gitpod-io/openvscode-server). Gitpod actively monitor the VS Code release cycle, and release the latest version of VS Code shortly after the upstream repository is updated. You can find more information about which version of VS Code is running in the browser by navigating to "Help > About" from a running Gitpod workspace.
+VS Code in the browser in Gitpod uses a fork of [VS Code](https://github.com/microsoft/vscode) called [openvscode-server](https://github.com/gitpod-io/openvscode-server). Gitpod actively monitors VS Code's release cycle, and releases the latest version of VS Code shortly after the upstream repository is updated. You can find more information about which version of VS Code is running in the browser by navigating to "Help > About" from a running Gitpod workspace.
 
 ## Can I use both a desktop IDE and a browser editor in Gitpod?
 
-Yes, you can. Both desktop and browser IDE/editors have full access to files and directories within the workspace. So, when you connect to you Gitpod workspace from your Desktop you can also access your workspace via your browser. This means browser-based editing can either be used as your first-choice editor, or as a "fall back" alternative option for when you want to make edits on the move. With Gitpod, where and how you edit your code is very flexible.
+Yes, you can. Both desktop and browser IDEs/editors have full access to files and directories within the workspace. So, when you connect to your Gitpod workspace from your Desktop you can also access your workspace via your browser. This means browser-based editing can either be used as your first-choice editor, or as a "fall back" alternative option for when you want to make edits on the move. With Gitpod, where and how you edit your code is very flexible.
 
 ## What is the preferred IDE/editor for Gitpod?
 
@@ -62,7 +61,7 @@ Yes, the plan is to eventually support all of the JetBrains IDE's. Please refer 
 
 Gitpod does not officially support [JetBrains Projector](https://lp.jetbrains.com/projector/). Gitpod has support for [JetBrains Gateway](ides-and-editors/jetbrains-gateway), which is the primary tool for remote development when using JetBrains IDE's.
 
-## JetBrains Gateway and Gitpod is not working as expected?
+## What should I do if JetBrains Gateway and Gitpod aren't working?
 
 1. Ensure you are using the latest version of [JetBrains Gateway](https://www.jetbrains.com/help/idea/remote-development-a.html#gateway)
 2. Ensure you are using the latest version of the [Gitpod JetBrains Gateway plugin](https://plugins.jetbrains.com/plugin/18438-gitpod-gateway)

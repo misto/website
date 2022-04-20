@@ -7,7 +7,18 @@ export const get: RequestHandler = async () => {
     import.meta.globEager("/src/routes/**/!(_)*.{svelte,md}")
   )
     .filter((page) => {
-      const filters = ["/src/routes/index.svelte", "_", "slug]", "title]"];
+      const filters = [
+        "/src/routes/index.svelte",
+        "_",
+        "slug]",
+        "title]",
+        "src/routes/docs/quickstart",
+        "extension-activation",
+        "unsubscribe",
+        "vs/jetbrains-space",
+        "enterprise-license",
+        "extension-uninstall",
+      ];
       return !filters.find((filter) => page.includes(filter));
     })
     .map((page) => {
@@ -29,6 +40,9 @@ export const get: RequestHandler = async () => {
   xmlns:video="https://www.google.com/schemas/sitemap-video/1.1"
 >
 <url><loc>${removeTrailingSlash(website)}</loc></url>
+<url><loc>${removeTrailingSlash(
+    "https://www.gitpod.io/docs/quickstart"
+  )}</loc></url>
 ${staticPages
   .map((page) => `<url><loc>${removeTrailingSlash(page)}</loc></url>`)
   .join("")}

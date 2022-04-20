@@ -62,7 +62,9 @@ If you want a base image without the default tooling installed then use the <a h
 FROM gitpod/workspace-base
 
 # Install custom tools, runtime, etc.
-RUN brew install fzf
+# base image only got `apt` as the package manager
+# install-packages is a wrapper for `apt` that helps skip a few commands in the docker env.
+RUN sudo install-packages shellcheck tree llvm
 ```
 
 When you launch a Gitpod workspace, the local console will use the `gitpod` user, so all local settings, config file, etc. should apply to `/home/gitpod` or be run using `USER gitpod` (we no longer recommend using `USER root`).
@@ -73,13 +75,13 @@ You can however use `sudo` in your Dockerfile. The following example shows a typ
 FROM gitpod/workspace-full
 
 # Install custom tools, runtime, etc.
-RUN sudo apt-get update \\
-    && sudo apt-get install -y \\
-        ... \\
-    && sudo rm -rf /var/lib/apt/lists/*
+# install-packages is a wrapper for `apt` that helps skip a few commands in the docker env.
+RUN sudo install-packages \\
+          binwalk \\
+          clang \\
+          tmux
 
 # Apply user-specific settings
-ENV ...
 ```
 
 Once committed and pushed, Gitpod will automatically build this Dockerfile when (or [before](/docs/prebuilds)) new workspaces are created.

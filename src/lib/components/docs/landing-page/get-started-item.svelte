@@ -16,7 +16,7 @@
 </style>
 
 <div
-  class="text-center bg-off-white rounded-4xl shadow-normal py-x-small px-micro flex flex-col"
+  class="text-center bg-off-white rounded-2xl shadow-normal py-x-small px-micro flex flex-col"
 >
   <div class="flex justify-center">
     <img

@@ -8,6 +8,7 @@
   import Config from "$lib/components/extension-activation/config.svelte";
   import OpenGraph from "$lib/components/open-graph.svelte";
   import Header from "$lib/components/header.svelte";
+  import Card from "$lib/components/card/card.svelte";
 
   const currentBrowser = ["Opera", "Chrome", "Firefox", "IE"].find(
     (browser) =>
@@ -15,7 +16,7 @@
       window.navigator.userAgent.includes(browser)
   );
 
-  const features = [
+  const cards = [
     {
       icon: "/images/extension-activation/prebuild.svg",
       title: "Skip the Waiting",
@@ -56,22 +57,19 @@
 <Config />
 
 <section
-  class="flex items-center lg:items-stretch flex-col lg:flex-row sm:pb-huge space-y-small lg:space-y-0 lg:space-x-xx-small"
+  class="flex items-center justify-center lg:items-stretch flex-col lg:flex-row sm:pb-huge space-y-small lg:space-y-0 lg:space-x-xx-small"
 >
-  {#each features as feature}
-    <div
-      class="text-center py-small px-xx-small bg-gray-100 rounded-4xl lg:w-1/3 max-w-md"
-    >
-      <div>
-        <!-- svelte-ignore a11y-missing-attribute -->
-        <img
-          src={feature.icon}
-          role="presentation"
-          class="mx-auto mb-xx-small h-28 w-28"
-        />
-        <h2 class="h3">{feature.title}</h2>
-        <p>{feature.description}</p>
-      </div>
-    </div>
+  {#each cards as { title, description, icon }}
+    <Card
+      card={{
+        title: title,
+        text: description,
+        icon: {
+          src: icon,
+          alt: "",
+          transform: "scale(1.5)",
+        },
+      }}
+    />
   {/each}
 </section>

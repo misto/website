@@ -7,6 +7,6 @@
   export let card: CardType;
 </script>
 
-<Card size="medium" class="py-small px-x-small {className}">
+<Card size="small" class="py-small px-x-small {className}">
   <Base {card} {...$$restProps} iconClassNames="h-28" />
 </Card>

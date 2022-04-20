@@ -8,6 +8,6 @@
   export let textAlign: "left" | "center" | "right" = "center";
 </script>
 
-<Card size="medium" class="py-small max-w-sm px-x-small {className}">
+<Card size="small" class="py-small max-w-sm px-x-small {className}">
   <Base {textAlign} {...$$restProps} {card} />
 </Card>

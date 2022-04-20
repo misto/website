@@ -22,6 +22,10 @@
       @apply mb-x-large;
     }
   }
+
+  .feature-boxes > :global(div:first-child) :global(.feature-box) {
+    @apply mb-x-small !important;
+  }
 </style>
 
 <OpenGraph
@@ -40,37 +44,39 @@
   tight={true}
 />
 
-<FeatureBox
-  feature={{
-    title: "Ready in a flash",
-    paragraph:
-      "Gitpod removes long init and build times by continuously pre-building workspaces for your project. Thereby it allows you to start coding or debugging immediately, from any context, at any time.",
-    moreButton: {
-      href: "/docs/prebuilds",
-      text: "More about Prebuilds.",
-    },
-    image: {
-      src: "/images/github-codespaces/spaces-1.svg",
-      alt: "Gitpod vs GitHub Codespaces speed comparison",
-    },
-    footnote:
-      "Compared start-up time until ready-to-code for<br /> <a href='https://github.com/gitpod-io/vscode' target='_blank'>https://github.com/gitpod-io/vscode</a>. Last verified 25 Sep 2020.",
-  }}
-/>
+<div class="feature-boxes">
+  <FeatureBox
+    feature={{
+      title: "Ready in a flash",
+      paragraph:
+        "Gitpod removes long init and build times by continuously pre-building workspaces for your project. Thereby it allows you to start coding or debugging immediately, from any context, at any time.",
+      moreButton: {
+        href: "/docs/prebuilds",
+        text: "More about Prebuilds.",
+      },
+      image: {
+        src: "/images/github-codespaces/spaces-1.svg",
+        alt: "Gitpod vs GitHub Codespaces speed comparison",
+      },
+      footnote:
+        "Compared start-up time until ready-to-code for<br /> <a href='https://github.com/gitpod-io/vscode' target='_blank'>https://github.com/gitpod-io/vscode</a>. Last verified 25 Sep 2020.",
+    }}
+  />
 
-<FeatureBox
-  feature={{
-    title: "Resource Efficient",
-    paragraph:
-      "Instead of running on expensive VMs, Gitpod provisions secure containers and achieves best-in-class resource-efficiency with scalable workspaces running on shared high-powered cloud servers. <a href='https://www.researchgate.net/publication/333096446_Reduced_carbon_emission_and_optimized_power_consumption_technique_using_container_over_virtual_machine' target='_blank'>Helping our planet</a> 🌱.",
-    image: {
-      src: "/images/github-codespaces/spaces-2.svg",
-      alt: "Gitpod vs GitHub Codespaces price comparison",
-    },
-    footnote:
-      "Price comparison for a developer working 5h per day, 21 per month with 8 core CPUs and 12GB RAM. Last verified 3 Sep 2021. Sources: <a href='/pricing'>Gitpod</a>, <a href='https://github.com/features/codespaces' target='_blank'>GitHub Codespaces</a>.",
-  }}
-/>
+  <FeatureBox
+    feature={{
+      title: "Resource Efficient",
+      paragraph:
+        "Instead of running on expensive VMs, Gitpod provisions secure containers and achieves best-in-class resource-efficiency with scalable workspaces running on shared high-powered cloud servers. <a href='https://www.researchgate.net/publication/333096446_Reduced_carbon_emission_and_optimized_power_consumption_technique_using_container_over_virtual_machine' target='_blank'>Helping our planet</a> 🌱.",
+      image: {
+        src: "/images/github-codespaces/spaces-2.svg",
+        alt: "Gitpod vs GitHub Codespaces price comparison",
+      },
+      footnote:
+        "Price comparison for a developer working 5h per day, 21 per month with 8 core CPUs and 12GB RAM. Last verified 3 Sep 2021. Sources: <a href='/pricing'>Gitpod</a>, <a href='https://github.com/features/codespaces' target='_blank'>GitHub Codespaces</a>.",
+    }}
+  />
+</div>
 
 <Section>
   <FeatureTable tableData={codespacesComparison} />
@@ -109,7 +115,7 @@
       },
     }}
     variant="cta"
-    btnClassNames=" mt-x-small"
+    btnClassNames="mt-x-small"
     class="mx-micro mb-micro"
     headingLevel="h2"
   />

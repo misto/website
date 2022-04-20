@@ -41,6 +41,7 @@
       <ButtonsWrapper class="justify-center">
         {#each buttons as { href, icon, text }}
           <LinkButton
+            class="flex items-center"
             variant="gray"
             size="medium"
             {href}
