@@ -36,7 +36,11 @@
             class="flex flex-row items-center"
             data-analytics={`{"context":"submenu"}`}
           >
-            <MenuLink href={sub.path}>{sub.title}</MenuLink>
+            {#if !sub.isSubeMenuCategoryHeader}
+              <MenuLink href={sub.path}>{sub.title}</MenuLink>
+            {:else}
+              <div class="text-p-medium"><b>{sub.title}</b></div>
+            {/if}
             {#if sub.status}
               <Pill
                 text={sub.status}

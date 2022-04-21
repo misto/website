@@ -2,7 +2,8 @@ export type MenuStatus = "soon" | "beta";
 
 export type MenuEntry = {
   title: string;
-  path: string;
+  isSubeMenuCategoryHeader: boolean;
+  path?: string;
   status: MenuStatus;
   subMenu?: MenuEntry[];
 };

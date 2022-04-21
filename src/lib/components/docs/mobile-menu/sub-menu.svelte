@@ -103,16 +103,25 @@
     >
       <ul class="divide-y divide-sand-dark">
         {#each currentSection?.subMenu as sub}
-          <MenuItem href={sub.path} onClick={() => ($subMenuState = false)}>
-            {sub.title}
-            {#if sub.status}
-              <Pill
-                variant={sub.status === "soon" ? "pink" : "orange"}
-                text={sub.status}
-                class="ml-1.5"
-              />
-            {/if}
-          </MenuItem>
+          {#if !sub.isSubeMenuCategoryHeader}
+            <MenuItem href={sub.path} onClick={() => ($subMenuState = false)}>
+              {sub.title}
+              {#if sub.status}
+                <Pill
+                  variant={sub.status === "soon" ? "pink" : "orange"}
+                  text={sub.status}
+                  class="ml-1.5"
+                />
+              {/if}
+            </MenuItem>
+          {:else}
+            <li class="mb-0">
+              <div class="text-p-medium flex min-h-13 items-center ">
+                <b>{sub.title}</b>
+              </div>
+              <hr class="divide-sand-dark" />
+            </li>
+          {/if}
         {/each}
       </ul>
     </div>
