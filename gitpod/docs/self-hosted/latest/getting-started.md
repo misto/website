@@ -19,6 +19,52 @@ Gitpod is a Kubernetes application that uses Kubernetes internally to provision 
 
 Once you have created your Kubernetes cluster you need to install [cert-manager](https://cert-manager.io/). cert-manager is needed in any case even when you bring your own TLS certificate for your domain. Please consider the [cert-manager documentation](https://cert-manager.io/docs/) on how to install it.
 
+**Creating TLS certs for your domain with cert-manager**
+
+cert-manager provides the Gitpod installation with certificates for internal communication. Besides this, cert-manager can also create a TLS certificate for your domain. Since Gitpod needs wildcard certificates, you must use the [DNS-01 challenge](https://letsencrypt.org/docs/challenge-types/#dns-01-challenge). Please consult the [cert-manager documentation](https://cert-manager.io/docs/configuration/acme/dns01) for instructions. You can use either an [`Issuer` or `ClusterIssuer`](https://cert-manager.io/docs/concepts/issuer).
+
+Following the cert-manager instructions, you will have a `Issuer` or `ClusterIssuer` with a configured `dns01` solver (most probably with a proper secret with credentials for your DNS provider) as well a `Certificate` with the following `dnsNames`:
+
+- `example.com`
+- `*.example.com`
+- `*.ws.example.com`
+
+_(replace `example.com` with your Gitpod domain)_
+
 ## Step 3: Configure DNS
 
+To install Gitpod you need a domain with a TLS certificate. The DNS setup to your domain needs to be configured that it points to the ingress of your Kubernetes cluster. You need to configure your actual domain (say `example.com`) as well as the wildcard subdomains `*.example.com` as well as `*.ws.example.com`.
+
 ## Step 4: Install Gitpod
+
+At this point, you should have:
+
+- a running Kubernetes cluster
+- cert-manager installed in this cluster
+- a TLS certificate for your domain (incl. wildcard subdomains) _or_ a configured `Issuer`/`ClusterIssuer` plus `Certificate` for cert-manager
+- a domain with proper DNS setup
+
+To start with installing Gitpod, you need a terminal where you can run `kubectl` to access your cluster. At first, install the KOTS kubectl plugin:
+
+```shell
+$ curl https://kots.io/install | bash
+```
+
+Now, you are ready to install Gitpod. Run the following command in your terminal:
+
+```shell
+$ kubectl kots install gitpod
+```
+
+You will be asked for the namespace you want to install Gitpod as well as password for the admin console. After some time, you will see the following output:
+
+```
+  • Press Ctrl+C to exit
+  • Go to http://localhost:8800 to access the Admin Console
+```
+
+Open your favorite browser and go to `http://localhost:8800` (port `8800` is opened on your node on `localhost` only—you may want to forward the port to your workstation in order to access the admin console).
+
+The first page will ask you to upload your Gitpod license. We provide a community license for free ([Download](https://raw.githubusercontent.com/gitpod-io/gitpod/main/install/licenses/Community.yaml)). To get an enterprise license, [fill out this form](/enterprise-license).
+
+After uploading the license, you will be forwarded to the config page.

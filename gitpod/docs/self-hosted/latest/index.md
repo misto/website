@@ -35,7 +35,7 @@ Gitpod can be deployed and operated on your own infrastructure. It supports diff
   Gitpod needs a properly configured [cert-manager](https://cert-manager.io/) that runs in the cluster. It is used to issue internal certificates for the Gitpod installation as well as to create certificates for the Gitpod domain (unless you bring your own domain certificates).
 
 - **DNS setup** <br />
-  For your Gitpod installation you need a properly configured domain. The domain itself as well as the wildcard subdomain `*.your-domain.com`, `*.ws.your-domain.com` need to point to the cluster ingress.
+  For your Gitpod installation you need a properly configured domain. The domain itself as well as the wildcard subdomain `*.example.com`, `*.ws.example.com` (replace `example.com` with your Gitpod domain) need to point to the cluster ingress.
 
 - **Gitpod product license** <br />
   To install Gitpod, you need a license. We provide a community license for free ([Download](https://raw.githubusercontent.com/gitpod-io/gitpod/main/install/licenses/Community.yaml)). To get an enterprise license, [fill out this form](/enterprise-license).

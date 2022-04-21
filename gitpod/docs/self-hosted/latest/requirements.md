@@ -44,6 +44,19 @@ Here are the minimum requirements:
 
 If you want to run Gitpod Self-Hosted at home we recommend at minimum 2vCPU's and 8GB of memory. For a better experience we recommend at least 4vCPUs and 16GB RAM for workspace nodes. For cost efficiency, we recommend enabling cluster-autoscaling when running on a commercial cloud provider.
 
+### Node Affinity Labels reqirements
+
+Your Kubernetes nodes must have the following labels applied to them:
+
+- `gitpod.io/workload_meta=true`
+- `gitpod.io/workload_ide=true`
+- `gitpod.io/workload_workspace_services=true`
+- `gitpod.io/workload_workspace_regular=true`
+- `gitpod.io/workload_workspace_headless=true`
+
+It is recommended to have a minimum of two node pools, grouping the `meta`
+and `ide` nodes together and the `workspace` nodes together.
+
 ## Runtime requirements
 
 ### DNS
