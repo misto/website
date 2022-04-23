@@ -20,7 +20,7 @@ Gitpod Self-Hosted runs well on:
 - Microsoft Azure Kubernetes Service
 - K3s
 
-## Incompatible Kubernetes distributions
+### Incompatible Kubernetes distributions
 
 These platforms do not currently work with Gitpod Self-Hosted but we would like to support them in the future. Gitpod is an open-source project, maybe you could contribute the required changes to help get them working sooner?
 
@@ -89,13 +89,3 @@ gitpod.your-domain.com
 - Gitpod requires trusted HTTPS certificates. While there is no hard requirement on any certificate authority, we recommend using an [ACME certificate](https://caddyserver.com/docs/automatic-https#acme-challenges) issuer (such as [ZeroSSL](https://zerossl.com) or [LetsEncrypt](https://letsencrypt.org)) to automatically renew and install certificates as we do for [gitpod.io](https://gitpod.io).
 - Installation of Gitpod with SSL certificates signed with your own CA are not currently supported. This scenario is desired and we would welcome help getting [this community pull-request](https://github.com/gitpod-io/gitpod/pull/2984) merged.
 - The HTTPS certificates for your domain must include `your-domain.com`, `*.your-domain.com` and `*.ws.your-domain.com`. Beware that wildcard certificates are valid for one level only (i.e. `*.a.com` is not valid for `c.b.a.com`)
-
-### Storage
-
-- Either Google Cloud Storage or Amazon S3 or MinIO Storage.
-
-### Database
-
-- Gitpod uses a MySQL database to store user data.
-- By default Gitpod ships with a MySQL database built-in and data is stored using a Kubernetes PersistentVolume.
-- For production settings, we recommend operating your own MySQL database (version v5.7 or newer).

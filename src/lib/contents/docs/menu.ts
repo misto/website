@@ -74,7 +74,7 @@ export const MENU: MenuEntry[] = [
   M("Gitpod Self-Hosted", "self-hosted/latest", [
     M("Getting Started", "self-hosted/latest/getting-started"),
     M("Requirements", "self-hosted/latest/requirements"),
-    M("Product Compatibility", "self-hosted/latest/compatibility"),
+    M("Required Components", "self-hosted/latest/required-components"),
     M("Kubernetes Setup", "self-hosted/latest/infrastructure"),
     M("Advanced Installation", "self-hosted/latest/installation"),
     M("Updating Gitpod", "self-hosted/latest/updating"),

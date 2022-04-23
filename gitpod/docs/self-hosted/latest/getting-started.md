@@ -68,3 +68,5 @@ Open your favorite browser and go to `http://localhost:8800` (port `8800` is ope
 The first page will ask you to upload your Gitpod license. We provide a community license for free ([Download](https://raw.githubusercontent.com/gitpod-io/gitpod/main/install/licenses/Community.yaml)). To get an enterprise license, [fill out this form](/enterprise-license).
 
 After uploading the license, you will be forwarded to the config page.
+
+By default, Gitpod can install the components it needs itself. However you can also bring your own. See the [required component documentation](./required-components) for more details.
