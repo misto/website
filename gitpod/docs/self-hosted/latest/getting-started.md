@@ -13,7 +13,7 @@ title: Gettings Started with Gitpod Self-Hosted
 
 ## Step 1: Create a Kubernetes Cluster
 
-Gitpod is a Kubernetes application that uses Kubernetes internally to provision workspaces as Kubernetes pods. Before you can start with installing Gitpod, you need to create a compatible Kubernetes cluster. Since the steps that are needed to create a proper cluster differ between the cloud providers, it's up to you to setup a cluster that meets the proper [requirements](./requirements). We have created a [list of examples and scripts](./infrastructure) that will help you to get started with your favorite cloud provider.
+Gitpod is a Kubernetes application that uses Kubernetes internally to provision workspaces as Kubernetes pods. Before you can start with installing Gitpod, you need to create a compatible Kubernetes cluster. Since the steps that are needed to create a proper cluster differ between the cloud providers, it's up to you to setup a cluster that meets the proper [requirements](./cluster-set-up). We have created a [list of examples and scripts](./cluster-set-up#automated-cluster-set-up) that will help you to get started with your favorite cloud provider.
 
 ## Step 2: Install Cert-Manager
 
