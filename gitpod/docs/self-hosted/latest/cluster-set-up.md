@@ -11,6 +11,10 @@ title: Cluster Set-Up
 
 Gitpod is a Kubernetes application running with certain expectations on the characteristics of the cluster it is running on. In order to create a cluster that meets these expectations, you can either use one of our automated set up scripts or manually go through the requirements below.
 
+As a result of the above, your cluster should look like this:
+
+![cluster requirements](../../static/images/docs/self-hosted-cluster-requirements.png)
+
 ### Automated Cluster Set-up
 
 > These guides are inteded as a starting point for most users, but will not cover edge cases. In these situations, please see the requirements below to create your own cluster.
@@ -27,7 +31,7 @@ After completing the guides you will still need to [installed cert-manager](./re
 
 ## Compute Resources
 
-We recommend nodes with a size of at least 4 vCPU and 8GB of ram. We further recommend at least two nodes in your cluster to get started - this should allow you to run around two workspaces in parallel. The exact number will depend on what exactly you are running.
+We recommend nodes with a size of at least 4 vCPU and 8GB of ram. We further recommend at least two nodes in your cluster to get started - this should allow you to run around two workspaces in parallel. The exact number of workspaces you can run will depend on what exactly you are running within each workspace.
 
 ## Supported Kubernetes distributions
 
