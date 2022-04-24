@@ -15,7 +15,7 @@ As a result of the above, your cluster should look like this:
 
 ![cluster requirements](../../static/images/docs/self-hosted-cluster-requirements.png)
 
-### Automated Cluster Set-up
+## Automated Cluster Set-up
 
 > These guides are inteded as a starting point for most users, but will not cover edge cases. In these situations, please see the requirements below to create your own cluster.
 
@@ -29,11 +29,13 @@ There are guides for the most popular cloud providers:
 
 After completing the guides you will still need to [installed cert-manager](./requirements#cert-manager) and register [DNS](./requirements#dns) and have [certificates](./requirements#ssl) ready in order to proceed with the installation.<!--- todo: add link to installation docs--->
 
-## Compute Resources
+## Cluster Requirements
+
+### Compute Resources
 
 We recommend nodes with a size of at least 4 vCPU and 8GB of ram. We further recommend at least two nodes in your cluster to get started - this should allow you to run around two workspaces in parallel. The exact number of workspaces you can run will depend on what exactly you are running within each workspace.
 
-## Supported Kubernetes distributions
+### Supported Kubernetes distributions
 
 Gitpod requires Kubernetes as an orchestration technology in order to spin up and down workspaces - ideally in combination with cluster autoscaling to minimise cost. We strongly recommend deploying a dedicated kubernetes cluster just for Gitpod Self-Hosted.
 
@@ -46,7 +48,7 @@ Gitpod Self-Hosted runs well on:
 - Microsoft Azure Kubernetes Service
 - K3s
 
-### Incompatible Kubernetes distributions
+#### Incompatible Kubernetes distributions
 
 These platforms do not currently work with Gitpod Self-Hosted but we would like to support them in the future. Gitpod is an open-source project, maybe you could contribute the required changes to help get them working sooner?
 
@@ -55,7 +57,7 @@ These platforms do not currently work with Gitpod Self-Hosted but we would like 
 
 If you are considering purchasing a commerical license for Gitpod Self-Hosted and need one of the above platforms then please [contact us](/contact/sales) to start discussions about making support for them happen sooner.
 
-## Node Affinity Labels reqirements
+### Node Affinity Labels reqirements
 
 Your Kubernetes nodes must have the following labels applied to them:
 
@@ -68,7 +70,7 @@ Your Kubernetes nodes must have the following labels applied to them:
 It is recommended to have a minimum of two node pools, grouping the `meta`
 and `ide` nodes together and the `workspace` nodes together.
 
-## Node and container requirements
+### Node and container requirements
 
 These are the components expected on each node:
 
