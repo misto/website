@@ -15,6 +15,8 @@ As a result of the above, your cluster should look like this:
 
 ![cluster requirements](../../static/images/docs/self-hosted-cluster-requirements.png)
 
+<!-- original file commited to git in case changes are needed - see /workspace/website/static/images/docs/self-hosted-environment.excalidraw -->
+
 ## Automated Cluster Set-up
 
 > These guides are inteded as a starting point for most users, but will not cover edge cases. In these situations, please see the requirements below to create your own cluster.
@@ -33,7 +35,7 @@ After completing the guides you will still need to [installed cert-manager](./re
 
 ### Compute Resources
 
-We recommend nodes with a size of at least 4 vCPU and 8GB of ram. We further recommend at least two nodes in your cluster to get started - this should allow you to run around two workspaces in parallel. The exact number of workspaces you can run will depend on what exactly you are running within each workspace.
+We recommend nodes with a size of at least 4 vCPU and 8GB of ram. We further recommend at least two nodes in your cluster to get started - this should allow you to run around two workspaces in parallel. The exact number of workspaces you can run will depend on what exactly you are running within each workspace. We recommend using cluster autoscaling to manage your compute capacity while minimizing cost.
 
 ### Supported Kubernetes distributions
 
