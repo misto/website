@@ -23,25 +23,6 @@ export const openSourceFeature = {
 
 export const features: Feature[] = [
   {
-    title: "Your environment, your tools, your&nbsp;craft",
-    paragraph:
-      "We adapt, so you don't need to. That's why we natively integrated JetBrains IDEs into Gitpod next to VS Code. Don't limit yourself or your team to a single vendor and choose from the best options available.",
-    image: {
-      src: "/images/jetbrains-space/ides.png",
-      alt: "Multiple IDEs supported by Gitpod",
-    },
-  },
-  openSourceFeature,
-  {
-    title: "Ephemeral workspaces",
-    paragraph:
-      "Spin up preconfigured, standardized dev environments from any git context when you need them and close them when you're done. Once you’ve experienced the freedom, you won’t go back to the friction of long-living stateful environments as JetBrains Spaces offers it.",
-    image: {
-      src: "/svg/features/muti-track-development.svg",
-      alt: "Ephemeral Workspaces",
-    },
-  },
-  {
     title: "Greater cost-efficiency",
     paragraph:
       "Instead of running on expensive VMs, Gitpod provisions secure containers and achieves best-in-class resource-efficiency with scalable workspaces running on shared high-powered cloud servers. <strong>Saves you money, helps our planet 🌱</strong>.",
@@ -50,7 +31,26 @@ export const features: Feature[] = [
       alt: "Greater cost-efficiency",
     },
     footnote:
-      'Price comparison for a developer working 5h per day, 21 per month with 8 core CPUs and 12GB RAM. Last verified 9 Dec 2021. Sources: <a href="/pricing">Gitpod</a>, <a href="https://www.jetbrains.com/space/buy/?billing=yearly#cloud" target="_blank">JetBrains Space</a>.',
+      'Price comparison for a developer working 5h per day, 21 per month with 8 core CPUs and 12GB RAM. Last verified 7 Feb 2022. Sources: <a href="/pricing">Gitpod</a>, <a href="https://www.jetbrains.com/remote-development/space-dev-environments/" target="_blank">JetBrains Space</a>.',
+  },
+  {
+    title: "Your environment, your tools, your&nbsp;craft",
+    paragraph:
+      "We adapt, so you don't need to. That's why we natively integrated JetBrains IDEs into Gitpod next to VS Code and other editors. Don't limit yourself or your team to one editing experience and choose from the best options available.",
+    image: {
+      src: "/svg/jetbrains-space/ides.svg",
+      alt: "Multiple IDEs supported by Gitpod",
+    },
+  },
+  openSourceFeature,
+  {
+    title: "Ephemeral workspaces",
+    paragraph:
+      "Spin up preconfigured, standardized dev environments from any git context when you need them and close them when you're done. Once you’ve experienced the freedom, you won’t go back to the friction of long-living stateful environments.",
+    image: {
+      src: "/svg/features/muti-track-development.svg",
+      alt: "Ephemeral Workspaces",
+    },
   },
 ];
 
@@ -65,7 +65,7 @@ export const gitpodTableData: FeatureTableColumn = {
   },
   items: [
     {
-      term: "Pricing (SAAS)",
+      term: "Pricing (SaaS)",
       text: "Free for 50h/month",
     },
     {
@@ -113,11 +113,7 @@ export const gitpodTableData: FeatureTableColumn = {
       availability: true,
     },
     {
-      term: "Virtual Desktop (VNC)",
-      availability: true,
-    },
-    {
-      term: "Jetbrains Ide Support",
+      term: "Jetbrains IDE Support",
       availability: true,
     },
     {
@@ -178,18 +174,14 @@ export const jetbrainsTableData: FeatureTableColumn = {
     },
     {
       term: "VS Code Extensions",
-      availability: true,
-    },
-    {
-      term: "iPad Support",
-      availability: true,
-    },
-    {
-      term: "Virtual Desktop (VNC)",
       availability: false,
     },
     {
-      term: "Jetbrains Ide Support",
+      term: "iPad Support",
+      availability: false,
+    },
+    {
+      term: "Jetbrains IDE Support",
       availability: true,
     },
     {
@@ -299,13 +291,7 @@ export const JetbraisSpaceToc: FeatureTableToc[] = [
   {
     type: "text",
     data: {
-      text: "Virtual Desktop (VNC)",
-    },
-  },
-  {
-    type: "text",
-    data: {
-      text: "Jetbrains Ide Support",
+      text: "Jetbrains IDE Support",
     },
   },
   {

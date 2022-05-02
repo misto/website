@@ -49,6 +49,36 @@ export const quotes: Quote[] = [
   },
 ];
 
+export const jetbrains_quotes: Quote[] = [
+  {
+    text: "Through our partnership with Gitpod, we are enabling our mutual users to accelerate productivity, save resources and time while strengthening security compliance. Remote development is meant to simplify daily work. This really helps to supercharge developers’ performance.",
+    author: "Max Shafirov",
+    jobTitle: "CEO at JetBrains",
+    companyLogo: {
+      src: "/svg/blog/jetbrains.svg",
+      alt: "JetBrains",
+    },
+  },
+  {
+    text: "Companies like Google, Facebook, Shopify, GitHub, and LinkedIn all have moved software development to the cloud, leaving brittle local development behind. With the JetBrains and Gitpod partnership, every software team and individual developer can reap the same benefits while continuing to use the tools of their choice.",
+    author: "Tom Preston-Werner",
+    jobTitle: "GitHub Founder & former CEO",
+    companyLogo: {
+      src: "/svg/blog/github.svg",
+      alt: "GitHub",
+    },
+  },
+  {
+    text: "As a long time fan of JetBrains’ work, I am very excited about this partnership, as it combines the peace of mind and convenience of automated, cloud-based developer environments with the best professional Desktop IDEs out there.",
+    author: "Sven Efftinge",
+    jobTitle: "Founder & Co-CEO Gitpod",
+    companyLogo: {
+      src: "/svg/blog/gitpod.svg",
+      alt: "Gitpod",
+    },
+  },
+];
+
 export const brands: Brand[] = [
   {
     alt: "GitLab",

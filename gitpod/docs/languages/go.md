@@ -43,7 +43,7 @@ To install Go Test Explorer for your repository, add the following to your [.git
 ```YAML
 vscode:
   extensions:
-    - premparihar.gotestexplorer@0.1.10:jvUM8akrQ67vQxfjaxCgCg==
+    - premparihar.gotestexplorer
 ```
 
 ### **[Start-up tasks](/docs/config-start-tasks)**
@@ -65,7 +65,7 @@ tasks:
 
 vscode:
   extensions:
-    - premparihar.gotestexplorer@0.1.10:jvUM8akrQ67vQxfjaxCgCg==
+    - premparihar.gotestexplorer
 ```
 
 ### Using the `dep` dependency manager in Gitpod
@@ -91,8 +91,38 @@ tasks:
 
 vscode:
   extensions:
-    - premparihar.gotestexplorer@0.1.10:jvUM8akrQ67vQxfjaxCgCg==
+    - premparihar.gotestexplorer
 ```
+
+# Installing custom `go` version on a minimal workspace
+
+Let's say you want go v1.17, follow along!
+At first, add a [.gitpod.Dockerfile](/docs/config-docker) file on your repo with the following content in it:
+
+```dockerfile
+# You can find the new timestamped tags here: https://hub.docker.com/r/gitpod/workspace-base/tags
+FROM gitpod/workspace-base:2022-04-26-07-40-59
+
+# Change your version here
+ENV GO_VERSION=1.17
+
+# For ref, see: https://github.com/gitpod-io/workspace-images/blob/61df77aad71689504112e1087bb7e26d45a43d10/chunks/lang-go/Dockerfile#L10
+ENV GOPATH=$HOME/go-packages
+ENV GOROOT=$HOME/go
+ENV PATH=$GOROOT/bin:$GOPATH/bin:$PATH
+RUN curl -fsSL https://dl.google.com/go/go${GO_VERSION}.linux-amd64.tar.gz | tar xzs \
+    && printf '%s\n' 'export GOPATH=/workspace/go' \
+                      'export PATH=$GOPATH/bin:$PATH' > $HOME/.bashrc.d/300-go
+```
+
+Secondly, reference the above Dockerfile in your `.gitpod.yml` configuration file, like so:
+
+```yaml
+image:
+  file: .gitpod.Dockerfile
+```
+
+Now you can [See it in action on a new workspace](/docs/config-gitpod-file#see-it-in-action)
 
 ## Debugging
 

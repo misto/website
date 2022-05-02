@@ -60,6 +60,14 @@ export const authors: { [idx: string]: Author } = {
     description:
       "Christian loves building things, systems and software. Ever keen to solve cross-cutting problems, he has experience in human-computer interaction, embedded software development, and the backend side of things (Kubernetes, Docker).",
   },
+  iqqbot: {
+    name: "Pudong Zheng",
+    socialProfiles: {
+      github: "iqqbot",
+      twitter: "",
+    },
+    description: "",
+  },
   aledbf: {
     name: "Manuel Alejandro de Brito Fontes",
     socialProfiles: {
@@ -276,6 +284,25 @@ export const authors: { [idx: string]: Author } = {
       twitter: "TheShroppieBeek",
     },
     description: "",
+  },
+  "nancy-chauhan": {
+    name: "Nancy Chauhan",
+    socialProfiles: {
+      github: "",
+      twitter: "_nancychauhan",
+      linkedin: "",
+    },
+    description: "",
+  },
+  helenjoscott: {
+    name: "Helen Scott",
+    socialProfiles: {
+      github: "",
+      twitter: "HelenJoScott",
+      linkedin: "",
+    },
+    description:
+      "Helen Scott is a Java Developer Advocate at JetBrains. She has worked at numerous software companies in the last 20 years.",
   },
 };
 

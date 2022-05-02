@@ -11,7 +11,11 @@ title: Gitpod Local Companion
 
 > **Please note:** The Gitpod Local Companion is currently in beta. If you experience any issues, or have feedback, please [get in touch](/contact/support).
 
-You can refer to the [Gitpod Local Companion - localhost is going remote](/blog/local-app) blog post for details on how to explore the beta release of the _Gitpod local companion_.
+Please refer to the [Gitpod Local Companion - localhost is going remote](/blog/local-app) announcement blog post for moredetails on how to explore the beta release of the _Gitpod local companion_.
+
+## For workspace SSH access
+
+The preferred method for SSH access into Gitpod is via the copy/paste command available in the Gitpod dashboard, see [command line](/docs/ides-and-editors/command-line) for more information.
 
 ## Connect To VS Code Desktop
 

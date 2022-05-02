@@ -10,20 +10,7 @@ import type { FAQ } from "../types/faq.type";
 
 export const pricingPlans: Pricing[] = [
   {
-    title: "Community",
-    price: `${isEurope() ? "€" : "$"}0`,
-    duration: "Open Source",
-    features: [
-      "Unlimited users",
-      "Public & private repos",
-      "GitLab, GitHub and Bitbucket",
-    ],
-    btnText: "Install now",
-    btnHref: "/docs/self-hosted/latest",
-    trackingName: "community",
-  },
-  {
-    title: "Starter",
+    title: "Community (≤10 users)",
     price: `${isEurope() ? "€" : "$"}0`,
     duration: "for the first 10 users",
     features: [
@@ -36,7 +23,20 @@ export const pricingPlans: Pricing[] = [
     ],
     btnText: "Install now",
     btnHref: "/docs/self-hosted/latest",
-    trackingName: "starter",
+    trackingName: "communitystarter",
+  },
+  {
+    title: "Community (>10 users)",
+    price: `${isEurope() ? "€" : "$"}0`,
+    duration: "after the 11th user",
+    features: [
+      "Unlimited users",
+      "Public & private repos",
+      "GitLab, GitHub and Bitbucket",
+    ],
+    btnText: "Install now",
+    btnHref: "/docs/self-hosted/latest",
+    trackingName: "community",
   },
   {
     title: "Professional",
@@ -45,6 +45,7 @@ export const pricingPlans: Pricing[] = [
     features: [
       "Starts after the 11th user",
       "Everything from Starter",
+      "Air gapped environments",
       "Standard support",
     ],
     btnText: "Register and Install now",
@@ -54,9 +55,9 @@ export const pricingPlans: Pricing[] = [
   },
 ];
 
-export const starterPlanTableData: FeatureTableColumn = {
+export const communityBelow10PlanTableData: FeatureTableColumn = {
   header: {
-    headline: "Starter",
+    headline: "Community (≤10&nbsp;users)",
     subtitle: `${isEurope() ? "€" : "$"}0 per user/month`,
   },
   link: {
@@ -77,7 +78,7 @@ export const starterPlanTableData: FeatureTableColumn = {
       text: "unlimited",
     },
     {
-      term: "timeout Boost",
+      term: "Timeout Boost",
       text: "unlimited",
     },
     {
@@ -85,8 +86,28 @@ export const starterPlanTableData: FeatureTableColumn = {
       text: "unlimited",
     },
     {
-      term: "prebuilds",
+      term: "Prebuilds",
       text: "unlimited",
+    },
+    {
+      term: "GitLab",
+      availability: true,
+    },
+    {
+      term: "GitHub",
+      availability: true,
+    },
+    {
+      term: "Bitbucket",
+      availability: true,
+    },
+    {
+      term: "Multi-IDE support",
+      availability: true,
+    },
+    {
+      term: "Encrypted backups",
+      availability: true,
     },
     {
       term: "Shared workspaces",
@@ -101,12 +122,45 @@ export const starterPlanTableData: FeatureTableColumn = {
       availability: true,
     },
     {
-      term: "Encrypted backups",
+      term: "Air gapped environment support",
+      availability: false,
+    },
+  ],
+};
+
+export const communityPlanTableData: FeatureTableColumn = {
+  header: {
+    headline: "Community (>10&nbsp;users)",
+    subtitle: `${isEurope() ? "€" : "$"}0 per user/month`,
+  },
+  link: {
+    label: "Install now",
+    href: "/docs/self-hosted/latest",
+  },
+  items: [
+    {
+      term: "Public & Private Repos",
       availability: true,
     },
     {
-      term: "multi-ide support",
-      availability: true,
+      term: "Team Limit",
+      text: "<span class='font-bold'>unlimited</span>",
+    },
+    {
+      term: "Inactivity timeout",
+      text: "unlimited",
+    },
+    {
+      term: "Timeout Boost",
+      text: "unlimited",
+    },
+    {
+      term: "Parallel Workspaces",
+      text: "unlimited",
+    },
+    {
+      term: "Prebuilds",
+      text: "unavaliable",
     },
     {
       term: "GitLab",
@@ -119,6 +173,30 @@ export const starterPlanTableData: FeatureTableColumn = {
     {
       term: "Bitbucket",
       availability: true,
+    },
+    {
+      term: "Multi-IDE support",
+      availability: true,
+    },
+    {
+      term: "Encrypted backups",
+      availability: true,
+    },
+    {
+      term: "Shared workspaces",
+      availability: false,
+    },
+    {
+      term: "Snapshots",
+      availability: false,
+    },
+    {
+      term: "Admin Dashboard",
+      availability: false,
+    },
+    {
+      term: "Air gapped environment support",
+      availability: false,
     },
   ],
 };
@@ -147,7 +225,7 @@ export const professionalPlanTableData: FeatureTableColumn = {
       text: "unlimited",
     },
     {
-      term: "timeout Boost",
+      term: "Timeout Boost",
       text: "unlimited",
     },
     {
@@ -155,8 +233,28 @@ export const professionalPlanTableData: FeatureTableColumn = {
       text: "unlimited",
     },
     {
-      term: "prebuilds",
+      term: "Prebuilds",
       text: "unlimited",
+    },
+    {
+      term: "GitLab",
+      availability: true,
+    },
+    {
+      term: "GitHub",
+      availability: true,
+    },
+    {
+      term: "Bitbucket",
+      availability: true,
+    },
+    {
+      term: "Multi-IDE support",
+      availability: true,
+    },
+    {
+      term: "Encrypted backups",
+      availability: true,
     },
     {
       term: "Shared workspaces",
@@ -171,23 +269,7 @@ export const professionalPlanTableData: FeatureTableColumn = {
       availability: true,
     },
     {
-      term: "Encrypted backups",
-      availability: true,
-    },
-    {
-      term: "multi-ide support",
-      availability: true,
-    },
-    {
-      term: "GitLab",
-      availability: true,
-    },
-    {
-      term: "GitHub",
-      availability: true,
-    },
-    {
-      term: "Bitbucket",
+      term: "Air gapped environment support",
       availability: true,
     },
   ],
@@ -217,7 +299,7 @@ export const selfHostedToc: FeatureTableToc[] = [
   {
     type: "tooltip",
     data: {
-      text: "timeout Boost",
+      text: "Timeout Boost",
       tooltip: "Extra workspace inactivity timeout boost.",
     },
   },
@@ -231,47 +313,9 @@ export const selfHostedToc: FeatureTableToc[] = [
   {
     type: "tooltip",
     data: {
-      text: "prebuilds",
+      text: "Prebuilds",
       tooltip:
         "Enable prebuilds to continuously build your Git branches, so you and your team can always start coding right away.",
-    },
-  },
-  {
-    type: "tooltip",
-    data: {
-      text: "Shared workspaces",
-      tooltip: "Pair program with your team by sharing running workspaces.",
-    },
-  },
-  {
-    type: "tooltip",
-    data: {
-      text: "Snapshots",
-      tooltip:
-        "Create a copy of your workspace by sharing a snapshot with your team.",
-    },
-  },
-  {
-    type: "tooltip",
-    data: {
-      text: "Admin Dashboard",
-      tooltip: "Access to exclusive stats of your team.",
-    },
-  },
-  {
-    type: "tooltip",
-    data: {
-      text: "Encrypted backups",
-      tooltip:
-        "Keeps your data safe. More on <a href='/security'>security</a>.",
-    },
-  },
-  {
-    type: "tooltip",
-    data: {
-      text: "multi-ide support",
-      tooltip:
-        "Connect Gitpod with your favourite IDE. View <a href='/docs/ides-and-editors'>docs/IDE</a> to see all suported IDE’s.",
     },
   },
   {
@@ -304,19 +348,74 @@ export const selfHostedToc: FeatureTableToc[] = [
       },
     },
   },
+  {
+    type: "tooltip",
+    data: {
+      text: "Multi-IDE support",
+      tooltip:
+        "Connect Gitpod with your favourite IDE. View <a href='/docs/ides-and-editors'>docs/IDE</a> to see all suported IDE’s.",
+    },
+  },
+  {
+    type: "tooltip",
+    data: {
+      text: "Encrypted backups",
+      tooltip:
+        "Keeps your data safe. More on <a href='/security'>security</a>.",
+    },
+  },
+  {
+    type: "tooltip",
+    data: {
+      text: "Shared workspaces",
+      tooltip: "Pair program with your team by sharing running workspaces.",
+    },
+  },
+  {
+    type: "tooltip",
+    data: {
+      text: "Snapshots",
+      tooltip:
+        "Create a copy of your workspace by sharing a snapshot with your team.",
+    },
+  },
+  {
+    type: "tooltip",
+    data: {
+      text: "Admin Dashboard",
+      tooltip: "Access to team and project management and configuration.",
+    },
+  },
+  {
+    type: "tooltip",
+    data: {
+      text: "Air gapped environment support",
+      tooltip:
+        "Install Gitpod in an environment that does not have access to the public internet.",
+    },
+  },
 ];
 
 export const selfHostedComparison: FeatureTable = {
   toc: selfHostedToc,
-  columns: [starterPlanTableData, professionalPlanTableData],
+  columns: [
+    communityBelow10PlanTableData,
+    communityPlanTableData,
+    professionalPlanTableData,
+  ],
 };
 export const selfhostedFAQ: FAQ = {
   headline: "FAQs",
   items: [
     {
-      title: "Can I create a team plan?",
+      title: "How do I move from plan to plan?",
       content:
-        '<p> Of course! You can use Gitpod Self-Hosted Community on your own infrastructure for free for unlimited users. If you\'d like to try additional features like unlimited prebuilds, shared workspaces, snapshots and an admin dashboard, the Starter tier is available without a license for the first 10 users. You can upgrade to to the Professional Plan at any time. Simply update your existing instance with a license key. Currently, Self-Hosted Gitpod licenses can currently only be purchased through contacting sales. Please <a href="/enterprise-license" >request a license</a > key or <a href="/contact/sales">Get in touch</a> if you have any questions. </p>',
+        '<p> You can use Gitpod Self-Hosted Community on your own infrastructure for free for unlimited users. If you have less than 10 users, you will automatically be able to also use additional features like unlimited prebuilds, shared workspaces, snapshots and an admin dashboard.  You lose these features once you go above 10 users.</p> <p> In case you want to enjoy these features with more than 10 users, you can upgrade to to the Professional Plan at any time by contacting our sales team: Either request a license <a href="/enterprise-license" >request a license</a > key directly or <a href="/contact/sales">get in touch</a> if you have any questions. </p>',
+    },
+    {
+      title: "What is the difference between the two Community plans?",
+      content:
+        "<p> On an implementation level, these plans are the same. You use the same actual license for both. However, the feature set differs depending on the amount of users you have. For up to ten users you gain access to additional features. If you have more users than this, you automatically loose access to these features. Alternatively, you can purchase the Professional plan.</p>",
     },
     {
       title: "Can I add more users to my plan at any time?",

@@ -1,11 +1,11 @@
 ---
 author: svenefftinge
 date: Tue Jul 31 2018 06:02:26 GMT+0000 (UTC)
-excerpt: After over one year of intensive work, we are proud to announce the public Beta of Gitpod. Gitpod is an online IDE which can be launched
+excerpt: After over one year of intensive work, we are proud to announce the public Beta of Gitpod. Gitpod is a Remote Developer Environment which can be launched
 image: gitpod-online-ide.png
-slug: gitpod-online-ide
+slug: gitpod-remote-developer-environment
 subtitle: One Click to Coding!
-title: Gitpod — Online IDE For GitHub
+title: Gitpod - Remote Developer Environment
 url: https://medium.com/gitpod/gitpod-gitpod-online-ide-for-github-6296b907a886
 ---
 
@@ -15,7 +15,7 @@ url: https://medium.com/gitpod/gitpod-gitpod-online-ide-for-github-6296b907a886
 
 After over one year of intensive work, we are proud to announce the public Beta of Gitpod.
 
-Gitpod is an online IDE which can be launched from any GitHub page. Simply **prefix any GitHub-URL with “*https://gitpod.io/#*”** or use our [browser extension](https://chrome.google.com/webstore/detail/gitpod-online-ide/dodmmooeoklaejobgleioelladacbeki?hl=en) that adds a button to GitHub pages.
+Gitpod is a Remote Developer Environment which can be launched from any GitHub page. Simply **prefix any GitHub-URL with “*https://gitpod.io/#*”** or use our [browser extension](https://chrome.google.com/webstore/detail/gitpod-online-ide/dodmmooeoklaejobgleioelladacbeki?hl=en) that adds a button to GitHub pages.
 
 Within seconds, Gitpod provides you with a fully working developer environment, including a VS Code-powered IDE and a cloud-based Linux container configured specifically for the project at hand.
 

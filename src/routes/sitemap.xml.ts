@@ -15,7 +15,6 @@ export const get: RequestHandler = async () => {
         "src/routes/docs/quickstart",
         "extension-activation",
         "unsubscribe",
-        "vs/jetbrains-space",
         "enterprise-license",
         "extension-uninstall",
       ];

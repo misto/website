@@ -28,6 +28,10 @@ VS Code desktop support installs, manages and runs the [Local Companion](/docs/i
 <br />
 <sup>1</sup> Yes this also means you get to keep your keyboard shortcuts just the way you prefer them. You know, Ctrl/Cmd + W to close an editor tab 😉.
 
+## Settings Sync
+
+You can optionally enable Settings Sync with Gitpod to have the same extensions, themes and settings on VS Code Browser and Desktop. You can learn more about it as well as how to enable it in [Settings Sync](settings-sync).
+
 ## Managing extensions
 
 VS Code runs extensions in one of two places: locally on the UI / client side, or remotely on your Gitpod workspace.
@@ -41,7 +45,7 @@ The process of installing fonts matches how you typically install custom fonts l
 1. Download the desired font to your local machine and install it locally on your operating system.
 1. Open the editor's user settings (e.g. _File_ > _Preferences_ > _Settings_ > _User_)
 1. Configure your font with the `editor.fontFamily` setting:
-   ```
+   ```json
    {
      "editor.fontFamily": "Your custom font name"
    }

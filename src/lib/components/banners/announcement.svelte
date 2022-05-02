@@ -29,7 +29,7 @@
     <span class="flex-1 text-lg text-right">🤝 </span>
     <p class="flex-2 px-4 md:px-2">
       Gitpod x JetBrains join forces to solve 'works on my machine' problem | <a
-        href="/vs/jetbrains-space"
+        href="/blog/gitpod-jetbrains"
         on:click={closeBanner}>View announcement</a
       >
     </p>

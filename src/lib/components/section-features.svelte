@@ -19,10 +19,10 @@
 </style>
 
 <Section>
-  <div class="text-center" class:top={!type}>
+  <div class="text-center" class:top={!type} class:mb-small={type}>
     <h2>{title}</h2>
     {#if text}
-      <p class="text-large" class:mb-small={type}>{text}</p>
+      <p class="text-large">{text}</p>
     {/if}
   </div>
   {#if type === "box"}
