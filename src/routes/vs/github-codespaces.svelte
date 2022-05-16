@@ -89,7 +89,7 @@
   <Card
     card={{
       title: "Automation-first",
-      text: "Simply add your build command into a .gitpod.yml file and let Gitpod do the heavy-lifting. Once you’ve experienced the freedom of ephemeral workspaces, you’ll never want to go back to long-lived manually-maintained environments.",
+      text: "Simply add your build command into a <a href='https://github.com/gitpod-io/for-opensource/blob/main/templates/.gitpod.yml' target='_blank'>.gitpod.yml</a> file and let Gitpod do the heavy-lifting. Once you’ve experienced the freedom of ephemeral workspaces, you’ll never want to go back to long-lived manually-maintained environments.",
       link: {
         href: "https://gitpod.io/workspaces/",
         text: "Try Now",
