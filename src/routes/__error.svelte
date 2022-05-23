@@ -28,7 +28,7 @@
 <div class="text-center">
   <Section>
     <img
-      src="/images/illustration-large.jpg"
+      src="/images/illustration-large.png"
       alt="The Gitpod cube set up as a remote workspace"
       class="mx-auto mb-8 w-96 grayscale-[60%]"
     />
@@ -54,7 +54,7 @@
 
 {#if dev && error.stack}
   <article
-    class="p-xx-small sm:py-small sm:px-x-small md:p-medium rounded-2xl bg-off-white"
+    class="p-xx-small sm:py-small sm:px-x-small md:p-medium rounded-2xl bg-card"
   >
     <pre>{error.stack}</pre>
   </article>

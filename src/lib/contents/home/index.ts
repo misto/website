@@ -2,54 +2,64 @@ import type { Brand } from "$lib/types/brand.type";
 import type { Project } from "$lib/types/project.type";
 import type { Testimonial } from "$lib/types/testimonial.type";
 import type { Ide } from "$lib/types/ide.type";
+import GitlabLogo from "$lib/components/svgs/brands/gitlab-logo.svelte";
+import Freecodecamp from "$lib/components/svgs/brands/freecodecamp.svelte";
+import Google from "$lib/components/svgs/brands/google.svelte";
+import Uber from "$lib/components/svgs/brands/uber.svelte";
+import Datastax from "$lib/components/svgs/brands/datastax.svelte";
+import Amazon from "$lib/components/svgs/brands/amazon.svelte";
+import Shares from "$lib/components/svgs/brands/shares.svelte";
+import Astrato from "$lib/components/svgs/brands/astrato.svelte";
+import CodeInstitute from "$lib/components/svgs/brands/code-institute.svelte";
+import Redwood from "$lib/components/svgs/brands/redwood.svelte";
 
 export const brands: Brand[] = [
   {
     alt: "GitLab",
-    logo: "svg/brands/gitlab-logo.svg",
+    logo: GitlabLogo,
   },
   {
     alt: "freeCodeCamp",
-    logo: "svg/brands/freecodecamp.svg",
+    logo: Freecodecamp,
     className: "fcc",
   },
   {
     alt: "Google",
-    logo: "svg/brands/google.svg",
+    logo: Google,
     transform: "scale(0.9)",
   },
   {
     alt: "Uber",
-    logo: "svg/brands/uber.svg",
+    logo: Uber,
   },
   {
     alt: "DataStax",
-    logo: "svg/brands/datastax.svg",
+    logo: Datastax,
     transform: "scale(1.1)",
   },
   {
     alt: "Amazon",
-    logo: "svg/brands/amazon.svg",
+    logo: Amazon,
     transform: "scale(0.9) translateY(5px)",
   },
   {
     alt: "Shares",
-    logo: "svg/brands/shares.svg",
+    logo: Shares,
     transform: "scale(1.1)",
   },
   {
     alt: "Astrato",
-    logo: "svg/brands/astrato.svg",
+    logo: Astrato,
     transform: "scale(1.1)",
   },
   {
     alt: "Redwood",
-    logo: "svg/brands/redwood.svg",
+    logo: Redwood,
     transform: "scale(1.1)",
   },
   {
     alt: "Code Institute",
-    logo: "svg/brands/code-institute.svg",
+    logo: CodeInstitute,
   },
 ];
 

@@ -17,9 +17,9 @@
         if (e.isIntersecting) {
           Array.from(sideNavLinks).forEach((a) => {
             if (a.textContent === from) {
-              a.classList.add("border-orange-900");
+              a.classList.add("border-primary");
             } else {
-              a.classList.remove("border-orange-900");
+              a.classList.remove("border-primary");
             }
           });
         }

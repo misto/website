@@ -24,7 +24,7 @@
 
   input:checked + label::before {
     background-image: url("/tick-dark.svg");
-    @apply text-black border border-solid border-orange-900 bg-orange-900 bg-center;
+    @apply text-important border border-solid border-primary bg-primary bg-center;
   }
 
   label:hover::before,
@@ -46,7 +46,7 @@
 </style>
 
 <input
-  class="hidden absolute box-border text-black {className}"
+  class="hidden absolute box-border text-important {className}"
   class:error={hasError}
   class:disabled
   {disabled}
@@ -59,7 +59,7 @@
 />
 {#if label}
   <label
-    class="flex cursor-pointer text-dark-grey mt-1 mb-2 {labelClasses}"
+    class="flex cursor-pointer text-body mt-1 mb-2 {labelClasses}"
     for={label}
     >{@html label}
   </label>

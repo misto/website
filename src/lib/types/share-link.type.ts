@@ -1,5 +1,10 @@
 export type ShareLink = {
+  name?: string;
   href: string;
-  alt: string;
-  icon: string;
+  icon?: {
+    src: string;
+    alt: string;
+  };
+  svg?: any;
+  trackingName: string;
 };

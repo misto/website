@@ -18,19 +18,19 @@
 
   const cards = [
     {
-      icon: "/images/extension-activation/prebuild.svg",
+      icon: "/svg/icons/gear-play.svg",
       title: "Skip the Waiting",
       description:
         "Gitpod continuously builds your git branches like a CI server. This means no more waiting for dependencies to be downloaded and builds to finish.",
     },
     {
-      icon: "/images/extension-activation/collaborate.svg",
+      icon: "/svg/icons/team.svg",
       title: "Code Together",
       description:
         "Do code reviews within Gitpod, work together in one workspace in real-time and share reproducible workspaces with your team.",
     },
     {
-      icon: "/images/extension-activation/fresh.svg",
+      icon: "/svg/icons/cloud.svg",
       title: "Work Remotely",
       description:
         "You no longer need an over-powered laptop, Gitpod works just as smoothly on a Chromebook or iPad. All you need is a browser.",
@@ -66,8 +66,7 @@
         text: description,
         icon: {
           src: icon,
-          alt: "",
-          transform: "scale(1.5)",
+          alt: title,
         },
       }}
     />

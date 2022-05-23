@@ -11,8 +11,14 @@
 
 <style lang="postcss">
   .active {
-    @apply text-black;
+    @apply border-current font-semibold text-secondary;
   }
 </style>
 
-<a class:active {href} sveltekit:prefetch {...$$props}><slot /></a>
+<a
+  class:active
+  class="block border-l pl-4 -ml-px border-transparent dark:hover:border-divider-light hover:border-light-black"
+  {href}
+  sveltekit:prefetch
+  {...$$props}><slot /></a
+>

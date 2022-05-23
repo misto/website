@@ -1,10 +1,13 @@
-import type { TableData } from "$lib/types/table-data.type";
 import type { Feature } from "$lib/types/feature.type";
 import type {
   FeatureTable,
   FeatureTableColumn,
   FeatureTableToc,
 } from "$lib/components/ui-library/feature-table/feature-table.types";
+import opensourceSvelte from "$lib/components/svgs/opensource.svelte";
+import githubMarkSvelte from "$lib/components/svgs/github-mark.svelte";
+import awsSvelte from "$lib/components/svgs/aws.svelte";
+import idesSvelte from "$lib/components/svgs/ides.svelte";
 
 export const openSourceFeature = {
   title: "Open-source",
@@ -15,10 +18,7 @@ export const openSourceFeature = {
     "Contribute to Gitpod and build your own customizations",
     "Works just as smoothly with GitHub, GitLab and Bitbucket",
   ],
-  image: {
-    src: "/images/github-codespaces/spaces-3.svg",
-    alt: "Gitpod integrations",
-  },
+  previewComponent: opensourceSvelte,
 };
 
 export const features: Feature[] = [
@@ -37,19 +37,16 @@ export const features: Feature[] = [
     title: "Your environment, your tools, your&nbsp;craft",
     paragraph:
       "We adapt, so you don't need to. That's why we natively integrated JetBrains IDEs into Gitpod next to VS Code and other editors. Don't limit yourself or your team to one editing experience and choose from the best options available.",
-    image: {
-      src: "/svg/jetbrains-space/ides.svg",
-      alt: "Multiple IDEs supported by Gitpod",
-    },
+    previewComponent: idesSvelte,
   },
   openSourceFeature,
   {
     title: "Ephemeral workspaces",
     paragraph:
       "Spin up preconfigured, standardized dev environments from any git context when you need them and close them when you're done. Once you’ve experienced the freedom, you won’t go back to the friction of long-living stateful environments.",
-    image: {
-      src: "/svg/features/muti-track-development.svg",
-      alt: "Ephemeral Workspaces",
+    lottie: {
+      src: "/lottie/edit_workspace.json",
+      id: "edit_workspace",
     },
   },
 ];
@@ -208,10 +205,7 @@ export const JetbraisSpaceToc: FeatureTableToc[] = [
     type: "image",
     data: {
       text: "GitHub Integration",
-      image: {
-        alt: "GitHub",
-        path: "/svg/github.svg",
-      },
+      image: githubMarkSvelte,
     },
   },
   {
@@ -248,10 +242,7 @@ export const JetbraisSpaceToc: FeatureTableToc[] = [
     type: "image",
     data: {
       text: "Self-Host on AWS",
-      image: {
-        alt: "AWS",
-        path: "/svg/brands/aws.svg",
-      },
+      image: awsSvelte,
     },
   },
   {

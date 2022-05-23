@@ -12,6 +12,7 @@ title: IntelliJ IDEA
   export const prerender = true;
 </script>
 
+<!-- prettier-ignore -->
 # IntelliJ IDEA Ultimate
 
 Gitpod enables code editing using JetBrains {title} currently via [JetBrains Gateway](jetbrains-gateway).
@@ -95,14 +96,17 @@ You can install a plugin only for **your current workspace** following these ste
 
 #### Preconfigure for repository
 
+> **Please note:** This feature is currently experimental and is a subject to change. [Send feedback](https://github.com/gitpod-io/gitpod/issues/6576).
+
 You can share a plugin on **{title} backend** with everybody working on the repository by adding it to [.gitpod.yml](/docs/config-gitpod-file) and pushing to your Git repository.
 Each workspace is preconfigured with plugins from the `gitpod.yml` configuration file. For example:
 
 ```yaml
 jetbrains:
   intellij:
-    - zielu.gittoolbox
-    - izhangzhihao.rainbow.brackets
+    plugins:
+      - zielu.gittoolbox
+      - izhangzhihao.rainbow.brackets
 ```
 
 You can find the **pluginId** on the [JetBrains Marketplace](https://plugins.jetbrains.com) page:

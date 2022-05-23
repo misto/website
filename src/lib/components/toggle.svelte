@@ -10,56 +10,103 @@
 </script>
 
 <style lang="postcss">
-  label {
-    @apply mb-0 cursor-pointer text-h6 font-bold py-macro px-xx-small rounded-5xl transition-all duration-300 hover:text-gray-900;
+  .switch-container {
+    &,
+    &::before,
+    &::after {
+      @apply transition-all duration-200;
+    }
   }
 
-  .switch-container {
-    filter: drop-shadow(0px 1px 1px rgba(0, 0, 0, 0.1));
+  label {
+    @apply mb-0 cursor-pointer text-h6 font-bold py-1.5 h-10 px-xx-small rounded-5xl transition-all duration-300 hover:text-important focus:text-important;
   }
 
   label:first-of-type {
-    @apply bg-orange-700;
+    @apply bg-tertiary;
   }
 
   .checked label {
     &:first-of-type {
-      @apply bg-white;
+      @apply bg-card;
     }
 
     &:last-of-type {
-      @apply bg-orange-700 text-gray-900;
+      @apply bg-tertiary text-important;
     }
   }
 
   .inversed label {
     &:first-of-type {
-      @apply bg-white;
+      @apply bg-card;
     }
 
     &:last-of-type {
-      @apply bg-orange-700 text-gray-900;
+      @apply bg-tertiary text-important;
     }
   }
 
   .inversed.checked label {
     &:first-of-type {
-      @apply bg-orange-700 text-gray-900;
+      @apply bg-tertiary text-important;
     }
 
     &:last-of-type {
-      @apply bg-white;
+      @apply bg-card;
+    }
+  }
+
+  :global(body.dark) .switch-container {
+    @apply bg-card;
+
+    label:first-of-type {
+      @apply bg-primary text-black;
+    }
+
+    &.checked label {
+      &:first-of-type {
+        @apply bg-transparent text-body;
+      }
+
+      &:last-of-type {
+        @apply bg-primary text-black;
+      }
+    }
+
+    &.inversed {
+      label:first-of-type {
+        @apply bg-transparent text-body;
+
+        &:hover,
+        &:focus {
+          @apply text-important;
+        }
+      }
+
+      label:last-of-type {
+        @apply bg-primary text-black;
+      }
+
+      &.checked {
+        label:first-of-type {
+          @apply bg-primary text-black;
+        }
+
+        label:last-of-type {
+          @apply bg-transparent text-body;
+        }
+      }
     }
   }
 </style>
 
 <div class="text-center">
   <div
-    class="switch-container inline-flex justify-center items-center space-x-0.5 {clazz} h-14 mx-auto bg-white p-1.5 rounded-5xl transition-all duration-200"
+    class="switch-container stroked inline-flex justify-center items-center space-x-0.5 {clazz} mx-auto bg-card py-1 px-1 rounded-5xl transition-all duration-200"
     class:checked
     class:inversed={isInversed}
   >
-    <label for={id} class:text-gray-900={!checked && !isInversed}>
+    <label for={id} class:text-important={!checked && !isInversed}>
       {labelLeft}
     </label>
     <div class="relative flex items-center cursor-pointer">

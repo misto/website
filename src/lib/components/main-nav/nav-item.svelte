@@ -19,7 +19,7 @@
   }
 
   .active {
-    color: var(--black);
+    @apply text-important;
   }
 
   .highlight {
@@ -38,7 +38,7 @@
   on:click
   on:focus
   sveltekit:prefetch={isPrefecthable}
-  class="text-black text-p-large sm:text-dark-grey sm:hover:text-black sm:focus:text-black"
+  class="text-important sm:text-body text-p-large hover:text-important focus:text-important active:text-important"
 >
   {label}
 </a>

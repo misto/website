@@ -27,10 +27,11 @@
   on:click
   class:highlight
   class="
-    text-dark-grey
+    text-body
     no-underline
-    focus:text-black
-    hover:text-black
+    focus:text-important
+    hover:text-important
+    active:text-important
     {clazz}
   "
 >

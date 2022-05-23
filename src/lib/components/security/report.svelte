@@ -5,7 +5,7 @@
 
 <Section>
   <div
-    class="bg-white shadow-normal rounded-4xl text-center p-medium sm:p-large max-w-xl mx-auto"
+    class="bg-card shadow-normal rounded-4xl text-center p-medium sm:p-large max-w-xl mx-auto"
   >
     <h2 class="h3">Report security concerns</h2>
     <p class="my-x-small">

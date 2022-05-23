@@ -1,4 +1,6 @@
 <script lang="ts">
+  import Arrow from "$lib/components/svgs/arrow.svelte";
+
   import type { FeatureTableHeader } from "../feature-table.types";
 
   export let headerData: FeatureTableHeader;
@@ -35,11 +37,10 @@
         View all Features
       {/if}
     </div>
-    <img
-      src="/arrow.svg"
-      alt="Arrow Toggle"
-      class="h-6 w-6 mt-macro mx-auto duration-200"
-      class:rotate-180={isShown}
+    <Arrow
+      class="h-6 w-6 mt-macro mx-auto duration-200 {isShown
+        ? 'rotate-180'
+        : ''}"
     />
   </button>
 </div>

@@ -9,10 +9,21 @@
     /* Move to markup once src/lib/assets/markdown-commons.scss is gone */
     @apply leading-4;
   }
+
+  :global(body.dark) .link-icon-external {
+    img {
+      filter: invert(80%) grayscale(80%);
+      @apply transition-all duration-200;
+    }
+
+    &:hover img {
+      filter: none;
+    }
+  }
 </style>
 
 <a
-  class="inline-flex text-center py-2 px-4 text-btn-small leading-4 rounded-xl shadow-light font-semibold bg-off-white text-black hover:bg-white focus:bg-white"
+  class="link-icon-external inline-flex text-center py-2 px-4 text-btn-small leading-4 rounded-xl shadow-light dark:shadow-none font-semibold bg-card text-important hover:bg-tertiary focus:bg-tertiary dark:hover:bg-quaternary dark:hover:text-black"
   {href}
   target="_blank"
   rel="noopener"

@@ -27,7 +27,7 @@
   }
 
   ::marker {
-    @apply text-orange-800;
+    @apply text-secondary;
   }
 </style>
 

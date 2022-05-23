@@ -15,7 +15,7 @@
   }
 
   ::marker {
-    @apply text-orange-800;
+    @apply text-secondary;
   }
 
   ul li {
@@ -23,7 +23,7 @@
   }
 
   ul li::before {
-    @apply absolute text-orange-800;
+    @apply absolute text-secondary;
     content: "—";
     left: calc(var(--xx-small) * -1);
   }

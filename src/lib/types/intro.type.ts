@@ -3,5 +3,6 @@ export type Intro = {
   name: string;
   works: string;
   workflow: string;
+  workflowComponent?: any;
   isHighlighted?: boolean;
 };

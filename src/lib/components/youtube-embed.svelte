@@ -12,6 +12,8 @@
   import { trackEvent } from "./segment.svelte";
   import Share from "./share.svelte";
   import Card from "$lib/components/ui-library/card";
+  import type { ShareLink } from "$lib/types/share-link.type";
+  import Hackernews from "./svgs/share/hackernews.svelte";
 
   export let embedId: string;
   export let title: string;
@@ -59,29 +61,33 @@
 
   export const youtubeURL = `https://youtube.com/watch?v=${embedId}`;
 
-  const shareLinks = [
+  const shareLinks: ShareLink[] = [
     {
       href: `https://twitter.com/intent/tweet?text=${encodeURIComponent(
         youtubeURL
       )}`,
-      alt: "Twitter",
-      icon: "/svg/brands/twitter.svg",
+      icon: {
+        src: "/svg/brands/twitter.svg",
+        alt: "Twitter",
+      },
       trackingName: "twitter",
     },
     {
       href: `http://www.reddit.com/submit?url=${encodeURIComponent(
         youtubeURL
       )}`,
-      alt: "Reddit",
-      icon: "/svg/brands/reddit.svg",
+      icon: {
+        src: "/svg/brands/reddit.svg",
+        alt: "Reddit",
+      },
       trackingName: "reddit",
     },
     {
+      name: "Hacker News",
       href: `http://news.ycombinator.com/submitlink?u=${encodeURIComponent(
         youtubeURL
       )}`,
-      alt: "HackerNews",
-      icon: "/svg/brands/hackernews.svg",
+      svg: Hackernews,
       trackingName: "hackernews",
     },
   ];
@@ -111,7 +117,7 @@
 </style>
 
 <div>
-  <Card size="small" class="youtube">
+  <Card size="small" class="youtube" stroked={false}>
     <iframe
       id={randomId}
       src={`https://www.youtube.com/embed/${embedId}?enablejsapi=1`}

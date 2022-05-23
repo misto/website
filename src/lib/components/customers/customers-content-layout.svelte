@@ -6,6 +6,7 @@
   import OpenGraph from "../open-graph.svelte";
 
   import Share from "../share.svelte";
+  import Hackernews from "../svgs/share/hackernews.svelte";
   import MoreCustomersStories from "./more-customers-stories.svelte";
 
   const baseUrl = "https://www.gitpod.io/customers/";
@@ -22,24 +23,28 @@
       href: `https://twitter.com/intent/tweet?text=${encodeURIComponent(
         `${title} ${baseUrl}${slug}`
       )}`,
-      alt: "Twitter",
-      icon: "/svg/brands/twitter.svg",
+      icon: {
+        src: "/svg/brands/twitter.svg",
+        alt: "Twitter",
+      },
       trackingName: "twitter",
     },
     {
       href: `http://www.reddit.com/submit?url=${encodeURIComponent(
         `${baseUrl}${slug}&title=${title}`
       )}`,
-      alt: "Reddit",
-      icon: "/svg/brands/reddit.svg",
+      icon: {
+        src: "/svg/brands/reddit.svg",
+        alt: "Reddit",
+      },
       trackingName: "reddit",
     },
     {
       href: `http://news.ycombinator.com/submitlink?u=${encodeURIComponent(
         `${baseUrl}${slug}`
       )}&t=${encodeURIComponent(title)}`,
-      alt: "HackerNews",
-      icon: "/svg/brands/hackernews.svg",
+      name: "HackerNews",
+      svg: Hackernews,
       trackingName: "hackernews",
     },
   ];

@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import { slide } from "svelte/transition";
+  import displayBanner from "$lib/stores/display-banner";
 
   let clazz = "";
   export { clazz as class };
@@ -15,18 +16,22 @@
     window.localStorage.setItem(storageKey, "true");
     if (clazz === "announcement-banner") {
       document.body.classList.remove("banner-is-shown");
+      document.documentElement.classList.remove("display-banner");
     }
   };
 
   onMount(() => {
     showBanner = !window.localStorage.getItem(storageKey);
-    if (clazz === "announcement-banner") {
+    displayBanner.set(showBanner && display);
+    if (clazz.includes("announcement-banner")) {
       if (display && showBanner) {
+        document.documentElement.classList.add("display-banner");
         document.body.classList.add("banner-is-shown");
       } else if (!display || !showBanner) {
         showBanner = false;
         if (clazz === "announcement-banner") {
           document.body.classList.remove("banner-is-shown");
+          document.documentElement.classList.remove("display-banner");
         }
       }
     }
@@ -36,6 +41,10 @@
 <style lang="postcss">
   :global(.banner-is-shown) :global(main > div:first-child) {
     @apply mt-small;
+  }
+
+  :global(.display-banner) {
+    scroll-padding-top: 8rem;
   }
 
   .top {
@@ -50,7 +59,7 @@
 {#if showBanner}
   <div
     transition:slide
-    class="{location} px-4 py-2 flex justify-between items-center w-full bg-sand-dark shadow-sm text-xs sm:text-sm md:text-base"
+    class="{location} px-4 py-2 flex justify-between items-center w-full bg-sand-dark dark:bg-card shadow-sm text-xs sm:text-sm md:text-base {clazz}"
   >
     <slot {closeBanner} />
   </div>

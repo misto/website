@@ -15,7 +15,7 @@
 
   li::before {
     content: "—";
-    @apply text-orange-800 mr-micro;
+    @apply text-secondary mr-micro;
   }
 </style>
 

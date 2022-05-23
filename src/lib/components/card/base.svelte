@@ -4,17 +4,19 @@
   import { isAnExternalLink } from "$lib/utils/helpers";
   import type { Card } from "$lib/types/card.type";
   import Modal from "$lib/components/ui-library/modal";
+  import type { ButtonSizes } from "../ui-library/button/button";
   let clazz = "";
   export { clazz as class };
 
   export let card: Card;
-  const { title, text, link, icon, modal } = card;
+  const { title, text, link, icon, modal, transform } = card;
   const target = link && isAnExternalLink(link.href) ? "_blank" : undefined;
   export let headingLevel: "h3" | "h2" = "h3";
   export let titleClassNames: "h4" | "h5" = "h4";
   export let iconClassNames: string = "h-16 w-20";
   export let btnClassNames: string = "mt-x-small";
   export let variant: "primary" | "secondary" | "cta" = "cta";
+  export let btnSize: ButtonSizes = "medium";
   export let styles: string = "";
   export let textAlign: "left" | "center" | "right" = "center";
 
@@ -32,27 +34,38 @@
   style={styles}
 >
   <div>
-    {#if icon}
+    {#if icon && icon.src}
       <img
         src={icon.src}
         alt={icon.alt || title}
         class="{iconClassNames} mb-xx-small mx-auto"
-        style="transform: {icon.transform}"
+        style="transform: {icon.transform || transform}"
       />
+    {:else if icon}
+      <div
+        class="{iconClassNames} mb-xx-small flex justify-center"
+        style="width: auto;"
+      >
+        <svelte:component
+          this={icon}
+          class="mx-auto {iconClassNames}"
+          style="transform: {transform}"
+        />
+      </div>
     {/if}
     {#if headingLevel === "h3"}
-      <h3 class="mb-micro {titleClassNames}">{title}</h3>
+      <h3 class={titleClassNames}>{title}</h3>
     {:else}
-      <h2 class="mb-micro {titleClassNames}">{title}</h2>
+      <h2 class={titleClassNames}>{title}</h2>
     {/if}
-    <p class={alignmentMap[textAlign]}>{@html text}</p>
+    <p class="{alignmentMap[textAlign]} mt-micro">{@html text}</p>
   </div>
   {#if link}
     <LinkButton
       href={link.href}
       {target}
       {variant}
-      size="medium"
+      size={btnSize}
       class={btnClassNames}>{link.text}</LinkButton
     >
   {/if}

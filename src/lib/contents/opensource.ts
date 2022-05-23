@@ -10,16 +10,23 @@ import {
   multiTrackDevelopmentFeature,
 } from "./home/features";
 import type { FAQ } from "$lib/types/faq.type";
+// @ts-ignore
+import redwoodjsSvelte from "$lib/components/svgs/customers/redwoodjs.svelte";
+// @ts-ignore
+import prismaSvelte from "$lib/components/svgs/opensource/prisma.svelte";
+// @ts-ignore
+import prometheusSvelte from "$lib/components/svgs/opensource/prometheus.svelte";
+// @ts-ignore
+import theiaSvelte from "$lib/components/svgs/opensource/theia.svelte";
+import openVscodeSvelte from "$lib/components/svgs/opensource/open-vscode.svelte";
+import werftSvelte from "$lib/components/svgs/opensource/werft.svelte";
 
 export const quotes: Quote[] = [
   {
     text: "Gitpod totally changed the development velocity for RedwoodJS—it removed any issues related to configurations of dev environments and made it incredibly easy to contribute. Reviewing pull requests is delightful because they are prebuilt and ready for review!",
     author: "Tom Preston-Werner",
     jobTitle: "Co-founder of GitHub",
-    companyLogo: {
-      src: "/svg/opensource/redwood.svg",
-      alt: "RedwoodJS",
-    },
+    companyLogo: redwoodjsSvelte,
     link: { href: "/customers/redwoodjs", text: "View Customer Story" },
     img: {
       src: "/images/opensource/mojombo.jpg",
@@ -31,10 +38,7 @@ export const quotes: Quote[] = [
     text: "I'm using Gitpod almost daily when trying out new technologies, working on OSS PRs/repros or when giving demos. Welcome to the promised land of cloud development environments.",
     author: "Johannes Schickling",
     jobTitle: "Co-founder of Prisma",
-    companyLogo: {
-      src: "/svg/opensource/prisma.svg",
-      alt: "Prisma",
-    },
+    companyLogo: prismaSvelte,
     img: {
       src: "/images/opensource/schickling.jpg",
       square: true,
@@ -45,10 +49,7 @@ export const quotes: Quote[] = [
     text: `With Gitpod, I can review at any pull request in a full coding environment where I can edit, build, and test the contribution, by just prepending "http://gitpod.io#". Gitpod makes the pull-request review process so much nicer for me and I no longer have to do any local checkouts.`,
     author: "Julius Volz",
     jobTitle: "Co-founder of Prometheus",
-    companyLogo: {
-      src: "/svg/opensource/prometheus.svg",
-      alt: "Prometheus",
-    },
+    companyLogo: prometheusSvelte,
     img: {
       src: "/images/opensource/juliusv.jpg",
       square: true,
@@ -93,25 +94,25 @@ export const programBenefits: Card[] = [
     icon: {
       src: "/svg/media-kit/logo-mark.svg",
       alt: "Gitpod",
-      transform: "scale(.95)",
     },
+    transform: "scale(.95)",
     title: "Gitpod for free",
     text: "Maintainers get unlimited hours for usage on public repos. Contributors to your project are provided with a generous free plan for up to 50h a month, including private repos. For projects that run their own infrastructure complimentary <a href='/self-hosted'>Gitpod Self-Hosted</a> licenses are also available.",
   },
   {
     icon: {
-      src: "/svg/heart.svg",
+      src: "/svg/icons/heart.svg",
       alt: "Special treats",
-      transform: "scale(0.8)",
     },
+    transform: "scale(0.8)",
     title: "Special treats",
     text: "If your open-source software appears in our bill of materials then Gitpod would like to unconditionally <a href='https://github.com/moby/buildkit/issues/2525'>shout you some beers</a> <a href='/blog/devxconf-wrap'>or more</a> as our way of saying thank-you.",
   },
   {
     icon: {
-      src: "/svg/contact/sales.svg",
+      src: "/svg/icons/chat.svg",
       alt: "Personal onboarding",
-      transform: "scale(1.6) translateY(3px)",
+      transform: "scale(.85)",
     },
     title: "Personal onboarding",
     text: "We are here to help you with getting started and can provide ongoing support for maintaining the <a href='/docs/references/gitpod-yml'>.gitpod.yml</a> if you want.",
@@ -160,10 +161,7 @@ export const cards: Card[] = [
     },
   },
   {
-    icon: {
-      src: "/svg/opensource/theia.svg",
-      alt: "Theia",
-    },
+    icon: theiaSvelte,
     title: "Theia",
     text: "An extensible framework to develop full-fledged multi-language Cloud & Desktop IDEs.",
     link: {
@@ -172,11 +170,8 @@ export const cards: Card[] = [
     },
   },
   {
-    icon: {
-      src: "/svg/opensource/open-vscode.svg",
-      alt: "OpenVS Code",
-      transform: "scale(1.5)",
-    },
+    icon: openVscodeSvelte,
+    transform: "scale(1.5)",
     title: "OpenVS Code",
     text: "A version of VS Code that runs a server on a remote machine and allows access through a modern web browser.",
     link: {
@@ -197,10 +192,7 @@ export const cards: Card[] = [
     },
   },
   {
-    icon: {
-      src: "/svg/opensource/werft.svg",
-      alt: "Werft",
-    },
+    icon: werftSvelte,
     title: "Werft",
     text: "Werft is a Kubernetes-native CI system. It knows no pipelines, just jobs and each job is a Kubernetes pod. What you do in that pod is up to you.",
     link: {

@@ -18,7 +18,7 @@
 
 {#if label}
   <label
-    class="text-dark-grey cursor-pointer block mb-2"
+    class="text-body cursor-pointer block mb-2"
     class:error={hasError}
     for={id}>{@html label}</label
   >
@@ -29,7 +29,7 @@
   bind:value
   bind:this={element}
   class:error={hasError}
-  class="whitespace-pre-wrap resize-none bg-transparent text-[#000000] box-border w-full rounded-lg py-2 px-4 border-[1px] border-divider placeholder:text-dark-grey {className}"
+  class="whitespace-pre-wrap resize-none bg-transparent text-important box-border w-full rounded-lg py-2 px-4 border-[1px] border-divider placeholder:text-body {className}"
   {...$$restProps}
 />
 {#if hasError}

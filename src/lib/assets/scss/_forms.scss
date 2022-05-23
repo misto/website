@@ -2,7 +2,7 @@
 [type="checkbox"] {
   all: unset;
   font: inherit;
-  color: var(--dark-grey);
+  color: var(--body);
   box-sizing: border-box;
 }
 [type="radio"],
@@ -16,7 +16,7 @@
 label,
 legend {
   display: block;
-  color: var(--dark-grey);
+  color: var(--body);
   margin-bottom: 0.5rem;
 }
 
@@ -52,12 +52,12 @@ legend {
   color: var(--error);
 }
 .error.error [type] + label {
-  color: var(--dark-grey);
+  color: var(--body);
 }
 [type="checkbox"]:checked + label::before,
 [type="radio"]:checked + label {
   color: var(--black);
-  @apply border border-solid border-orange-900 bg-orange-900;
+  @apply border border-solid border-primary bg-primary;
 }
 [type="checkbox"]:checked + label::before {
   background-image: url("/tick-dark.svg");
@@ -67,10 +67,10 @@ legend {
 [type="checkbox"] + label:focus::before,
 [type="radio"]:hover + label,
 [type="radio"]:focus + label {
-  border-color: var(--dark-grey);
+  border-color: var(--body);
 }
 [type="radio"]:checked + label {
-  @apply border-orange-900;
+  @apply border-primary;
 }
 [class|="btn"]:disabled {
   background-color: var(--sand-dark);

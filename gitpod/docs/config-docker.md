@@ -9,7 +9,7 @@ title: Custom Docker Image
 
 # Custom Docker Image
 
-By default, Gitpod uses a standard Docker Image called [`Workspace-Full`](https://github.com/gitpod-io/workspace-images/blob/481f7600b725e0ab507fbf8377641a562a475625/dazzle.yaml#L18) as the foundation for workspaces. Workspaces started based on this default image come pre-installed with Docker, Go, Java, Node.js, C/C++, Python, Ruby, Rust, PHP as well as tools such as Homebrew, Tailscale, Nginx and several more.
+By default, Gitpod uses a standard Docker Image called [`Workspace-Full`](https://github.com/gitpod-io/workspace-images/blob/481f7600b725e0ab507fbf8377641a562a475625/dazzle.yaml#L18) as the foundation for workspaces. Workspaces started based on this default image come pre-installed with Docker, Nix, Go, Java, Node.js, C/C++, Python, Ruby, Rust, PHP as well as tools such as Homebrew, Tailscale, Nginx and several more.
 
 If this image does not include the tools you need for your project, you can provide a public Docker image or your own [Dockerfile](#using-a-dockerfile). This provides you with the flexibility to install the tools & libraries required for your project.
 
@@ -31,7 +31,7 @@ You can find the source code for these images in <a href="https://github.com/git
 
 For public images, feel free to specify a tag, e.g. `image: node:buster` if you are interested in a particular version of the Docker image.
 
-For Gitpod images, we recommend you do not specify a tag or use `:latest` to make sure you automatically benefit from security patches and fixes we release.
+For Gitpod images, we recommend using timestamped tag for maximum reproducibility, for example `image: gitpod/workspace-full:2022-05-08-14-31-53` (taken from the `Tags` panel on [this dockerhub page](https://hub.docker.com/r/gitpod/workspace-full/tags) for example)
 
 ## Configure a custom Dockerfile
 
@@ -48,7 +48,8 @@ A good starting point for creating a custom `.gitpod.Dockerfile` is the
 <a href="https://github.com/gitpod-io/workspace-images/blob/481f7600b725e0ab507fbf8377641a562a475625/dazzle.yaml#L18" target="_blank">gitpod/workspace-full</a> image as it already contains all the tools necessary to work with all languages Gitpod supports.
 
 ```dockerfile
-FROM gitpod/workspace-full
+# You can find the new timestamped tags here: https://hub.docker.com/r/gitpod/workspace-full/tags
+FROM gitpod/workspace-full:2022-05-08-14-31-53
 
 # Install custom tools, runtime, etc.
 RUN brew install fzf
@@ -59,7 +60,8 @@ RUN brew install fzf
 If you want a base image without the default tooling installed then use the <a href="https://github.com/gitpod-io/workspace-images/blob/481f7600b725e0ab507fbf8377641a562a475625/dazzle.yaml#L3" target="_blank">gitpod/workspace-base</a> image.
 
 ```dockerfile
-FROM gitpod/workspace-base
+# You can find the new timestamped tags here: https://hub.docker.com/r/gitpod/workspace-base/tags
+FROM gitpod/workspace-base:2022-05-08-14-31-53
 
 # Install custom tools, runtime, etc.
 # base image only got `apt` as the package manager
@@ -72,7 +74,8 @@ When you launch a Gitpod workspace, the local console will use the `gitpod` user
 You can however use `sudo` in your Dockerfile. The following example shows a typical `.gitpod.Dockerfile` inheriting from `gitpod/workspace-full`:
 
 ```dockerfile
-FROM gitpod/workspace-full
+# You can find the new timestamped tags here: https://hub.docker.com/r/gitpod/workspace-full/tags
+FROM gitpod/workspace-full:2022-05-08-14-31-53
 
 # Install custom tools, runtime, etc.
 # install-packages is a wrapper for `apt` that helps skip a few commands in the docker env.

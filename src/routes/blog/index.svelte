@@ -39,7 +39,7 @@
   <Section>
     <Header
       title="Blog"
-      text="The latest news, articles, and opinions around developer<br class='hidden sm:block'/>experience and remote development in the cloud."
+      text="The latest news, articles, and opinions around developer <br class='hidden sm:block'/>experience and remote development in the cloud."
       tight={true}
     />
     <div

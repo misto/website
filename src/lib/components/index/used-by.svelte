@@ -10,7 +10,7 @@
 </script>
 
 {#if isCard}
-  <Card size="small">
+  <Card size="medium" class="shadow-normal">
     <Section class="text-center {clazz}" {...$$restProps}>
       <h2 class="h3">{title}</h2>
       <Brands />

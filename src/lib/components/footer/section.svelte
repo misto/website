@@ -11,6 +11,6 @@
 </style>
 
 <ul class="min-w-min mb-xx-small space-y-2.5 md:mb-0">
-  <li class="font-semibold text-black">{title}</li>
+  <li class="font-semibold text-important">{title}</li>
   <slot />
 </ul>

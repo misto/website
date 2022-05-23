@@ -19,13 +19,13 @@ Still, you may wish to customize Gitpod, or to extend it with new features. You 
 
 To install a VS Code extension in Gitpod, simply go to the left vertical menu, and open the Extensions view. There you can search for an extension and install it with one click.
 
-Please note that this uses the [Open VSX](https://open-vsx.org/) registry. If you can't find an extension you use in your local VS Code, please read the "[Where do I find extensions?](#where-do-i-find-extensions)" section below.
+For [VS Code Web](vscode-browser), we use the [Open VSX](https://open-vsx.org/) registry. If you can't find an extension you use in your local VS Code, please read the "[Where do I find extensions?](#where-do-i-find-extensions)" section below.
 
 If the extension is helpful to anyone who works on the project, you can add it to the `.gitpod.yml` configuration file so that it gets installed for anyone who works on the project. To do that:
 
 1. Visit the extension page (where you installed it from)
-1. Click the settings icon
-1. Select "Add to .gitpod.yml" from the menu
+2. Click the settings icon
+3. Select "Add to .gitpod.yml" from the menu
 
 Your project's `.gitpod.yml` is updated automatically and lists the given extension. You can also directly edit this file to install or remove extensions manually.
 
@@ -47,12 +47,10 @@ Extensions are installed in the `/workspace/.vscode-remote/extensions/` director
 
 You have two options to install extensions for yourself only:
 
-1. For the current workspace only
-1. For all your workspaces
+1. For the current workspace only - if you don't want extensions to be synced across workspaces, select `Install (Do Not Sync)` instead of `Install` when installing new extensions.
+2. For all your workspaces - can be useful for extensions that you want to have in all your projects (for example a custom theme), and this doesn't require changing every project's `.gitpod.yml` configuration. **All manually installed extensions are synced across workspaces by default**.
 
-The second use case can be useful for extensions that you want to have in all your projects (for example a custom theme), and this doesn't require changing every project's `.gitpod.yml` configuration.
-
-To do this, open the Extensions view, search for the extension you want to install and click **Install**.
+You can read more about why and how extensions are synced on the [Settings Sync](settings-sync) page.
 
 ## Built-in Extensions
 
@@ -62,7 +60,7 @@ You can view all pre-installed extensions by navigating to VS Code's Extensions 
 
 ## Where do I find extensions?
 
-If you cannot find an extension by searching in Gitpod, it probably means that the extension hasn't been added to the [Open VSX](https://open-vsx.org/) registry yet.
+If you cannot find an extension by searching in Gitpod using [VS Code Web](vscode-browser), it probably means that the extension hasn't been added to the [Open VSX](https://open-vsx.org/) registry yet.
 
 In that case, please reach out to the extension author and politely ask them to publish their extension to the vendor-neutral, open source Open VSX registry. The "[How to Publish an Extension](https://github.com/eclipse/openvsx/wiki/Publishing-Extensions)" docs provide step-by-step instructions.
 

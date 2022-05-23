@@ -65,7 +65,7 @@
   }
 
   .bg-open-state {
-    @apply bg-off-white !important;
+    @apply bg-card !important;
   }
 
   .wrapper {
@@ -74,8 +74,7 @@
   }
 
   .scrolled-out {
-    @apply border-divider;
-    background: hsl(0 5% 96% / 85%);
+    @apply border-divider bg-nav;
     backdrop-filter: saturate(0.5) blur(5px);
   }
 
@@ -107,7 +106,7 @@
 <!-- Intersection observer target to trigger the strike through animation. -->
 <div id="choose-project-observer-target-top" />
 <nav
-  class="fixed z-50 mx-auto w-full border-b border-solid border-transparent"
+  class="fixed z-40 mx-auto w-full border-b border-solid border-transparent border-t-0"
   class:scrolled-out={scroll > 0}
   class:bg-open-state={$menuState}
 >

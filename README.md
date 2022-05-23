@@ -9,7 +9,7 @@ Gitpod removes all friction from the developer experience to be always ready-to-
 
 Contributing is as easy as starting a new workspace:
 
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/gitpod-io/website)
+[![Open in Gitpod](https://www.gitpod.io/svg/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/gitpod-io/website)
 
 ## Technology stack
 

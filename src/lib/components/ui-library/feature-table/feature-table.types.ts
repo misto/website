@@ -3,7 +3,7 @@ export type FeatureTocItemType = "text" | "tooltip" | "image";
 export type FeatureTocItem = {
   text: string;
   tooltip?: string;
-  image?: FeatureImage;
+  image?: FeatureImage | any;
 };
 
 export type FeatureItemDetail = {

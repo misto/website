@@ -14,7 +14,7 @@
 
 <style lang="postcss">
   .othercompanies span {
-    @apply px-2 py-[0.3rem] rounded-xl bg-orange-700;
+    @apply px-2 py-[0.3rem] rounded-xl bg-tertiary dark:text-dark-grey;
   }
 </style>
 
@@ -37,7 +37,7 @@
 </Header>
 
 <div class="max-w-[50rem] mt-small mx-auto mb-auto my-small lg:my-x-huge">
-  <h2 class="h4 pl-7 border-l-orange-800 border-l-[0.25rem]">
+  <h2 class="h4 pl-7 border-l-secondary border-l-[0.25rem]">
     Remove all friction from the developer experience to be always ready-to-code
     and make software engineering more collaborative, joyful, and secure.
   </h2>
@@ -180,19 +180,19 @@
 />
 
 <div class="header max-w-4xl my-small lg:my-x-huge mx-auto">
-  <h2>Gitpod in the news</h2>
+  <h2 class="text-center">Gitpod in the news</h2>
   <ul class="flex flex-row flex-wrap justify-center mt-x-small">
     <li
       class="p-4 flex-grow-0 flex-shrink-0 basis-1/2 min-w-[300px] text-center mb-0"
     >
       <a
-        class="p-4 block bg-white rounded-2xl"
+        class="p-4 block bg-white dark:bg-card rounded-2xl"
         href="https://www.theregister.com/2020/08/25/gitpod_open_sources_cloud_development_platform/"
         target="_blank"
         rel="noreferrer"
       >
         <img
-          class="inline"
+          class="inline dark:filter dark:invert"
           src="/images/about/TheRegister.svg"
           alt="The Register"
           height="40"
@@ -204,13 +204,13 @@
       class="p-4 flex-grow-0 flex-shrink-0 basis-1/2 min-w-[300px] text-center mb-0"
     >
       <a
-        class="p-4 block bg-white rounded-2xl"
+        class="p-4 block bg-white dark:bg-card rounded-2xl"
         href="https://www.infoq.com/articles/cloud-based-development/"
         target="_blank"
         rel="noreferrer"
       >
         <img
-          class="inline"
+          class="inline dark:filter dark:invert"
           src="/images/about/InfoQ.svg"
           alt="Info Q"
           height="40"
@@ -222,13 +222,13 @@
       class="p-4 flex-grow-0 flex-shrink-0 basis-1/2 min-w-[300px] text-center mb-0"
     >
       <a
-        class="p-4 block bg-white rounded-2xl"
+        class="p-4 block bg-white dark:bg-card rounded-2xl"
         href="https://devops.com/gitpod-open-sources-automated-local-development-environment/"
         target="_blank"
         rel="noreferrer"
       >
         <img
-          class="inline"
+          class="inline dark:filter dark:invert"
           src="/images/about/DevOpsDotCom.svg"
           alt="DevOps.com"
           height="40"
@@ -240,13 +240,13 @@
       class="p-4 flex-grow-0 flex-shrink-0 basis-1/2 min-w-[300px] text-center mb-0"
     >
       <a
-        class="p-4 block bg-white rounded-2xl"
+        class="p-4 block bg-white dark:bg-card rounded-2xl"
         href="https://thenewstack.io/gitpod-open-sources-a-holistic-ide/"
         target="_blank"
         rel="noreferrer"
       >
         <img
-          class="inline"
+          class="inline dark:filter dark:invert"
           src="/images/about/TheNewStack.svg"
           alt="The New Stack"
           height="40"

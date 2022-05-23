@@ -2,6 +2,7 @@
   import { faqsKey } from "./faqs.svelte";
   import { getContext, onMount } from "svelte";
   import { stringToBeautifiedFragment } from "$lib/utils/helpers";
+  import Arrow from "../svgs/arrow.svelte";
 
   export let title: string;
   let details: HTMLElement;
@@ -138,7 +139,7 @@
 </style>
 
 <details
-  class="faq group bg-sand-dark border border-solid border-transparent focus:border-white hover:border-white rounded-2xl"
+  class="faq group bg-sand-dark dark:bg-card border border-solid border-transparent focus:border-white dark:hover:border-black dark:focus:border-black hover:border-white rounded-2xl"
   open={isActive}
   on:toggle={setActive}
   id={fragment}
@@ -154,12 +155,10 @@
       class="faq__top flex items-center p-xx-small sm:p-x-small lgx:p-medium"
     >
       <h3 class="h4 faq__title flex-1 inline-block w-5/6">{title}</h3>
-      <img
-        class="faq__arrow group-open:rotate-180 ml-macro h-6 w-6 outline-none transition-all duration-200"
+      <Arrow
         width="24"
         height="24"
-        src="/arrow.svg"
-        alt="Arrow"
+        class="group-open:rotate-180 ml-macro h-6 w-6 outline-none transition-all duration-200"
       />
     </div>
   </summary>

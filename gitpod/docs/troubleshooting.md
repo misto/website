@@ -19,6 +19,26 @@ These logs contain information about the workspace, the session, and the Visual 
 
 **Important:** The content of these logs should **NOT** be shared publicly as they could contain sensitive information about your workspace. Instead, send them to support@gitpod.io along with a link to a corresponding GitHub issue if needed.
 
+## Gitpod logs in JetBrains Gateway
+
+These logs contain information about the workspace, the session, and the JetBrains Gateway. They are useful for diagnosing issues when connecting to a workspace, issues from Gateway Plugins and issues preventing the JetBrains Client to open.
+
+- Open the **Help** menu and select **Collect Logs and Diagnostic Data** option. After a few seconds, the file manager window will show up, revealing the location where the zip file containing all the logs has been saved.
+
+**Important:** The content of these logs should **NOT** be shared publicly as they could contain sensitive information about your workspace. Instead, send them to support@gitpod.io along with a link to a corresponding GitHub issue if needed.
+
+**Note:** Ensure you are using the latest version of [JetBrains Gateway](https://www.jetbrains.com/help/idea/remote-development-a.html#gateway) and [Gitpod JetBrains Gateway plugin](https://plugins.jetbrains.com/plugin/18438-gitpod-gateway), as issues from older versions might have already been fixed.
+
+## Gitpod logs in JetBrains Client
+
+These logs contain information about the workspace, the session, and the JetBrains IDE. They are useful for diagnosing connection issues, issues from IDE Plugins, and any unexpected behavior from the client and the server.
+
+- Open the **Help** menu and select **Collect Host and Client logs** option. After a few seconds, the file manager window will show up, revealing the location where the zip file containing all the logs has been saved.
+
+**Important:** The content of these logs should **NOT** be shared publicly as they could contain sensitive information about your workspace. Instead, send them to support@gitpod.io along with a link to a corresponding GitHub issue if needed.
+
+**Note:** Ensure you are using the latest version of both [JetBrains Gateway](https://www.jetbrains.com/help/idea/remote-development-a.html#gateway) and [Gitpod JetBrains Gateway plugin](https://plugins.jetbrains.com/plugin/18438-gitpod-gateway), as issues from older versions might have already been fixed.
+
 ## Why doesn't the "ClearURLs" browser extension work with Gitpod?
 
 The ClearURLs browser extension for [Google Chrome](https://chrome.google.com/webstore/detail/clearurls/lckanjgmijmafbedllaakclkaicjfmnk?hl=en) and [Mozilla Firefox](https://addons.mozilla.org/en-US/firefox/addon/clearurls/) inhibits Gitpod workspaces from initialising and the problem manifests with the following symptoms:

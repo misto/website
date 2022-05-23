@@ -15,17 +15,16 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import topicsState from "./states/topics-state";
-  import EditInGitpod from "./edit-in-gitpod.svelte";
   import { page } from "$app/stores";
+  import MagGlass from "../svgs/mag-glass.svelte";
   let clazz = "";
   export { clazz as class };
   export let containerClasses = "";
   export let iconClasses = "";
   export let placeholder = "Quick search";
-  export let showEditInGitpod: boolean = false;
 
   const docSearchJSVersion = "2.6.3";
-  const docSearchInputSelector = "search-doc-input";
+  export let docSearchInputSelector = "search-doc-input";
 
   let docSearchInput: HTMLInputElement;
   let docSearchScript: HTMLScriptElement;
@@ -74,6 +73,13 @@
     display: block !important; /* DocSearch adds inline styles, !important helps us take control */
   }
 
+  :global(.algolia-autocomplete .ds-dropdown-menu [class^="ds-dataset-"]) {
+    @apply rounded-xl !important;
+  }
+  :global(.algolia-autocomplete .ds-dropdown-menu) {
+    @apply rounded-xl;
+  }
+
   :global(div
       .algolia-autocomplete.algolia-autocomplete-left
       .ds-dropdown-menu),
@@ -83,6 +89,23 @@
     left: 0 !important; /* DocSearch adds inline styles, !important helps us take control */
     min-width: unset;
     max-width: unset;
+    @apply lg:w-[500px];
+  }
+  :global(.algolia-docsearch-suggestion--category-header) {
+    @apply mt-4;
+  }
+
+  :global(.algolia-autocomplete .algolia-docsearch-suggestion--highlight) {
+    @apply text-secondary;
+  }
+
+  :global(.algolia-autocomplete .algolia-docsearch-suggestion--title) {
+    @apply text-black font-semibold;
+  }
+
+  :global(.algolia-docsearch-suggestion--highlight) {
+    box-shadow: none !important;
+    @apply !text-secondary;
   }
 </style>
 
@@ -99,17 +122,16 @@
 
 <svelte:body on:keydown={handleBodyKeyDown} />
 
-<div class="items-center flex my-4 lg:my-0  lg:mb-12">
-  <div class:narrow-search={showEditInGitpod} class="w-full sm:px-4">
+<div class="items-center flex my-4 lg:my-0  lg:mb-8">
+  <div class="w-full sm:px-4">
     <div
       class={`w-full input-container relative ${
         $topicsState || isSupportPage ? "topics-active" : ""
       } ${containerClasses}`}
     >
       <label for={docSearchInputSelector} class="sr-only">Search</label>
-      <img
+      <MagGlass
         class="absolute top-1/2 z-10 left-3 -translate-y-1/2 pointer-events-none h-xx-small w-xx-small lef {iconClasses}"
-        src="/svg/mag-glass.svg"
         alt="Search"
         aria-hidden="true"
       />
@@ -118,18 +140,8 @@
         type="search"
         {placeholder}
         id={docSearchInputSelector}
-        class="box-border rounded-2xl bg-off-white shadow-normal block w-full text-p-medium h-small pl-11 pr-3 py-2 border border-transparent leading-5 text-gray-600 placeholder:text-gray-500 focus:outline-none focus:bg-none focus:border-white focus:ring-white focus:text-gray-900 {clazz}"
+        class="box-border text-base rounded-2xl dark:bg-light-black bg-sand-dark  block w-full text-p-medium h-small pl-11 pr-3 py-2 border border-transparent leading-5 text-important placeholder:text-body dark:active:shadow-slight focus:outline-none focus:bg-none focus:border-transparent focus:shadow-md focus:bg-card focus:ring-transparent focus:text-important {clazz}"
       />
     </div>
   </div>
-  {#if showEditInGitpod}
-    <div
-      class="w-1/4 lg:flex hidden justify-start sm:pl-4 lg:pl-8  {$topicsState ||
-      isSupportPage
-        ? 'topics-active'
-        : ''}"
-    >
-      <EditInGitpod />
-    </div>
-  {/if}
 </div>

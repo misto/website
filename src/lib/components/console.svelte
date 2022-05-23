@@ -1,6 +1,7 @@
 <script lang="ts">
   import { reducedMotion } from "$lib/stores/reduce-motion";
   import { onMount } from "svelte";
+  import { theme } from "$lib/stores/theme";
 
   export let source = "";
   export let dark = false;
@@ -8,20 +9,18 @@
   export let narrow = false;
   export let skipToEnd = false;
   export let alt = "";
+  let black = dark ? "#F9F9F9" : "rgba(18, 16, 12, 0.7)";
+  let blue = dark ? "#FFE4BC" : "#0099EF";
+  let currentTheme = $theme;
 
-  $: colors = dark
-    ? {
-        black: "#F9F9F9",
-        orange: "#fc8800",
-        green: "#57c700",
-        blue: "#FFE4BC",
-      }
-    : {
-        black: "rgba(18, 16, 12, 0.7)",
-        orange: "#fc8800",
-        green: "#57c700",
-        blue: "#0099EF",
-      };
+  $: isDark = currentTheme === "dark";
+
+  $: colors = {
+    black: isDark ? "#999795" : black,
+    orange: "#fc8800",
+    green: "#57c700",
+    blue: isDark ? "#57c700" : blue,
+  };
 
   let wrapper: HTMLDivElement;
   let canvas: HTMLCanvasElement;
@@ -373,7 +372,7 @@
   });
 </script>
 
-<style>
+<style lang="postcss">
   .aspect {
     position: relative;
     height: 100%;
@@ -410,6 +409,9 @@
   .wrapper.dark {
     background: rgba(18, 16, 12, 0.7);
   }
+  :global(body.dark) .wrapper {
+    background: #373531;
+  }
   .wrapper.shadowGrey {
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.08),
       0px 5px 20px rgba(0, 0, 0, 0.12);
@@ -427,6 +429,13 @@
     background: rgba(249, 249, 249, 0.9);
     -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
+  }
+  :global(body.dark) .titlebar {
+    background: #514f4d;
+
+    &::before {
+      background: #807c78;
+    }
   }
   .dark .titlebar {
     background: #696662;

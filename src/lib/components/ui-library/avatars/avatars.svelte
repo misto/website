@@ -60,7 +60,7 @@
       : `https://github.com/${username}`;
 </script>
 
-<span class:-space-x-2={!displayNames} class="avatars">
+<span class:-space-x-2={!displayNames}>
   {#each trimmedUsernames as username}
     {#if displayNames}
       <a

@@ -121,7 +121,7 @@
 
 <Card
   size="small"
-  class="p-xx-small sm:py-small sm:px-x-small md:p-medium mb-32 sm:mx-8 lg:flex lg:items-center lg:justify-around"
+  class="shadow-normal p-xx-small sm:py-small sm:px-x-small md:p-medium mb-32 sm:mx-8 lg:flex lg:items-center lg:justify-around"
 >
   <div class="letter lg:w-2/5 lgpr-xx-small mb-small">
     <p class="text-large">

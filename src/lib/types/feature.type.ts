@@ -1,3 +1,5 @@
+import type { Lottie } from "./lottie.type";
+
 export type Feature = {
   title: string;
   paragraph: string;
@@ -5,6 +7,7 @@ export type Feature = {
   secondaryButton?: { text: string; href: string };
   featureList?: string[];
   image?: {
+    darkSrc?: string;
     src: string;
     alt: string;
     height?: number;
@@ -21,6 +24,7 @@ export type Feature = {
     dark?: boolean;
   };
   previewComponent?: any;
+  lottie?: Lottie;
   showTheMediaFirstOnMobile?: boolean;
   headingLevel?: "h2" | "h3";
 };

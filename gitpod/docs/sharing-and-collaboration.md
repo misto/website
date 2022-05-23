@@ -68,4 +68,5 @@ This marks your workspace as shared. When you open it, you can copy & share its 
 With Gitpod you can also use the following third-party integrations for real-time collaboration:
 
 - [Code Together](https://www.codetogether.com/) - Works on VS Code Desktop, VS Code Browser, and via JetBrains or Eclipse.
+- [GitLive](https://git.live/) - Works on VS Code Desktop, VS Code Browser, and via JetBrains.
 - [Duckly](https://duckly.com/) - Works on VS Code Desktop and VS Code Browser.

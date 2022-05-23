@@ -157,4 +157,4 @@ Gitpod can make your life much simpler by automating your development setup just
 
 ![Animated character waving hand with a smile](https://res-3.cloudinary.com/anudeepc/image/upload/q_auto/v1/blog-images/character.gif)
 
-<div class="h3 text-black font-bold">Happy coding with Gitpod ✨</div>
+<div class="h3 text-important font-bold">Happy coding with Gitpod ✨</div>

@@ -70,7 +70,7 @@
 
 <div class="max-w-lg mx-auto mt-24">
   <Duration duration={screencast.duration} />
-  <p class="h5 text-black font-bold mt-macro mb-xx-small">
+  <p class="h5 text-important font-bold mt-macro mb-xx-small">
     {screencast.description}
   </p>
   {#if screencast.relatedDocs}

@@ -15,12 +15,16 @@
       width: 100%;
     }
   }
+
+  :global(body.dark) .logo-box:not(.dark) :global(a) {
+    @apply shadow-sm;
+  }
 </style>
 
 <div
-  class="logo-box px-small py-medium sm:p-large rounded-4xl bg-white shadow-normal md:mx-micro mb-micro md:mb-small"
-  class:bg-gray-900={isDark}
-  class:text-white={isDark}
+  class="logo-box px-small py-medium sm:p-large rounded-4xl shadow-normal md:mx-micro mb-micro md:mb-small {isDark
+    ? 'dark bg-black dark:bg-card text-white'
+    : 'bg-white text-dark-grey'}"
 >
   <img src={svgSrc} {alt} class="mx-auto" />
   <p class="mt-medium mb-micro">Download {text}</p>

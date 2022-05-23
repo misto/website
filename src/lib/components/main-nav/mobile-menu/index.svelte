@@ -53,7 +53,7 @@
 
 {#if $menuState}
   <div
-    class="nav-items absolute flex flex-col py-x-small w-screen items-center bg-off-white space-y-xx-small z-10 shadow-md max-h-screen overflow-y-auto"
+    class="nav-items absolute flex flex-col py-x-small w-screen items-center bg-card space-y-xx-small z-10 shadow-md max-h-screen overflow-y-auto"
   >
     {#each navItems as navItem}
       <NavItem {navItem} />

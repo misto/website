@@ -23,7 +23,7 @@
   <Carousel class="mb-small pr-44">
     {#each quotes as { text, author, jobTitle, companyLogo }}
       <div
-        class="text-black text-base w-96 p-x-small overflow-hidden rounded-2xl shadow-md bg-white hover:shadow-xl transition-shadow duration-300 ease-in-out mb-micro"
+        class="text-important text-base w-96 p-x-small overflow-hidden rounded-2xl shadow-md bg-white hover:shadow-xl transition-shadow duration-300 ease-in-out mb-micro"
       >
         <p class="mb-small">{text}</p>
         <div>

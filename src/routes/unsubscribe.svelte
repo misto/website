@@ -34,7 +34,7 @@
 <div>
   <Card
     size="small"
-    class="unsubscribe p-xx-small sm:py-small sm:px-x-small md:p-medium pb mb-medium text-center sm:mx-8"
+    class="unsubscribe shadow-normal p-xx-small sm:py-small sm:px-x-small md:p-medium pb mb-medium text-center sm:mx-8"
   >
     <h1 class="h4">Unsubscribed</h1>
     <p class="max-w-2xl text-large mx-auto">

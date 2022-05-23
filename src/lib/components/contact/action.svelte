@@ -10,18 +10,18 @@
   export let btnClass: "primary" | "cta" = "primary";
   export let action: ContactAction;
   export let isTextSmall: boolean = false;
-  const { icon, title, text, link } = action;
+  const { icon, transform, title, text, link } = action;
   const target = isAnExternalLink(link.href) ? "_blank" : undefined;
 </script>
 
 <div
-  class="flex flex-col justify-between items-center bg-off-white rounded-2xl px-xx-small py-xx-small md:py-small mb-micro md:mb-small shadow-normal {clazz}"
+  class="flex flex-col justify-between items-center bg-card rounded-2xl mx-macro px-xx-small py-xx-small md:py-small mb-micro md:mb-small shadow-normal {clazz}"
   style="width: {width}"
 >
   <div>
-    {#if icon}
-      <img src="/svg/contact/{icon}" alt={title} class="mx-auto h-28" />
-    {/if}
+    <div class="h-28" style="transform: {transform};">
+      <svelte:component this={icon} class="mx-auto mb-x-small h-28" />
+    </div>
     <h2 class="h4">{title}</h2>
     <p class="mt-micro mb-x-small" class:text-small={isTextSmall}>{text}</p>
   </div>

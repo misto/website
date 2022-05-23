@@ -9,6 +9,8 @@
   import Header from "$lib/components/header.svelte";
   import OpenGraph from "$lib/components/open-graph.svelte";
   import Section from "$lib/components/section.svelte";
+  import Spaces_1 from "$lib/components/svgs/github-codespaces/spaces-1.svelte";
+  import Spaces_2 from "$lib/components/svgs/github-codespaces/spaces-2.svelte";
   import FeatureTable from "$lib/components/ui-library/feature-table/feature-table.svelte";
   import { codespacesComparison } from "$lib/contents/codespaces";
   import { openSourceFeature } from "$lib/contents/jetbrains-space";
@@ -54,12 +56,9 @@
         href: "/docs/prebuilds",
         text: "More about Prebuilds.",
       },
-      image: {
-        src: "/images/github-codespaces/spaces-1.svg",
-        alt: "Gitpod vs GitHub Codespaces speed comparison",
-      },
+      previewComponent: Spaces_1,
       footnote:
-        "Compared start-up time until ready-to-code for<br /> <a href='https://github.com/gitpod-io/vscode' target='_blank'>https://github.com/gitpod-io/vscode</a>. Last verified 25 Sep 2020.",
+        "Compared start-up time until ready-to-code for<br /> <a href='https://github.com/gitpod-io/openvscode-server' target='_blank'>https://github.com/gitpod-io/openvscode-server</a>. Last verified 14 Feb 2022.",
     }}
   />
 
@@ -68,10 +67,7 @@
       title: "Resource Efficient",
       paragraph:
         "Instead of running on expensive VMs, Gitpod provisions secure containers and achieves best-in-class resource-efficiency with scalable workspaces running on shared high-powered cloud servers. <a href='https://www.researchgate.net/publication/333096446_Reduced_carbon_emission_and_optimized_power_consumption_technique_using_container_over_virtual_machine' target='_blank'>Helping our planet</a> 🌱.",
-      image: {
-        src: "/images/github-codespaces/spaces-2.svg",
-        alt: "Gitpod vs GitHub Codespaces price comparison",
-      },
+      previewComponent: Spaces_2,
       footnote:
         "Price comparison for a developer working 5h per day, 21 per month with 8 core CPUs and 12GB RAM. Last verified 3 Sep 2021. Sources: <a href='/pricing'>Gitpod</a>, <a href='https://github.com/features/codespaces' target='_blank'>GitHub Codespaces</a>.",
     }}

@@ -5,7 +5,7 @@
 <style lang="postcss">
   .year {
     border-bottom: 3px;
-    @apply inline-block border-orange-900 border-solid;
+    @apply inline-block border-primary border-solid;
 
     &:not(:first-of-type) {
       @apply mt-x-large;
@@ -24,7 +24,7 @@
   class="max-w-lg"
 >
   <img
-    src="/svg/heart.svg"
+    src="/svg/icons/heart.svg"
     alt="Heart"
     class="h-10 mx-auto mb-micro"
     slot="top"
@@ -35,6 +35,9 @@
       <li>
         <a rel="nofollow" href="https://twitter.com/AlanCao5">Alan Cao</a> from New
         York University.
+      </li>
+      <li>
+        <a href="https://www.linkedin.com/in/0x33c0unt/"> Yusuf Kocadaş</a>.
       </li>
     </ol>
     <h2 class="h4 year">2021</h2>

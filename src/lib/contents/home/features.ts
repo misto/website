@@ -8,9 +8,9 @@ export const multiTrackDevelopmentFeature: Feature = {
   title: "Multi track development with ease",
   paragraph:
     "You can have multiple workspaces with different contexts open at once - one for your feature, one for a bug or one for your code review directly in Gitpod.",
-  image: {
-    src: "/svg/features/muti-track-development.svg",
-    alt: "Multi track development with ease",
+  lottie: {
+    src: "/lottie/edit_workspace.json",
+    id: "edit_workspace",
   },
 };
 
@@ -18,11 +18,15 @@ export const collaborationFeature: Feature = {
   title: "Where teams code together",
   paragraph:
     "Share running workspaces for pair programming, use port forwarding or share a snapshot as a copy of your workspace with teammates.",
-  image: {
-    src: "/images/features/collaboration.png",
-    alt: "Collaboration",
-    classNames: "shadow-medium",
-    styles: "border-radius: 7px",
+  // image: {
+  //   src: "/images/features/collaboration.png",
+  //   alt: "Collaboration",
+  //   classNames: "shadow-medium",
+  //   styles: "border-radius: 7px",
+  // },
+  lottie: {
+    src: "/lottie/share_workspace.json",
+    id: "share-workspace",
   },
 };
 
@@ -94,21 +98,21 @@ export const otherFeatures: Feature[] = [
 export const secondaryFeatures: Card[] = [
   {
     icon: {
-      src: "/svg/features/open-source.svg",
+      src: "/svg/icons/opensource.svg",
     },
     title: "Open Source",
     text: "We're free from big tech influence and integrate, not dictate. This makes our product development fast and close to our users & community.",
   },
   {
     icon: {
-      src: "/svg/features/saas.svg",
+      src: "/svg/icons/cloud.svg",
     },
     title: "SaaS or Self-Hosted",
     text: "Use our SaaS solution running on the carbon neutral Google Cloud Platform or host Gitpod on your own cloud infrastructure using GKE, k3s, EKS or AKS.",
   },
   {
     icon: {
-      src: "/svg/features/secure.svg",
+      src: "/svg/icons/secure.svg",
     },
     title: "Secure by design",
     text: "Gitpod centralizes all source code and safely stores it in the cloud, never locally. Security is at the core of everything we do at Gitpod. <br><a href='/security'>More about security</a>",

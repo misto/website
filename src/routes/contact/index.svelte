@@ -4,10 +4,28 @@
 
 <script>
   import OpenGraph from "$lib/components/open-graph.svelte";
-  import Action from "$lib/components/contact/action.svelte";
   import { contactActions } from "$lib/contents/contact";
   import Header from "$lib/components/header.svelte";
+  import CardSmall from "$lib/components/card/card-small.svelte";
 </script>
+
+<style lang="postcss">
+  div {
+    grid-template-columns: repeat(auto-fill, 320px);
+
+    @media (max-width: 1465px) {
+      grid-template-columns: repeat(auto-fill, 314px);
+    }
+
+    @media (max-width: 1380px) {
+      @apply max-w-4xl mx-auto;
+    }
+
+    @media (max-width: 400px) {
+      grid-template-columns: none;
+    }
+  }
+</style>
 
 <OpenGraph
   data={{
@@ -23,9 +41,12 @@
   tight={true}
   fullWidth={true}
 >
-  <div slot="content" class="flex flex-wrap justify-around mt-small">
+  <div
+    slot="content"
+    class="grid gap-micro justify-center mt-small sm:mb-xx-large"
+  >
     {#each contactActions as action}
-      <Action {action} width="19rem" />
+      <CardSmall card={action} btnSize="normal" titleClassNames="h4" />
     {/each}
   </div>
 </Header>

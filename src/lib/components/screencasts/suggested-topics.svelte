@@ -8,24 +8,36 @@
 
   const handleTopicSetup = (e: Event, topic: string) => {
     const target = e.target as HTMLElement;
-    target.parentElement.childNodes.forEach(
-      (t: HTMLElement) => (t.style.background = "var(--sand-dark)")
-    );
+    target.parentElement.childNodes.forEach((t: HTMLElement) => {
+      if (undefined !== t.classList) {
+        t.classList.remove("active");
+      }
+    });
+    target.classList.add("active");
     if (topic !== currentTopic) {
       dispatch("setTopic", topic);
-      target.style.background = "var(--brand-almost-ripe)";
+      console.log(topic, currentTopic);
     } else {
       dispatch("setTopic", "");
-      target.style.background = "var(--sand-dark)";
+      console.log(topic, currentTopic);
+      target.classList.remove("active");
     }
   };
 </script>
 
+<style lang="postcss">
+  .buttons-wrapper :global(button.active) {
+    @apply bg-primary text-black;
+  }
+</style>
+
 <div class="md:mt-x-large mb-small">
-  <p class="h5 text-center text-black font-bold mb-xx-small">
+  <p class="h5 text-center text-important font-bold mb-xx-small">
     Suggested topics
   </p>
-  <div class="flex flex-wrap justify-center max-w-3xl mx-auto sm:space-x-macro">
+  <div
+    class="flex flex-wrap justify-center max-w-3xl mx-auto sm:space-x-macro buttons-wrapper"
+  >
     {#each topics as topic}
       <Button
         on:click={(e) => handleTopicSetup(e, topic)}

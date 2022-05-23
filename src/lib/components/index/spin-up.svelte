@@ -21,7 +21,7 @@
   ];
 </script>
 
-<Card size="medium">
+<Card size="medium" class="shadow-normal">
   <Section
     class="flex flex-col max-w-2xl mx-auto lg:max-w-none lg:flex-row items-center px-micro py-small sm:px-small sm:py-medium lg:space-x-small xl:py-24 xl:px-20 xl:space-x-20"
   >
@@ -38,7 +38,7 @@
         and Bitbucket projects to easily spin up a dev environment with a single
         click.
       </p>
-      <ButtonsWrapper class="justify-center">
+      <ButtonsWrapper class="justify-center sm:justify-start">
         {#each buttons as { href, icon, text }}
           <LinkButton
             class="flex items-center"

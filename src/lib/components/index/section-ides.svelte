@@ -57,7 +57,7 @@
           <img
             src="/images/index/{idetoRender.screenshots[ideType]}"
             alt={idetoRender.label}
-            class="shadow-brand rounded-lg"
+            class="shadow-highlight rounded-lg"
           />
         </div>
         <IdeSwitcher

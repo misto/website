@@ -4,9 +4,7 @@
   export let MENU: MenuEntry[];
 </script>
 
-<ul
-  class="space-y-8 px-8 sticky top-24 self-start max-h-[calc(100vh-6rem)] pb-10 overflow-auto"
->
+<ul class="space-y-2 self-start max-h-[calc(100vh-6rem)] overflow-auto">
   {#each MENU as menuItem}
     <MenuSection {menuItem} />
   {/each}

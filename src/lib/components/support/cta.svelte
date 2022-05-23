@@ -1,6 +1,7 @@
 <script>
   import Section from "../section.svelte";
   import LinkButton from "$lib/components/ui-library/link-button";
+  import ButtonsWrapper from "../buttons-wrapper.svelte";
 </script>
 
 <Section
@@ -12,7 +13,7 @@
     <p class="mb-x-small">
       Please get in contact and we’ll get onto it right away.
     </p>
-    <div class="flex justify-center items-center flex-wrap space-x-4">
+    <ButtonsWrapper class="justify-center sm:justify-start">
       <LinkButton
         target="_blank"
         variant="primary"
@@ -22,6 +23,6 @@
       <LinkButton variant="secondary" size="medium" href="/contact/support"
         >Contact support</LinkButton
       >
-    </div>
+    </ButtonsWrapper>
   </div>
 </Section>

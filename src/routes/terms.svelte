@@ -15,7 +15,7 @@
   }
 
   ::marker {
-    @apply text-orange-800;
+    @apply text-secondary;
   }
   article :global() {
     --h1: 3.375rem;
@@ -698,7 +698,7 @@
   </p>
 
   <div
-    class="p-xx-small sm:py-small sm:px-x-small md:p-medium rounded-2xl bg-off-white"
+    class="p-xx-small sm:py-small sm:px-x-small md:p-medium rounded-2xl bg-card"
   >
     <div>-- begin model withdrawal form --</div>
     <p class="mb-4">

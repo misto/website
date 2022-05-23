@@ -18,16 +18,11 @@
 </script>
 
 <script lang="ts">
-  import { onMount } from "svelte";
   import Wrapper from "$lib/components/changelog/wrapper.svelte";
   import OpenGraph from "$lib/components/open-graph.svelte";
   import "$lib/assets/markdown-commons.scss";
   export let changelogEntry: ChangelogEntryType;
   const { date, title, excerpt, content, image, alt } = changelogEntry;
-
-  onMount(() => {
-    document.getElementsByClassName("toc")[0].remove();
-  });
 </script>
 
 <style lang="postcss">

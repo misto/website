@@ -1,5 +1,6 @@
 import type { Quote } from "$lib/types/quote.type";
 import type { Brand } from "$lib/types/brand.type";
+import githubMarkSvelte from "$lib/components/svgs/github-mark.svelte";
 
 export const quotes: Quote[] = [
   {
@@ -63,10 +64,7 @@ export const jetbrains_quotes: Quote[] = [
     text: "Companies like Google, Facebook, Shopify, GitHub, and LinkedIn all have moved software development to the cloud, leaving brittle local development behind. With the JetBrains and Gitpod partnership, every software team and individual developer can reap the same benefits while continuing to use the tools of their choice.",
     author: "Tom Preston-Werner",
     jobTitle: "GitHub Founder & former CEO",
-    companyLogo: {
-      src: "/svg/blog/github.svg",
-      alt: "GitHub",
-    },
+    companyLogo: githubMarkSvelte,
   },
   {
     text: "As a long time fan of JetBrains’ work, I am very excited about this partnership, as it combines the peace of mind and convenience of automated, cloud-based developer environments with the best professional Desktop IDEs out there.",

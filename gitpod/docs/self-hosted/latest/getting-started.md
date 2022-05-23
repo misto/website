@@ -80,3 +80,5 @@ Now, you are seeing the installation admin page. Once the installation has been 
 ![kots-admin-dashboard](../../static/images/docs/self-hosted/kots-admin-dashboard.png)
 
 Open your Gitpod domain in your browser to access your running Gitpod instance.
+
+> Note that your first workspace start can take a bit of time because an image first needs to be built and then downloaded. Subsequent workspace starts should be much quicker.

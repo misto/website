@@ -4,7 +4,6 @@ import headings from "remark-autolink-headings";
 import remarkExternalLinks from "remark-external-links";
 import slug from "remark-slug";
 import sveltePreprocess from "svelte-preprocess";
-import rehypeToc from "@jsdevtools/rehype-toc";
 import remarkSetImagePath from "./src/lib/utils/remark-set-image-path.js";
 import remarkEmbedVideo from "./src/lib/utils/remark-embed-video.js";
 import remarkLinkWithImageAsOnlyChild from "./src/lib/utils/remark-link-with-image-as-only-child.js";
@@ -66,35 +65,7 @@ const config = {
         customers:
           "./src/lib/components/customers/customers-content-layout.svelte",
       },
-      rehypePlugins: [
-        [
-          rehypeToc,
-          {
-            customizeTOC: (toc) => {
-              // The Toc always has an <ol> element, but it doesn't
-              // have children if the Markdown content contains no headings.
-              return toc.children[0].children.length === 0 ? false : toc;
-            },
-            customizeTOCItem: (toc, heading) => {
-              if (heading.tagName !== "h2") {
-                toc.properties.className = `${
-                  toc.properties.className || ""
-                } ml-4 my-macro docs-toc-item`;
-              } else {
-                toc.properties.className = `${
-                  toc.properties.className || ""
-                } relative my-micro`;
-              }
-              return toc;
-            },
-            cssClasses: {
-              listItem: "toc-level",
-            },
-            headings: ["h2", "h3", "h4", "h5", "h6"],
-            position: "beforebegin",
-          },
-        ],
-      ],
+      rehypePlugins: [],
       remarkPlugins: [
         [
           remarkExternalLinks,
@@ -110,7 +81,7 @@ const config = {
             linkProperties: {},
             content: function (node) {
               return [
-                h("span.icon.icon-link", {
+                h("span.icon.icon-link header-anchor", {
                   ariaLabel: toString(node) + " permalink",
                 }),
               ];

@@ -8,6 +8,7 @@
   import subMenuState from "../states/sub-menu-state";
 
   import type { MenuEntry } from "$lib/types/menu-entry.type";
+  import Arrow from "$lib/components/svgs/arrow.svelte";
   export let currentSection: MenuEntry = null;
 </script>
 
@@ -55,7 +56,7 @@
 </style>
 
 <button
-  class="back-button flex items-center text-black w-full py-3"
+  class="back-button flex items-center text-important w-full py-3"
   type="button"
   on:click={() => {
     $topicsState = true;
@@ -63,19 +64,13 @@
   }}
 >
   <div class="back-button__icon">
-    <img
-      class="back-button__icon-arrow"
-      src="/arrow.svg"
-      alt="See all topics"
-      width="12"
-      height="7"
-    />
+    <Arrow width="12" height="12" class="rotate-90" />
   </div>
   All topics
 </button>
 
 {#if currentSection?.subMenu}
-  <div class="sub-menu-container bg-white">
+  <div class="sub-menu-container bg-card">
     <button
       class="toggle-button w-full"
       type="button"
@@ -83,14 +78,14 @@
       aria-expanded={$subMenuState}
       on:click={() => ($subMenuState = !$subMenuState)}
     >
-      <div class="toggle-button__label">{currentSection?.title}</div>
+      <div class="toggle-button__label text-important">
+        {currentSection?.title}
+      </div>
       <div class="toggle-button__icon">
-        <img
-          class={`toggle-button__icon-arrow ${$subMenuState ? "open" : ""}`}
-          src="/arrow.svg"
-          alt="Toggle sub menu"
-          width="12"
-          height="7"
+        <Arrow
+          class={$subMenuState ? "rotate-180" : ""}
+          height="15"
+          width="15"
         />
       </div>
     </button>
@@ -101,7 +96,7 @@
       class={`px-4 ${$subMenuState ? "block" : "hidden"}`}
       id="sub-menu"
     >
-      <ul class="divide-y divide-sand-dark">
+      <ul class="divide-y divide-divider">
         {#each currentSection?.subMenu as sub}
           <MenuItem href={sub.path} onClick={() => ($subMenuState = false)}>
             {sub.title}

@@ -15,12 +15,15 @@ You can pass environment variables into your workspace and use them in your code
 
 ## Default Environment Variables
 
-The following environment variables are set automatically by Gitpod and are guaranteed to exist:
+Below are some environment variables which are set automatically by Gitpod and are guaranteed to exist:
 
 - `GITPOD_WORKSPACE_ID`: The Universally Unique Identifier (UUID) associated with the workspace.
 - `GITPOD_WORKSPACE_URL`: The unique URL of the workspace.
+- `GITPOD_REPO_ROOT`: Path to the directory where your git repository was cloned inside the workspace.
 
-### Reserved Prefix
+> **Protip:** Try running **`env | grep GITPOD_`** on a workspace terminal to see all the Gitpod specific environment variables. These can be useful for scripting a dynamic workspace behavior.
+
+#### Reserved Prefix
 
 Environment variables beginning with the prefix `GITPOD_` are reserved for internal use by Gitpod and are overridden on every workspace startup. This means that a _user-defined_ variable set with the name `GITPOD_FOOBAR` will be ignored and not accessible in the workspace.
 
@@ -38,14 +41,9 @@ should look like this:
 { "remap-user": "1000" }
 ```
 
-## Project-Specific Environment Variables
+### Ways of setting user-specific environment variables
 
-Environment variables which are defined in [project](/docs/teams-and-projects#projects) settings will be visible in prebuilds, and optionally also in workspaces. This is useful for prebuilds to access restricted services.
-
-**WARNING**
-Care should be taken with secrets. Allowing secrets to be accessed from workspaces will expose those secrets to anyone who can open the workspace.
-
-### Using the command line: `gp env`
+#### Using the command line: `gp env`
 
 The `gp` CLI prints and modifies the persistent environment variables associated with your user for the current repository.
 
@@ -73,6 +71,9 @@ To delete a persistent environment variable use:
 
 ```sh
 gp env -u foo
+
+# And if you want to remove it from your shell session too:
+unset foo
 ```
 
 Note that you can delete/unset variables if their repository pattern matches the repository of this workspace exactly. I.e. you cannot
@@ -88,7 +89,7 @@ Flags:
   -u, --unset    deletes/unsets persisted environment variables
 ```
 
-### Using the account settings
+#### Using the account settings
 
 You can also configure and view the persistent environment variables in [your account settings](https://gitpod.io/variables).
 
@@ -103,9 +104,20 @@ Subsequently `*/*` makes that variable available in every workspace.
 
 > **Beware:** while the variable values are stored encrypted, they are available as plain text inside a workspace. Be careful when sharing your live workspace or when using `*/*` as repository pattern.
 
-## Terminal Specific Environment Variables
+## Project-Specific Environment Variables
 
-You can set environment variables within the terminal of VS Code by setting the `env` property within the task definition in your `.gitpod.yml`.
+Environment variables which are defined in [project](/docs/teams-and-projects#projects) settings will be visible in prebuilds, and optionally also in workspaces. This is useful for prebuilds to access restricted services.
+
+Important notes:
+
+- [Project-Specific Environment Variables](#project-specific-environment-variables) will take precedence over [User-Specific Environment Variables](#user-specific-environment-variables)
+- The `gp env` command can pull/set environment variables from/to [User-Specific Environment Variables](#user-specific-environment-variables) but not [User-Specific Environment Variables](#user-specific-environment-variables)
+
+> **Warning:** Care should be taken with secrets. Allowing secrets to be accessed from workspaces will expose those secrets to anyone who can open the workspace.
+
+## Terminal-Specific Environment Variables
+
+You can set environment variables for a Gitpod `task` terminal of VS Code by setting the `env` property within the task definition in your `.gitpod.yml`. Please note that such environment variables will be limited to the `task` terminal and is not globally set across the workspace.
 
 For example:
 
@@ -114,16 +126,16 @@ tasks:
   - name: Example of passing an environment variable to a command
     env:
       PRINT_ME: "Hello World!"
-    command: echo $PRINT_ME
+    command: echo "$PRINT_ME"
 ```
 
 See [`.gitpod.yml`](/docs/references/gitpod-yml#tasksnenv) for more details.
 
-## Provide env vars via URL
+## Providing one-time environment variables via URL
 
-> ❗️ This feature is great for configuring environment variables but is not appropriate for configuring sensitive information, such as passwords or long-lived API tokens. Gitpod and the [Open Web Application Security Project](https://owasp.org/www-community/vulnerabilities/Information_exposure_through_query_strings_in_url) recommends that you do not pass sensitive information through query strings. Refer to [CWE-598](https://cwe.mitre.org/data/definitions/598.html) to learn more about this recommendation.
+> ❗️ This feature is great for setting one-time environment variables for dynamic workspace configurations or setups but is not appropriate for configuring sensitive information, such as passwords or long-lived API tokens. Gitpod and the [Open Web Application Security Project](https://owasp.org/www-community/vulnerabilities/Information_exposure_through_query_strings_in_url) recommends that you do not pass sensitive information through query strings. Refer to [CWE-598](https://cwe.mitre.org/data/definitions/598.html) to learn more about this recommendation.
 
-In addition to user-specific env variables, Gitpod also allows passing in variables through the `gitpod.io/#` URL.
+In addition to user-specific environment variables, Gitpod also allows passing in variables through the `gitpod.io/#` URL.
 The syntax for that is:
 
 ```

@@ -1,3 +1,7 @@
+// @ts-ignore
+import awsSvelte from "$lib/components/svgs/aws.svelte";
+// @ts-ignore
+import githubMarkSvelte from "$lib/components/svgs/github-mark.svelte";
 import type {
   FeatureTable,
   FeatureTableColumn,
@@ -33,10 +37,7 @@ export const codespacesToc: FeatureTableToc[] = [
     type: "image",
     data: {
       text: "GitHub Integration",
-      image: {
-        alt: "GitHub",
-        path: "/svg/github.svg",
-      },
+      image: githubMarkSvelte,
     },
   },
   {
@@ -73,10 +74,7 @@ export const codespacesToc: FeatureTableToc[] = [
     type: "image",
     data: {
       text: "Self-Host on EKS",
-      image: {
-        alt: "aws",
-        path: "/svg/brands/aws.svg",
-      },
+      image: awsSvelte,
     },
   },
   {
@@ -232,10 +230,7 @@ export const codespacesColumn: FeatureTableColumn = {
   isHighlighted: false,
   header: {
     headline: "Codespaces",
-    image: {
-      alt: "github",
-      path: "/svg/github.svg",
-    },
+    image: githubMarkSvelte,
   },
   items: [
     {

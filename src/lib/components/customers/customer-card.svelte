@@ -25,7 +25,7 @@
   }
 
   .h5 {
-    @apply text-black font-bold mb-macro;
+    @apply text-important font-bold mb-macro;
   }
 </style>
 

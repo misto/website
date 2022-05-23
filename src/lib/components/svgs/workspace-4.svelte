@@ -7,8 +7,8 @@
   aria-hidden="true"
 >
   <g clip-path="url(#workspace-4-clip0)">
-    <rect width="372" height="296" fill="#F9F9F9" />
-    <rect width="432" height="44" fill="#F3F1F0" />
+    <rect width="372" height="296" class="fill-card" />
+    <rect width="432" height="44" class="fill-bg dark:fill-divider" />
     <circle cx="30" cy="22" r="6" fill="#ECE7E5" />
     <rect
       x="103"

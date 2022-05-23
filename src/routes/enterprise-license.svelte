@@ -134,14 +134,14 @@
 
 <Header tight={true}>
   <div slot="content">
-    <h1 class="h2">Fill this out and get 10 additional users.</h1>
+    <h1 class="h2">Fill this out to get additional users.</h1>
     <p>Tell us how we can help and your license will be emailed shortly.</p>
   </div>
 </Header>
 
 <Card
   size="small"
-  class="p-xx-small sm:py-small sm:px-x-small md:p-medium mb-32 sm:mx-8"
+  class="shadow-normal p-xx-small sm:py-small sm:px-x-small md:p-medium mb-32 sm:mx-8"
 >
   <form bind:this={form} on:submit|preventDefault={handleSubmit} novalidate>
     <h2 class="h4 title">Customer Information</h2>
@@ -294,8 +294,7 @@
     <div>
       <p>
         <a href="/docs/self-hosted/latest"
-          >Skip the 10 extra users and just go directly to the installation
-          guides.</a
+          >Skip the extra users and just go directly to the installation guides.</a
         >
       </p>
     </div>

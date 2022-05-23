@@ -52,11 +52,6 @@
   btnPrimary={{
     href: "https://www.gitpod.io/docs/ides-and-editors/jetbrains-gateway",
     text: "Try Now",
-    onClickHandler: () =>
-      window.analytics.track("product_cta_clicked", {
-        context: "hero",
-        destination: "https://gitpod.io/workspaces/",
-      }),
   }}
 />
 
@@ -68,6 +63,7 @@
         "Gitpod and JetBrains entered into a long term partnership with a deep product integration. You can work in cloud developer environments provisioned by Gitpod using your favorite desktop IDE from JetBrains.",
       image: {
         src: "/images/jetbrains-space/gitpod-jetbrains.png",
+        darkSrc: "/images/jetbrains-space/gitpod-jetbrains-dark.png",
         alt: "JetBrains’ IDEs within Gitpod",
         classNames: "w-full max-w-md md:max-w-lg",
       },
@@ -91,12 +87,12 @@
     src="/images/jetbrains-space/jetbrains-ides-in-gitpod.png"
     alt="Jetbrains IDEs available to use with Gitpod"
     slot="image"
-    class="max-w-3xl mx-auto mt-small w-full hidden md:block"
+    class="max-w-3xl mx-auto mt-small w-full hidden md:block dark:shadow-highlight rounded-2xl"
   />
   <img
     src="/images/jetbrains-space/jetbrains-ides-in-gitpod-mobile.png"
     alt="Jetbrains IDEs available to use with Gitpod"
     slot="image-mobile"
-    class="max-w-xs mx-auto mt-x-small w-full md:hidden"
+    class="max-w-xs mx-auto mt-x-small w-full md:hidden dark:shadow-highlight rounded-2xl"
   />
 </CalloutSecondary>

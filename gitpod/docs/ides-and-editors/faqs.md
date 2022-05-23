@@ -17,6 +17,16 @@ There is no hard-limit about how many IDE/editors can be connected to a running 
 
 VS Code in the browser in Gitpod uses a fork of [VS Code](https://github.com/microsoft/vscode) called [openvscode-server](https://github.com/gitpod-io/openvscode-server). Gitpod actively monitors VS Code's release cycle, and releases the latest version of VS Code shortly after the upstream repository is updated. You can find more information about which version of VS Code is running in the browser by navigating to "Help > About" from a running Gitpod workspace.
 
+## Does Gitpod VS Code Settings Sync work with other products (e.g. Codespaces)?
+
+Gitpod doesn't currently support settings sync with other hosted VS Code environments, such as [Codespaces](https://github.com/features/codespaces) or [vscode.dev](https://vscode.dev/).
+
+## My VS Code extensions are not syncing, what should I do?
+
+1. When installing an extension in Gitpod using the `Install (Do Not Sync)` option.
+2. Extensions defined in [`gitpod.yml`](https://www.gitpod.io/docs/config-gitpod-file/)
+3. Extensions manually installed from a `vsix` file
+
 ## Can I use both a desktop IDE and a browser editor in Gitpod?
 
 Yes, you can. Both desktop and browser IDEs/editors have full access to files and directories within the workspace. So, when you connect to your Gitpod workspace from your Desktop you can also access your workspace via your browser. This means browser-based editing can either be used as your first-choice editor, or as a "fall back" alternative option for when you want to make edits on the move. With Gitpod, where and how you edit your code is very flexible.

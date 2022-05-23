@@ -39,4 +39,4 @@ Upload your own TLS certificate, key, and (optionally) CA certificate. When your
 
 > ⚠️ **Limitation**
 >
-> Adding custom CA certificates is currently _not_ supported on **Google Kubernetes Engine (GKE)** because you cannot get `containerd` to trust other certificates without being restarted. We are in contact with Google for a fix.
+> Adding custom CA certificates is currently _not_ supported on **Google Kubernetes Engine (GKE)** because on GKE `containerd` does not support custom certificates.

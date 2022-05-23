@@ -27,6 +27,11 @@ Below is a full reference of all available properties. To see the underlying sch
 - [`image`](#image)
   - [`image.file`](#imagefile)
   - [`image.context`](#imagecontext)
+- [`jetbrains`](#jetbrains)
+  - [`jetbrains.plugins`](#jetbrainsplugins)
+  - [`jetbrains.[product]`](#jetbrainsproduct)
+  - [`jetbrains.[product].plugins`](#jetbrainsproductplugins)
+  - [`jetbrains.[product].prebuilds`](#jetbrainsproductprebuilds)
 - [`ports`](#ports)
   - [`ports[n].onOpen`](#portsnonopen)
   - [`ports[n].port`](#portsnport)
@@ -268,6 +273,112 @@ Optionally, you can set the `image.context`. This is useful when you want to cop
 | Type     | Default   |
 | -------- | --------- |
 | `string` | `<empty>` |
+
+</div>
+
+## `jetbrains`
+
+> **Please note:** This feature is currently experimental and is a subject to change. [Send feedback](https://github.com/gitpod-io/gitpod/issues/6576).
+
+Define the integration between Gitpod and JetBrains IDEs.
+
+<div class="overflow-x-auto">
+
+| Type     | Default   |
+| -------- | --------- |
+| `object` | `<empty>` |
+
+</div>
+
+### `jetbrains.plugins`
+
+> **Please note:** This feature is currently experimental and is a subject to change. [Send feedback](https://github.com/gitpod-io/gitpod/issues/6576).
+
+Define a list of plugins which should be installed for all compatible JetBrains IDEs when starting a workspace. To find the plugin identifier, from the [JetBrains Marketplace](https://plugins.jetbrains.com), find the desired plugin, open the 'Versions' tab, select any version and copy the 'Plugin ID' (like `${publisher}.${name}`).
+
+<div class="overflow-x-auto">
+
+| Type    | Default   |
+| ------- | --------- |
+| `array` | `<empty>` |
+
+</div>
+
+### `jetbrains.[product]`
+
+> **Please note:** This feature is currently experimental and is a subject to change. [Send feedback](https://github.com/gitpod-io/gitpod/issues/6576).
+
+Define the integration between Gitpod and a specific JetBrains IDE. Install plugins and configure prebuilds to speed up the IDE indexing.
+
+Specify the 'product' with one of the following values:
+
+- `intellij`
+- `goland`
+- `pycharm`
+- `phpstorm`
+
+<div class="overflow-x-auto">
+
+| Type     | Default   |
+| -------- | --------- |
+| `object` | `<empty>` |
+
+</div>
+
+### `jetbrains.[product].plugins`
+
+> **Please note:** This feature is currently experimental and is a subject to change. [Send feedback](https://github.com/gitpod-io/gitpod/issues/6576).
+
+Define a list of plugins which should be installed for the given JetBrains IDE when starting a workspace. To find the plugin identifier, from the [JetBrains Marketplace](https://plugins.jetbrains.com), find the desired plugin, open the 'Versions' tab, select any version and copy the 'Plugin ID' (like `${publisher}.${name}`).
+
+<div class="overflow-x-auto">
+
+| Type    | Default   |
+| ------- | --------- |
+| `array` | `<empty>` |
+
+</div>
+
+**Example**
+
+```yaml
+jetbrains:
+  intellij:
+    plugins:
+      - zielu.gittoolbox
+      - izhangzhihao.rainbow.brackets
+```
+
+### `jetbrains.[product].prebuilds`
+
+> **Please note:** This feature is currently experimental and is a subject to change. [Send feedback](https://github.com/gitpod-io/gitpod/issues/6740).
+
+Define whether Gitpod enables prebuilds for a specific JetBrains IDE.
+
+<div class="overflow-x-auto">
+
+| Type     | Default   |
+| -------- | --------- |
+| `object` | `<empty>` |
+
+</div>
+
+**Example**
+
+```yaml
+jetbrains:
+  intellij:
+    prebuilds:
+      version: stable
+```
+
+The `version` is defined as follows:
+
+<div class="overflow-x-auto">
+
+| Type     | Default  | Values                     |
+| -------- | -------- | -------------------------- |
+| `string` | `stable` | `stable`, `latest`, `both` |
 
 </div>
 

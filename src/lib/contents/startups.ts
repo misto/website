@@ -20,6 +20,7 @@ export const features: Feature[] = [
     },
     image: {
       src: "/images/startups/stories.png",
+      darkSrc: "/images/startups/stories-dark.png",
       alt: "Gitpod Customer Stories",
     },
   },
@@ -56,7 +57,7 @@ export const programBenefits: Card[] = [
   },
   {
     icon: {
-      src: "/svg/startups/2x.svg",
+      src: "/svg/icons/2x.svg",
       alt: "2x",
     },
     title: "Double up",
@@ -64,9 +65,8 @@ export const programBenefits: Card[] = [
   },
   {
     icon: {
-      src: "/svg/startups/community.svg",
+      src: "/svg/icons/team.svg",
       alt: "Community",
-      transform: "scale(1.6)",
     },
     title: "Join a thriving community",
     text: "Engage with, learn from and share best practices with other startups that use Gitpod.",

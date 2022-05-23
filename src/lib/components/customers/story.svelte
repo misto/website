@@ -10,15 +10,15 @@
   }
 
   :global(blockquote) {
-    @apply bg-transparent border-l-4 border-orange-900 pl-xx-small py-0 sm:m-small rounded-none !important;
+    @apply bg-transparent border-l-4 border-primary pl-xx-small py-0 sm:m-small rounded-none !important;
   }
 
   :global(blockquote) :global(p) {
-    @apply text-h6 text-black font-semibold !important;
+    @apply text-h6 text-important font-semibold !important;
   }
 
   :global(code) {
-    @apply bg-orange-700 rounded-xl px-macro py-1;
+    @apply bg-tertiary rounded-xl px-macro py-1;
   }
 </style>
 

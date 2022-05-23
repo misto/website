@@ -5,8 +5,9 @@
   export { className as class };
   import type { Card as CardType } from "$lib/types/card.type";
   export let card: CardType;
+  export let titleClassNames: "h4" | "h5" = "h5";
 </script>
 
 <Card size="small" styles="max-width: 315px" class="p-x-small {className}">
-  <Base {card} {...$$restProps} titleClassNames="h5" />
+  <Base {card} {...$$restProps} {titleClassNames} iconClassNames="h-12 w-14" />
 </Card>

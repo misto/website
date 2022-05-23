@@ -95,7 +95,7 @@
 >
   {#each ides as { name, availibility, label, icon, screenshots }}
     <button
-      class="block relative cursor-pointer"
+      class="block relative cursor-pointer group"
       on:mouseenter={(e) => {
         handleMouseEnter(e, name);
       }}
@@ -105,7 +105,7 @@
       class:hidden={ideType === "browser" && !screenshots.browser}
     >
       <div
-        class="icon-box relative flex items-center justify-center bg-off-white rounded-lg md:rounded-xl lgx:rounded-2xl shadow-lg transition duration-200 linear"
+        class="icon-box relative flex items-center justify-center border-solid bg-card group-hover:bg-white dark:group-hover:bg-black group-focus:bg-white dark:group-focus:bg-black rounded-lg md:rounded-xl lgx:rounded-2xl shadow-lg transition duration-200 linear"
         class:grayed={!(activeByDefaultName === name) &&
           !(activeIdeName === "vscode")}
         data-name={name}
@@ -114,9 +114,9 @@
       </div>
       {#if availibility}
         <div
-          class="hidden absolute -top-3 md:-top-1 left-1/2 -translate-x-1/2 md:transform-none md:-left-10 lg:left-3/4 items-center justify-center h-4 w-10 sm:h-5 sm:w-14 text-xs font-semibold text-gray-900 rounded-md sm:rounded-lg shadow-light"
-          class:bg-pink-900={availibility === "soon"}
-          class:bg-orange-700={availibility === "beta"}
+          class="hidden absolute -top-3 md:-top-1 left-1/2 -translate-x-1/2 md:transform-none md:-left-10 lg:left-3/4 items-center justify-center h-4 w-10 sm:h-5 sm:w-14 text-xs font-semibold text-black rounded-md sm:rounded-lg shadow-light"
+          class:bg-salmon={availibility === "soon"}
+          class:bg-tertiary={availibility === "beta"}
         >
           {availibility.charAt(0).toUpperCase() + availibility.slice(1)}
         </div>

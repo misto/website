@@ -4,11 +4,15 @@
   export { clazz as class };
 </script>
 
-<style>
+<style lang="postcss">
   div {
     scroll-snap-type: x mandatory;
     scrollbar-width: thin;
     scrollbar-color: var(--divider) var(--white);
+  }
+
+  :global(body.dark) div {
+    scrollbar-color: var(--divider) var(--card);
   }
 
   div::-webkit-scrollbar {

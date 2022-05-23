@@ -15,9 +15,9 @@
 
 <style lang="postcss">
   div {
-    grid-template-columns: repeat(auto-fill, 316px);
+    grid-template-columns: repeat(auto-fill, 314px);
 
-    @media (max-width: 1460px) {
+    @media (max-width: 1430px) {
       @apply max-w-4xl mx-auto;
     }
 

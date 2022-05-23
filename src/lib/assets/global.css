@@ -24,7 +24,17 @@
     font-family: var(--font);
     text-rendering: optimizeSpeed;
     line-height: 1.5;
-    @apply m-0 min-h-screen text-dark-grey bg-sand-light text-p-medium;
+    @apply m-0 min-h-screen text-body bg-bg text-p-medium;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-weight: 600; /* this is default. it's removed in TW. Should we just remove it from the TW reset? */
+    @apply text-important;
   }
 
   /* Make images easier to work with */
@@ -34,11 +44,12 @@
   }
 
   a {
-    @apply underline text-link-grey underline-offset-[0.25em] transition-all duration-200 delay-[50ms];
+    @apply underline text-link-grey dark:text-body underline-offset-[0.25em] transition-all duration-200 delay-[50ms];
   }
   a:hover,
-  a:focus {
-    @apply text-black underline decoration-transparent;
+  a:focus,
+  a:active {
+    @apply text-important underline decoration-transparent;
   }
 
   a[class] {
@@ -82,6 +93,43 @@
   }
   .ol-alpha {
     @apply list-outside list-alpha;
+  }
+
+  .stroked {
+    @apply relative;
+    z-index: 0;
+
+    &::before {
+      content: "";
+      @apply absolute top-0 left-0 right-0 bottom-0;
+      background: linear-gradient(to bottom, #ffffff, #ece7e5);
+      border-radius: inherit;
+      z-index: -3;
+    }
+
+    &::after {
+      content: "";
+      @apply absolute;
+      border-radius: inherit;
+      top: 1px;
+      bottom: 1px;
+      left: 1px;
+      right: 1px;
+      @apply bg-card;
+      z-index: -2;
+    }
+  }
+
+  .stroked-light {
+    &::after {
+      @apply bg-white dark:bg-card;
+    }
+  }
+
+  body.dark .stroked {
+    &::before {
+      background: linear-gradient(to bottom, #332d23, #0f0e0b);
+    }
   }
 }
 

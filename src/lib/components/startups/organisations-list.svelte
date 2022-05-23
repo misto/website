@@ -18,7 +18,7 @@
 
   li::before {
     content: "—";
-    @apply text-orange-800 mr-micro;
+    @apply text-secondary mr-micro;
 
     @media (max-width: 540px) {
       @apply mr-macro;

@@ -11,11 +11,17 @@
   const href = `${BASE_PATH}${currentPage}.md`;
 </script>
 
-<div class="flex justify-end flex-shrink-0">
+<style lang="postcss">
+  .disable-filter {
+    @apply after:filter-none !important;
+  }
+</style>
+
+<div class="flex flex-shrink-0">
   <a
     {href}
     target="_blank"
-    class="inline-flex py-macro px-4 items-center  justify-center bg-off-white rounded-2xl text-btn-small text-black shadow-light font-semibold hover:bg-white focus:bg-white"
+    class="inline-flex stroked disable-filter after:dark:hover:bg-light-black after:filter-none py-macro px-4 items-center justify-center bg-bg dark:bg-card rounded-2xl text-btn-small text-important dark:text-white shadow-light dark:shadow-none font-semibold hover:bg-card focus:bg-card dark:hover:bg-light-black dark:focus:bg-light-black"
     rel="noopener"
     data-analytics={`{"variant":"open_in_gitpod"}`}
   >

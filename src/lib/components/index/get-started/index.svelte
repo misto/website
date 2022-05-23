@@ -45,20 +45,20 @@
   >
     {#if checked}
       <Card
-        class="p-xx-small sm:py-small basis-[50%] sm:px-x-small md:p-medium text-center"
+        class="shadow-normal p-xx-small sm:py-small basis-[50%] sm:px-x-small md:p-medium text-center"
         size="small"
       >
         <HostGitpodYourself />
       </Card>
     {:else}
       <Card
-        class="p-xx-small sm:py-small basis-[50%] sm:px-x-small md:p-medium text-center"
+        class="shadow-normal p-xx-small sm:py-small basis-[50%] sm:px-x-small md:p-medium text-center"
         size="small"
       >
-        <LinkGitRepository /></Card
-      >
+        <LinkGitRepository />
+      </Card>
       <Card
-        class="p-xx-small sm:py-small  basis-[50%] sm:px-x-small md:p-medium text-center"
+        class="shadow-normal p-xx-small sm:py-small  basis-[50%] sm:px-x-small md:p-medium text-center"
         size="small"
       >
         <LaunchExampleWorkspace />

@@ -8,7 +8,6 @@
   import FeedbackWidget from "./feedback-widget.svelte";
   import docsCurrentSectionStore from "$lib/stores/docs-current-section";
   import PrevNext from "./prev-next.svelte";
-  import OnThisPageNav from "../on-this-page-nav.svelte";
 
   /** @type {string} */
   export let section;
@@ -17,6 +16,12 @@
 
   $: $docsCurrentSectionStore = section;
 </script>
+
+<style lang="postcss">
+  :global(pre[class*="language-"]) {
+    @apply rounded-xl;
+  }
+</style>
 
 <svelte:head>
   <link rel="stylesheet" href="/prism-solarized-light.min.css" />
@@ -30,11 +35,12 @@
   }}
 />
 <div class="flex">
-  <div class="content-docs prose md:px-4 max-w-none flex-auto min-w-0 xl:w-2/3">
+  <div
+    class="content-docs prose prose-h1:text-[32px] !prose-pre:rounded-xl md:px-4 max-w-none flex-auto min-w-0 xl:w-2/3"
+  >
     <AnnouncementBanner />
     <slot />
   </div>
-  <OnThisPageNav />
 </div>
 <FeedbackWidget type="docs" class="my-huge" />
 <PrevNext />

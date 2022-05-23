@@ -97,18 +97,34 @@
     .explore__illustration .small {
       @apply block;
     }
+
+    :global(body.dark) .small-light {
+      @apply hidden !important;
+    }
+
+    :global(body.light) .small-dark {
+      @apply hidden !important;
+    }
+  }
+
+  .kumquat-illustration {
+    background: url("/images/kumquat.png");
+    @apply bg-cover;
   }
 </style>
 
 <Section>
-  <Card size="medium" class="flex xl:items-center max-w-none text-left explore">
+  <Card
+    size="medium"
+    class="shadow-normal flex xl:items-center max-w-none text-left explore"
+  >
     <div class="explore__text md:py-medium xl:py-0">
       <h2 class="h1">{@html title}</h2>
       <p class="explore__paragraph text-p-large">
         {@html description}
       </p>
       {#if note}
-        <p class="h5 font-semibold text-gray-900 mb-x-small md:-mt-micro">
+        <p class="h5 font-semibold text-important mb-x-small md:-mt-micro">
           {note}
         </p>
       {/if}
@@ -132,23 +148,37 @@
       </ButtonsWrapper>
     </div>
     <div
-      class="explore__illustration w-full bg-cover bg-left"
-      style="background-image: url(/images/{useKumquatIllustration
-        ? 'kumquat.png'
-        : 'illustration-grid.png'});"
+      class="explore__illustration w-full bg-cover bg-left bg-[url('/images/illustration-grid.png')] dark:bg-[url('/images/illustration-grid-dark.png')]"
+      class:kumquat-illustration={useKumquatIllustration}
     >
       <img
         src="/images/{useKumquatIllustration
           ? 'kumquat.png'
           : 'illustration-grid.png'}"
         alt="Gitpod in a Nutshell"
+        class="dark:hidden"
+      />
+      <img
+        src="/images/{useKumquatIllustration
+          ? 'kumquat.png'
+          : 'illustration-grid-dark.png'}"
+        alt="Gitpod in a Nutshell"
+        class="hidden dark:block"
       />
       <img
         src="/images/{useKumquatIllustration
           ? 'kumquat.png'
           : 'illustration-small.png'}"
         class:pt-micro={useKumquatIllustration}
-        class="small"
+        class="small small-light"
+        alt="Gitpod in a Nutshell"
+      />
+      <img
+        src="/images/{useKumquatIllustration
+          ? 'kumquat.png'
+          : 'illustration-small-dark.png'}"
+        class:pt-micro={useKumquatIllustration}
+        class="small small-dark hidden dark:block"
         alt="Gitpod in a Nutshell"
       />
     </div>

@@ -32,7 +32,7 @@
 >
   <div class="lg:mr-small mb-small lg:mb-0">
     <header class={textMaxWClass}>
-      <p class="h5 font-bold text-light-grey mb-xx-small">Customer story</p>
+      <p class="h5 font-bold text-sub mb-xx-small">Customer story</p>
       <h1 class="h1">{@html title}</h1>
     </header>
     <p class="text-large max-w-3xl">{text}</p>

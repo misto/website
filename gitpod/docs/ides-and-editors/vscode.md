@@ -25,7 +25,6 @@ This command will open your local VS Code, connect to the Gitpod workspace and l
 
 VS Code desktop support installs, manages and runs the [Local Companion](/docs/ides-and-editors/local-companion) app under-the-hood so you don't have to. However, if you're currently using the local companion, you can can continue to use it independently.
 
-<br />
 <sup>1</sup> Yes this also means you get to keep your keyboard shortcuts just the way you prefer them. You know, Ctrl/Cmd + W to close an editor tab 😉.
 
 ## Settings Sync

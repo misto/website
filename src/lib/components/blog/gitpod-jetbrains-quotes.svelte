@@ -23,7 +23,7 @@
   <Carousel class="mb-small pr-44">
     {#each jetbrains_quotes as { text, author, jobTitle, companyLogo }}
       <div
-        class="text-black text-base w-96 p-x-small overflow-hidden rounded-2xl shadow-md bg-white hover:shadow-xl transition-shadow duration-300 ease-in-out mb-micro"
+        class="text-black text-base w-96 p-x-small overflow-hidden rounded-2xl shadow-md bg-white dark:bg-card hover:shadow-xl transition-shadow duration-300 ease-in-out mb-micro"
       >
         <p class="mb-small">{text}</p>
         <div>
@@ -31,7 +31,15 @@
           <br />
           <span>{jobTitle}</span>
         </div>
-        <img src={companyLogo.src} alt={companyLogo.alt} class="h-6 mt-micro" />
+        {#if companyLogo.src}
+          <img
+            src={companyLogo.src}
+            alt={companyLogo.alt}
+            class="h-6 mt-micro"
+          />
+        {:else}
+          <svelte:component this={companyLogo} class="h-6 mt-micro" />
+        {/if}
       </div>
     {/each}
   </Carousel>

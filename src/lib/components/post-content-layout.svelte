@@ -5,6 +5,8 @@
   import "$lib/assets/markdown-commons.scss";
   import Share from "$lib/components/share.svelte";
   import Pill from "./pill.svelte";
+  import type { ShareLink } from "$lib/types/share-link.type";
+  import Hackernews from "./svgs/share/hackernews.svelte";
 
   export let baseUrl: string;
   export let imagesDirectoryName: string;
@@ -44,29 +46,33 @@
     return result;
   };
 
-  const shareLinks = [
+  const shareLinks: ShareLink[] = [
     {
       href: `https://twitter.com/intent/tweet?text=${encodeURIComponent(
         `${title} by ${renderTwitterHandles()} ${baseUrl}${slug}`
       )}`,
-      alt: "Twitter",
-      icon: "/svg/brands/twitter.svg",
+      icon: {
+        src: "/svg/brands/twitter.svg",
+        alt: "Twitter",
+      },
       trackingName: "twitter",
     },
     {
       href: `http://www.reddit.com/submit?url=${encodeURIComponent(
         `${baseUrl}${slug}&title=${title}`
       )}`,
-      alt: "Reddit",
-      icon: "/svg/brands/reddit.svg",
+      icon: {
+        src: "/svg/brands/reddit.svg",
+        alt: "Reddit",
+      },
       trackingName: "reddit",
     },
     {
+      name: "HackerNews",
       href: `http://news.ycombinator.com/submitlink?u=${encodeURIComponent(
         `${baseUrl}${slug}`
       )}&t=${encodeURIComponent(title)}`,
-      alt: "HackerNews",
-      icon: "/svg/brands/hackernews.svg",
+      svg: Hackernews,
       trackingName: "hackernews",
     },
   ];
@@ -98,7 +104,7 @@
       alt={`${title}`}
       class="max-h-[540px] rounded-tl-2xl rounded-tr-[1.3rem]"
     />
-    <p class="mt-[1.875rem] mb-6 text-dark-grey">{dateDisplay}</p>
+    <p class="mt-[1.875rem] mb-6 text-body">{dateDisplay}</p>
     {#if type === "digest"}
       <Pill text="DevX Digest" class="mb-micro" />
     {/if}
@@ -109,7 +115,7 @@
           usernames={author}
           displayNames={authorDisplayNames}
           socialMediaLinks={authorSocialMediaLinks}
-          socialMediaLinkClasses="inline-flex mr-2 px-2 bg-white rounded-xl text-dark-grey focus:bg-off-white focus:text-black hover:bg-off-white hover:text-black"
+          socialMediaLinkClasses="inline-flex mr-2 px-2 bg-white dark:bg-card rounded-xl text-body focus:bg-card focus:text-important hover:bg-card hover:text-important"
           socialMediaImgClasses="mr-2 h-6 w-6 place-self-center"
         /></span
       >

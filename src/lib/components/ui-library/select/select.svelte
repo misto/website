@@ -27,7 +27,7 @@
 </style>
 
 {#if label}
-  <label class:error={hasError} class="text-dark-grey block mb-2" for={label}
+  <label class:error={hasError} class="text-body block mb-2" for={label}
     >{@html label}</label
   >
 {/if}
@@ -35,14 +35,14 @@
   class:error={hasError}
   bind:this={element}
   id={label}
-  class="box-border bg-off-white text-black border-divider border-[1px] px-4 py-2 rounded-lg appearance-none  w-full {className}"
+  class="box-border bg-card text-important border-divider border-[1px] px-4 py-2 rounded-lg appearance-none  w-full {className}"
   {name}
   aria-label={name}
   bind:value
   on:change
   {...$$restProps}
 >
-  <option disabled class="text-gray-800" value="">{placeholder}</option>
+  <option disabled class="text-body" value="">{placeholder}</option>
   {#each options as option}
     <option value={option}>
       {option}
@@ -51,7 +51,7 @@
 </select>
 
 {#if hasError}
-  <legend class:error={hasError} class="block text-dark-grey text-xs mt-1 mb-2"
+  <legend class:error={hasError} class="block text-body text-xs mt-1 mb-2"
     >Please select a value</legend
   >
 {/if}

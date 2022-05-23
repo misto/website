@@ -7,7 +7,6 @@
 
 <style lang="scss">
   .testimonial {
-    color: var(--black);
     scroll-snap-align: start;
 
     @media (max-width: 768px) {
@@ -39,7 +38,7 @@
   rel="noreferrer"
 >
   <div
-    class="testimonial w-96 p-xx-small overflow-hidden rounded-2xl bg-white hover:shadow-xl transition-shadow duration-300 ease-in-out"
+    class="testimonial stroked stroked-light w-96 p-xx-small overflow-hidden rounded-2xl bg-white dark:bg-card hover:shadow-xl transition-shadow duration-300 ease-in-out text-body"
   >
     <div>{@html text}</div>
     <div class="mt-4 flex">
@@ -51,7 +50,9 @@
         height="48"
       />
       <div class="ml-3">
-        <p class="mb-0 font-semibold text-small leading-6">{name}</p>
+        <p class="mb-0 font-semibold text-small leading-6 text-important">
+          {name}
+        </p>
         <p class="role">{role} {@html org}</p>
       </div>
     </div>

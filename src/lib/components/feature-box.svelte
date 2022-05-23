@@ -26,7 +26,7 @@
 <div>
   <Card
     size="medium"
-    class="feature-box py-small px-xx-small sm:p-small lg:p-16 max-w-7xl mx-auto"
+    class="feature-box shadow-normal py-small px-xx-small sm:p-small lg:p-16 max-w-7xl mx-auto"
   >
     <Feature feature={{ ...feature, showTheMediaFirstOnMobile: true }} />
   </Card>

@@ -1,5 +1,5 @@
 ---
-author: christinfrohne, ghuntley
+author: chrifro, ghuntley
 date: Thursday, 3 Jun 2021 11:00:00 UTC
 excerpt: As part of Gitpod’s Open-Source Sustainability Fund initiative attendees of DevX Conf were able to decide where USD 10,000 of funds (the profits from DevX Conf plus an additional donation by Gitpod) were to be distributed. Here's the breakdown how the fund was split and our retrospective on running our first-ever conference.
 image: teaser.png

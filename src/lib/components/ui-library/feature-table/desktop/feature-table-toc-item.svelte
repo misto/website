@@ -15,12 +15,17 @@
   {#if type === "text"}
     {definition.text}
   {/if}
-  {#if type === "image"}<img
-      class="mr-2"
-      src={definition.image.path}
-      alt={definition.image.alt}
-      width="24"
-    />
+  {#if type === "image"}
+    {#if definition.image && definition.image.path}
+      <img
+        class="mr-2"
+        src={definition.image.path}
+        alt={definition.image.alt}
+        width="24"
+      />
+    {:else}
+      <svelte:component this={definition.image} width="24" class="mr-2" />
+    {/if}
     {definition.text}
   {/if}
 </div>

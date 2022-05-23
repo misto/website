@@ -1,11 +1,11 @@
 <script lang="ts">
   import { isAnExternalLink } from "$lib/utils/helpers";
   import LinkButton from "$lib/components/ui-library/link-button";
-
   import type { Feature } from "$lib/types/feature.type";
   import Console from "./console.svelte";
   import Section from "./section.svelte";
   import ButtonsWrapper from "./buttons-wrapper.svelte";
+  import Lottie from "./lottie.svelte";
 
   export let feature: Feature;
   const {
@@ -17,6 +17,7 @@
     terminal,
     image,
     previewComponent,
+    lottie,
     showTheMediaFirstOnMobile,
     footnote,
     headingLevel,
@@ -33,7 +34,7 @@
   }
 
   .feature :global(code) {
-    @apply py-1 px-2 rounded-xl bg-orange-700;
+    @apply py-1 px-2 rounded-xl bg-tertiary text-dark-grey;
     white-space: break-spaces;
   }
 
@@ -49,6 +50,11 @@
 
   .buttons-wrapper {
     @apply flex justify-center items-center flex-wrap space-x-4;
+  }
+
+  .component-container > :global(*) {
+    height: 100%;
+    width: 100%;
   }
 </style>
 
@@ -119,15 +125,30 @@
         <img
           src={image.src}
           alt={image.alt}
-          class="{image.classNames} mx-auto"
+          class="{image.classNames} mx-auto {image.darkSrc
+            ? 'dark:hidden'
+            : ''}"
           style={image.styles}
         />
+        {#if image.darkSrc}
+          <img
+            src={image.darkSrc}
+            alt={image.alt}
+            class="{image.classNames} mx-auto hidden dark:block"
+            style={image.styles}
+          />
+        {/if}
+      {/if}
+      <div class="component-container">
+        {#if previewComponent}
+          <svelte:component this={previewComponent} />
+        {/if}
+      </div>
+      {#if lottie}
+        <Lottie {lottie} />
       {/if}
       {#if footnote}
         <p class="fine-print mt-x-small max-w-md mx-auto">{@html footnote}</p>
-      {/if}
-      {#if previewComponent}
-        <svelte:component this={previewComponent} />
       {/if}
     </div>
   </div>

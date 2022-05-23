@@ -2,16 +2,6 @@
 /* --- Typography --- */
 /* -------------------------------------- */
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-weight: 600; /* this is default. it's removed in TW. Should we just remove it from the TW reset? */
-  color: var(--black);
-}
-
 .homeh1 {
   font-size: var(--h1);
   line-height: 110%;

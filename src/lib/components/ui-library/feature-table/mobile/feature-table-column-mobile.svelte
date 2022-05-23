@@ -14,13 +14,14 @@
   const items = featureData.items.map((item, index) => {
     return { ...item, ...tocData[index] };
   });
-
-  const shadow = featureData.isHighlighted ? "shadow-brand" : "shadow-normal";
-
   let isShown: boolean = false;
 </script>
 
-<Card size="small" class="p-x-small  {shadow}  max-w-[400px] mx-auto">
+<Card
+  size="small"
+  class="p-x-small max-w-[400px] mx-auto"
+  brandShadow={featureData.isHighlighted}
+>
   <FeatureTableHeaderMobile headerData={featureData.header} bind:isShown>
     {#if isShown}
       <section

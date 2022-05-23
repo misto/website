@@ -11,6 +11,7 @@ module.exports = {
   ],
   // we have to safelist these because there are dynamically added to the dom via JS and for prod tailwind ships the classes via analyzing the markup without doing so these won't make there way to prod unless used somewhere on the markup.
   safelist: ["overflow-y-hidden", "mr-4"],
+  darkMode: "class",
   theme: {
     extend: {
       listStyleType: {
@@ -30,37 +31,37 @@ module.exports = {
         "5xl": "2.5rem",
       },
       colors: {
-        black: "var(--black)",
-        "dark-grey": "var(--dark-grey)",
-        "light-grey": "var(--light-grey)",
+        important: "var(--important)",
+        body: "var(--body)",
+        sub: "var(--sub)",
         "link-grey": "var(--link-grey)",
         divider: "var(--divider)",
+        "divider-light": "var(--divider-light)",
+        bg: "var(--bg)",
+        card: "var(--card)",
+        nav: "var(--nav)",
+
+        "less-important": "var(--less-important)",
+
         "sand-dark": "var(--sand-dark)",
         "sand-light": "var(--sand-light)",
-        "off-white": "var(--off-white)",
         white: "var(--white)",
-        "brand-hover": "var(--brand-hover)",
+
+        primary: "var(--brand-almost-ripe)",
+        secondary: "var(--brand-ripe)",
+        tertiary: "var(--brand-light)",
+        quaternary: "var(--brand-quaternary)",
+
         "black-hover": "var(--black-hover)",
         error: "var(--error)",
+
+        salmon: "var(--salmon)",
         "salmon-hover": "var(--salmon-hover)",
 
-        gray: {
-          900: "var(--black)",
-          800: "var(--dark-grey)",
-          700: "var(--light-grey)",
-          400: "var(--divider)",
-          300: "var(--sand-dark)",
-          200: "var(--sand-light)",
-          100: "var(--off-white)",
-        },
-        orange: {
-          900: "var(--brand-almost-ripe)",
-          800: "var(--brand-ripe)",
-          700: "var(--brand-light)",
-        },
-        pink: {
-          900: "var(--salmon)",
-        },
+        black: "var(--black)",
+        "off-black": "var(--off-black)",
+        "light-black": "var(--light-black)",
+        "dark-grey": "var(--dark-grey)",
       },
       fontSize: {
         h1: "var(--h1)",
@@ -101,8 +102,10 @@ module.exports = {
         normal: "var(--shadow)",
         light: "var(--shadow-light)",
         light1: "var(--shadow-light-1)",
+        slight: "var(--shadow-slight)",
         medium: "var(--shadow-medium)",
         brand: "var(--shadow-brand)",
+        highlight: "var(--shadow-highlight)",
       },
       zIndex: {
         "-10": "-10",
@@ -113,6 +116,12 @@ module.exports = {
             a: {
               color: "var(--link-grey)",
             },
+            "h1, h2, h3, h4, h5": {
+              color: "var(--important) !important",
+            },
+            "p, ul, ol, div, strong, figcaption": {
+              color: "var(--body)",
+            },
             blockquote: {
               fontStyle: "normal",
               margin: "2rem 0",
@@ -120,10 +129,26 @@ module.exports = {
               borderLeftWidth: "0",
               borderRadius: "0.75rem",
               background: "var(--brand-light)",
+              a: {
+                color: "var(--link-grey)",
+              },
+              "a:hover": {
+                color: "var(--black)",
+              },
+              "a:focus": {
+                color: "var(--black)",
+              },
               code: {
                 background: "var(--brand-almost-ripe)",
               },
+              ul: {
+                color: "var(--dark-grey)",
+              },
               p: {
+                color: "var(--dark-grey)",
+                strong: {
+                  color: "var(--dark-grey)",
+                },
                 margin: "0",
                 "&::after": {
                   content: "none !important",
@@ -143,9 +168,14 @@ module.exports = {
               "&::before": {
                 content: "none !important",
               },
+              a: {
+                color: "var(--link-grey)",
+              },
+              "a:hover": {
+                color: "var(--black)",
+              },
             },
             h1: {
-              fontSize: "var(--h3)",
               fontWeight: "700",
               marginBottom: "var(--xx-small)",
             },
@@ -153,7 +183,6 @@ module.exports = {
               code: {
                 fontWeight: "700 !important",
               },
-              fontSize: "var(--h4)",
               fontWeight: "700",
               marginBottom: "var(--xx-small)",
               marginTop: "var(--medium)",
@@ -162,7 +191,6 @@ module.exports = {
               code: {
                 fontWeight: "700 !important",
               },
-              fontSize: "var(--h5)",
               fontWeight: "700",
               marginBottom: "var(--xx-small)",
               em: {
@@ -170,7 +198,6 @@ module.exports = {
               },
             },
             h4: {
-              fontSize: "var(--p-large)",
               marginBottom: "var(--macro)",
             },
             iframe: {
@@ -192,6 +219,9 @@ module.exports = {
               ul: {
                 marginLeft: "var(--x-small)",
               },
+              strong: {
+                color: "var(--important)",
+              },
             },
             ol: {
               listStylePosition: "inside",
@@ -206,10 +236,9 @@ module.exports = {
               },
             },
             p: {
-              color: "var(--dark-grey)",
               fontSize: "var(--p-medium)",
               strong: {
-                color: "var(--dark-grey)",
+                color: "var(--body)",
               },
             },
             pre: {
@@ -234,9 +263,15 @@ module.exports = {
               "@media (min-width: 768px)": {
                 minWidth: "31.25rem",
               },
+              strong: {
+                color: "var(--important)",
+              },
             },
             tbody: {
-              background: "var(--off-white)",
+              background: "var(--card)",
+            },
+            tr: {
+              "border-color": "var(--divider)",
             },
             td: {
               lineHeight: "150%",
@@ -249,7 +284,7 @@ module.exports = {
               verticalAlign: "top",
               "&:first-child": {
                 code: {
-                  color: "var(--black)",
+                  color: "var(--dark-grey)",
                   fontWeight: "700",
                 },
               },
@@ -262,9 +297,7 @@ module.exports = {
               marginLeft: "1.5rem",
               padding: "0.75rem 1.5rem",
               textAlign: "left",
-            },
-            thead: {
-              background: "var(--sand-dark)",
+              color: "var(--important)",
             },
             ul: {
               listStyle: "none",

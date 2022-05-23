@@ -16,13 +16,10 @@
   }
 
   .h3 {
-    @apply text-h4 !important;
+    @apply text-h4 text-important !important;
   }
 </style>
 
-<a
-  {href}
-  class="text-black h3 font-semibold transition-all duration-200 {clazz}"
->
+<a {href} class="h3 font-semibold transition-all duration-200 {clazz}">
   <slot />
 </a>

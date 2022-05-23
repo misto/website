@@ -21,7 +21,7 @@ title: Gitpod x JetBrains join forces to solve 'works on my machine' problem
 
 - [Gitpod and JetBrains announce partnership and deep product integration](https://blog.jetbrains.com/blog/2022/02/24/jetbrains_partners_with_gitpod/) to bring remote development to developers around the world
 - Starting today professional software engineers can work in reproducible developer environments provisioned by Gitpod using their favorite desktop IDE from JetBrains including IntelliJ IDEA, PyCharm, GoLand, and PhpStorm
-- Gitpod is the only product that is natively integrated into JetBrains Gateway for a seamless remote development experience
+- Gitpod is the first 3rd party service that is natively integrated into JetBrains Gateway for a seamless remote development experience
 - Benefit from improved developer experience, security, and collaboration while keeping the local editing experience with all shortcuts, keybindings and themes
 - Skip the talking and [get started now](https://www.gitpod.io/docs/ides-and-editors/jetbrains-gateway)
 

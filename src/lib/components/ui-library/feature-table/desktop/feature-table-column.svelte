@@ -6,11 +6,9 @@
   import Card from "$lib/components/ui-library/card";
 
   export let featureData: FeatureTableColumn;
-
-  const shadow = featureData.isHighlighted ? "shadow-brand" : "shadow-normal";
 </script>
 
-<Card size="small" class="{shadow} p-4">
+<Card size="small" class="p-4" brandShadow={featureData.isHighlighted}>
   <FeatureTableHeader headerData={featureData.header} />
   <section
     class="grid grid-cols-1 auto-rows-[3.75rem] border-t-2 border-divider pt-4 inner-grid-desktop"

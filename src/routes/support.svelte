@@ -27,7 +27,7 @@
     slot="content"
     placeholder="Search Documentation"
     class="text-left py-7 sm:pl-medium h-14"
-    containerClasses="roun max-w-lg mx-auto shadow rounded-xl"
+    containerClasses="roun max-w-lg mx-auto rounded-xl"
     iconClasses="h-6 w-6 left-4 sm:left-5"
   />
 </Header>

@@ -5,7 +5,7 @@
 
 <style lang="postcss">
   li::marker {
-    @apply text-orange-900;
+    @apply text-primary;
   }
 </style>
 

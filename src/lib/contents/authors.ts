@@ -184,10 +184,10 @@ export const authors: { [idx: string]: Author } = {
     description:
       "A big open-source fan, Arthur is a SRE focused on cloud-native observability. When not training backflips and gymnastics, you can find him chit-chatting at CNCF's slack channels.",
   },
-  christinfrohne: {
+  chrifro: {
     name: "Christin Frohne",
     socialProfiles: {
-      github: "ChristinFrohne",
+      github: "chrifro",
       twitter: "christinfrohne",
       linkedin: "christin-frohne-91a4b0173",
     },
@@ -268,6 +268,24 @@ export const authors: { [idx: string]: Author } = {
     },
     description: "",
   },
+  Furisto: {
+    name: "Thomas Schubart",
+    socialProfiles: {
+      github: "Furisto",
+      twitter: "",
+      linkedin: "",
+    },
+    description: "",
+  },
+  lucasvaltl: {
+    name: "Lucas Valtl",
+    socialProfiles: {
+      github: "lucasvaltl",
+      twitter: "",
+      linkedin: "",
+    },
+    description: "",
+  },
   brandonroberts: {
     name: "Brandon Roberts",
     socialProfiles: {
@@ -303,6 +321,15 @@ export const authors: { [idx: string]: Author } = {
     },
     description:
       "Helen Scott is a Java Developer Advocate at JetBrains. She has worked at numerous software companies in the last 20 years.",
+  },
+  jacobparis: {
+    name: "Jacob Paris",
+    socialProfiles: {
+      github: "JacobParis",
+      twitter: "jacobmparis",
+      linkedin: "",
+    },
+    description: "",
   },
 };
 

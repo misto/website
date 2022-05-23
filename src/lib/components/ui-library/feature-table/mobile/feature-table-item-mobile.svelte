@@ -1,5 +1,6 @@
 <script lang="ts">
   import QaTooltip from "$lib/components/qa-tooltip.svelte";
+  import Cross from "$lib/components/svgs/cross.svelte";
   export let definition: any;
 </script>
 
@@ -33,7 +34,7 @@
     {/if}
 
     {#if definition.availability === false}
-      <img alt="No" class="mx-auto" height="24" width="24" src="/cross.svg" />
+      <Cross />
     {/if}
   </div>
 {/if}
