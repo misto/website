@@ -9,15 +9,17 @@ title: Required Components
 
 # Required Components
 
-Gitpod relies on certain components and services for it to function. By default, most of these can be automatically installed in-cluster during installation. However, you can also configure Gitpod to use your own version of these that may or may not live inside the cluster. <!--- todo: When do we advise these to be run outside of cluster? --->
+Gitpod relies on certain components and services for it to function. By default, most of these can be automatically installed in-cluster during installation. However, you can also configure Gitpod to use your own version of these that may or may not live inside the cluster.
 
-| Component                                                                                  | Required?                     |
-| ------------------------------------------------------------------------------------------ | ----------------------------- |
-| [Bucket Storage](./required-components#bucket-storage)                                     | Use default or bring your own |
-| [Database](./required-components#database)                                                 | Use default or bring your own |
-| [Image Registry](./required-components#image-registry)                                     | Use default or bring your own |
-| [Source Control Management System](./required-components#source-control-management-system) | Use default or bring your own |
-| [Cert-manager](./required-components#cert-manager)                                         | Yes                           |
+| Component                                                                                  | Required?                     | Known Supported Versions \*                                                                                    |
+| ------------------------------------------------------------------------------------------ | ----------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| [Bucket Storage](./required-components#bucket-storage)                                     | Use default or bring your own | MiniIO, Google Cloud Storage, S3                                                                               |
+| [Database](./required-components#database)                                                 | Use default or bring your own | MySQL (5.7)                                                                                                    |
+| [Image Registry](./required-components#image-registry)                                     | Use default or bring your own | Docker Registry, Google Container Registry, Elastic Container Registry                                         |
+| [Source Control Management System](./required-components#source-control-management-system) | Use default or bring your own | Github.com, Gitlab.com, Bitbucket.org, Github Enterprise, Self-Managed Gitlab (14.x), Bitbucket Server (v7.20) |
+| [Cert-manager](./required-components#cert-manager)                                         | Yes                           | cert-manager v1.8                                                                                              |
+
+\* These are the component versions that we confidently support - i.e. they are part of our testing strategy. Other versions may work, however we cannot guarantee this.
 
 ## Bucket Storage
 
@@ -30,7 +32,7 @@ By default, MinIO is installed in the cluster to store static content and to bac
 
 ## Database
 
-Gitpod uses a MySQL database to store user data. By default Gitpod ships with a MySQL database built-in and data is stored using a Kubernetes PersistentVolume. For production settings, we recommend operating your own MySQL database (version v5.7 or newer). Which database is used can be configured during installation. <!--- todo: Is this true? How do you configure this? --->
+Gitpod uses a MySQL database to store user data. By default Gitpod ships with a MySQL database built-in and data is stored using a Kubernetes PersistentVolume. For production settings, we recommend operating your own MySQL database (version v5.7 or newer). Which database is used can be configured during installation.
 
 ## Image Registry
 
