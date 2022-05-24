@@ -13,9 +13,9 @@ title: "Self-Hosted Reference Architecture"
 
 # Self-Hosted Reference Architecture
 
-This guide describes a production-ready reference architecture for Gitpod. It consists of a Kubernetes cluster, cert-manager, external MySQL database, external OCI image registry, and external object storage. You will also find instructions on how to set up the reference architecture on different cloud platforms.
+This guide describes a production-ready reference architecture for Gitpod. It consists of a Kubernetes cluster, cert-manager, external MySQL database, external OCI image registry, and external object storage. It includes instructions on how to set up this reference architecture on different cloud providers.
 
-This reference architecture can be used as a blueprint for your Gitpod installation. Start with this reference architecture and adapt it to your needs. The reference architecture as described in this guide is what we support and what we test for every release.
+This reference architecture can be used as a blueprint for your Gitpod installation: Start with this reference architecture and adapt it to your needs. The reference architecture as described in this guide is what we support and what we use to test every release.
 
 To use Gitpod, you also need a Git source code management system (SCM) like GitLab, GitHub, or Bitbucket. You will find the supported SCMs on the [required components guide](../required-components). Installing your own SCM is beyond the scope of this guide. However, you can simply use the cloud versions of GitLab, GitHub, or Bitbucket as well as the possible existing installation in your corporate network.
 
@@ -35,7 +35,7 @@ The cluster-external components are accessed by a specific set of components as 
 - **OCI Image Registry**, e.g. Google Artifact Registry or Amazon ECR.<br/>
   _Note: This registry is used by Gitpod to cache images, and store images it builds on behalf of users. This is **not** the registry that contains the images of Gitpod’s services._
 
-In addition, the diagram indicates the different node pools within the cluster. Notice that we separate any user workloads from Gitpod’s services (with the exception of `ws-daemon`). In this reference architecture, we create two node pools: the services node pool (upper half in diagram) and the workspaces node pool (lower half in the diagram).
+In addition, the diagram indicates the different node pools within the cluster. Notice that we separate any user workloads from Gitpod’s services (except for `ws-daemon`). In this reference architecture, we create two node pools: the services node pool (upper half in the diagram) and the workspaces node pool (lower half in the diagram).
 
 ## Cloud Provider Preparations
 
@@ -49,7 +49,7 @@ Independent of the cloud provider you are using, you need to have `kubectl` inst
 
 In order to deploy Gitpod on the [Google Kubernetes Engine (GKE)](https://cloud.google.com/kubernetes-engine) of the [Google Cloud Platform (GCP)](https://cloud.google.com/docs), you need to create and configure a project for your installation. In this guide, we give you examples of how to create the needed resources by using the command line tool `gcloud`. To follow these examples make sure you have [installed the `gcloud` CLI](https://cloud.google.com/sdk/docs/install) and [logged in to your Google Cloud account](https://cloud.google.com/sdk/gcloud/reference/auth/login). You can also use the [GCP Console](https://console.cloud.google.com/) or the API instead. In that case, please refer to the linked Google docs.
 
-At first, [create a GCP project](https://cloud.google.com/resource-manager/docs/creating-managing-projects) and [enable billing](https://cloud.google.com/billing/docs/concepts) (you have to enable billing in order to enable GKE). You can freely choose a name for your project (hereinafter referred to as environment variable `PROJECT_NAME`). You also need the billing account ID (referred to as `BILLING_ACCOUNT`). To see available lDs, run [`gcloud alpha billing accounts list`](https://cloud.google.com/sdk/gcloud/reference/alpha/billing/accounts/list).
+At first, [create a GCP project](https://cloud.google.com/resource-manager/docs/creating-managing-projects) and [enable billing](https://cloud.google.com/billing/docs/concepts) (you have to enable billing to enable GKE). You can freely choose a name for your project (hereinafter referred to as environment variable `PROJECT_NAME`). You also need the billing account ID (referred to as `BILLING_ACCOUNT`). To see available lDs, run [`gcloud alpha billing accounts list`](https://cloud.google.com/sdk/gcloud/reference/alpha/billing/accounts/list).
 
 ```
 PROJECT_NAME=gitpod
@@ -71,7 +71,7 @@ After you created your project, you need to enable the following services in thi
 | Services                         |                                                                                              |                                                                                              |
 | -------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
 | cloudbilling.googleapis.com      | [Google Billing API](https://cloud.google.com/billing/docs/reference/rest)                   | Billing is required to set up a GKE cluster.                                                 |
-| containerregistry.googleapis.com | [Docker container images registry](https://cloud.google.com/container-registry)              | Enable this service so that Gitpod can push the workspace images to that repository.         |
+| containerregistry.googleapis.com | [Docker container images registry](https://cloud.google.com/container-registry)              | Enable this service such that Gitpod can push workspace images to that repository.           |
 | iam.googleapis.com               | [Identity and Access Management (IAM) API](https://cloud.google.com/iam/docs/reference/rest) | To create and use service accounts for the setup.                                            |
 | compute.googleapis.com           | [Google Compute Engine API](https://cloud.google.com/compute/docs/reference/rest/v1)         | The Google Compute Engine empowers to run virtual machines (VMs) for the Kubernetes cluster. |
 | container.googleapis.com         | [Kubernetes Engine API](https://cloud.google.com/kubernetes-engine/docs/reference/rest)      | The Kubernetes engine is where we will deploy Gitpod to.                                     |
@@ -285,7 +285,7 @@ Now, you can **connect `kubectl`** to your newly created cluster.
 gcloud container clusters get-credentials --region="${REGION}" "${CLUSTER_NAME}"
 ```
 
-After that, you need to create cluster role bindings to allows the current user to create new RBAC rules.
+After that, you need to create cluster role bindings to allow the current user to create new RBAC rules.
 
 ```
 kubectl create clusterrolebinding cluster-admin-binding \\
@@ -490,7 +490,7 @@ helm upgrade \\
 
 </details>
 
-In addition to the internal communication, in this reference architecture, we use cert-manager also to create **TLS certificates for the Gitpod domain**. Since we need wildcard certificates for the subdomains, you must use the [DNS-01 challenge](https://letsencrypt.org/docs/challenge-types/#dns-01-challenge). In case you already have TLS certificates for your domain, you can skip this step and use your own certificates during the installation.
+In this reference architecture, we use cert-manager to also create **TLS certificates for the Gitpod domain**. Since we need wildcard certificates for the subdomains, you must use the [DNS-01 challenge](https://letsencrypt.org/docs/challenge-types/#dns-01-challenge). In case you already have TLS certificates for your domain, you can skip this step and use your own certificates during the installation.
 
 <CloudPlatformToggle id="cloud-platform-toggle-cert-manager-tls">
 <div slot="gcp">
@@ -540,7 +540,7 @@ kubectl apply -f issuer.yaml
 </div>
 <div slot="aws">
 
-If using eksctl and the cert-manager service account along with well known policies AND have your intended zone hosted in Route53, then follow the [cert-manager](https://cert-manager.io/docs/configuration/acme/dns01/route53/) configuration steps. An example ClusterIssuer is below.
+If using eksctl and the cert-manager service account along with well-known policies AND have your intended zone hosted in Route53, then follow the [cert-manager](https://cert-manager.io/docs/configuration/acme/dns01/route53/) configuration steps. An example ClusterIssuer is below.
 
 ```yaml
 apiVersion: cert-manager.io/v1
@@ -573,7 +573,7 @@ Kubernetes clusters pull their components from an **image registry**. In Gitpod,
 2. Pulling base images for workspaces. This is either a default [workspace-full](https://hub.docker.com/r/gitpod/workspace-full) image or the image that is configured in the `.gitpod.yml` resp. `.gitpod.Dockerfile` in the repo.
 3. Pushing individual workspace images that are built for workspaces during image start. That are for example custom images that are defined in a `.gitpod.Dockerfile` in the repo. These images are pulled by Kubernetes after image building to provision the workspace. This is the only case where Gitpod needs write access to push images.
 
-In this reference architecture, we use a different registry for each of the three items. The Gitpod images (1) are pulled from a public Google Container Registry we provide. The workspace base image (2) is pulled from Docker Hub (or from the location that is set in the Dockerfile of the corresponding repo). For the individual workspace images (3), we create an image registry that is provided by the used cloud provider. You could also configure Gitpod to use the same registry for all cases. That is particularly useful for [air-gap installations](../advanced/air-gap) where you have access to an internal image registry only.
+We use a different registry for each of the three items in this reference architecture. The Gitpod images (1) are pulled from a public Google Container Registry we provide. The workspace base image (2) is pulled from Docker Hub (or from the location that is set in the Dockerfile of the corresponding repo). For the individual workspace images (3), we create an image registry that is provided by the used cloud provider. You could also configure Gitpod to use the same registry for all cases. That is particularly useful for [air-gap installations](../advanced/air-gap) where you have access to an internal image registry only.
 
 <CloudPlatformToggle id="cloud-platform-toggle-registry">
 <div slot="gcp">
@@ -649,7 +649,7 @@ A RDS MySQL db.m6g.large instance with a standby instance for failover is sugges
 
 ## Object Storage
 
-Gitpod uses an **object storage** to store blob data. This includes workspace backups that will be created when a workspace stops and will be restored when an existing workspace will be restarted as well as different user settings like IDE preferences.
+Gitpod uses an **object storage** to store blob data. This includes workspace backups that will be created when a workspace stops and are used to restore state upon restart. Different user settings like IDE preferencesa are also stored this way.
 
 This reference architecture uses managed object storage by the cloud providers.
 
@@ -692,7 +692,7 @@ Congratulations. You have set up your cluster. Now, you are ready to install Git
 <CloudPlatformToggle id="cloud-platform-toggle-install">
 <div slot="gcp">
 
-If you followed the steps to create your infastructure on GCP of this guide, you need to use the following config settings for your Gitpod installation:
+If you followed the steps to create your infrastructure on GCP of this guide, you need to use the following config settings for your Gitpod installation:
 
 | General settings |                         |
 | ---------------- | ----------------------- |
