@@ -15,6 +15,22 @@ export type Feature = {
     classNames?: string;
     styles?: string;
   };
+  superImage?: {
+    alt: string;
+    height: number;
+    src: string;
+    sources: {
+      srcset: string;
+      type: string;
+    }[];
+    placeholder: string;
+    width: number;
+    maxWidth?: string;
+    sizes?: string;
+    importance?: "auto" | "high" | "low" | undefined;
+    loading?: "lazy" | "eager";
+    style?: string;
+  };
   footnote?: string;
   terminal?: {
     source: string;

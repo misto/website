@@ -33,6 +33,15 @@
   import type { BannerData } from "$lib/types/banner.type";
   import { removeTrailingSlash } from "$lib/utils/helpers";
 
+  import lazyload from "vanilla-lazyload";
+  import { browser } from "$app/env";
+
+  // @ts-ignore
+  if (browser && !document.lazyloadInstance) {
+    // @ts-ignore
+    document.lazyloadInstance = new lazyload();
+  }
+
   export let bannerData: BannerData;
 
   setContext(key, bannerData);

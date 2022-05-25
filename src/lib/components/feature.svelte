@@ -6,7 +6,8 @@
   import Section from "./section.svelte";
   import ButtonsWrapper from "./buttons-wrapper.svelte";
   import Lottie from "./lottie.svelte";
-  import Image from "./image/index.svelte";
+  // import Image from "./image/index.svelte";
+  import { Image } from "@rodneylab/sveltekit-components";
 
   export let feature: Feature;
   const {
@@ -17,6 +18,7 @@
     featureList,
     terminal,
     image,
+    superImage,
     previewComponent,
     lottie,
     showTheMediaFirstOnMobile,
@@ -123,7 +125,7 @@
         />
       {/if}
       {#if image}
-        <Image
+        <img
           src={image.src}
           alt={image.alt}
           class="{image.classNames} mx-auto {image.darkSrc
@@ -139,6 +141,9 @@
             style={image.styles}
           />
         {/if}
+      {/if}
+      {#if superImage}
+        <Image {...superImage} />
       {/if}
       <div class="component-container">
         {#if previewComponent}

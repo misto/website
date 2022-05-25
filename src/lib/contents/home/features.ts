@@ -3,6 +3,8 @@ import { terminalSource, linuxSource } from "../terminal";
 // @ts-ignore
 import Workspaces from "$lib/components/workspaces.svelte";
 import type { Card } from "$lib/types/card.type";
+import ipadMeta from "$lib/assets/ipad.png?w=768&metadata";
+import ipadSrcsetPng from "$lib/assets/ipad.png?w=1536;1280;768;640&jpeg&srcset";
 
 export const multiTrackDevelopmentFeature: Feature = {
   title: "Multi track development with ease",
@@ -18,12 +20,6 @@ export const collaborationFeature: Feature = {
   title: "Where teams code together",
   paragraph:
     "Share running workspaces for pair programming, use port forwarding or share a snapshot as a copy of your workspace with teammates.",
-  // image: {
-  //   src: "/images/features/collaboration.png",
-  //   alt: "Collaboration",
-  //   classNames: "shadow-medium",
-  //   styles: "border-radius: 7px",
-  // },
   lottie: {
     src: "/lottie/share_workspace.json",
     id: "share-workspace",
@@ -34,9 +30,19 @@ export const codeAnywhereFeature: Feature = {
   title: "Code anywhere, on any device",
   paragraph:
     "You no longer need an over-powered laptop to code, Gitpod works just as smoothly on a Chromebook or iPad. All you need is a browser. ",
-  image: {
-    src: "/images/features/ipad.png",
+  superImage: {
+    sources: [
+      {
+        srcset: "/images/features/ipad.png",
+        type: "image/png",
+      },
+    ],
+    height: ipadMeta.height,
+    width: ipadMeta.width,
+    src: ipadMeta.src,
     alt: "Gitpod Workspace on an iPad.",
+    sizes: "(max-width: 672px) calc(100vw - 32px), 672px",
+    placeholder: ipadMeta.src,
   },
 };
 

@@ -10,6 +10,7 @@ import remarkLinkWithImageAsOnlyChild from "./src/lib/utils/remark-link-with-ima
 import remarkHeadingsPermaLinks from "./src/lib/utils/remark-headings-permalinks.js";
 import { toString } from "mdast-util-to-string";
 import { h } from "hastscript";
+import { imagetools } from "vite-imagetools";
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -49,6 +50,9 @@ const config = {
             ? process.env.GITPOD_WORKSPACE_URL.replace("https://", "3000-")
             : "localhost",
         },
+      },
+      plugins: {
+        plugins: [imagetools({ force: true })],
       },
     },
   },
