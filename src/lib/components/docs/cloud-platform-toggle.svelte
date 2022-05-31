@@ -1,42 +1,94 @@
 <script lang="ts">
-  import Toggle from "../toggle.svelte";
-  import Card from "../ui-library/card";
+  import type { comparisonItem } from "$lib/types/docs.type";
+
+  export let items: comparisonItem[] = [
+    {
+      mobileTitle: "GCP",
+      title: "Google Cloud Platform (GCP)",
+      value: 1,
+      slotName: "gcp",
+    },
+    {
+      mobileTitle: "AWS",
+      title: "Amazon Web Services (AWS)",
+      value: 2,
+      slotName: "aws",
+    },
+    {
+      mobileTitle: "Azure",
+      title: "Microsoft Azure",
+      value: 3,
+      slotName: "azure",
+    },
+  ];
+  let activeValue = 1;
+
+  const clickHandler = (tabValue: number) => () => (activeValue = tabValue);
 
   export let id = "cloud-platform-toggle";
-
-  export let checked = false;
-  const handleChange = () => {
-    checked = !checked;
-  };
 
   export let open = false;
 </script>
 
-<details open={open || null}>
+<style lang="postcss">
+  .active {
+    @apply bg-white;
+  }
+  .box {
+    @apply px-4 py-2 rounded-b-2xl rounded-tr-2xl bg-white border-t-0;
+  }
+
+  li {
+    @apply before:hidden m-0 p-0 !important;
+  }
+</style>
+
+<details open={open || null} {id}>
   <summary class="text-p-medium">Cloud provider specific instructions</summary>
 
-  <Toggle
-    labelLeft="Google Cloud Platform (GCP)"
-    labelRight="Amazon Web Services (AWS)"
-    on:change={handleChange}
-    {checked}
-    class="mb-x-small"
-    {id}
-  />
-
-  {#if checked}
-    <Card
-      class="shadow-normal p-xx-small sm:py-small basis-[50%] sm:px-x-small md:p-medium"
-      size="small"
-    >
-      <slot name="aws" />
-    </Card>
-  {:else}
-    <Card
-      class="shadow-normal p-xx-small sm:py-small basis-[50%] sm:px-x-small md:p-medium"
-      size="small"
-    >
-      <slot name="gcp" />
-    </Card>
-  {/if}
+  <div class="my-8 mt-0">
+    <ul class="flex flex-wrap !pl-0 !mb-0">
+      {#each items as item}
+        {#if Object.keys($$slots).includes(item.slotName)}
+          <li class="!before:hidden">
+            <span
+              class="rounded-t-2xl cursor-pointer px-4 py-2 hidden md:block {activeValue ===
+              item.value
+                ? 'active'
+                : ''} bg-sand-dark transition-all duration-200"
+              on:click={clickHandler(item.value)}>{item.title}</span
+            >
+            <span
+              class="rounded-t-2xl cursor-pointer px-4 py-2 md:hidden block {activeValue ===
+              item.value
+                ? 'active'
+                : ''} bg-sand-dark transition-all duration-200"
+              on:click={clickHandler(item.value)}>{item.mobileTitle}</span
+            >
+          </li>
+        {/if}
+      {/each}
+    </ul>
+    {#if $$slots.gcp}
+      {#if activeValue === 1}
+        <div class="box">
+          <slot name="gcp" />
+        </div>
+      {/if}
+    {/if}
+    {#if $$slots.aws}
+      {#if activeValue === 2}
+        <div class="box">
+          <slot name="aws" />
+        </div>
+      {/if}
+    {/if}
+    {#if $$slots.azure}
+      {#if activeValue === 3}
+        <div class="box">
+          <slot name="azure" />
+        </div>
+      {/if}
+    {/if}
+  </div>
 </details>
