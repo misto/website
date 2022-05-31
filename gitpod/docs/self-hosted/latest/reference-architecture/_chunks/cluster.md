@@ -3,7 +3,8 @@ layout: false
 ---
 
 <script lang="ts">
-  import CloudPlatformToggle from "$lib/components/docs/cloud-platform-toggle.svelte";
+  
+  import PlatformComparison from "$lib/components/docs/platform-comparison.svelte"
 </script>
 
 The heart of this reference architecture is a **Kubernetes cluster** where all Gitpod components are deployed to. This cluster consists of two node pools:
@@ -25,7 +26,7 @@ The following table gives an overview of the node types for the different cloud 
 | Services Node Pool   | `n2-standard-4` | `m6i.xlarge`  |
 | Workspaces Node Pool | `n2-standard-8` | `m6i.2xlarge` |
 
-<CloudPlatformToggle id="cloud-platform-toggle-cluster">
+<PlatformComparison >
 
 <div slot="gcp">
 
@@ -254,7 +255,7 @@ The suggested node group settings include privateNetworking:
 ```
 
 </div>
-</CloudPlatformToggle>
+</PlatformComparison>
 
 ## Networking
 
@@ -270,7 +271,7 @@ The entry point for all traffic is the `proxy` component which has a service of 
 
 In order to support SSH access (which is also needed to work with desktop IDEs), you need to create a **load balancer** capable of working with [L4 protocols](https://en.wikipedia.org/wiki/OSI_model#Layer_4:_Transport_layer).
 
-<CloudPlatformToggle id="cloud-platform-toggle-networking">
+<PlatformComparison>
 <div slot="gcp">
 
 In this guide, we use [load balancing through a standalone network endpoint group (NEG)](https://cloud.google.com/kubernetes-engine/docs/how-to/standalone-neg). For this, the Gitpod proxy service will get the following annotation by default:
@@ -293,11 +294,11 @@ The VPC has a public and private side. All managed node groups and Gitpod servic
 If installing Calico, follow their [installation steps](https://projectcalico.docs.tigera.io/getting-started/kubernetes/managed-public-cloud/eks) and ensure you modify the `hostNetwork: True` option on the cert-manager installation options later.
 
 </div>
-</CloudPlatformToggle>
+</PlatformComparison>
 
 You also need to configure your **DNS server**. If you have your own DNS server for your domain, make sure the domain with all wildcards points to your load balancer.
 
-<CloudPlatformToggle id="cloud-platform-toggle-dns">
+<PlatformComparison >
 <div slot="gcp">
 
 In this reference architecture, we use [Google Cloud DNS](https://cloud.google.com/dns) for domain name resolution. To automatically configure Cloud DNS, we use [External DNS for Kubernetes](https://github.com/kubernetes-sigs/external-dns).
@@ -361,10 +362,8 @@ gcloud dns managed-zones describe ${CLUSTER_NAME} --format json | jq '.nameServe
 ```
 
 </div>
-<div slot="aws">
 
-</div>
-</CloudPlatformToggle>
+</PlatformComparison>
 
 Gitpod secures its internal communication between components with **TLS certificates**. You need to have a **[cert-manager](https://cert-manager.io/)** instance in your cluster that is responsible for issuing these certificates. There are different ways to install cert-manager. If you don’t have a cert-manager instance in your cluster, please refer to the [cert-manager docs](https://cert-manager.io/docs/) to choose an installation method.
 
@@ -392,7 +391,7 @@ helm upgrade \\
 
 In this reference architecture, we use cert-manager to also create **TLS certificates for the Gitpod domain**. Since we need wildcard certificates for the subdomains, you must use the [DNS-01 challenge](https://letsencrypt.org/docs/challenge-types/#dns-01-challenge). In case you already have TLS certificates for your domain, you can skip this step and use your own certificates during the installation.
 
-<CloudPlatformToggle id="cloud-platform-toggle-cert-manager-tls">
+<PlatformComparison>
 <div slot="gcp">
 
 Now, we are configuring [Google Cloud DNS for the DNS-01 challenge](https://cert-manager.io/docs/configuration/acme/dns01/google/). For this, we need to create a secret that contains the key for the DNS service account:
@@ -463,7 +462,7 @@ spec:
 In using this example, one would use `letsencrypt-pod` in the Gitpod self hosted installer page when asked for the name of the certificate issuer.
 
 </div>
-</CloudPlatformToggle>
+</PlatformComparison>
 
 ## OCI Image Registry
 
@@ -475,11 +474,10 @@ Kubernetes clusters pull their components from an **image registry**. In Gitpod,
 
 We use a different registry for each of the three items in this reference architecture. The Gitpod images (1) are pulled from a public Google Container Registry we provide. The workspace base image (2) is pulled from Docker Hub (or from the location that is set in the Dockerfile of the corresponding repo). For the individual workspace images (3), we create an image registry that is provided by the used cloud provider. You could also configure Gitpod to use the same registry for all cases. That is particularly useful for [air-gap installations](../advanced/air-gap) where you have access to an internal image registry only.
 
-<CloudPlatformToggle id="cloud-platform-toggle-registry">
+<PlatformComparison>
 <div slot="gcp">
 
 By enabling the service `containerregistry.googleapis.com` (see above), your project provides you with an OCI Image Registry. As credentials, we need the [object storage](#object-storage) service account key that we will create below. Therefore, there is no further action needed to use the registry in Gitpod.
 
 </div>
-<div slot="aws"></div>
-</CloudPlatformToggle>
+</PlatformComparison>

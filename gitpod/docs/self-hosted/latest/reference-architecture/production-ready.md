@@ -8,7 +8,6 @@ title: "Self-Hosted Reference Architecture"
 </script>
 
 <script lang="ts">
-  import CloudPlatformToggle from "$lib/components/docs/cloud-platform-toggle.svelte";
 
   import Overview from "./_chunks/overview.md";
   import Preparations from "./_chunks/preparations.md";
