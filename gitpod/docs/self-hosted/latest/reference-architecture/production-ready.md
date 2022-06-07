@@ -12,6 +12,8 @@ title: "Self-Hosted Reference Architecture"
   import Overview from "./_chunks/overview.md";
   import Preparations from "./_chunks/preparations.md";
   import Cluster from "./_chunks/cluster.md";
+  import Networking from "./_chunks/networking.md";
+  import Registry from "./_chunks/registry.md";
   import Database from "./_chunks/database.md";
   import Storage from "./_chunks/storage.md";
   import Install from "./_chunks/install.md";
@@ -38,6 +40,14 @@ You can also create a Kubernetes cluster on your bare metal servers for smaller 
 ## Kubernetes Cluster
 
 <Cluster />
+
+## Networking
+
+<Networking />
+
+## OCI Image Registry
+
+<Registry />
 
 ## Database
 
