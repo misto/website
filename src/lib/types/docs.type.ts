@@ -3,4 +3,5 @@ export type comparisonItem = {
   mobileTitle: string;
   value: number;
   slotName: string;
+  hidden?: boolean;
 };

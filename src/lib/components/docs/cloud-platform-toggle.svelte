@@ -15,12 +15,14 @@
       title: "Amazon Web Services (AWS)",
       value: 2,
       slotName: "aws",
+      hidden: true, // hidden since it is not ready to publish yet
     },
     {
       mobileTitle: "Azure",
       title: "Microsoft Azure",
       value: 3,
       slotName: "azure",
+      hidden: true, // hidden since it is not ready to publish yet
     },
   ];
   let activeValue = 1;
@@ -51,7 +53,7 @@
   <div class="my-8 mt-0">
     <ul class="flex flex-wrap !pl-0 !mb-0">
       {#each items as item}
-        {#if Object.keys($$slots).includes(item.slotName)}
+        {#if Object.keys($$slots).includes(item.slotName) && !item.hidden}
           <li class="!before:hidden">
             <span
               class="rounded-t-2xl cursor-pointer px-4 py-2 hidden md:block {activeValue ===
