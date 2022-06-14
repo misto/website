@@ -11,7 +11,7 @@ title: Getting Started with Gitpod Self-Hosted
 
 > **Note:** Setting up a self-hosted Gitpod instance needs some Kubernetes experience. Detailed guidance on how to setup and maintain a Kubernetes cluster is behind the scope of these docs. See also [_Prerequisites to Install Gitpod Self-Hosted_](../latest#prerequisites-to-install-gitpod-self-hosted).
 
-This guide will walk you through the steps to install Gitpod on your own Kubernetes cluster that has access to the internet. If you want to install Gitpod in an offline (or air-gapped) environment that cannot access our publicly available containers, please request a trial license with [this form](https://www.gitpod.io/enterprise-license) and ensure you have the additional resources available that are documented in [our advanced airgap guide](./advanced/air-gap).
+This guide is for installing Gitpod on your own Kubernetes cluster that has access to the internet. If you want to install Gitpod in an offline (or air-gapped) environment that cannot access our public images, please request a trial license with [this form](https://www.gitpod.io/enterprise-license). Access to an internal registry to stage our images will be required, see [our advanced airgap guide](./advanced/air-gap) for more details.
 
 ## Step 1: Create a Kubernetes Cluster
 
