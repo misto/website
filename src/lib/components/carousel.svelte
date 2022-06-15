@@ -6,6 +6,7 @@
 
 <style lang="postcss">
   div {
+    max-width: 1200px;
     scroll-snap-type: x mandatory;
     scrollbar-width: thin;
     scrollbar-color: var(--divider) var(--white);
@@ -35,6 +36,6 @@
   }
 </style>
 
-<div class="{clazz} flex items-start overflow-x-scroll space-x-6" dir="ltr">
+<div class="{clazz} flex items-start space-x-6 mx-auto h-[340px]" dir="ltr">
   <slot />
 </div>
