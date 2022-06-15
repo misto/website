@@ -19,7 +19,7 @@
   export { clazz as class };
 </script>
 
-<style lang="scss">
+<style lang="postcss">
   :global(.slides) {
     margin-bottom: var(--small);
   }
@@ -27,6 +27,10 @@
   :global(.slides) > :global(div) > :global(div) {
     display: flex;
     justify-content: center;
+  }
+
+  .active {
+    @apply bg-gray-400 dark:bg-divider;
   }
 </style>
 
@@ -67,11 +71,16 @@
       {#each sequence as number}
         <button
           on:click={() => {
-            console.log(activeSequenceNumber, number);
             isDirectionNegative = activeSequenceNumber > number;
             activeSequenceNumber = number;
+            console.log(
+              number === activeSequenceNumber,
+              number,
+              activeSequenceNumber
+            );
           }}
-          class="inline-block h-4 w-4 bg-divider-light dark:bg-light-black rounded-full"
+          class="inline-block h-4 w-4 bg-divider-light dark:bg-light-black rounded-full transition-all duration-200"
+          class:active={number === activeSequenceNumber}
         />
       {/each}
     </div>
