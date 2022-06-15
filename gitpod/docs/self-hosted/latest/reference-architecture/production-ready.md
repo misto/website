@@ -21,9 +21,9 @@ title: "Self-Hosted Reference Architecture"
 
 # Self-Hosted Reference Architecture
 
-This guide describes a production-ready reference architecture for Gitpod. It consists of a Kubernetes cluster, cert-manager, external MySQL database, external OCI image registry, and external object storage. It includes instructions on how to set up this reference architecture on different cloud providers.
+This guide describes a production-ready reference architecture for Gitpod. It consists of a Kubernetes cluster, cert-manager, external MySQL database, external OCI image registry, and external object storage. It includes instructions on how to set up this reference architecture on the officially supported cloud providers.
 
-This reference architecture can be used as a blueprint for your Gitpod installation: Start with this reference architecture and adapt it to your needs. The reference architecture as described in this guide is what we support and what we use to test every release.
+This reference architecture can be used as a blueprint for your Gitpod installation: Start with this reference architecture and adapt it to your needs. The reference architecture as described in this guide is what Gitpod supports, and is used to test against every self-hosted Gitpod release.
 
 To use Gitpod, you also need a Git source code management system (SCM) like GitLab, GitHub, or Bitbucket. You will find the supported SCMs on the [required components guide](../required-components). Installing your own SCM is beyond the scope of this guide. However, you can simply use the cloud versions of GitLab, GitHub, or Bitbucket as well as the possible existing installation in your corporate network.
 
@@ -41,7 +41,7 @@ You can also create a Kubernetes cluster on your bare metal servers for smaller 
 
 <Cluster />
 
-## Networking
+## Ingress
 
 <Networking />
 

@@ -53,7 +53,7 @@ Keep cert-manager selected for the TLS certificates options.
 | --------------------------- | ----------------------- |
 | Self-signed TLS certificate | no                      |
 | cert-manager                | yes                     |
-| Issuer name                 | `gitpdo-issuer`         |
+| Issuer name                 | `gitpod-issuer`         |
 | Issuer type                 | Select “cluster issuer” |
 
 </div>

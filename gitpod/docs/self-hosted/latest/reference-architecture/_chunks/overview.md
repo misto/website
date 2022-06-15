@@ -4,7 +4,7 @@ layout: false
 
 ![Reference Architecture Overview](../../../static/images/docs/self-hosted/reference-architecture/ReferenceArchitecture.png)
 
-The diagram above gives an overview of the reference architecture. Starting from the user’s workstation, access is provided using an L4 load balancer. An internal proxy distributes this traffic within Gitpod.
+The diagram above gives an overview of the reference architecture. Starting from the user’s workstation, access is provided using a layer 4 (L4) load balancer. An internal proxy distributes this traffic within Gitpod.
 
 The cluster-external components are accessed by a specific set of components as shown in the diagram. The external components are:
 

@@ -98,6 +98,8 @@ gcloud container clusters \\
 
 Unfortunately, you cannot create a cluster without the default node pool. Since we need a custom node pool, you need to remove the default one.
 
+<!-- Can we re-use the default node pool instead? → https://github.com/gitpod-io/website/pull/2106#discussion_r893885815 -->
+
 ```
 gcloud --quiet container node-pools delete default-pool \\
     --cluster="${CLUSTER_NAME}" --region="${REGION}"
@@ -146,7 +148,7 @@ We are also creating a **node pool for the Gitpod workspaces**.
 |                   |                                                                                                                                                 |
 | ----------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
 | Image Type        | `UBUNTU_CONTAINERD`                                                                                                                             |
-| Machine Type      | `n2-standard-4`                                                                                                                                 |
+| Machine Type      | `n2-standard-8`                                                                                                                                 |
 | Enable            | Autoscaling,<br/>Autorepair,<br/>IP Alias,<br/>Network Policy                                                                                   |
 | Disable           | Autoupgrade<br/>`metadata=disable-legacy-endpoints=true`                                                                                        |
 | Create Subnetwork | `gitpod-${CLUSTER_NAME}`                                                                                                                        |
@@ -165,7 +167,7 @@ gcloud container node-pools \\
     --disk-type="pd-ssd" \\
     --disk-size="100GB" \\
     --image-type="UBUNTU_CONTAINERD" \\
-    --machine-type="n2-standard-4" \\
+    --machine-type="n2-standard-8" \\
     --num-nodes=1 \\
     --no-enable-autoupgrade \\
     --enable-autorepair \\

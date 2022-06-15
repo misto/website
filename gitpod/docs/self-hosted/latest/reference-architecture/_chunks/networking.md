@@ -16,7 +16,7 @@ gitpod.example.com
 
 The entry point for all traffic is the `proxy` component which has a service of type `LoadBalancer` that allows inbound traffic on ports 80 (HTTP) and 443 (HTTPS) as well as port 22 (SSH access to the workspaces).
 
-In order to support SSH access (which is also needed to work with desktop IDEs), you need to create a **load balancer** capable of working with [L4 protocols](https://en.wikipedia.org/wiki/OSI_model#Layer_4:_Transport_layer).
+SSH access is required to work with desktop IDEs, such as [VS Code Desktop](/docs/ides-and-editors/vscode) and JetBrains via [JetBrains Gateway](/docs/ides-and-editors/jetbrains-gateway). To enable SSH, you'll need to create a **load balancer** capable of working with [L4 protocols](https://en.wikipedia.org/wiki/OSI_model#Layer_4:_Transport_layer).
 
 <CloudPlatformToggle id="cloud-platform-toggle-networking">
 <div slot="gcp">
@@ -36,7 +36,7 @@ It is suggested to create a dedicated VPC (and EKS instance) for Gitpod. eksctl 
 
 - You also customize eksctl’s [vpc](https://eksctl.io/usage/vpc-subnet-settings/#custom-subnet-topology) creation to suit your existing configurations.
 
-The VPC has a public and private side. All managed node groups and Gitpod services run in the private side. Inbound access to the services is through ALB/ELB services auto-provisioned by AWS based on the configuration used (standard LoadBalancer roles or creation of an Ingress). If running a separate jump host or vpn endpoint, it should be deployed in the public interface.
+The VPC needs public and private subnets. All managed node groups and Gitpod services should run in the private subnet. Inbound access to the services should be through ALB/ELB services auto-provisioned by AWS based on the configuration used (standard LoadBalancer roles or creation of an Ingress). If running a jump host or vpn endpoint, it should be deployed in the public subnet.
 
 If installing Calico, follow their [installation steps](https://projectcalico.docs.tigera.io/getting-started/kubernetes/managed-public-cloud/eks) and ensure you modify the `hostNetwork: True` option on the cert-manager installation options later.
 
