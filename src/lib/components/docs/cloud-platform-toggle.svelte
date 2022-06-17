@@ -15,7 +15,7 @@
       title: "Amazon Web Services (AWS)",
       value: 2,
       slotName: "aws",
-      hidden: true, // hidden since it is not ready to publish yet
+      hidden: false,
     },
     {
       mobileTitle: "Azure",
@@ -31,7 +31,7 @@
 
   export let id = "cloud-platform-toggle";
 
-  export let open = false;
+  export let open = true;
 </script>
 
 <style lang="postcss">

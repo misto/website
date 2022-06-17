@@ -63,9 +63,22 @@ Now, you are prepared to create your Kubernetes cluster.
 
 <div slot="aws">
 
-In order to deploy Gitpod on the [Amazon Elastic Kubernetes Service (EKS)](https://aws.amazon.com/eks/) of the [Amazon Web Service (AWS)](https://aws.amazon.com/), you need an AWS account. In this guide, we use [AWS CLI](https://aws.amazon.com/cli/) as well as [EKS CLI `eksctl`](https://eksctl.io/). Please refer to the docs on how to install these tools.
+In this guide, we use the set of tools that you will need to have installed. Please refer to the respective docs on how to install these tools.
 
-Make sure you are logged in and are connected to the proper AWS account. Ensure AWS is configured and working with the command `aws sts get-caller-identity`.
+- `eksctl`: https://github.com/weaveworks/eksctl#installation
+- `awscli`: https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
+- `kubectl`: https://kubernetes.io/docs/tasks/tools/
+- `kubectl cert-manager plugin`: https://cert-manager.io/docs/usage/kubectl-plugin/#installation
+
+In order to deploy Gitpod on the [Amazon Elastic Kubernetes Service (EKS)](https://aws.amazon.com/eks/)of the [Amazon Web Service (AWS)](https://aws.amazon.com/), you need an AWS account. You will further need to have permissions to create all the resources deployed in this guide:
+
+- VPC, Subnets, Security Groups
+- EC2 Instances, EKS, AutoScale Groups
+- RDS
+- S3 Buckets
+- IAM Roles / Service account
+
+Make sure you are logged in and are connected to the proper AWS account. You can ensure AWS is configured and working wiviath the command `aws sts get-caller-identity`.
 
 </div>
 

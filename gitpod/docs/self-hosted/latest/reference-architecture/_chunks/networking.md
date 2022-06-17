@@ -32,6 +32,8 @@ For Gitpod, we support Calico as CNI only. You need to make sure that you DO NOT
 </div>
 <div slot="aws">
 
+<!-- ToDo: Is any of this relevant? I honestly don't know. I thought the cluster created above has a VPC by default. Does it need to configured with public and private subnets? We have installed Calico already above, and as such I would remove that here.  -->
+
 It is suggested to create a dedicated VPC (and EKS instance) for Gitpod. eksctl can do this for you, but if VPCs have to be configured separately, follow eksctl’s [suggestions](https://eksctl.io/usage/vpc-configuration/).
 
 - You also customize eksctl’s [vpc](https://eksctl.io/usage/vpc-subnet-settings/#custom-subnet-topology) creation to suit your existing configurations.

@@ -25,6 +25,8 @@ The following table gives an overview of the node types for the different cloud 
 | Services Node Pool   | `n2-standard-4` | `m6i.xlarge`  |
 | Workspaces Node Pool | `n2-standard-8` | `m6i.2xlarge` |
 
+There are other relevant requirementss around the expected networking plicy and container runtime which can be found in the [Cluster Set-Up](../../latest/cluster-set-up#node-and-container-requirements) section. These requirements are respected in the coud specific instructions below.
+
 <CloudPlatformToggle id="cloud-platform-toggle-cluster">
 
 <div slot="gcp">
@@ -198,7 +200,7 @@ kubectl create clusterrolebinding cluster-admin-binding \\
 </div>
 <div slot="aws">
 
-For eksctl, configuring the cluster and the nodegroups cannot happen simultaneously. You need to deploy the cluster control plane first, do modifications to the network stack (either AWS VPC or Calico), and then provision the node groups. This ensures you have the maximum number of pods to run (110 in most cases) Gitpod workspaces.
+<!-- For eksctl, configuring the cluster and the nodegroups cannot happen simultaneously. You need to deploy the cluster control plane first, do modifications to the network stack (either AWS VPC or Calico), and then provision the node groups. This ensures you have the maximum number of pods to run (110 in most cases) Gitpod workspaces.
 
 The example `eksctl` config file includes services accounts that might not be relevant to a particular deployment, but are included for reference.
 
@@ -253,7 +255,216 @@ The suggested node group settings include privateNetworking:
     gitpod.io/workload_workspace_regular: "true"
     gitpod.io/workload_workspace_services: "true"
     gitpod.io/workload_workspace_headless: "true"
+``` -->
+
+For eksctl, configuring the cluster and the nodegroups cannot happen simultaneously. You need to deploy the cluster control plane first, do modifications to the network stack (either AWS VPC or Calico), and then provision the node groups. This ensures you have the maximum number of pods to run (110 in most cases) Gitpod workspaces.
+
+The example `eks-gitpod-cluster.yml` config defines the cluster that we will create. It includes the following services accounts that might not be relevant to a particular deployment, but are included for reference:
+
+- `aws-load-balancer-controller` enables ELB creation for LoadBalancer services and integration with AWS Application Load Balancers.
+- `ebs-csi-controller-sa` enables provisioning the EBS volumes for PVC storage.
+- `cluster-autoscaler` connects to the AWS autoscaler.
+- - `cert-manager` provided for the required cert-manager tooling. If using DNS-01 challenges for LetsEncrypt with a Route53 zone, then enable the cert-manager wellKnowPolicy or ensure one exists with permissions to modify records in the zone.
+
+> **Important:** You need to update the `eks-gitpod-cluster.yml` below with your desired region and metadata.
+
+<details> 
+<summary> <b> eks-gitpod-cluster.yml </b>  </summary>
+
+```yaml
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+metadata:
+  name: gitpod
+  region: eu-west-2 # please set your desired region
+  version: "1.22"
+  tags:
+    project: "gitpod"
+
+# uncomment and update to include just a specific subset of availability zones
+#availabilityZones:[eu-west-2a,eu-west-2b]
+
+iam:
+  withOIDC: true
+
+  serviceAccounts:
+    - metadata:
+        name: aws-load-balancer-controller
+        namespace: kube-system
+      wellKnownPolicies:
+        awsLoadBalancerController: true
+    - metadata:
+        name: ebs-csi-controller-sa
+        namespace: kube-system
+      wellKnownPolicies:
+        ebsCSIController: true
+    - metadata:
+        name: cluster-autoscaler
+        namespace: kube-system
+      wellKnownPolicies:
+        autoScaler: true
+    - metadata:
+        name: cert-manager
+        namespace: cert-manager
+      wellKnownPolicies:
+        certManager: true
+
+vpc:
+  autoAllocateIPv6: false
+  nat:
+    gateway: Single
+
+cloudWatch:
+  clusterLogging:
+    enableTypes: ["*"]
+
+privateCluster:
+  enabled: false
+  additionalEndpointServices:
+    - "autoscaling"
+    - "logs"
+
+managedNodeGroups:
+  - name: services
+    amiFamily: Ubuntu2004
+    spot: false
+    instanceTypes: ["m6i.xlarge"]
+    desiredCapacity: 2
+    minSize: 1
+    maxSize: 4
+    maxPodsPerNode: 110
+    disableIMDSv1: false
+    volumeSize: 300
+    volumeType: gp3
+    volumeIOPS: 6000
+    volumeThroughput: 500
+    ebsOptimized: true
+    privateNetworking: true
+    propagateASGTags: true
+
+    iam:
+      attachPolicyARNs:
+        - arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly
+        - arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy
+        - arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy
+        - arn:aws:iam::aws:policy/ElasticLoadBalancingFullAccess
+        - arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore
+      withAddonPolicies:
+        albIngress: true
+        autoScaler: true
+        cloudWatch: true
+        certManager: true
+        ebs: true
+
+    tags:
+      k8s.io/cluster-autoscaler/enabled: "true"
+      k8s.io/cluster-autoscaler/gitpod: "owned"
+
+    labels:
+      gitpod.io/workload_meta: "true"
+      gitpod.io/workload_ide: "true"
+
+    preBootstrapCommands:
+      - echo "export USE_MAX_PODS=false" >> /etc/profile.d/bootstrap.sh
+      - echo "export CONTAINER_RUNTIME=containerd" >> /etc/profile.d/bootstrap.sh
+      - sed -i '/^set -o errexit/a\\nsource /etc/profile.d/bootstrap.sh' /etc/eks/bootstrap.sh
+
+  - name: workspaces
+    amiFamily: Ubuntu2004
+    spot: false
+    instanceTypes: ["m6i.2xlarge"]
+    desiredCapacity: 2
+    minSize: 1
+    maxSize: 10
+    maxPodsPerNode: 110
+    disableIMDSv1: false
+    volumeSize: 300
+    volumeType: gp3
+    volumeIOPS: 6000
+    volumeThroughput: 500
+    ebsOptimized: true
+    privateNetworking: true
+    propagateASGTags: true
+
+    iam:
+      attachPolicyARNs:
+        - arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly
+        - arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy
+        - arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy
+        - arn:aws:iam::aws:policy/ElasticLoadBalancingFullAccess
+        - arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore
+      withAddonPolicies:
+        albIngress: true
+        autoScaler: true
+        cloudWatch: true
+        ebs: true
+
+    tags:
+      k8s.io/cluster-autoscaler/enabled: "true"
+      k8s.io/cluster-autoscaler/gitpod: "owned"
+
+    labels:
+      gitpod.io/workload_workspace_regular: "true"
+      gitpod.io/workload_workspace_services: "true"
+      gitpod.io/workload_workspace_headless: "true"
+
+    preBootstrapCommands:
+      - echo "export USE_MAX_PODS=false" >> /etc/profile.d/bootstrap.sh
+      - echo "export CONTAINER_RUNTIME=containerd" >> /etc/profile.d/bootstrap.sh
+      - sed -i '/^set -o errexit/a\\nsource /etc/profile.d/bootstrap.sh' /etc/eks/bootstrap.sh
 ```
+
+</details>
+
+1. Use eksctl to deploy the cluster without the nodegroups using our `eks-gitpod-cluster.yml` file from above.
+
+```
+eksctl create cluster --config-file eks-gitpod-cluster.yml --without-nodegroup
+```
+
+2. Update the local kubectl configuration \*ensure you set the right `region`):
+
+```
+aws eks update-kubeconfig --name gitpod --region eu-west-2
+```
+
+Ensure kubectl is happy with the cluster (gitpod) we just created:
+
+```
+kubectl cluster-info
+```
+
+3. Now replace the network stack with calico which is required by Gitpod for networking overlay and policy as well as to ensure we have enough IPs:
+
+```
+kubectl delete daemonset -n kube-system aws-node
+kubectl apply -f https://projectcalico.docs.tigera.io/manifests/calico-vxlan.yaml
+kubectl -n kube-system set env daemonset/calico-node FELIX_AWSSRCDSTCHECK=Disable
+```
+
+4. With the networking in place, we can now provision the node groups, using the same `eks-gitpod-cluster.yml ` file:
+
+```
+eksctl create nodegroup -f eks-gitpod-cluster.yml
+```
+
+5. Once this completes, you can verify that the nodes are running:
+
+```
+kubectl get nodes
+```
+
+This should give you an output similar to:
+
+```
+NAME                                            STATUS   ROLES    AGE     VERSION
+ip-192-168-112-142.eu-west-1.compute.internal   Ready    <none>   11m     v1.22.6-eks-7d68063
+ip-192-168-118-119.eu-west-1.compute.internal   Ready    <none>   7m34s   v1.22.6-eks-7d68063
+ip-192-168-153-136.eu-west-1.compute.internal   Ready    <none>   11m     v1.22.6-eks-7d68063
+ip-192-168-156-195.eu-west-1.compute.internal   Ready    <none>   7m44s   v1.22.6-eks-7d68063
+```
+
+You should now have a cluster up and running that is ready for the next steps below.
 
 </div>
 </CloudPlatformToggle>
