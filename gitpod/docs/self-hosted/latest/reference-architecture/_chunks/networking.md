@@ -113,6 +113,8 @@ gcloud dns managed-zones describe ${CLUSTER_NAME} --format json | jq '.nameServe
 </div>
 <div slot="aws">
 
+<!-- ToDo: What do we write here? I assume something related to setting up Route53. But I don't know what.  -->
+
 </div>
 </CloudPlatformToggle>
 
@@ -190,6 +192,8 @@ kubectl apply -f issuer.yaml
 </div>
 <div slot="aws">
 
+<!-- ToDo: Is this relevant? This needs to be logically consistent with what we write above -->
+
 If using eksctl and the cert-manager service account along with well-known policies AND have your intended zone hosted in Route53, then follow the [cert-manager](https://cert-manager.io/docs/configuration/acme/dns01/route53/) configuration steps. An example ClusterIssuer is below.
 
 ```yaml
@@ -210,7 +214,7 @@ spec:
             role: arn:aws:iam::YYYYYYYYYYYY:role/dns-manager
 ```
 
-In using this example, one would use `letsencrypt-pod` in the Gitpod self hosted installer page when asked for the name of the certificate issuer.
+When using this example, one would use `letsencrypt-pod` in the Gitpod self hosted installer page when asked for the name of the certificate issuer.
 
 </div>
 </CloudPlatformToggle>

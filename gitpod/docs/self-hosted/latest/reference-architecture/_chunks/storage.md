@@ -39,5 +39,8 @@ gcloud iam service-accounts keys create --iam-account "${OBJECT_STORAGE_SA_EMAIL
 
 </div>
 <div slot="aws">
+
+<!-- ToDo: Need to add instructions on how to set up storage  -->
+
 </div>
 </CloudPlatformToggle>

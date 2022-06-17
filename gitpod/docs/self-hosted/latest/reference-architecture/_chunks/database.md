@@ -62,6 +62,8 @@ gcloud iam service-accounts keys create --iam-account "${MYSQL_SA_EMAIL}" \\
 </div>
 <div slot="aws">
 
+<!-- ToDo: Need to add instructions on how to set up our the db  -->
+
 A RDS MySQL db.m6g.large instance with a standby instance for failover is suggested starting point for installations.
 
 </div>

@@ -20,5 +20,7 @@ We use a different registry for each of the three items in this reference archit
 By enabling the service `containerregistry.googleapis.com` (see above), your project provides you with an OCI Image Registry. As credentials, we need the [object storage](#object-storage) service account key that we will create below. Therefore, there is no further action needed to use the registry in Gitpod.
 
 </div>
-<div slot="aws"></div>
+<div slot="aws">
+<!-- ToDo: Need to add instructions on how to set up our registry  -->
+</div>
 </CloudPlatformToggle>
