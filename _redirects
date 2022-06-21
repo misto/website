@@ -1,6 +1,7 @@
 /blog/gitlab-integration/+ /blog/gitlab-integration 301
 /careers https://gitpod.crew.work/jobs 301
 /chat https://discord.com/invite/gitpod 301
+/cla https://github.com/gitpod-io/cla 301
 /code-of-conduct https://github.com/gitpod-io/.github/blob/main/CODE_OF_CONDUCT.md
 /configure/editor /docs/editors/vscode 301
 /direction https://www.notion.so/gitpod/Gitpod-s-Direction-be35d064c0704fbda61c542b84e07ef6 301
