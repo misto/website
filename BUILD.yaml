@@ -1,0 +1,12 @@
+packages:
+  - name: website
+    type: yarn
+    srcs:
+      - "**"
+    config:
+      packaging: library
+      commands:
+        install: ["npm", "install"]
+        build: ["npm", "run", "build"]
+        dev: ["npm", "run", "dev"]
+        test: ["sh", "-c", "gp await-port 3000 && export CYPRESS_BASE_URL=$(gp url 3000) && npm run test:e2e"]
