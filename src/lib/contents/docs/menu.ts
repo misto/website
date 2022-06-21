@@ -96,17 +96,7 @@ export const MENU: MenuEntry[] = [
     M("Browser Bookmarklet", "browser-bookmarklet"),
     M("Browser Extension", "browser-extension"),
   ]),
-  M("Gitpod Self-Hosted", "self-hosted/latest", [
-    M("Getting Started", "self-hosted/latest/getting-started"),
-    M("Reference Architectures", "self-hosted/latest/reference-architecture"),
-    M("Cluster Set-Up", "self-hosted/latest/cluster-set-up"),
-    M("Required Components", "self-hosted/latest/required-components"),
-    M("Advanced Installation", "self-hosted/latest/advanced"),
-    M("Updating Gitpod", "self-hosted/latest/updating"),
-    M("Troubleshooting", "self-hosted/latest/troubleshooting"),
-    M("Telemetry", "self-hosted/latest/telemetry"),
-    M("Monitoring", "self-hosted/latest/monitoring"),
-  ]),
+  M("Self-Hosted", "self-hosted/latest"),
   M("References", "references", [
     M(".gitpod.yml", "references/gitpod-yml"),
     M("Command Line Interface", "command-line-interface"),

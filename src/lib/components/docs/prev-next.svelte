@@ -1,7 +1,8 @@
 <script lang="ts">
   import { page } from "$app/stores";
   import { getMenuContext } from "$lib/contents/docs/menu";
-  const menuCtx = getMenuContext($page.url.pathname);
+  import docsSiebareStore from "$lib/stores/docs-sidebar";
+  $: menuCtx = getMenuContext($page.url.pathname, $docsSiebareStore);
 </script>
 
 <div

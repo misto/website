@@ -2,9 +2,25 @@
   export const load = async ({ fetch, url }) => {
     const slug = url.pathname.replace(/\//g, "__");
     const res = await fetch(`/api/${slug}.docs.json`);
+
+    const sidebars = Object.entries(
+      import.meta.globEager("/src/lib/contents/docs/sidebars/*.ts")
+    ).reduce((acc, [path, data]) => {
+      const filename = path.split("/").pop().replace(/\.ts$/, "");
+
+      const sidebar = MENU.map((item) => {
+        if (item.title === "Self-Hosted") {
+          item = { ...data.MENU };
+        }
+        return item;
+      });
+      acc[filename] = sidebar;
+      return acc;
+    }, {});
+
     try {
       const data = await res.clone().json();
-      return { props: { docsMeta: data } };
+      return { props: { docsMeta: data, sidebars } };
     } catch (e) {
       return {
         error: e,
@@ -25,8 +41,17 @@
   import EditInGitpod from "$lib/components/docs/edit-in-gitpod.svelte";
   import displayBanner from "$lib/stores/display-banner";
   import { onMount } from "svelte";
+  import type { MenuEntry } from "$lib/types/menu-entry.type";
+  import sidebarStore from "$lib/stores/docs-sidebar";
 
   let extendSticky: boolean = false;
+  export let sidebars: { [key: string]: MenuEntry[] };
+  let version = "22.04";
+
+  $: activeSidebar = sidebars[version];
+  $: {
+    $sidebarStore = activeSidebar;
+  }
 
   onMount(() => {
     extendSticky = $displayBanner;
@@ -48,13 +73,13 @@
     class="hidden z-20 sticky top-24 self-start lg:block lg:w-1/5"
   >
     <Search docSearchInputSelector="algolia-mobile" />
-    <Menu {MENU} />
+    <Menu MENU={activeSidebar} />
   </div>
   <div class="lg:w-3/5 lg:pl-4">
     <div class="block lg:hidden">
       <Search />
     </div>
-    <MobileMenu {MENU} />
+    <MobileMenu MENU={activeSidebar} />
     <div class="lg:border-l lg:border-r lg:border-divider">
       <slot />
     </div>
