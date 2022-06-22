@@ -40,17 +40,28 @@
   import type { DocsMeta } from "$lib/types/docs-meta";
   import EditInGitpod from "$lib/components/docs/edit-in-gitpod.svelte";
   import displayBanner from "$lib/stores/display-banner";
-  import { onMount } from "svelte";
+  import { onMount, tick } from "svelte";
   import type { MenuEntry } from "$lib/types/menu-entry.type";
   import sidebarStore from "$lib/stores/docs-sidebar";
+  import { page } from "$app/stores";
+  import { releases } from "$lib/contents/docs/releases";
+  import { goto } from "$app/navigation";
 
   let extendSticky: boolean = false;
   export let sidebars: { [key: string]: MenuEntry[] };
-  let version = "22.04";
+  let version: string = releases[0];
 
   $: activeSidebar = sidebars[version];
   $: {
     $sidebarStore = activeSidebar;
+  }
+
+  async function versionChangeHandler() {
+    await tick();
+    const test = $page.url.pathname.split("/");
+    console.log(test);
+    test[3] = version;
+    goto(test.join("/"));
   }
 
   onMount(() => {
@@ -72,6 +83,13 @@
     class:extended-sticky={extendSticky}
     class="hidden z-20 sticky top-24 self-start lg:block lg:w-1/5"
   >
+    {#if $page.url.pathname.includes("/docs/self-hosted")}
+      <select on:change={versionChangeHandler} bind:value={version}>
+        {#each releases as release}
+          <option value={release}>{release}</option>
+        {/each}
+      </select>
+    {/if}
     <Search docSearchInputSelector="algolia-mobile" />
     <Menu MENU={activeSidebar} />
   </div>

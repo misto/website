@@ -1,1 +1,1 @@
-export const releases = ["22.04"];
+export const releases = ["latest"];
