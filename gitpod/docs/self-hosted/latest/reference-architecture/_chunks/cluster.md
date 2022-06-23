@@ -207,53 +207,224 @@ The example `eksctl` config file includes services accounts that might not be re
 - `cluster-autoscaler` connects to the AWS autoscaler.
 - `ebs-csi-controller-sa` enables provisioning the EBS volumes for PVC storage.
 
-The suggested node group settings include privateNetworking:
+Provided below is a complete eksctl configuration file that will deploy all the components required for an EKS installation to support Gitpod. All references to an `gitpod-cluster.yaml` file refer to this reference.
 
+`eksctl` will be configuring the VPC and networking along with creating the EKS cluster itself, if you need to use pre-existing networking provisioned by another team or department, refer to the [custom vpc documentation](https://eksctl.io/usage/vpc-networking/#use-existing-vpc-other-custom-configuration).
+
+**Note on AMI Usage**
+In this reference example the Ubuntu2004 amiFamily is used instead of listing a specific AMI ID. This is for portability of the reference document. If you wish to ensure you nodegroups continue to use the identical image instead of the latest at time of launch, replace `amiFamily: Ubuntu2004` with `ami: ami-customid` where `ami-customid` is from Ubuntu's EKS AMI list or the output from this command:
+
+```sh
+aws ec2 describe-images --owners 099720109477 \
+    --filters 'Name=name,Values=ubuntu-eks/k8s_1.22/images/*' \
+    --query 'sort_by(Images,&CreationDate)[-1].ImageId'  \
+    --executable-users all \
+    --output text --region us-west-2
+```
+Refer to eksctl's documentation on [AMI Family](https://eksctl.io/usage/custom-ami-support/) for more information on it's behavior.
+
+**gitpod-cluster.yaml**
 ```yaml
-- name: services
-  amiFamily: Ubuntu2004
-    instanceTypes: ["m6i.xlarge"]
-  desiredCapacity: 2
-  minSize: 1
-  maxSize: 6
-  maxPodsPerNode: 110
-  disableIMDSv1: false
-  volumeSize: 300
-  volumeType: gp3
-  volumeIOPS: 6000
-  volumeThroughput: 500
-  ebsOptimized: true
-  privateNetworking: true
-  propagateASGTags: true
-    tags:
-    k8s.io/cluster-autoscaler/enabled: "true"
-    k8s.io/cluster-autoscaler/gitpod: "owned"
-  labels:
-    gitpod.io/workload_meta: "true"
-    gitpod.io/workload_ide: "true"
-    iam:
-    attachPolicyARNs: # EKS CNI Policy is needed for IP management
-      - arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly
-      - arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy
-      - arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy
-      - arn:aws:iam::aws:policy/ElasticLoadBalancingFullAccess
-      - arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore
-    withAddonPolicies:
-    albIngress: true
-    autoScaler: true
-    cloudWatch: true
-    certManager: true
-    ebs: true
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+metadata:
+  name: gitpod
+  region: eu-west-1
+  version: "1.22"
+  # update tags to ensure all generated resources have atleast these tags applied
+  tags:
+    department: cs
+    project: gitpod
 
-  - name: workspaces # identical as above, with the following differences
+iam:
+  withOIDC: true
+
+  serviceAccounts:
+    - metadata:
+        name: aws-load-balancer-controller
+        namespace: kube-system
+      wellKnownPolicies:
+        awsLoadBalancerController: true
+    - metadata:
+        name: ebs-csi-controller-sa
+        namespace: kube-system
+      wellKnownPolicies:
+        ebsCSIController: true
+    - metadata:
+        name: cluster-autoscaler
+        namespace: kube-system
+      wellKnownPolicies:
+        autoScaler: true
+    - metadata:
+        name: cert-manager
+        namespace: cert-manager
+      wellKnownPolicies:
+        certManager: true
+
+# Uncomment and update for your region if you wish to use fewer availability zones
+# availabilityZones:
+#   - eu-west-1a
+#   - eu-west-1b
+#   - eu-west-1c
+
+# By default we create a dedicated VPC for the cluster
+# You can use an existing VPC by supplying private and/or public subnets. Please check
+# https://eksctl.io/usage/vpc-networking/#use-existing-vpc-other-custom-configuration
+vpc:
+  autoAllocateIPv6: false
+  nat:
+    # For production environments use HighlyAvailable, for an initial deployment Single adequate
+    # HighlyAvailable will consume 3 Elastic IPs so ensure your region has capacity before using
+    # https://eksctl.io/usage/vpc-networking/#nat-gateway
+    gateway: Single
+
+  # Cluster endpoints and public access
+  # Private access ensures that nodes can communicate internally in case of NAT failure
+  # For customizing for your environment review https://eksctl.io/usage/vpc-cluster-access/
+  clusterEndpoints:
+    privateAccess:  true
+    publicAccess: true 
+  publicAccessCIDRs: ["0.0.0.0/0"]
+  
+ 
+# Logging settings
+cloudWatch:
+  clusterLogging:
+    enableTypes: ["*"]
+
+
+# Nodegroups / Compute settings
+managedNodeGroups:
+  - name: services
+    amiFamily: Ubuntu2004
+    spot: false
+    instanceTypes: ["m6i.xlarge"]
+    desiredCapacity: 2
+    minSize: 1
+    maxSize: 4
+    maxPodsPerNode: 110
+    disableIMDSv1: false
+    volumeSize: 300
+    volumeType: gp3
+    volumeIOPS: 6000
+    volumeThroughput: 500
+    ebsOptimized: true
+    privateNetworking: true
+    propagateASGTags: true
+
+    iam:
+      attachPolicyARNs:
+        - arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly
+        - arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy
+        - arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy
+        - arn:aws:iam::aws:policy/ElasticLoadBalancingFullAccess
+        - arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore
+
+    tags:
+      k8s.io/cluster-autoscaler/enabled: "true"
+      k8s.io/cluster-autoscaler/gitpod: "owned"
+
+    labels:
+      gitpod.io/workload_meta: "true"
+      gitpod.io/workload_ide: "true"
+    
+    preBootstrapCommands: 
+      - echo "export USE_MAX_PODS=false" >> /etc/profile.d/bootstrap.sh
+      - echo "export CONTAINER_RUNTIME=containerd" >> /etc/profile.d/bootstrap.sh
+      - sed -i '/^set -o errexit/a\\nsource /etc/profile.d/bootstrap.sh' /etc/eks/bootstrap.sh
+
+  - name: workspaces
+    amiFamily: Ubuntu2004
+    spot: false
     instanceTypes: ["m6i.2xlarge"]
+    desiredCapacity: 2
     minSize: 1
     maxSize: 10
+    maxPodsPerNode: 110
+    disableIMDSv1: false
+    volumeSize: 300
+    volumeType: gp3
+    volumeIOPS: 6000
+    volumeThroughput: 500
+    ebsOptimized: true
+    privateNetworking: true
+    propagateASGTags: true
+
+    iam:
+      attachPolicyARNs:
+        - arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly
+        - arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy
+        - arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy
+        - arn:aws:iam::aws:policy/ElasticLoadBalancingFullAccess
+        - arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore
+
+    tags:
+      k8s.io/cluster-autoscaler/enabled: "true"
+      k8s.io/cluster-autoscaler/gitpod: "owned"
+
     labels:
-    gitpod.io/workload_workspace_regular: "true"
-    gitpod.io/workload_workspace_services: "true"
-    gitpod.io/workload_workspace_headless: "true"
+      gitpod.io/workload_workspace_regular: "true"
+      gitpod.io/workload_workspace_services: "true"
+      gitpod.io/workload_workspace_headless: "true"
+
+    preBootstrapCommands: 
+      - echo "export USE_MAX_PODS=false" >> /etc/profile.d/bootstrap.sh
+      - echo "export CONTAINER_RUNTIME=containerd" >> /etc/profile.d/bootstrap.sh
+      - sed -i '/^set -o errexit/a\\nsource /etc/profile.d/bootstrap.sh' /etc/eks/bootstrap.sh
 ```
+
+In order to ensure there are enough IPs and networking policy enforcement is in place, Gitpod suggests using Calico for networking. To enable Calico in an EKS installation it must be done after the control plane has been provisioned and before the nodegroups have been.
+
+First: Run eksctl with the `--without-nodegroup` flag to provision just the control plane defined in the `gitpod-cluster.yaml`:
+```
+eksctl create cluster --without-nodegroup --config-file gitpod-cluster.yaml
+```
+After this command finishes, check that eksctl also created the kubeconfig properly by running the command `kubectl get pods -n kube-system`. If deployed correctly one should see the a list of pods in a pending state. If this works without error, continue to the next step to [install Calico](https://projectcalico.docs.tigera.io/getting-started/kubernetes/managed-public-cloud/eks).
+
+To install Calico, first remove the default AWS provided networking component:
+```
+kubectl delete daemonset -n kube-system aws-node
+```
+
+Install the Tigera Operator, which will manage the Calico installation:
+```
+kubectl create -f https://projectcalico.docs.tigera.io/manifests/tigera-operator.yaml
+```
+
+Now configure Calico for EKS specific support with the following manifest / command:
+```
+kubectl create -f - <<EOF
+kind: Installation
+apiVersion: operator.tigera.io/v1
+metadata:
+  name: default
+spec:
+  kubernetesProvider: EKS
+  cni:
+    type: Calico
+  calicoNetwork:
+    bgp: Disabled
+EOF
+```
+
+Once the kubectl command completes, you are ready to proceed with the next step of deploying the EKS nodegroups:
+```
+eksctl create nodegroup --config-file gitpod-cluster.yaml
+```
+
+You can verify that your installation was deployed properly with the custom kubectl command provided below which will let you review maxpods, kernel and containerd versions to ensure they are meeting [our minimum requirements](https://www.gitpod.io/docs/self-hosted/latest/cluster-set-up) as intended.
+
+```
+kubectl get nodes -o=custom-columns="NAME:.metadata.name,\
+RUNTIME:.status.nodeInfo.containerRuntimeVersion,\
+MAXPODS:.status.capacity.pods,\
+KERNEL:.status.nodeInfo.kernelVersion,\
+AMIFAMILY:.status.nodeInfo.osImage,\
+K8S:.status.nodeInfo.kubeletVersion,\
+AMI:.spec.providerID"
+```
+
+
 
 </div>
 </CloudPlatformToggle>

@@ -63,9 +63,29 @@ Now, you are prepared to create your Kubernetes cluster.
 
 <div slot="aws">
 
-In order to deploy Gitpod on the [Amazon Elastic Kubernetes Service (EKS)](https://aws.amazon.com/eks/) of the [Amazon Web Service (AWS)](https://aws.amazon.com/), you need an AWS account. In this guide, we use [AWS CLI](https://aws.amazon.com/cli/) as well as [EKS CLI `eksctl`](https://eksctl.io/). Please refer to the docs on how to install these tools.
+In order to deploy Gitpod on [Amazon Elastic Kubernetes Service (Amazon EKS)](https://docs.aws.amazon.com/eks/latest/userguide/what-is-eks.html), you must have an Amazon account that has permissions to deploy EKS and the underlying component services, which can include:
+- VPCs
+- Subnets
+- Internet Gateways
+- EC2 Instances
+- Autoscaling Groups
+- Elastic Load Balancers
 
-Make sure you are logged in and are connected to the proper AWS account. Ensure AWS is configured and working with the command `aws sts get-caller-identity`.
+Specifically for Gitpods use, you will also need permissions to create these additional components:
+- Route53 DNS Zone for the intended Gitpod servers domain name (for use with Letsencrypt certificate generation)
+- RDS Instance running MySQL 5.7 for Gitpod's database
+- S3 Bucket: Hosting Gitpod's workspace images and object storage
+- AWS IAM Service account: To enable access to the S3 bucket
+
+This guide uses the following tools:
+- [AWS CLI](https://aws.amazon.com/cli/) for creating none EKS specific services
+- [EKS CLI `eksctl`](https://eksctl.io/) for creating the EKS cluster and nodegroups themselves
+- [Kubectl](https://kubernetes.io/docs/tasks/tools/) for performing kubernetes administration commands
+- [Helm](https://helm.sh/docs/intro/install/) for installing and configuring [cert-manager](https://cert-manager.io/docs/installation/helm/)
+
+Amazon has a brief run through on how to [deploy a basic cluster](https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html) using the eksctl tooling if you'd like to familiarize yourself before deploying the Gitpod reference architecture.
+
+Make sure you are logged in and are connected to the proper AWS account. Ensure AWS is configured and working with the command `aws sts get-caller-identity`. For later steps you will need to ensure that Kubectl is properly configured to authenticate to the newly provisioned EKS environment, you can review how those are credentials are [set here](https://docs.aws.amazon.com/eks/latest/userguide/create-kubeconfig.html).
 
 </div>
 
