@@ -21,3 +21,4 @@ This website uses the following technologies:
 - [Tailwind CSS](https://tailwindcss.com)
   - Note: Custom CSS was used initially. This is considered legacy and any PR going forward requires Tailwind CSS.
 - [Netlify](https://www.netlify.com)
+- ...
