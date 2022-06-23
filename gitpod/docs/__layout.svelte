@@ -6,7 +6,11 @@
     const sidebars = Object.entries(
       import.meta.globEager("/src/lib/contents/docs/sidebars/*.ts")
     ).reduce((acc, [path, data]) => {
-      const filename = path.split("/").pop().replace(/\.ts$/, "");
+      const filename = path
+        .split("/")
+        .pop()
+        .replace(/\.ts$/, "")
+        .replace(/\./g, "-");
 
       const sidebar = MENU.map((item) => {
         if (item.title === "Self-Hosted") {
@@ -30,38 +34,32 @@
 </script>
 
 <script lang="ts">
+  import { page } from "$app/stores";
+  import "$lib/assets/markdown-commons.scss";
+  import EditInGitpod from "$lib/components/docs/edit-in-gitpod.svelte";
   import Menu from "$lib/components/docs/menu.svelte";
   import MobileMenu from "$lib/components/docs/mobile-menu/index.svelte";
   import Search from "$lib/components/docs/search.svelte";
-  import "$lib/assets/markdown-commons.scss";
-  import { MENU } from "$lib/contents/docs/menu";
-  import { docsMeta as docsMetaStore } from "$lib/stores/docs-meta";
   import OnThisPageNav from "$lib/components/navigation/on-this-page-nav.svelte";
-  import type { DocsMeta } from "$lib/types/docs-meta";
-  import EditInGitpod from "$lib/components/docs/edit-in-gitpod.svelte";
-  import displayBanner from "$lib/stores/display-banner";
-  import { onMount, tick } from "svelte";
-  import type { MenuEntry } from "$lib/types/menu-entry.type";
-  import sidebarStore from "$lib/stores/docs-sidebar";
-  import { page } from "$app/stores";
+  import { MENU } from "$lib/contents/docs/menu";
   import { releases } from "$lib/contents/docs/releases";
-  import { goto } from "$app/navigation";
+  import displayBanner from "$lib/stores/display-banner";
+  import { docsMeta as docsMetaStore } from "$lib/stores/docs-meta";
+  import sidebarStore from "$lib/stores/docs-sidebar";
+  import type { DocsMeta } from "$lib/types/docs-meta";
+  import type { MenuEntry } from "$lib/types/menu-entry.type";
+  import { onMount } from "svelte";
+  import VersionSwitch from "$lib/components/docs/version-switch.svelte";
 
   let extendSticky: boolean = false;
   export let sidebars: { [key: string]: MenuEntry[] };
-  let version: string = releases[0];
+
+  let version: string = releases[0].name.replace(/\./g, "-");
 
   $: activeSidebar = sidebars[version];
+
   $: {
     $sidebarStore = activeSidebar;
-  }
-
-  async function versionChangeHandler() {
-    await tick();
-    const test = $page.url.pathname.split("/");
-    console.log(test);
-    test[3] = version;
-    goto(test.join("/"));
   }
 
   onMount(() => {
@@ -84,18 +82,18 @@
     class="hidden z-20 sticky top-24 self-start lg:block lg:w-1/5"
   >
     {#if $page.url.pathname.includes("/docs/self-hosted")}
-      <select on:change={versionChangeHandler} bind:value={version}>
-        {#each releases as release}
-          <option value={release}>{release}</option>
-        {/each}
-      </select>
+      <VersionSwitch {version} />
     {/if}
     <Search docSearchInputSelector="algolia-mobile" />
+
     <Menu MENU={activeSidebar} />
   </div>
   <div class="lg:w-3/5 lg:pl-4">
     <div class="block lg:hidden">
       <Search />
+      {#if $page.url.pathname.includes("/docs/self-hosted")}
+        <VersionSwitch {version} />
+      {/if}
     </div>
     <MobileMenu MENU={activeSidebar} />
     <div class="lg:border-l lg:border-r lg:border-divider">
