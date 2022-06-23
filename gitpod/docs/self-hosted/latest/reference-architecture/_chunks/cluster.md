@@ -6,24 +6,27 @@ layout: false
   import CloudPlatformToggle from "$lib/components/docs/cloud-platform-toggle.svelte";
 </script>
 
-The heart of this reference architecture is a **Kubernetes cluster** where all Gitpod components are deployed to. This cluster consists of two node pools:
+The heart of this reference architecture is a **Kubernetes cluster** where all Gitpod components are deployed to. This cluster consists of a few node pools:
 
 1. **Services Node Pool**: On these nodes, the Gitpod “app” with all its services are deployed to. These services provide the users with the dashboard and manages the provisioning of workspaces.
-2. **Workspaces Node Pool**: On the workspace nodes, Gitpod deploys the actual workspaces (where the actual developer work is happening). Because workspaces have vastly differing resource and security isolation requirements compared to Gitpod’s own services, they run on a dedicated node pool.
+2. **Regular Workspace Node Pool**: On the workspace nodes, Gitpod deploys regular workspaces (where the actual developer work is happening). Because regular workspaces have vastly differing resource and security isolation requirements compared to Gitpod’s own services, they run on a dedicated node pool.
+3. **Headless Workspace Node Pool**: On the headless nodes, Gitpod deploys the imagebuild and prebuild workspaces (where heavy build work generally demands more CPU and disk). Because headless workspaces have vastly differing resource and security isolation requirements compared to Gitpod’s own services and regular workspaces, they run on a dedicated node pool.
 
 To enforce that the Gitpod components are scheduled to the proper node pools, you need to assign the following labels to the node pools:
 
-| Node Pool            | Labels                                                                                                                                          |
-| -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
-| Services Node Pool   | `gitpod.io/workload_meta=true`,<br/>`gitpod.io/workload_ide=true`                                                                               |
-| Workspaces Node Pool | `gitpod.io/workload_workspace_services=true`,<br/>`gitpod.io/workload_workspace_regular=true`,<br/>`gitpod.io/workload_workspace_headless=true` |
+| Node Pool                    | Labels                                                                                         |
+| ---------------------------- | ---------------------------------------------------------------------------------------------- |
+| Services Node Pool           | `gitpod.io/workload_meta=true`,<br/>`gitpod.io/workload_ide=true`                              |
+| Regular Workspace Node Pool  | `gitpod.io/workload_workspace_services=true`,<br/>`gitpod.io/workload_workspace_regular=true`  |
+| Headless Workspace Node Pool | `gitpod.io/workload_workspace_services=true`,<br/>`gitpod.io/workload_workspace_headless=true` |
 
 The following table gives an overview of the node types for the different cloud providers that are used by this reference architecture.
 
-|                      | GCP               | AWS           |
-| -------------------- | ----------------- | ------------- |
-| Services Node Pool   | `n2d-standard-8`  | `m6i.xlarge`  |
-| Workspaces Node Pool | `n2d-standard-16` | `m6i.2xlarge` |
+|                              | GCP               | AWS           |
+| ---------------------------- | ----------------- | ------------- |
+| Services Node Pool           | `n2d-standard-8`  | `m6i.xlarge`  |
+| Regular Workspace Node Pool  | `n2d-standard-16` | `m6i.2xlarge` |
+| Headless Workspace Node Pool | `n2d-standard-16` | `m6i.2xlarge` |
 
 <CloudPlatformToggle id="cloud-platform-toggle-cluster">
 
