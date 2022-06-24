@@ -62,14 +62,14 @@
               class="rounded-t-2xl cursor-pointer px-4 py-2 hidden md:block {activeValue ===
               item.value
                 ? 'bg-white dark:bg-card'
-                : 'bg-sand-dark'} transition-all duration-200"
+                : 'bg-sand-dark dark:bg-light-black'} transition-all duration-200"
               on:click={clickHandler(item.value)}>{item.title}</span
             >
             <span
               class="rounded-t-2xl cursor-pointer px-4 py-2 md:hidden block {activeValue ===
               item.value
                 ? 'bg-white dark:bg-card'
-                : 'bg-sand-dark'} transition-all duration-200"
+                : 'bg-sand-dark dark:bg-light-black'} transition-all duration-200"
               on:click={clickHandler(item.value)}>{item.mobileTitle}</span
             >
           </li>
