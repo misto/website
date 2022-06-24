@@ -62,7 +62,126 @@ gcloud iam service-accounts keys create --iam-account "${MYSQL_SA_EMAIL}" \\
 </div>
 <div slot="aws">
 
-A RDS MySQL db.m6g.large instance with a standby instance for failover is suggested starting point for installations.
+A RDS MySQL db.m5g.large instance running MySQL 5.7. Before deploying an RDS instance, additional configuration has to be done to the VPC created by the eksctl command. 
+
+### Create a RDS security group
+
+First find the subnet IDs for the public subnets in your environment. For deploying RDS in private subnets replace true with false in the below command:
+```sh
+aws ec2 describe-subnets  --filters "Name=tag:project,Values=gitpod" --query 'Subnets[?MapPublicIpOnLaunch==`true`] | [*].[SubnetId, AvailabilityZone, CidrBlock, MapPublicIpOnLaunch]'
+
+[
+    [
+        "subnet-0686443f3f2782453",
+        "eu-west-1a",
+        "192.168.64.0/19",
+        true
+    ],
+    [
+        "subnet-010ea25d0e398f6df",
+        "eu-west-1c",
+        "192.168.0.0/19",
+        true
+    ],
+    [
+        "subnet-0f0370a5697d85df2",
+        "eu-west-1b",
+        "192.168.32.0/19",
+        true
+    ]
+]
+```
+
+Using the three subnet IDs, create an RDS subnet group, with the name gitpod-rds:
+```sh
+aws rds create-db-subnet-group \
+    --db-subnet-group-name gitpod-rds \
+    --db-subnet-group-description "Subnet for the Gitpod RDS deployment in VPC" \
+    --subnet-ids '[ "subnet-0f0370a5697d85df2", "subnet-010ea25d0e398f6df", "subnet-0686443f3f2782453" ]' \
+    --tags Key=project,Value=gitpod
+```
+
+Now you will need to create a security group for the RDS instance, running a similar command as before:
+```
+aws ec2 create-security-group --description 'Gitpod RDS' --group-name 'gitpod-rds' \
+--vpc-id vpc-09a109f23dad0a298 \
+--tag-specifications 'ResourceType=security-group,Tags=[{Key=Name,Value=gitpod-rds-sg},{Key=project,Value=gitpod},{Key=team,Value=cs}]'
+
+{
+    "GroupId": "sg-0e538ccac25bb1387",
+    "Tags": [
+        {
+            "Key": "project",
+            "Value": "gitpod"
+        },
+        {
+            "Key": "team",
+            "Value": "cs"
+        }
+    ]
+}
+```
+
+Now update the ingress policy for the RDS group to allow incoming connections from the Services nodegroup on port 3306, the MySQL port:
+
+```
+aws ec2 authorize-security-group-ingress \
+    --group-id sg-0e538ccac25bb1387 \
+    --protocol tcp --port 3306 \
+    --source-group sg-04b9a5f403307efe5 \
+    --tag-specifications 'ResourceType=security-group-rule,Tags=[{Key=Name,Value=rds-access},{Key=project,Value=gitpod},{Key=team,Value=cs}]'
+```
+
+Now create a password to use for MySQL. This will be required for the creation of the RDS instance and later for use by the Gitpod installer:
+```
+export MYSQL_GITPOD_PW=$(openssl rand -hex 18)
+echo $MYSQL_GITPOD_PW
+```
+
+Now create the [Multi-AZ RDS instance](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.MultiAZSingleStandby.html) using the mysql password, the security group, and rds subnet you created in the previous steps:
+```
+aws rds create-db-instance \
+    --db-name gitpod \
+    --db-instance-identifier gitpod-instance \
+    --db-instance-class db.m5.large \
+    --db-subnet-group-name gitpod-rds \
+    --vpc-security-group-ids sg-0e538ccac25bb1387 \
+    --multi-az \
+    --engine mysql \
+    --allocated-storage 20 \
+    --max-allocated-storage 120 \
+    --master-username gitpod \
+    --master-user-password $MYSQL_GITPOD_PW \
+    --engine-version 5.7 \
+    --tags Key=project,Value=gitpod Key=Name,Value=Gitpod-MySQLDB
+
+{
+    "DBInstance": {
+        "DBInstanceIdentifier": "gitpod-instance",
+        "DBInstanceClass": "db.m5.large",
+        "Engine": "mysql",
+        "DBInstanceStatus": "creating",
+        "MasterUsername": "gitpod",
+        "DBName": "gitpod",
+        "AllocatedStorage": 20,
+        "PreferredBackupWindow": "22:11-22:41",
+        "BackupRetentionPeriod": 1,
+        "DBSecurityGroups": [],
+        "VpcSecurityGroups": [
+...
+```
+
+To check for the instance creation to complete, and to retrieve the URL to use, run this command:
+```
+aws rds describe-db-instances \                                                   
+    --db-instance-identifier gitpod-instance \
+    --query 'DBInstances[0].[DBInstanceStatus,Endpoint.Address]'
+[
+    "modifying",
+    "gitpod-instance.coynfywwqpjg.eu-west-1.rds.amazonaws.com"
+]
+```
+
 
 </div>
 </CloudPlatformToggle>

@@ -212,7 +212,7 @@ Provided below is a complete eksctl configuration file that will deploy all the 
 `eksctl` will be configuring the VPC and networking along with creating the EKS cluster itself, if you need to use pre-existing networking provisioned by another team or department, refer to the [custom vpc documentation](https://eksctl.io/usage/vpc-networking/#use-existing-vpc-other-custom-configuration).
 
 **Note on AMI Usage**
-In this reference example the Ubuntu2004 amiFamily is used instead of listing a specific AMI ID. This is for portability of the reference document. If you wish to ensure you nodegroups continue to use the identical image instead of the latest at time of launch, replace `amiFamily: Ubuntu2004` with `ami: ami-customid` where `ami-customid` is from Ubuntu's EKS AMI list or the output from this command:
+In this reference example the Ubuntu2004 amiFamily is used instead of listing a specific AMI ID. This is for portability of the reference document and allows for use of the builtin bootstrap command instead of having to create a custom one. If you want to do more customization of your bootstrap command or use a static AMI, first, replace `amiFamily: Ubuntu2004` with `ami: ami-customid` where `ami-customid` is from Ubuntu's EKS AMI list or the output from the below command. You will then replace `preBootstrapCommands` with your bootstrap script under a new section labeled `overrideBootstrapCommand`.
 
 ```sh
 aws ec2 describe-images --owners 099720109477 \
@@ -378,38 +378,121 @@ In order to ensure there are enough IPs and networking policy enforcement is in 
 First: Run eksctl with the `--without-nodegroup` flag to provision just the control plane defined in the `gitpod-cluster.yaml`:
 ```
 eksctl create cluster --without-nodegroup --config-file gitpod-cluster.yaml
+2022-06-24 09:54:59 [ℹ]  eksctl version 0.102.0-dev+3229f126.2022-06-17T12:44:20Z
+2022-06-24 09:54:59 [ℹ]  using region eu-west-1
+2022-06-24 09:54:59 [ℹ]  setting availability zones to [eu-west-1c eu-west-1a eu-west-1b]
+2022-06-24 09:54:59 [ℹ]  subnets for eu-west-1c - public:192.168.0.0/19 private:192.168.96.0/19
+2022-06-24 09:54:59 [ℹ]  subnets for eu-west-1a - public:192.168.32.0/19 private:192.168.128.0/19
+2022-06-24 09:54:59 [ℹ]  subnets for eu-west-1b - public:192.168.64.0/19 private:192.168.160.0/19
+2022-06-24 09:54:59 [ℹ]  using Kubernetes version 1.22
+...
+2022-06-24 10:11:30 [✔]  EKS cluster "gitpod" in "eu-west-1" region is ready
 ```
-After this command finishes, check that eksctl also created the kubeconfig properly by running the command `kubectl get pods -n kube-system`. If deployed correctly one should see the a list of pods in a pending state. If this works without error, continue to the next step to [install Calico](https://projectcalico.docs.tigera.io/getting-started/kubernetes/managed-public-cloud/eks).
+After this command finishes, check that eksctl also created the kubeconfig properly by running the command `kubectl get pods -n kube-system`. If deployed correctly one should see the a list of pods in a pending state. 
+
+```
+kubectl get pods -n kube-system
+NAME                       READY   STATUS    RESTARTS   AGE
+coredns-5947f47f5f-69lvv   0/1     Pending   0          26m
+coredns-5947f47f5f-srm5t   0/1     Pending   0          26m
+```
+### Calico Installation
+This is following the instructions provided by [Tigera](https://projectcalico.docs.tigera.io/getting-started/kubernetes/managed-public-cloud/eks).
 
 To install Calico, first remove the default AWS provided networking component:
 ```
 kubectl delete daemonset -n kube-system aws-node
 ```
 
-Install the Tigera Operator, which will manage the Calico installation:
+Install the Calico manifest:
 ```
-kubectl create -f https://projectcalico.docs.tigera.io/manifests/tigera-operator.yaml
-```
-
-Now configure Calico for EKS specific support with the following manifest / command:
-```
-kubectl create -f - <<EOF
-kind: Installation
-apiVersion: operator.tigera.io/v1
-metadata:
-  name: default
-spec:
-  kubernetesProvider: EKS
-  cni:
-    type: Calico
-  calicoNetwork:
-    bgp: Disabled
-EOF
+kubectl apply -f https://projectcalico.docs.tigera.io/manifests/calico-vxlan.yaml
 ```
 
-Once the kubectl command completes, you are ready to proceed with the next step of deploying the EKS nodegroups:
+Now configure Calico for EKS specific support with the following command:
 ```
-eksctl create nodegroup --config-file gitpod-cluster.yaml
+kubectl -n kube-system set env daemonset/calico-node FELIX_AWSSRCDSTCHECK=Disable
+```
+
+### Additional Network configuration
+For using RDS in the VPC you will need security groups created and associated with the Services nodegroup before it is launched. RDS does not have to be deployed yet but an additional security group for the Services nodegroup does need to be created and adding to `gitpod-cluster.yaml` before continuing.
+
+First get the ID of the cluster eksctl just created. If you kept the tag `project=gitpod` in the gitpod-cluster.yaml file, retrieve the id and cidr block with:
+```
+aws ec2 describe-vpcs --filters "Name=tag:project,Values=gitpod" --query 'Vpcs[*].[VpcId, CidrBlock]'              
+[
+    [
+        "vpc-09a109f23dad0a298",
+        "192.168.0.0/16"
+    ]
+]
+```
+Create the new security group (we do not rules added to it yet) using the vpc-id from above, note how tags are auto populated to the security group as well:
+```
+aws ec2 create-security-group --description 'Gitpod Services Nodegroup' --group-name 'gitpod-services' \
+--vpc-id vpc-09a109f23dad0a298 --tag-specifications 'ResourceType=security-group,Tags=[{Key=Name,Value=gitpod-services-sg},{Key=project,Value=gitpod},{Key=team,Value=cs}]'
+
+{
+    "GroupId": "sg-04b9a5f403307efe5",
+    "Tags": [
+        {
+            "Key": "project",
+            "Value": "gitpod"
+        },
+        {
+            "Key": "team",
+            "Value": "cs"
+        }
+    ]
+}
+```
+
+Update your gitpod-cluster.yaml to add the GroupId from the previous command to the `securityGroups.attachIDs` list in the `services` managedNodeGroups:
+```yaml
+    securityGroups:
+      attachIDs: ['sg-04b9a5f403307efe5']
+```
+
+If you destroy this cluster and recreate it, you will need to redo the above step as the old security group would have been deleted along with the VPC.
+
+### SSH Access to nodegroups
+
+eksctl allows for [ssh keys](https://eksctl.io/usage/schema/#managedNodeGroups-ssh) to be added to your nodegroups for troubleshooting. By default the `gitpod-cluster.yaml` does not configure this. AWS Systems Manager is enabled by default, allowing for connectivity [through multiple methods](https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-working-with-sessions-start.html) to each instance in your nodegroup.
+
+### Create nodegroups
+
+
+To ensure that if there are problems deploying the services nodegroup (you provided an incorrect security group ID for example) it can be deleted easily and not require having to delete a partially deployed workspaces nodegroup, create it before the workspaces nodegroup.
+
+Create the services nodegroups with `eksctl create nodegroup --include=services --config-file gitpod-cluster.yaml`: 
+
+```
+eksctl create nodegroup --include=services --config-file gitpod-cluster.yaml
+2022-06-24 13:42:01 [ℹ]  nodegroup "services" will use "ami-0793b4124359a6ad7" [Ubuntu2004/1.22]
+2022-06-24 13:42:01 [ℹ]  nodegroup "workspaces" will use "ami-0793b4124359a6ad7" [Ubuntu2004/1.22]
+2022-06-24 13:42:03 [ℹ]  combined include rules: services
+2022-06-24 13:42:03 [ℹ]  1 nodegroup (services) was included (based on the include/exclude rules)
+2022-06-24 13:42:03 [ℹ]  will create a CloudFormation stack for each of 1 managed nodegroups in cluster "gitpod"
+...
+2022-06-24 13:46:22 [✔]  created 1 managed nodegroup(s) in cluster "gitpod"
+2022-06-24 13:46:24 [ℹ]  checking security group configuration for all nodegroups
+2022-06-24 13:46:24 [ℹ]  all nodegroups have up-to-date cloudformation templates
+```
+
+Create the workspaces nodegroup second if the services are deployed correctly.
+
+```
+eksctl create nodegroup --include=workspaces --config-file gitpod-cluster.yaml
+2022-06-24 13:55:08 [ℹ]  nodegroup "services" will use "ami-0793b4124359a6ad7" [Ubuntu2004/1.22]
+2022-06-24 13:55:08 [ℹ]  nodegroup "workspaces" will use "ami-0793b4124359a6ad7" [Ubuntu2004/1.22]
+2022-06-24 13:55:13 [ℹ]  1 existing nodegroup(s) (services) will be excluded
+2022-06-24 13:55:13 [ℹ]  combined include rules: workspaces
+2022-06-24 13:55:13 [ℹ]  1 nodegroup (workspaces) was included (based on the include/exclude rules)
+2022-06-24 13:55:13 [ℹ]  will create a CloudFormation stack for each of 1 managed nodegroups in cluster "gitpod"
+...
+2022-06-24 13:59:10 [✔]  created 1 managed nodegroup(s) in cluster "gitpod"
+2022-06-24 13:59:13 [ℹ]  checking security group configuration for all nodegroups
+2022-06-24 13:59:13 [ℹ]  all nodegroups have up-to-date cloudformation templates
 ```
 
 You can verify that your installation was deployed properly with the custom kubectl command provided below which will let you review maxpods, kernel and containerd versions to ensure they are meeting [our minimum requirements](https://www.gitpod.io/docs/self-hosted/latest/cluster-set-up) as intended.
@@ -421,9 +504,24 @@ MAXPODS:.status.capacity.pods,\
 KERNEL:.status.nodeInfo.kernelVersion,\
 AMIFAMILY:.status.nodeInfo.osImage,\
 K8S:.status.nodeInfo.kubeletVersion,\
-AMI:.spec.providerID"
+Instance-ID:.spec.providerID"
 ```
 
+Because of how EKS launches instances, coredns may end up running on a single node, against best practices, before continuing to the next steps, restart coredns to ensure it is running on two nodes.
+
+```
+kubectl rollout restart deployment.apps/coredns -n kube-system
+```
+
+### Deleting the cluster
+
+In the future to delete this cluster any additional resources added to the VPC will need to be deleted before deleting the cluster, otherwise cloudformations will fail to delete the VPC and complete deleting the cluster. The alternative is to create a VPC managed separately and install EKS using the additions for working [with existing VPCs](https://eksctl.io/usage/vpc-networking/#use-existing-vpc-other-custom-configuration) in eksctl.
+
+The order resources to delete if created:
+- RDS First
+- RDS security group
+- Services security group
+- eksctl delete cluster
 
 
 </div>

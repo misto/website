@@ -87,6 +87,9 @@ Amazon has a brief run through on how to [deploy a basic cluster](https://docs.a
 
 Make sure you are logged in and are connected to the proper AWS account. Ensure AWS is configured and working with the command `aws sts get-caller-identity`. For later steps you will need to ensure that Kubectl is properly configured to authenticate to the newly provisioned EKS environment, you can review how those are credentials are [set here](https://docs.aws.amazon.com/eks/latest/userguide/create-kubeconfig.html).
 
+**AWS Region Setting**
+All commands that follow assume you have set an environment variable of `AWS_REGION` to your appropriate region or have it configured in your profile already and so will not include `--region` or `--profile` when running the aws command. Refer to the [AWS CLI documentation](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-envvars.html) for more information.
+
 </div>
 
 </CloudPlatformToggle>
