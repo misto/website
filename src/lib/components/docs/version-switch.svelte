@@ -38,7 +38,7 @@
   >
     <option disabled>Self-Hosted Version</option>
     {#each releases as release}
-      <option value={release.name.replace(/\./g, "-")}>{release.name}</option>
+      <option value={release.name}>{release.name}</option>
     {/each}
   </select>
 </div>

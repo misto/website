@@ -1,6 +1,6 @@
 import type { MenuStatus, MenuEntry } from "$lib/types/menu-entry.type";
 
-const version = "2022-05-1";
+const version = "2022.05.1";
 
 function M(
   title: string,

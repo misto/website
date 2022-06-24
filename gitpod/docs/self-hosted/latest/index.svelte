@@ -8,7 +8,7 @@
     const latestRelease = releases.map((release) => {
       return {
         ...release,
-        name: release.name.replace(/\./g, "-"),
+        name: release.name,
       };
     })[0];
 

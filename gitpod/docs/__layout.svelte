@@ -6,11 +6,7 @@
     const sidebars = Object.entries(
       import.meta.globEager("/src/lib/contents/docs/sidebars/*.ts")
     ).reduce((acc, [path, data]) => {
-      const filename = path
-        .split("/")
-        .pop()
-        .replace(/\.ts$/, "")
-        .replace(/\./g, "-");
+      const filename = path.split("/").pop().replace(/\.ts$/, "");
 
       const sidebar = MENU.map((item) => {
         if (item.title === "Self-Hosted") {
@@ -54,7 +50,7 @@
   let extendSticky: boolean = false;
   export let sidebars: { [key: string]: MenuEntry[] };
 
-  let version: string = releases[0].name.replace(/\./g, "-");
+  let version: string = releases[0].name;
 
   $: activeSidebar = sidebars[version];
 
