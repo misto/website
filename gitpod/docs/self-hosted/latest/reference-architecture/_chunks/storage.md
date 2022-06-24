@@ -54,7 +54,9 @@ aws s3api create-bucket \
     --bucket $S3_BUCKET_NAME \
     --region eu-west-1 --create-bucket-configuration LocationConstraint=eu-west-1 \
     --object-ownership BucketOwnerEnforced
-aws s3 put-public-access-block --bucket $S3_BUCKET_NAME  --public-access-block-configuration BlockPublicAcls=true
+aws s3api put-public-access-block \
+    --bucket $S3_BUCKET_NAME \
+    --public-access-block-configuration "BlockPublicAcls=true,IgnorePublicAcls=true,BlockPublicPolicy=true,RestrictPublicBuckets=true"
 ```
 
 ### Create an IAM user for credentials with access just to this bucket
