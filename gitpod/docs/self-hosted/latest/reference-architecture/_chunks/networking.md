@@ -234,6 +234,7 @@ helm upgrade \
     --set webhook.hostNetwork=true \
     --set serviceAccount.create=false \
     --set webhook.securePort=10260 \
+    --set serviceAccount.name=cert-manager \
     --wait \
     cert-manager \
     jetstack/cert-manager
@@ -245,7 +246,6 @@ kubectl patch deployment cert-manager -n cert-manager -p \
   '{"spec":{"template":{"spec":{"securityContext":{"fsGroup":1001,"runAsNonRoot": true}}}}}'
 
 ```
-
 
 If using eksctl and the cert-manager service account along with well-known policies AND have your intended zone hosted in Route53, then follow the [cert-manager](https://cert-manager.io/docs/configuration/acme/dns01/route53/) configuration steps. An example ClusterIssuer using the hosted zone and cert-manager service account created by eksctl is below:
 
