@@ -520,8 +520,41 @@ In the future to delete this cluster any additional resources added to the VPC w
 The order resources to delete if created:
 - RDS First
 - RDS security group
+- Services Nodegroup
 - Services security group
 - eksctl delete cluster
+
+A full removal of these installed components would look something like this:
+```
+#### delete RDS resources
+aws rds delete-db-instance --db-instance-identifier gitpod-instance --skip-final-snapshot --delete-automated-backups
+aws ec2 delete-security-group --group-id sg-0e538ccac25bb1387
+aws rds delete-db-subnet-group --db-subnet-group-name gitpod-rds
+
+#### delete the services node group
+eksctl delete nodegroup --name services --cluster gitpod --disable-eviction --parallel 4 --max-grace-period 0s --wait
+
+#### delete the security group added for rds
+aws ec2 delete-security-group --group-id sg-04b9a5f403307efe5
+eksctl delete cluster --name gitpod --force --disable-nodegroup-eviction --wait
+
+#### below are optional to be removed if you want to reuse for another installation
+#### delete s3 resources
+aws s3 rm s3://suitably-tired-puma-registry --recursive
+aws s3 rb s3://suitably-tired-puma-registry --force
+
+#### delete iam resources
+aws iam detach-user-policy --user-name gitpod-s3-access --policy-arn 'arn:aws:iam::12344:policy/gitpod_s3_access_policy'
+
+# delete access keys:
+aws iam list-access-keys --user-name gitpod-s3-access 
+aws iam delete-access-key --user-name gitpod-s3-access --access-key-id AKI---------
+aws iam delete-user --user-name gitpod-s3-access
+
+# ensure that nothing else is attached to this policy
+aws iam list-entities-for-policy --policy-arn 'arn:aws:iam::12344:policy/gitpod_s3_access_policy'
+aws iam delete-policy --policy-arn 'arn:aws:iam::12344:policy/gitpod_s3_access_policy'
+```
 
 
 </div>
