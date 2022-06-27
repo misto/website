@@ -34,6 +34,8 @@ Below is a full reference of all available properties. To see the underlying sch
     - [`jetbrains.[product].plugins`](#jetbrainsproductplugins)
     - [`jetbrains.[product].prebuilds`](#jetbrainsproductprebuilds)
   - [`ports`](#ports)
+    - [`ports[n].name`](#portsnname)
+    - [`ports[n].description`](#portsndescription)
     - [`ports[n].onOpen`](#portsnonopen)
     - [`ports[n].port`](#portsnport)
     - [`ports[n].visibility`](#portsnvisibility)
@@ -352,7 +354,7 @@ jetbrains:
 
 ### `jetbrains.[product].prebuilds`
 
-> JetBrains prebuilds support (via gitpod.yml) is currently in [Beta](/docs/references/gitpod-releases) · [Send feedback](https://github.com/gitpod-io/gitpod/issues/6576).
+> JetBrains prebuilds support (via gitpod.yml) is currently in [Alpha](/docs/references/gitpod-releases) · [Send feedback](https://github.com/gitpod-io/gitpod/issues/6576).
 
 Define whether Gitpod enables prebuilds for a specific JetBrains IDE.
 
@@ -399,11 +401,41 @@ Configure how Gitpod treats various ports your application may listen on. You ca
 
 ```yaml
 ports:
-  - port: 3000
+  - name: Website
+    port: 3000
     onOpen: open-preview
-  - port: 10000
+  - name: VNC
+    description: full GUI Virtual Desktop
+    port: 6080
+    onOpen: open-browser
+  - name: Server
+    port: 10000
     onOpen: ignore
 ```
+
+### `ports[n].name`
+
+Define a name for the port, will be shown as a column in the output of `gp ports list` and as a title of port in the `Remote Explorer` under the VS Code Browser sidebar. [More detail](/docs/config-ports#specifying-port-names--descriptions)
+
+<div class="overflow-x-auto">
+
+| Type     | Default   |
+| -------- | --------- |
+| `string` | `<empty>` |
+
+</div>
+
+### `ports[n].description`
+
+Adds a description to the port, will be shown as a column in the output of `gp ports list` and as a tooltip (on hover) of the port in the `Remote Explorer` in VS Code Browser sidebar.
+
+<div class="overflow-x-auto">
+
+| Type     | Default   |
+| -------- | --------- |
+| `string` | `<empty>` |
+
+</div>
 
 ### `ports[n].onOpen`
 

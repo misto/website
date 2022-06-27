@@ -41,6 +41,8 @@
     value: "",
   };
 
+  let isSubmissionInProgress: boolean = false;
+
   let toType: EmailToType = "sales";
 
   const formData: Form = {
@@ -107,6 +109,7 @@
       scrollToElement(sectionStart, ".error");
       return;
     }
+    isSubmissionInProgress = true;
 
     trackIdentity({
       name_untrusted: formData.name.value,
@@ -177,8 +180,14 @@
   };
 
   $: {
-    if (formData.noOfEngineers.value === "1-10") {
+    if (
+      formData.noOfEngineers.value === "1-10" &&
+      (formData.selectedSubject.value === selfHostingSubject ||
+        formData.selectedSubject.value === demoSubject)
+    ) {
       toType = "community-license";
+    } else {
+      toType = "sales";
     }
   }
 </script>
@@ -251,8 +260,12 @@
       <div bind:this={sectionStart} data-analytics={`{"dnt":true}`}>
         {#if isEmailSent}
           <SubmissionSuccess
-            title="Thank you for your message"
-            text="We received your message. Our team will take a look and get back to you as soon as possible."
+            title={toType === "community-license"
+              ? "Check your email"
+              : "Thank you for your message"}
+            text={toType === "community-license"
+              ? "We've just sent you your license key via email. Enjoy!"
+              : "We received your message. Our team will take a look and get back to you as soon as possible."}
           />
         {:else}
           <form on:submit|preventDefault={handleSubmit} novalidate>
@@ -407,8 +420,15 @@
                 variant="cta"
                 size="medium"
                 type="submit"
-                disabled={isFormDirty && !isFormValid}>Contact sales</Button
+                disabled={isFormDirty && !isFormValid}
+                isLoading={isSubmissionInProgress}
               >
+                {#if toType === "community-license"}
+                  Receive license
+                {:else}
+                  Contact sales
+                {/if}
+              </Button>
               {#if isFormDirty && !isFormValid}
                 <legend class="text-xs text-error block mt-1 mb-2">
                   Please fill out all required fields above

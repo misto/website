@@ -63,18 +63,38 @@ The property `onOpen` configures port opening behaviors:
 
 ```yaml
 ports:
-  - port: 8080
+  - name: Web App
+    description: The main application web server
+    port: 8080
     onOpen: open-browser
 ```
 
-### Configure port visibility
+### Specifying Port Names & Descriptions
 
-Port visibility can be set via the [`.gitpod.yml`](/docs/references/gitpod-yml), or manually changed within the IDE or editor.
+You can give ports a `name` and a `description` (both optional). These properties will help you to add context about what the port is being used for.
+
+You can execute [`gp ports list`](/docs/command-line-interface#list-1) to output a table-formatted list of ports along with their status, URL, name and description.
+
+<figure>
+    <img class="shadow-medium w-full rounded-xl max-w-3xl mt-x-small" alt="Display port name and description on vscode Remote Explorer" src="/images/docs/ports-with-name-cmd.png" />
+    <figcaption>Display ports info with gp cli</figcaption>
+</figure>
+
+The port's name and description will be displayed in the Remote Explorer of VS Code Browser's sidebar immediately after you change them in your [`.gitpod.yml`](/docs/references/gitpod-yml).
+
+<figure>
+    <img class="shadow-medium w-full rounded-xl max-w-3xl mt-x-small" alt="Display port name and description on vscode Remote Explorer" src="/images/docs/ports-with-name-vscode.png" />
+    <figcaption>Display port name and description on VS Code Browser's Remote Explorer</figcaption>
+</figure>
 
 The property `visibility` configures who can access a port:
 
 - `private` (default) - Only allow users with workspace access to access the port.
 - `public` - Allows everyone with the port URL to access the port.
+
+### Configure port visibility
+
+Port visibility can be set in [`.gitpod.yml`](/docs/references/gitpod-yml), or manually changed within the IDE or editor.
 
 ### Port Visibility in VS Code Browser
 
@@ -97,6 +117,8 @@ All port configurations can be applied to ranges as well as single ports.
 
 **Example:** Prevent notifications for ports between 3000 and 8999.
 
+Ports won't be shown in VS Code Browser's Remote Explorer or in the `gp` CLI until they are opened.
+
 ```yaml
 ports:
   - port: 3000-8999
@@ -118,8 +140,8 @@ Using the [Local Companion](/docs/ides-and-editors/local-companion), you can aut
 With VS Code Desktop, all ports are automatically forwarded, allowing you to access any forwarded ports on your localhost address. You can also manually forward a port using the ports view.
 
 <figure>
-<img class="shadow-medium w-full rounded-xl max-w-3xl mt-x-small" alt="Setting a port public/private in VS Code Browser" src="/images/editors/port-forwarding-vscode-desktop.png">
-    <figcaption>Setting a port public/private in VS Code Browser</figcaption>
+<img class="shadow-medium w-full rounded-xl max-w-3xl mt-x-small" alt="Port forwarding in VS Code Desktop" src="/images/editors/port-forwarding-vscode-desktop.png">
+    <figcaption>Port forwarding in VS Code Desktop</figcaption>
 </figure>
 
 ### Local Port Forwarding in JetBrains IDEs
@@ -127,8 +149,8 @@ With VS Code Desktop, all ports are automatically forwarded, allowing you to acc
 To forward a port in JetBrains, navigate to the preferences page in the [JetBrains Gateway](/docs/ides-and-editors/jetbrains-gateway) client to select the port and protocol to be forwarded.
 
 <figure>
-<img class="shadow-medium w-full rounded-xl max-w-3xl mt-x-small" alt="Setting a port public/private in VS Code Browser" src="/images/jetbrains-gateway/port-forward-jetbrains.png">
-    <figcaption>Setting a port public/private in a JetBrains IDE</figcaption>
+<img class="shadow-medium w-full rounded-xl max-w-3xl mt-x-small" alt="Port forwarding in a JetBrains IDE" src="/images/jetbrains-gateway/port-forward-jetbrains.png">
+    <figcaption>Port forwarding in a JetBrains IDE</figcaption>
 </figure>
 
 ### Local Port Forwarding via SSH

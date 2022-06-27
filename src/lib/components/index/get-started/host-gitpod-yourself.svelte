@@ -7,7 +7,6 @@
         src: "/svg/index/gke.svg",
         alt: "Google Kubernetes Engine",
       },
-      href: "/docs/self-hosted/latest/installation/on-gke/",
     },
     {
       text: "Install on EKS",
@@ -15,7 +14,6 @@
         src: "/svg/index/eks.svg",
         alt: "Amazon Elastic Kubernetes Service",
       },
-      href: "/docs/self-hosted/latest/installation/on-amazon-eks",
     },
     {
       text: "Install on AKS",
@@ -23,7 +21,6 @@
         src: "/svg/index/aks.svg",
         alt: "Azure Kubernetes Service",
       },
-      href: "/docs/self-hosted/latest/installation/on-microsoft-aks",
     },
   ];
 </script>
@@ -34,11 +31,11 @@
 </p>
 
 <div class="my-x-small space-y-3">
-  {#each selfHostedButtons as { href, text, icon }}
+  {#each selfHostedButtons as { text, icon }}
     <div>
       <LinkButton
         class="inline-flex mx-auto items-center"
-        {href}
+        href="/community-license"
         variant="gray"
         size="large"
       >

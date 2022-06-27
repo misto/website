@@ -6,6 +6,7 @@
   import OpenGraph from "../open-graph.svelte";
   import FeedbackWidget from "./feedback-widget.svelte";
   import docsCurrentSectionStore from "$lib/stores/docs-current-section";
+  import docsCurrentSubSectionStore from "$lib/stores/docs-current-subsection";
   import PrevNext from "./prev-next.svelte";
 
   /** @type {string} */
@@ -13,7 +14,11 @@
   /** @type {string} */
   export let title;
 
+  /** @type {string}*/
+  export let subsection;
+
   $: $docsCurrentSectionStore = section;
+  $: $docsCurrentSubSectionStore = subsection;
 </script>
 
 <style lang="postcss">

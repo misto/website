@@ -1,6 +1,6 @@
 import type { Handler } from "@netlify/functions";
 import * as client from "@sendgrid/mail";
-import saveToSheet from "src/functions/feedback/_save-to-spreadsheet";
+import save from "src/functions/feedback/_save-to-spreadsheet";
 
 export type EmailToType = "contact" | "sales" | "community-license";
 
@@ -82,6 +82,20 @@ async function sendEmail(
   }
 }
 
+async function saveToSheet(sheetTitle: string, data: any) {
+  const isSaved = await save({
+    sheetTitle,
+    data,
+  });
+
+  const statusCode = isSaved ? 200 : 500;
+
+  return {
+    statusCode,
+    body: JSON.stringify(data) + " added",
+  };
+}
+
 const handler: Handler = function (event, _, callback) {
   const email: Email = JSON.parse(event.body!) as Email;
   const SENDGRID_API_KEY = process.env.SENDGRID_API_KEY || "no-key";
@@ -97,18 +111,25 @@ const handler: Handler = function (event, _, callback) {
     name: "Gitpod",
   };
 
-  client.setApiKey(SENDGRID_API_KEY);
-  sendEmail(client, email)
-    .then((response) =>
-      callback(null, {
-        statusCode: response.statusCode,
-        body: JSON.stringify(email) + " added",
-      })
-    )
-    .catch((err) => {
-      console.error(err);
-      callback(err, null);
-    });
+  const dontEmail =
+    email.data && email.data.noOfEngineers !== undefined
+      ? email.data.noOfEngineers === "1-10"
+      : false;
+
+  if (!dontEmail) {
+    client.setApiKey(SENDGRID_API_KEY);
+    sendEmail(client, email)
+      .then((response) =>
+        callback(null, {
+          statusCode: response.statusCode,
+          body: JSON.stringify(email) + " added",
+        })
+      )
+      .catch((err) => {
+        console.error(err);
+        callback(err, null);
+      });
+  }
 
   if (email.toType === "community-license") {
     const data = [
@@ -121,10 +142,17 @@ const handler: Handler = function (event, _, callback) {
       email.data.message,
     ];
 
-    saveToSheet({
-      sheetTitle: "Free Self-Hosted Community License",
-      data,
-    });
+    saveToSheet("Free Self-Hosted Community License", data)
+      .then((response) =>
+        callback(null, {
+          statusCode: response.statusCode,
+          body: JSON.stringify(email) + " added",
+        })
+      )
+      .catch((err) => {
+        console.error(err);
+        callback(err, null);
+      });
   }
 };
 

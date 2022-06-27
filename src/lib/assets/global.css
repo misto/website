@@ -126,9 +126,62 @@
     }
   }
 
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    .icon.icon-link {
+      @apply inline-block ml-2;
+      &::after {
+        content: "";
+        @apply inline-block opacity-0 bg-cover;
+        width: 22px;
+        height: 18px;
+        background-image: url("/svg/headling-link.svg");
+        transition: all 0.2s 50ms;
+      }
+    }
+
+    & {
+      &:hover,
+      &:focus,
+      a:hover,
+      a:focus {
+        .icon-link::after {
+          @apply opacity-100;
+        }
+      }
+    }
+
+    a {
+      &:hover,
+      &:focus {
+        &::after {
+          @apply opacity-100 !important;
+        }
+      }
+    }
+  }
+
   body.dark .stroked {
     &::before {
       background: linear-gradient(to bottom, #332d23, #0f0e0b);
+    }
+  }
+
+  body.dark {
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      &:hover,
+      &:focus {
+        .icon.icon-link::after {
+          filter: invert(100%) grayscale(100%);
+        }
+      }
     }
   }
 }

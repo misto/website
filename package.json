@@ -69,6 +69,7 @@
     "postcss-preset-env": "^7.0.1",
     "prettier": "^2.4.1",
     "prettier-plugin-svelte": "^2.4.0",
+    "rehype-wrap-all": "^1.1.0",
     "remark-autolink-headings": "^6.0.1",
     "remark-external-links": "^8.0.0",
     "remark-slug": "^6.0.0",

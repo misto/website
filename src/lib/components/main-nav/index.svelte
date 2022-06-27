@@ -5,7 +5,7 @@
   import NavItem from "./nav-item.svelte";
   import menuState from "./mobile-menu/state";
   import LoginButton from "./login-button.svelte";
-  import SignUpButton from "./sign-up-button.svelte";
+  import DemoButton from "./demo-button.svelte";
   import DashboardButton from "./dashboard-button.svelte";
   import Logo from "../svgs/logo.svelte";
   import { showHideOverflowY } from "$lib/utils/helpers";
@@ -146,7 +146,7 @@
         <DashboardButton />
       {:else}
         <LoginButton />
-        <SignUpButton />
+        <DemoButton />
       {/if}
     </div>
     <div class="flex items-center">

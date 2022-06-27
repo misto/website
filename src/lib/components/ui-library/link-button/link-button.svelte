@@ -48,6 +48,7 @@
     {classMap[variant]} 
     {classMap[size]} 
     {className}
+    {disabled ? classMap.disabled : ''}
   "
   {...$$restProps}
 >

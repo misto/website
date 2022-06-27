@@ -340,6 +340,15 @@ export const authors: { [idx: string]: Author } = {
     },
     description: "",
   },
+  mircoatgitpod: {
+    name: "Mirco Kater",
+    socialProfiles: {
+      github: "MircoatGitpod",
+      twitter: "securitymirco",
+      linkedin: "",
+    },
+    description: "",
+  },
 };
 
 export const authorSocialMediaLinks: SocialMediaLinks = Object.entries(

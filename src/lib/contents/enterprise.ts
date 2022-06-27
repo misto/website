@@ -7,7 +7,12 @@ import GitProviders from "../components/svgs/enterprise/git-providers.svelte";
 import { linuxSource } from "./terminal";
 import Jetbrains from "$lib/components/svgs/brands/jetbrains.svelte";
 import type { Quote } from "$lib/types/quote.type";
-import { redwoodJsQuote, sharesIoQuote, vizlibQuote } from "./customers";
+import {
+  factorialQuote,
+  redwoodJsQuote,
+  sharesIoQuote,
+  vizlibQuote,
+} from "./customers";
 import { jetbrainsQuote } from "./jetbrains-space";
 
 export const exploreContents: ExploreSection = {
@@ -17,25 +22,6 @@ export const exploreContents: ExploreSection = {
   link: { text: "Contact sales", href: "/contact/sales" },
   useKumquatIllustration: false,
 };
-
-export const cards: Card[] = [
-  {
-    title: "5h",
-    text: "saved per engineer per week",
-  },
-  {
-    title: "4x",
-    text: "faster from zero to first contribution",
-  },
-  {
-    title: "61%",
-    text: "cost savings compared to VDI",
-  },
-  {
-    title: "+500k",
-    text: "developers are using Gitpod",
-  },
-];
 
 export const featureCards: Card[] = [
   {
@@ -174,7 +160,7 @@ export const otherFeatures: Feature[] = [
 ];
 
 export const quotes: Quote[] = [
-  redwoodJsQuote,
+  factorialQuote,
   jetbrainsQuote,
   sharesIoQuote,
   vizlibQuote,

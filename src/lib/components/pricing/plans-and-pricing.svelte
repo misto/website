@@ -44,6 +44,7 @@
   />
   <PricingBoxes {pricingPlans} />
   <p class="mt-micro text-center">
-    Can’t find the answer here? <a href="/contact/sales">Contact sales</a>
+    Can’t find the answer here? Please <a href="/contact/sales">contact sales</a
+    >.
   </p>
 </Section>

@@ -1,4 +1,5 @@
 <script lang="ts">
+  import Loader from "$lib/components/loader.svelte";
   import { current_component } from "svelte/internal";
   import { forwardEventsBuilder } from "../utils/eventforwarder";
   import type { ButtonSizes, ButtonVariations } from "./button";
@@ -7,6 +8,7 @@
   export let size: ButtonSizes = "medium";
   export let variant: ButtonVariations;
   export let disabled: boolean = false;
+  export let isLoading: boolean = false;
 
   const classMap = {
     primary: "bg-primary text-important dark:text-black hover:bg-quaternary",
@@ -27,10 +29,17 @@
   const forwardEvents = forwardEventsBuilder(current_component);
 </script>
 
+<style lang="postcss">
+  .loading {
+    @apply relative text-transparent select-none !important;
+  }
+</style>
+
 <button
   use:forwardEvents
   {disabled}
   class:disabled
+  class:loading={isLoading}
   class="
     transition-all 
     duration-200 
@@ -46,9 +55,18 @@
     {classMap[variant]} 
     {classMap[size]} 
     {className}
+    {disabled ? classMap.disabled : ''}
   "
   {...$$restProps}
 >
   <slot name="image" />
   <slot />
+  {#if isLoading}
+    <Loader
+      isPositionedCenter={true}
+      height={size === "medium" ? 16 : undefined}
+      width={size === "medium" ? 16 : undefined}
+      borderWidth={size === "medium" ? 2 : undefined}
+    />
+  {/if}
 </button>

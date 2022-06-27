@@ -18,9 +18,7 @@ Usage:
   gp [command]
 
 Available Commands:
-  await-port          Waits for a process to listen on a port
   env                 Controls user-defined, persistent environment variables.
-  forward-port        Makes a port available on 0.0.0.0 so that it can be exposed to the internet
   help                Help about any command
   init                Create a Gitpod configuration for this project.
   open                Opens a file in Gitpod
@@ -31,6 +29,7 @@ Available Commands:
   sync-await          Awaits an event triggered using gp sync-done
   sync-done           Notifies the corresponding gp sync-await calls that this event has happened
   tasks               Interact with workspace tasks
+  timeout             Interact with workspace timeout configuration
   top                 Display workspace resource (CPU and memory usage)
   url                 Prints the URL of this workspace
   version             Prints the version of the CLI
@@ -79,23 +78,6 @@ With `gp env API_ENDPOINT=https://api.example.com` you can set an `API_ENDPOINT`
 To delete or unset an environment variable, you use `gp env -u API_ENDPOINT`.
 
 Please refer to the help output provided by `gp env --help` for more use cases of the `gp env` command.
-
-## forward-port
-
-In Gitpod, services/servers running on a port need to be _exposed_ before they become accessible from the internet. This process only works with services listening on `0.0.0.0` and not just `localhost`.
-Sometimes it is not possible to make a server listen on `0.0.0.0`, e.g. because it is not your code and there are simply no means of configuration.
-
-In that case, `gp forward-port <port>` can be used to forward all traffic form a socket listing on all network interfaces to your process listening on localhost only.
-
-## await-port
-
-When writing tasks to be executed on workspace start, one sometimes wants to wait for an http service to be available. `gp await-port` does that.
-
-Here's an example that will open a certain path once a service is a available:
-
-```sh
-gp await-port 3000 && gp preview $(gp url 3000)/my/path/index.html
-```
 
 ## sync-await
 
@@ -151,6 +133,18 @@ Alternatively, specify the `Terminal ID` that you can see with `gp tasks list`:
 gp tasks attach <id>
 ```
 
+## timeout
+
+Interact with workspace timeout configuration. You can learn more in [Life of a Workspace](/docs/life-of-workspace#timeouts).
+
+### extend
+
+Extends the current workspace's timeout.
+
+> **Note:** You can only have one workspace with extended timeout at a time.
+
+The default timeout, and the ability to extend a workspace timeout depends on your [plan](https://gitpod.io/plans) or [team plan](https://gitpod.io/teams).
+
 ## ports
 
 Provides a way to manage a workspace's ports. Applies to both: ports defined in [.gitpod.yml](/docs/references/gitpod-yml) and ports that are undeclared but are opened during the lifetime of the workspace.
@@ -163,6 +157,27 @@ Outputs a table-formatted list of ports along with their status, URL, name and d
 gp ports list
 ```
 
-### top
+### expose
+
+In Gitpod, services/servers running on a port need to be _exposed_ before they become accessible from the internet. This process only works with services listening on `0.0.0.0` and not just `localhost`.
+Sometimes it is not possible to make a server listen on `0.0.0.0`, e.g. because it is not your code and there are simply no means of configuration.
+
+In that case, `gp ports expose <port>` can be used to forward all traffic form a socket listing on all network interfaces to your process listening on localhost only.
+
+```sh
+gp ports expose <port>
+```
+
+### await
+
+When writing tasks to be executed on workspace start, one sometimes wants to wait for an http service to be available. `gp ports await` does that.
+
+Here's an example that will open a certain path once a service is a available:
+
+```sh
+gp ports await 3000 && gp preview $(gp url 3000)/my/path/index.html
+```
+
+## top
 
 Displays the used and available workspace CPU and memory.

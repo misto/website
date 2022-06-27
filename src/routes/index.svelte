@@ -3,7 +3,7 @@
 </script>
 
 <script lang="ts">
-  import { testimonials } from "$lib/contents/home/index";
+  import { testimonials, benefits } from "$lib/contents/home/index";
   import {
     features,
     otherFeatures,
@@ -21,6 +21,7 @@
   import SpinUp from "$lib/components/index/spin-up.svelte";
   import Section from "$lib/components/section.svelte";
   import Resources from "$lib/components/resources.svelte";
+  import Benefits from "$lib/components/benefits.svelte";
 </script>
 
 <OpenGraph
@@ -44,6 +45,9 @@
 </svelte:head>
 
 <Hero />
+<Section>
+  <Benefits {benefits} />
+</Section>
 <ChooseProject />
 <div id="choose-project-observer-target-bottom">
   <Features {features} />

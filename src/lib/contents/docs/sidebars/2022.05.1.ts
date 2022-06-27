@@ -20,6 +20,12 @@ export const MENU: MenuEntry = M(
   "Gitpod Self-Hosted",
   `self-hosted/${version}`,
   [
+    M(
+      "Preview Installation",
+      `self-hosted/${version}/preview-install`,
+      [],
+      "alpha"
+    ),
     M("Getting Started", `self-hosted/${version}/getting-started`),
     M(
       "Reference Architectures",
@@ -29,8 +35,12 @@ export const MENU: MenuEntry = M(
     M("Required Components", `self-hosted/${version}/required-components`),
     M("Advanced Installation", `self-hosted/${version}/advanced`),
     M("Updating Gitpod", `self-hosted/${version}/updating`),
-    M("Troubleshooting", `self-hosted/${version}/troubleshooting`),
-    M("Telemetry", `self-hosted/${version}/telemetry`),
     M("Monitoring", `self-hosted/${version}/monitoring`),
+    M("Troubleshooting", `self-hosted/${version}/troubleshooting`, [
+      M("Support Bundles", `self-hosted/${version}/support-bundle`, []),
+      M("Support Patches", `self-hosted/${version}/support-patches`, []),
+    ]),
+    M("Telemetry", `self-hosted/${version}/telemetry`),
+    M("Releases", `self-hosted/${version}/releases`),
   ]
 );

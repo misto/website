@@ -1,6 +1,12 @@
 ---
+<<<<<<<< HEAD:gitpod/docs/self-hosted/2022.05.1/advanced/support-patches.md
 section: self-hosted
 title: Gitpod Provided Support Patches
+========
+section: self-hosted/latest
+subsection: troubleshooting
+title: Support Patches
+>>>>>>>> main:gitpod/docs/self-hosted/latest/support-patches.md
 ---
 
 <script context="module">

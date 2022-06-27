@@ -2,6 +2,7 @@ import developLikeSvelte from "$lib/components/svgs/customers/develop-like.svelt
 import redwoodjsSvelte from "$lib/components/svgs/customers/redwoodjs.svelte";
 import sharesSvelte from "$lib/components/svgs/customers/shares.svelte";
 import vizlibSvelte from "$lib/components/svgs/customers/vizlib.svelte";
+import factorialSvelte from "$lib/components/svgs/customers/factorial.svelte";
 import type { Feature } from "$lib/types/feature.type";
 import type { Quote } from "$lib/types/quote.type";
 
@@ -57,7 +58,7 @@ export const redwoodJsQuote: Quote = {
   companyLogo: redwoodjsSvelte,
   img: {
     src: "/images/customers/redwoodjs/quote.png",
-    alt: "Shares.io",
+    alt: "RedwoodJS",
   },
   link: {
     href: "/customers/redwoodjs",
@@ -65,7 +66,27 @@ export const redwoodJsQuote: Quote = {
   },
 };
 
-export const quotes: Quote[] = [sharesIoQuote, vizlibQuote, redwoodJsQuote];
+export const factorialQuote: Quote = {
+  text: "You can either spend 3 days of your life setting them up, teaching them how the environment works, or you can give them a button and say ‘click here’.",
+  author: "Josep Jaume",
+  jobTitle: "Senior Director of Developer Experience at Factorial",
+  companyLogo: factorialSvelte,
+  img: {
+    src: "/images/customers/factorial/quote.png",
+    alt: "FactorialHR",
+  },
+  link: {
+    href: "/customers/factorial",
+    text: "View customer story",
+  },
+};
+
+export const quotes: Quote[] = [
+  factorialQuote,
+  sharesIoQuote,
+  vizlibQuote,
+  redwoodJsQuote,
+];
 
 export const developFeature: Feature = {
   title: "Develop like Google, Facebook or&nbsp;Shopify",

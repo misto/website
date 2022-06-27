@@ -11,12 +11,12 @@
   import Button from "$lib/components/ui-library/button";
   import Card from "$lib/components/ui-library/card";
 
-  import type { Email } from "../functions/submit-form";
+  import type { Email } from "../../functions/submit-form";
   import Header from "$lib/components/header.svelte";
   import { cloudPlatforms, noOfEngineers } from "$lib/contents/contact";
   import Checkbox from "$lib/components/ui-library/checkbox";
   import { tick } from "svelte";
-  import { scrollToElement } from "../lib/utils/helpers";
+  import { scrollToElement } from "../../lib/utils/helpers";
   import SubmissionSuccess from "$lib/components/submission-success.svelte";
 
   const formData: Form = {
@@ -61,6 +61,7 @@
   let form: HTMLElement;
   let isEmailSent: boolean = false;
   let sectionStart: HTMLElement;
+  let isSubmissionInProgress: boolean = false;
 
   $: isFormValid = Object.values(formData).every((field) => field.valid);
 
@@ -72,6 +73,8 @@
       return;
     }
 
+    isSubmissionInProgress = true;
+
     const email: Email = {
       toType: "community-license",
       replyTo: {
@@ -79,7 +82,7 @@
         name: formData.name.value,
       },
       subject:
-        "Requesting a professional Self-Hosted license" +
+        "Requesting a Community Self-Hosted license" +
         "  (from " +
         formData.email.value +
         ")",
@@ -106,6 +109,7 @@
         body: JSON.stringify(email),
       });
       if (response.ok) {
+        isSubmissionInProgress = false;
         isEmailSent = true;
         setTimeout(() => {
           sectionStart.scrollIntoView();
@@ -278,8 +282,11 @@
             variant="primary"
             size="large"
             type="submit"
-            disabled={isFormDirty && !isFormValid}>Receive license</Button
+            disabled={(isFormDirty && !isFormValid) || isSubmissionInProgress}
+            isLoading={isSubmissionInProgress}
           >
+            Receive license
+          </Button>
         </div>
         {#if isFormDirty && !isFormValid}
           <legend class="text-xs text-error block mt-1 mb-2">

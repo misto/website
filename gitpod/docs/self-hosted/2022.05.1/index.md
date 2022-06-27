@@ -44,6 +44,10 @@ Gitpod can be deployed and operated on your own infrastructure. It supports diff
 
 The [getting started guide](./latest/getting-started) provides you with step-by-step instructions on how to install Gitpod on your infrastructure.
 
+## Preview Installation
+
+The [preview installation](./latest/preview-install) provides you with step-by-step instructions on how to install Gitpod on your infrastructure.
+
 <!-- ## Advanced Installation
 
 You want to use your own database, registry, object storage, or source control management system? Gitpod should be run in an air-gap network? The [advanced installation page](./latest/advanced) provides you with more information on how to install and configure Gitpod. The page “[required components](./latest/required-components)” gives you an overview of compatible 3rd-party products like databases, registries, and source control management systems. -->

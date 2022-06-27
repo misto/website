@@ -9,6 +9,7 @@ import remarkEmbedVideo from "./src/lib/utils/remark-embed-video.js";
 import remarkLinkWithImageAsOnlyChild from "./src/lib/utils/remark-link-with-image-as-only-child.js";
 import remarkHeadingsPermaLinks from "./src/lib/utils/remark-headings-permalinks.js";
 import { toString } from "mdast-util-to-string";
+import rehypeWrap from "rehype-wrap-all";
 import { h } from "hastscript";
 
 /** @type {import('@sveltejs/kit').Config} */
@@ -65,7 +66,9 @@ const config = {
         customers:
           "./src/lib/components/customers/customers-content-layout.svelte",
       },
-      rehypePlugins: [],
+      rehypePlugins: [
+        [rehypeWrap, { selector: "table", wrapper: "div.overflow-auto" }],
+      ],
       remarkPlugins: [
         [
           remarkExternalLinks,

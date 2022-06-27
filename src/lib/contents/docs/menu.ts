@@ -40,7 +40,7 @@ export const MENU: MenuEntry[] = [
     M("Collaboration & Sharing", "sharing-and-collaboration"),
     M("Teams & Projects", "teams-and-projects", [], "beta"),
     M("Team Billing", "team-billing", [], "beta"),
-    M("Create a Team Plan", "teams"),
+    M("Create a Team Plan", "teams", []),
   ]),
   M("IDEs & Editors", "ides-and-editors", [
     M("VS Code Browser", "ides-and-editors/vscode-browser"),
@@ -96,7 +96,7 @@ export const MENU: MenuEntry[] = [
     M("Browser Bookmarklet", "browser-bookmarklet"),
     M("Browser Extension", "browser-extension"),
   ]),
-  M("Self-Hosted", "self-hosted/latest"),
+  M("Gitpod Self-Hosted", "self-hosted"),
   M("References", "references", [
     M(".gitpod.yml", "references/gitpod-yml"),
     M("Command Line Interface", "command-line-interface"),

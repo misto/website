@@ -14,6 +14,7 @@ import CodeInstitute from "$lib/components/svgs/brands/code-institute.svelte";
 import Redwood from "$lib/components/svgs/brands/redwood.svelte";
 import Jetbrains from "$lib/components/svgs/brands/jetbrains.svelte";
 import FourGeeks from "$lib/components/svgs/brands/fourgeeks.svelte";
+import type { Card } from "$lib/types/card.type";
 
 export const gitlab: Brand = {
   alt: "GitLab",
@@ -526,5 +527,24 @@ export const ides: Ide[] = [
       desktop: "",
     },
     icon: "webstorm.svg",
+  },
+];
+
+export const benefits: Card[] = [
+  {
+    title: "5h",
+    text: "weekly productivity gain per engineer",
+  },
+  {
+    title: "4x",
+    text: "faster time from zero to first PR",
+  },
+  {
+    title: "61%",
+    text: "cost savings compared to a VDI solution",
+  },
+  {
+    title: "500k",
+    text: "developers are using Gitpod",
   },
 ];

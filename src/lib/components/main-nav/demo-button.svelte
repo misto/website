@@ -6,7 +6,7 @@
 
 <LinkButton
   class="{clazz} flex items-center justify-center"
-  href="https://gitpod.io/workspaces/"
+  href="/contact/sales?get-a-demo"
   variant="tertiary"
-  size="medium">Sign Up</LinkButton
+  size="medium">Get a demo</LinkButton
 >
