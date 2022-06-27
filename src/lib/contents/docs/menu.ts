@@ -96,7 +96,7 @@ export const MENU: MenuEntry[] = [
     M("Browser Bookmarklet", "browser-bookmarklet"),
     M("Browser Extension", "browser-extension"),
   ]),
-  M("Gitpod Self-Hosted", "self-hosted"),
+  M("Gitpod Self-Hosted", "self-hosted/latest"),
   M("References", "references", [
     M(".gitpod.yml", "references/gitpod-yml"),
     M("Command Line Interface", "command-line-interface"),
