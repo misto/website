@@ -38,6 +38,7 @@ const quickstartItems = readable(
       "/svg/projects/java.svg"
     ),
     mapQuickstart("Julia", "quickstart/julia", false),
+    mapQuickstart("Jupyter Notebook", "quickstart/jupyter", false),
     mapQuickstart("NextJS", "quickstart/nextjs", false),
     mapQuickstart("Nix", "quickstart/nix", false),
     mapQuickstart(
