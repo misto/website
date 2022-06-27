@@ -164,7 +164,11 @@ aws rds create-db-instance \
     --master-user-password $MYSQL_GITPOD_PW \
     --engine-version 5.7 \
     --tags Key=project,Value=gitpod Key=Name,Value=Gitpod-MySQLDB
+```
 
+This should return an output similar to the following:
+
+```
 {
     "DBInstance": {
         "DBInstanceIdentifier": "gitpod-instance",
@@ -178,7 +182,7 @@ aws rds create-db-instance \
         "BackupRetentionPeriod": 1,
         "DBSecurityGroups": [],
         "VpcSecurityGroups": [
-...
+[...]
 ```
 
 To check whether instance creation has compeleted, and to retrieve the URL to use, run this command:
