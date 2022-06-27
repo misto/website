@@ -62,14 +62,19 @@ gcloud iam service-accounts keys create --iam-account "${MYSQL_SA_EMAIL}" \\
 </div>
 <div slot="aws">
 
-A RDS MySQL db.m5g.large instance running MySQL 5.7. Before deploying an RDS instance, additional configuration has to be done to the VPC created by the eksctl command. 
+We will create an RDS MySQL db.m5g.large instance running MySQL 5.7. Before deploying an RDS instance, additional configuration has to be done to the VPC created by the eksctl command:
 
 ### Create a RDS security group
 
 First find the subnet IDs for the public subnets in your environment. For deploying RDS in private subnets replace true with false in the below command:
+
 ```sh
 aws ec2 describe-subnets  --filters "Name=tag:project,Values=gitpod" --query 'Subnets[?MapPublicIpOnLaunch==`true`] | [*].[SubnetId, AvailabilityZone, CidrBlock, MapPublicIpOnLaunch]'
+```
 
+This should give you an output similar to the following:
+
+```
 [
     [
         "subnet-0686443f3f2782453",
@@ -93,15 +98,17 @@ aws ec2 describe-subnets  --filters "Name=tag:project,Values=gitpod" --query 'Su
 ```
 
 Using the three subnet IDs, create an RDS subnet group, with the name gitpod-rds:
+
 ```sh
 aws rds create-db-subnet-group \
     --db-subnet-group-name gitpod-rds \
     --db-subnet-group-description "Subnet for the Gitpod RDS deployment in VPC" \
-    --subnet-ids '[ "subnet-0f0370a5697d85df2", "subnet-010ea25d0e398f6df", "subnet-0686443f3f2782453" ]' \
+    --subnet-ids '[ "subnet-0686443f3f2782453", "subnet-010ea25d0e398f6df", "subnet-0f0370a5697d85df2" ]' \
     --tags Key=project,Value=gitpod
 ```
 
 Now you will need to create a security group for the RDS instance, running a similar command as before:
+
 ```
 aws ec2 create-security-group --description 'Gitpod RDS' --group-name 'gitpod-rds' \
 --vpc-id vpc-09a109f23dad0a298 \
@@ -122,7 +129,7 @@ aws ec2 create-security-group --description 'Gitpod RDS' --group-name 'gitpod-rd
 }
 ```
 
-Now update the ingress policy for the RDS group to allow incoming connections from the Services nodegroup on port 3306, the MySQL port:
+You can now update the ingress policy for the RDS group to allow for incoming connections from the Services nodegroup on port 3306, the MySQL port:
 
 ```
 aws ec2 authorize-security-group-ingress \
@@ -132,13 +139,16 @@ aws ec2 authorize-security-group-ingress \
     --tag-specifications 'ResourceType=security-group-rule,Tags=[{Key=Name,Value=rds-access},{Key=project,Value=gitpod},{Key=team,Value=cs}]'
 ```
 
-Now create a password to use for MySQL. This will be required for the creation of the RDS instance and later for use by the Gitpod installer:
+Now you can create a password to use for MySQL. This will be required for the creation of the RDS instance and later for use by the Gitpod installer:
+
 ```
+
 export MYSQL_GITPOD_PW=$(openssl rand -hex 18)
 echo $MYSQL_GITPOD_PW
 ```
 
-Now create the [Multi-AZ RDS instance](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.MultiAZSingleStandby.html) using the mysql password, the security group, and rds subnet you created in the previous steps:
+Now you can create the [Multi-AZ RDS instance](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.MultiAZSingleStandby.html) using the mysql password, the security group, and rds subnet you created in the previous steps:
+
 ```
 aws rds create-db-instance \
     --db-name gitpod \
@@ -171,9 +181,10 @@ aws rds create-db-instance \
 ...
 ```
 
-To check for the instance creation to complete, and to retrieve the URL to use, run this command:
+To check whether instance creation has compeleted, and to retrieve the URL to use, run this command:
+
 ```
-aws rds describe-db-instances \                                                   
+aws rds describe-db-instances \
     --db-instance-identifier gitpod-instance \
     --query 'DBInstances[0].[DBInstanceStatus,Endpoint.Address]'
 [
@@ -181,7 +192,6 @@ aws rds describe-db-instances \
     "gitpod-instance.coynfywwqpjg.eu-west-1.rds.amazonaws.com"
 ]
 ```
-
 
 </div>
 </CloudPlatformToggle>

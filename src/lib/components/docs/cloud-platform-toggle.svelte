@@ -15,7 +15,7 @@
       title: "Amazon Web Services (AWS)",
       value: 2,
       slotName: "aws",
-      hidden: true, // hidden since it is not ready to publish yet
+      hidden: false, // hidden since it is not ready to publish yet
     },
     {
       mobileTitle: "Azure",

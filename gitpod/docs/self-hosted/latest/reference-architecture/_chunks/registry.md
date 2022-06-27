@@ -24,7 +24,7 @@ By enabling the service `containerregistry.googleapis.com` (see above), your pro
 
 ECR is currently not supported, so configuring the registry will require using an S3 bucket. You can reuse the same S3 bucket used for object storage or a separate one. The steps would be identical in creation, just use different names for both the bucket and the IAM user account
 
-The Gitpod Installer will be configured with the values you use, ensure you select Incluster Registry, and S3 storage. The next when setting endpoint, include the region, so s3.amazonaws.com becomes s3.eu-west-1.amazonaws.com
+The Gitpod Installer will be configured with the values you use, ensure you select `Incluster Registry`, and `S3 storage`. When setting endpoint, include the region, so `s3.amazonaws.com` becomes `s3.eu-west-1.amazonaws.com`.
 
 </div>
 </CloudPlatformToggle>

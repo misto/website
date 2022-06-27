@@ -121,6 +121,7 @@ aws route53 create-hosted-zone --name aws.gitpod-self-hosted.com. --caller-refer
 ```
 
 Once the domain has been provisioned, you can get the details with the below command and record the Id for use later:
+
 ```
 aws route53 list-hosted-zones --query 'HostedZones[?Name==`aws.gitpod-self-hosted.com.`]'
 [
@@ -137,9 +138,7 @@ aws route53 list-hosted-zones --query 'HostedZones[?Name==`aws.gitpod-self-hoste
 ]
 ```
 
-With route 53 created, you can now proceed to installing cert-manager. Even if you are 
-
-
+With route 53 created, you can now proceed to install cert-manager. Cert-manager is needed for Gitpod's internal networking even if you are managing DNS yourself.
 
 </div>
 </CloudPlatformToggle>
@@ -219,7 +218,8 @@ kubectl apply -f issuer.yaml
 </div>
 <div slot="aws">
 
-Due to the networking behavior and service accounts in EKS, cert-manager needs a different installation procedure. First install cert-manager with the following command:
+Due to the networking behavior and service accounts in EKS, cert-manager needs a different installation procedure. First, install cert-manager with the following command:
+
 ```
 helm repo add jetstack https://charts.jetstack.io
 helm repo update
@@ -241,13 +241,14 @@ helm upgrade \
 ```
 
 Once installation has completed, you will need to update the cert-manager security context setting for the service account provisioned for cert-manager by eksctl:
+
 ```
 kubectl patch deployment cert-manager -n cert-manager -p \
   '{"spec":{"template":{"spec":{"securityContext":{"fsGroup":1001,"runAsNonRoot": true}}}}}'
 
 ```
 
-If using eksctl and the cert-manager service account along with well-known policies AND have your intended zone hosted in Route53, then follow the [cert-manager](https://cert-manager.io/docs/configuration/acme/dns01/route53/) configuration steps. An example ClusterIssuer using the hosted zone and cert-manager service account created by eksctl is below:
+If using eksctl and the cert-manager service account along with well-known policies AND you have your intended zone hosted in Route53, then follow the [cert-manager](https://cert-manager.io/docs/configuration/acme/dns01/route53/) configuration steps. An example ClusterIssuer using the hosted zone and cert-manager service account created by eksctl is below:
 
 ```yaml
 apiVersion: cert-manager.io/v1
@@ -262,18 +263,16 @@ spec:
     privateKeySecretRef:
       name: letsencrypt
     solvers:
-    - selector:
-        dnsZones:
-          - "aws.gitpod-self-hosted.com"
-      dns01:
-        route53:
-          region: us-east-1
-          hostedZoneID: Z1230498123094
+      - selector:
+          dnsZones:
+            - "aws.gitpod-self-hosted.com"
+        dns01:
+          route53:
+            region: us-east-1
+            hostedZoneID: Z1230498123094
 ```
 
-In using this example, one would use `letsencrypt-prod` in the Gitpod self hosted installer page when asked for the name of the certificate ClusterIssuer.
-
-
+In using this example, one would use `letsencrypt-prod` in the Gitpod self-hosted installer UI when asked for the name of the certificate ClusterIssuer.
 
 </div>
 </CloudPlatformToggle>

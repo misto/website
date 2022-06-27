@@ -44,11 +44,11 @@ In this deployment we create one S3 bucket and one IAM User service account to a
 
 ```
 export S3_BUCKET_NAME="suitably-tired-puma-registry"
-echo $S3_BUCKET_NAME 
+echo $S3_BUCKET_NAME
 ```
 
-
 ### Create the S3 Bucket and ensure it is private
+
 ```
 aws s3api create-bucket \
     --bucket $S3_BUCKET_NAME \
@@ -67,37 +67,39 @@ aws iam create-user --user-name gitpod-s3-access \
 ```
 
 Save the following file as S3_policy.json, replacing the resource name with the S3 bucket you created:
+
 ```json
 {
-    "Statement": [
-        {
-            "Action": [
-                "s3:ListBucketMultipartUploads",
-                "s3:ListBucket",
-                "s3:GetBucketLocation"
-            ],
-            "Effect": "Allow",
-            "Resource": ["arn:aws:s3:::suitably-tired-puma-registry"],
-            "Sid": ""
-        },
-        {
-            "Action": [
-                "s3:PutObject",
-                "s3:ListMultipartUploadParts",
-                "s3:GetObject",
-                "s3:DeleteObject",
-                "s3:AbortMultipartUpload"
-            ],
-            "Effect": "Allow",
-            "Resource": ["arn:aws:s3:::suitably-tired-puma-registry/*"],
-            "Sid": ""
-        }
-    ],
-    "Version": "2012-10-17"
+  "Statement": [
+    {
+      "Action": [
+        "s3:ListBucketMultipartUploads",
+        "s3:ListBucket",
+        "s3:GetBucketLocation"
+      ],
+      "Effect": "Allow",
+      "Resource": ["arn:aws:s3:::suitably-tired-puma-registry"],
+      "Sid": ""
+    },
+    {
+      "Action": [
+        "s3:PutObject",
+        "s3:ListMultipartUploadParts",
+        "s3:GetObject",
+        "s3:DeleteObject",
+        "s3:AbortMultipartUpload"
+      ],
+      "Effect": "Allow",
+      "Resource": ["arn:aws:s3:::suitably-tired-puma-registry/*"],
+      "Sid": ""
+    }
+  ],
+  "Version": "2012-10-17"
 }
 ```
 
 Create the policy, taking note of the ARN in the output:
+
 ```
 aws iam create-policy --policy-name gitpod_s3_access_policy --policy-document file://S3_policy.json \
   --tags Key=project,Value=gitpod
@@ -124,6 +126,7 @@ aws iam create-policy --policy-name gitpod_s3_access_policy --policy-document fi
 ```
 
 Attach the policy to the IAM user you just created:
+
 ```
 aws iam attach-user-policy --user-name gitpod-s3-access \
   --policy-arn 'arn:aws:iam::691173103445:policy/gitpod_s3_access_policy'
@@ -135,6 +138,11 @@ Be prepared to store the AccessKeyId and SecretAccessKey securely once you execu
 
 ```
 aws iam create-access-key --user-name gitpod-s3-access
+```
+
+This should result in an output similar to the following:
+
+```
 {
     "AccessKey": {
         "UserName": "gitpod-s3-access",
@@ -147,22 +155,21 @@ aws iam create-access-key --user-name gitpod-s3-access
 ```
 
 To test that this works, open a new shell session and configure it to use the AccessKeyId and SecretAccessKey you've just retrieved, and attempt to upload a file and then delete it:
+
 ```sh
-> export AWS_ACCESS_KEY_ID=----------
-> export AWS_SECRET_ACCESS_KEY="----------------"
-> aws s3 ls s3://suitably-tired-puma-registry                            
-> echo "hello world" > gitpod_test.txt
-> aws s3 cp gitpod_test.txt s3://suitably-tired-puma-registry
+export AWS_ACCESS_KEY_ID=----------
+export AWS_SECRET_ACCESS_KEY="----------------"
+aws s3 ls s3://suitably-tired-puma-registry
+echo "hello world" > gitpod_test.txt
+aws s3 cp gitpod_test.txt s3://suitably-tired-puma-registry
 upload: ./gitpod_test.txt to s3://suitably-tired-puma-registry/gitpod_test.txt
-> aws s3 ls s3://suitably-tired-puma-registry
+aws s3 ls s3://suitably-tired-puma-registry
 2022-06-24 15:50:20         12 gitpod_test.txt
-> aws s3 rm s3://suitably-tired-puma-registry/gitpod_test.txt
+aws s3 rm s3://suitably-tired-puma-registry/gitpod_test.txt
 delete: s3://suitably-tired-puma-registry/gitpod_test.txt
-> aws s3 ls s3://suitably-tired-puma-registry
-> *nothing returns if empty*   
+aws s3 ls s3://suitably-tired-puma-registry
+*nothing returns if empty*
 ```
-
-
 
 </div>
 </CloudPlatformToggle>
