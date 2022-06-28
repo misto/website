@@ -11,7 +11,7 @@ title: Amazon Elastic Kubernetes Service (EKS)
 
 Instructions on how to create an Amazon EKS environment that is ready to install Gitpod are located in the [gitpod-io/gitpod-eks-guide](https://github.com/gitpod-io/gitpod-eks-guide) repository on GitHub. The installation process takes around twenty minutes. In the end, the following resources are created:
 
-- An Amazon EKS cluster running Kubernetes v1.21
+- An Amazon EKS cluster running Kubernetes v1.22
 - Kubernetes nodes using a custom [AMI image](https://github.com/gitpod-io/amazon-eks-custom-amis/tree/gitpod):
 
   - Ubuntu 20.04

@@ -1605,12 +1605,12 @@
       "locked": false,
       "fontSize": 20,
       "fontFamily": 1,
-      "text": "Kubernetes >= 1.21  ",
+      "text": "Kubernetes >= 1.22  ",
       "baseline": 18,
       "textAlign": "left",
       "verticalAlign": "top",
       "containerId": null,
-      "originalText": "Kubernetes >= 1.21  "
+      "originalText": "Kubernetes >= 1.22  "
     },
     {
       "type": "text",
@@ -3315,12 +3315,12 @@
       "locked": false,
       "fontSize": 20,
       "fontFamily": 1,
-      "text": "Kubernetes >= 1.21  ",
+      "text": "Kubernetes >= 1.22  ",
       "baseline": 18,
       "textAlign": "left",
       "verticalAlign": "top",
       "containerId": null,
-      "originalText": "Kubernetes >= 1.21  "
+      "originalText": "Kubernetes >= 1.22  "
     },
     {
       "type": "diamond",

@@ -11,7 +11,7 @@ title: Microsoft Azure Kubernetes Service (AKS)
 
 Instructions on how to create a Microsoft AKS environment that is ready to install Gitpod are located in the [gitpod-io/gitpod-microsoft-aks-guide](https://github.com/gitpod-io/gitpod-microsoft-aks-guide) repository on GitHub. The installation process takes around twenty minutes. In the end, the following resources are created:
 
-- An Microsoft AKS cluster running Kubernetes v1.21.
+- An Microsoft AKS cluster running Kubernetes v1.22.
 - An Microsoft Azure load balancer.
 - An Microsoft Azure DNS zone.
 - An Microsoft Azure container registry.

@@ -73,7 +73,7 @@ After that, we [create a **Kubernetes cluster**](https://cloud.google.com/kubern
 ```
 CLUSTER_NAME=gitpod
 REGION=us-central1
-GKE_VERSION=1.21.11-gke.900
+GKE_VERSION=1.22.10-gke.600
 
 gcloud container clusters \\
     create "${CLUSTER_NAME}" \\
