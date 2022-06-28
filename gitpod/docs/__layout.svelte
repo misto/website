@@ -77,7 +77,7 @@
     class="hidden z-20 sticky top-24 self-start lg:block lg:w-1/5"
   >
     {#if $page.url.pathname.includes("/docs/self-hosted")}
-      <VersionSwitch {version} />
+      <VersionSwitch bind:version />
     {/if}
     <Search docSearchInputSelector="algolia-mobile" />
 
@@ -87,7 +87,7 @@
     <div class="block lg:hidden">
       <Search />
       {#if $page.url.pathname.includes("/docs/self-hosted")}
-        <VersionSwitch {version} />
+        <VersionSwitch bind:version />
       {/if}
     </div>
     <MobileMenu MENU={activeSidebar} />
