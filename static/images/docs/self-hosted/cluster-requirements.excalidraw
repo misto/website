@@ -1410,12 +1410,12 @@
       "locked": false,
       "fontSize": 20,
       "fontFamily": 1,
-      "text": "Ubuntu 18.04 or 20.04",
+      "text": "Ubuntu >= 18.04",
       "baseline": 18,
       "textAlign": "left",
       "verticalAlign": "top",
       "containerId": null,
-      "originalText": "Ubuntu 18.04 or 20.04"
+      "originalText": "Ubuntu >= 18.04"
     },
     {
       "type": "text",
@@ -3120,12 +3120,12 @@
       "locked": false,
       "fontSize": 20,
       "fontFamily": 1,
-      "text": "Ubuntu 18.04 or 20.04",
+      "text": "Ubuntu >= 18.04",
       "baseline": 18,
       "textAlign": "left",
       "verticalAlign": "top",
       "containerId": null,
-      "originalText": "Ubuntu 18.04 or 20.04"
+      "originalText": "Ubuntu >= 18.04"
     },
     {
       "type": "text",
