@@ -64,6 +64,10 @@
 </script>
 
 <style lang="postcss">
+  :global(body.consent-is-shown) .parent {
+    @apply bottom-[95px] xl:bottom-14;
+  }
+
   .links {
     @apply relative;
 
@@ -91,7 +95,7 @@
 </style>
 
 <div
-  class="fixed bottom-4 right-4 flex flex-col items-end z-50"
+  class="fixed bottom-4 right-4 flex flex-col items-end z-50 parent"
   data-analytics={`{"context":"contact_widget"}`}
 >
   {#if areButtonsShown}
@@ -108,29 +112,27 @@
       in:fade={{ duration: 600 }}
       out:fade={{ duration: 300 }}
       bind:this={linksWrapper}
-      class="stroked stroked-sand flex flex-col rounded-2xl mb-xx-small"
+      class="stroked stroked-sand flex flex-col rounded-2xl mb-xx-small links p-xx-small"
     >
-      <div class="links p-xx-small">
-        <div class="before" />
-        <div class="space-y-macro">
-          {#each buttons as { href, text, icon }}
-            <LinkButton
-              {href}
-              variant="white"
-              textAlign="left"
-              class="flex items-center max-w-[205px] group"
-            >
-              <svelte:component
-                this={icon}
-                class="h-4 w-4 mr-3 filter grayscale group-hover:grayscale-0 transition-all duration-200"
-                slot="image"
-              />
-              {text}
-            </LinkButton>
-          {/each}
-        </div>
-        <div class="stroked stroked-sand after" />
+      <div class="before" />
+      <div class="space-y-macro">
+        {#each buttons as { href, text, icon }}
+          <LinkButton
+            {href}
+            variant="white"
+            textAlign="left"
+            class="flex items-center max-w-[205px] group"
+          >
+            <svelte:component
+              this={icon}
+              class="h-4 w-4 mr-3 filter grayscale group-hover:grayscale-0 transition-all duration-200"
+              slot="image"
+            />
+            {text}
+          </LinkButton>
+        {/each}
       </div>
+      <div class="stroked stroked-sand after" />
     </div>
   {/if}
 
