@@ -104,6 +104,7 @@
         on:click={() => (areButtonsShown = false)}
         in:fade={{ duration: 200, delay: 300 }}
         out:fade={{ duration: 300 }}
+        aria-label="Close the menu"
       >
         <Close class="h-6 w-6 mb-macro" />
       </button>
@@ -112,7 +113,7 @@
       in:fade={{ duration: 600 }}
       out:fade={{ duration: 300 }}
       bind:this={linksWrapper}
-      class="stroked stroked-sand flex flex-col rounded-2xl mb-xx-small links p-xx-small"
+      class="stroked stroked-sand flex flex-col rounded-2xl mb-5 sm:mb-xx-small links p-3 sm:p-xx-small"
     >
       <div class="before" />
       <div class="space-y-macro">
@@ -140,7 +141,7 @@
     <div data-analytics={`{"label":"Hide/Show Contact Widget"}`}>
       <button
         in:fade={{ duration: 200 }}
-        class="stroked flex group justify-center items-center bg-card h-14 w-14 rounded-full"
+        class="stroked flex group justify-center items-center bg-card h-12 w-12 sm:h-14 sm:w-14 rounded-full"
         on:click={() => {
           areButtonsShown = !areButtonsShown;
         }}
@@ -148,7 +149,7 @@
         <div class="icon-wrapper" bind:this={iconWrapper}>
           <svelte:component
             this={Chat}
-            class="h-8 w-8 filter group-hover:grayscale transition-all duration-200 {areButtonsShown
+            class="h-6 w-6 sm:h-8 sm:w-8 filter group-hover:grayscale transition-all duration-200 {areButtonsShown
               ? 'grayscale'
               : ''}"
           />
