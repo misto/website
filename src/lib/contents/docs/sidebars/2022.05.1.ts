@@ -17,7 +17,7 @@ function M(
 }
 
 export const MENU: MenuEntry = M(
-  "Gitpod Self-Hosted",
+  `Gitpod Self-Hosted - v${version}`,
   `self-hosted/${version}`,
   [
     M(

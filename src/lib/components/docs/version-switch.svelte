@@ -8,9 +8,9 @@
 
   async function versionChangeHandler() {
     await tick();
-    const test = $page.url.pathname.split("/");
-    test[3] = version;
-    goto(test.join("/"));
+    const split = $page.url.pathname.split("/");
+    split[3] = version;
+    goto(split.join("/"));
   }
 </script>
 
@@ -29,10 +29,14 @@
   }
 </style>
 
-<div class="w-full sm:px-4 switcher {$topicsState ? 'topics-active' : ''}">
+<div
+  class="w-full mb-4 sm:px-4 md:px-0 switcher {$topicsState
+    ? 'topics-active'
+    : ''}"
+>
   <select
     id="version-switch"
-    class="box-border bg-card rounded-2xl text-important border-divider border px-4 py-2 appearance-none w-full mb-4"
+    class="box-border bg-card rounded-2xl text-important border-divider border px-4 py-2 appearance-none w-full"
     on:change={versionChangeHandler}
     bind:value={version}
   >
@@ -41,4 +45,10 @@
       <option value={release.name}>{release.name}</option>
     {/each}
   </select>
+  {#if version !== releases[0].name}
+    <legend class="text-sm text-error mt-2"
+      >You are not using the latest Self-Hosted Version. Please consider
+      upgrading to the newest</legend
+    >
+  {/if}
 </div>

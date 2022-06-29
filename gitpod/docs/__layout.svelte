@@ -76,9 +76,6 @@
     class:extended-sticky={extendSticky}
     class="hidden z-20 sticky top-24 self-start lg:block lg:w-1/5"
   >
-    {#if $page.url.pathname.includes("/docs/self-hosted")}
-      <VersionSwitch bind:version />
-    {/if}
     <Search docSearchInputSelector="algolia-mobile" />
 
     <Menu MENU={activeSidebar} />
@@ -100,6 +97,9 @@
     class="lg:w-1/5 flex-col top-24 self-start sticky gap-4 pl-8 hidden lg:flex max-w-none flex-auto min-w-0"
   >
     <div class="lg:mb-4">
+      {#if $page.url.pathname.includes("/docs/self-hosted")}
+        <VersionSwitch bind:version />
+      {/if}
       <EditInGitpod />
     </div>
     <OnThisPageNav />
