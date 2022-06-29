@@ -36,7 +36,7 @@
 
 <style lang="postcss">
   .box {
-    @apply px-4 py-2 rounded-b-2xl rounded-tr-2xl border-t-0;
+    @apply px-4 py-4 rounded-b-2xl rounded-tr-2xl border-t-0;
   }
 
   li {
