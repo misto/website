@@ -70,7 +70,7 @@ It is recommended to have a minimum of two node pools, grouping the `meta` and `
 
 These are the components expected on each node:
 
-- Either Ubuntu 18.04, 20.04, or 22.04 with kernel ≥ v5.4 and ≤ v5.15
+- Either Ubuntu 20.04, or 22.04 with kernel ≥ v5.4 and ≤ v5.15
 - Calico for the networking overlay and network policy
 - Containerd ≥ 1.5 and ≤ 1.6
 - At least 4 vCPU and 8GB of RAM
