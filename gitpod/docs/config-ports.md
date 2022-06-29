@@ -70,7 +70,7 @@ ports:
     onOpen: open-browser
 ```
 
-### Specifying Port Names & Descriptions
+### Specifying port names & descriptions
 
 You can give ports a `name` and a `description` (both optional). These properties will help you to add context about what the port is being used for.
 
@@ -100,7 +100,7 @@ Port visibility can be set in [`.gitpod.yml`](/docs/references/gitpod-yml), or m
 <IdeToggle id="ide-toggle-ports">
 
 <div slot="jetbrains">
-Currently, toggling port visibility is not possible in JetBrains IDEs.
+    Currently, toggling port visibility is not possible in JetBrains IDEs.
 </div>
 
 <div slot="vscodebrowser">
@@ -111,7 +111,7 @@ Currently, toggling port visibility is not possible in JetBrains IDEs.
 </div>
 
 <div slot="vscodedesktop">
-Currently, toggling port visibility is not possible in VS Code Desktop.
+    Currently, toggling port visibility is not possible in VS Code Desktop.
 </div>
 
 </IdeToggle>
@@ -130,7 +130,7 @@ ports:
     onOpen: ignore
 ```
 
-## Port Forwarding
+## Port forwarding
 
 There are two types of port forwarding: local and remote.
 
@@ -141,7 +141,7 @@ Local port forwarding allows you to forward a port running in your Gitpod worksp
 <IdeToggle id="ide-toggle-ports">
 
 <div slot="jetbrains">
-    To forward a port in JetBrains, navigate to the preferences page in the [JetBrains Gateway](/docs/ides-and-editors/jetbrains-gateway) client to select the port and protocol to be forwarded.
+    <p>To forward a port in JetBrains, navigate to the preferences page in the <a href="/docs/ides-and-editors/jetbrains-gateway">JetBrains Gateway</a> client to select the port and protocol to be forwarded.</p>
     <figure>
     <img class="shadow-medium w-full rounded-xl max-w-3xl mt-x-small" alt="Port forwarding in a JetBrains IDE" src="/images/jetbrains-gateway/port-forward-jetbrains.png">
         <figcaption>Port forwarding in a JetBrains IDE</figcaption>
@@ -149,11 +149,11 @@ Local port forwarding allows you to forward a port running in your Gitpod worksp
 </div>
 
 <div slot="vscodebrowser">
-    Using the [Local Companion](/docs/ides-and-editors/local-companion), you can automatically forward all ports from your workspace to localhost. Setting up port forwarding for VS Code Browser allows you to use a project already configured with localhost without requiring any code changes.
+    <p>Using the <a href="/docs/ides-and-editors/local-companion">Local Companion</a>, you can automatically forward all ports from your workspace to localhost. Setting up port forwarding for VS Code Browser allows you to use a project already configured with <code>localhost</code> without requiring any code changes.</p>
 </div>
 
 <div slot="vscodedesktop">
-    With VS Code Desktop, all ports are automatically forwarded, allowing you to access any forwarded ports on your localhost address. You can also manually forward a port using the ports view.
+    <p>With VS Code Desktop, all ports are automatically forwarded, allowing you to access any forwarded ports on your localhost address. You can also manually forward a port using the ports view.</p>
 
     <figure>
     <img class="shadow-medium w-full rounded-xl max-w-3xl mt-x-small" alt="Port forwarding in VS Code Desktop" src="/images/editors/port-forwarding-vscode-desktop.png">
@@ -164,7 +164,7 @@ Local port forwarding allows you to forward a port running in your Gitpod worksp
 
 </IdeToggle>
 
-### Local Port Forwarding via SSH
+### Local port forwarding via SSH
 
 Using [SSH command-line](/docs/ides-and-editors/command-line) access to your workspace, ports can also be forwarded manually using tools such as the OpenSSH remote login client.
 
