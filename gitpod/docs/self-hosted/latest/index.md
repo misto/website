@@ -54,4 +54,4 @@ You want to use your own database, registry, object storage, or source control m
 
 ## Troubleshooting
 
-The [troubleshooting guide](./latest/troubleshooting) shows you how to create a support bundle. Take a look at our [support page](/support) to learn how to reach our community and support team.
+Refer to the [troubleshooting section](./latest/troubleshooting) for help with your Gitpod Self-Hosted Instance. You can also take a look at our [support page](/support) to learn how to reach our community and support team.

@@ -97,20 +97,31 @@ export const MENU: MenuEntry[] = [
     M("Browser Extension", "browser-extension"),
   ]),
   M("Gitpod Self-Hosted", "self-hosted/latest", [
-    M("Local Preview", "self-hosted/latest/local-preview", [], "alpha"),
-    M("Getting Started", "self-hosted/latest/getting-started"),
-    M("Reference Architectures", "self-hosted/latest/reference-architecture"),
-    M("Cluster Set-Up", "self-hosted/latest/cluster-set-up"),
-    M("Required Components", "self-hosted/latest/required-components"),
-    M("Advanced Installation", "self-hosted/latest/advanced"),
-    M("Updating Gitpod", "self-hosted/latest/updating"),
-    M("Monitoring", "self-hosted/latest/monitoring"),
+    M("Installation Guides", "self-hosted/latest/installation-guides", [
+      M("Local Preview", "self-hosted/latest/local-preview", [], "alpha"),
+      M("Getting Started", "self-hosted/latest/getting-started"),
+      M(
+        "Reference Architectures",
+        "self-hosted/latest/reference-architecture",
+        [],
+        "alpha"
+      ),
+      M("Cluster Set-Up", "self-hosted/latest/cluster-set-up"),
+      M("Advanced Installation", "self-hosted/latest/advanced"),
+    ]),
+    M("Operational Guides", "self-hosted/latest/operational-guides", [
+      M("Updating", "self-hosted/latest/updating"),
+      M("Monitoring", "self-hosted/latest/monitoring"),
+    ]),
     M("Troubleshooting", "self-hosted/latest/troubleshooting", [
       M("Support Bundles", "self-hosted/latest/support-bundle", []),
       M("Support Patches", "self-hosted/latest/support-patches", []),
     ]),
-    M("Telemetry", "self-hosted/latest/telemetry"),
-    M("Releases", "self-hosted/latest/releases"),
+    M("Reference", "self-hosted/latest/reference", [
+      M("Required Components", "self-hosted/latest/required-components"),
+      M("Releases", "self-hosted/latest/releases"),
+      M("Telemetry", "self-hosted/latest/telemetry"),
+    ]),
   ]),
   M("References", "references", [
     M(".gitpod.yml", "references/gitpod-yml"),

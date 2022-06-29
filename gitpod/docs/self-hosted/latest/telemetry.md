@@ -1,5 +1,6 @@
 ---
 section: self-hosted/latest
+subsection: reference
 title: Telemetry in Gitpod Self-Hosted
 ---
 

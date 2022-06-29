@@ -33,10 +33,10 @@ $ kubectl get secrets -n <namespace> ca-issuer-ca -o jsonpath='{.data.ca\.crt}' 
 
 ## Option 3: Bring your own certificate
 
-Upload your own TLS certificate, key, and (optionally) CA certificate. When your TLS certificate is signed by a publicly accepted TLS authority, you just need to upload your certificate and key. In case it is a self-signed certificate (e.g. signed by a corporate CA), you also need to upload your CA.
-
-![kots-tls-bring-own](../../static/images/docs/self-hosted/kots-tls-bring-own.png)
-
 > ⚠️ **Limitation**
 >
 > Adding custom CA certificates is currently _not_ supported on **Google Kubernetes Engine (GKE)** because on GKE `containerd` does not support custom certificates.
+
+Upload your own TLS certificate, key, and (optionally) CA certificate. When your TLS certificate is signed by a publicly accepted TLS authority, you just need to upload your certificate and key. In case it is a self-signed certificate (e.g. signed by a corporate CA), you also need to upload your CA.
+
+![kots-tls-bring-own](../../static/images/docs/self-hosted/kots-tls-bring-own.png)
