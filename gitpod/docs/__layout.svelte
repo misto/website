@@ -59,6 +59,9 @@
 
   onMount(() => {
     extendSticky = $displayBanner;
+    version = $page.url.pathname.includes("docs/self-hosted")
+      ? $page.url.pathname.split("/")[3]
+      : releases[0].name;
   });
   export let docsMeta: DocsMeta;
 
