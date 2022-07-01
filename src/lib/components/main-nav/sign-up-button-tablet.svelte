@@ -1,6 +1,6 @@
 <style lang="postcss">
   a {
-    @media (min-width: 1090px) {
+    @media (min-width: 1190px) {
       @apply hidden;
     }
   }

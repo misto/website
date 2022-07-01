@@ -1,16 +1,7 @@
 <script lang="ts">
-  import { onMount } from "svelte";
   import LinkButton from "$lib/components/ui-library/link-button";
   import GithubMark from "../svgs/github-mark.svelte";
-
-  let githubStarsEl: HTMLAnchorElement;
-
-  onMount(async () => {
-    const githubButtons = await import("github-buttons");
-    githubButtons.render(githubStarsEl, (el) => {
-      githubStarsEl.parentNode.replaceChild(el, githubStarsEl);
-    });
-  });
+  import ButtonsWrapper from "../buttons-wrapper.svelte";
 </script>
 
 <style lang="scss">
@@ -46,47 +37,6 @@
       }
     }
 
-    &__action {
-      margin-top: var(--small);
-      align-items: end;
-      @media (max-width: 972px) {
-        margin-top: var(--xx-small);
-      }
-
-      & > * {
-        display: grid;
-        grid-template-columns: 160px 100%;
-        gap: var(--xx-small);
-
-        @media (max-width: 1140px) {
-          display: flex;
-          gap: initial;
-
-          & > * {
-            &:not(:last-child) {
-              margin-right: var(--micro);
-            }
-          }
-        }
-      }
-    }
-
-    &__try-now {
-      margin-bottom: var(--micro);
-
-      @media (max-width: 972px) {
-        p {
-          font-size: var(--btn-small);
-        }
-      }
-
-      @media (max-width: 360px) {
-        & > :first-child {
-          flex: 0 0 110px;
-        }
-      }
-    }
-
     &__icons {
       display: flex;
       justify-content: space-between;
@@ -110,14 +60,6 @@
           width: 27px;
         }
       }
-    }
-
-    :global(body.dark) &__stars {
-      filter: invert(90%);
-    }
-
-    &__stars {
-      height: 2rem;
     }
 
     &__illustration {
@@ -144,37 +86,23 @@
       for each task, in the cloud, in seconds.
     </p>
     <div class="hero__action">
-      <div class="hero__try-now text-small">
-        <div>
-          <LinkButton
-            variant="primary"
-            href="https://gitpod.io/workspaces/"
-            size="large">Try Now</LinkButton
-          >
-        </div>
-        <p>
-          Open a workspace.
-          <br />
-          Start from any Git context.
-        </p>
-      </div>
+      <ButtonsWrapper class="mt-small mb-x-small">
+        <LinkButton
+          variant="primary"
+          href="https://gitpod.io/workspaces/"
+          size="large">Try Now</LinkButton
+        >
+        <LinkButton variant="cta" href="/contact/sales?get-a-demo" size="large"
+          >Get a demo</LinkButton
+        >
+      </ButtonsWrapper>
       <div>
         <div class="hero__icons">
           <img src="/svg/gitlab.svg" alt="GitLab logo" />
           <GithubMark alt="GitHub logo" />
           <img src="/svg/bitbucket.svg" alt="Bitbucket logo" />
         </div>
-        <div class="hero__stars">
-          <a
-            bind:this={githubStarsEl}
-            class="github-button"
-            href="https://github.com/gitpod-io/gitpod"
-            data-icon="octicon-star"
-            data-size="large"
-            data-show-count="true"
-            aria-label="Star the Gitpod Repo on GitHub">Star</a
-          >
-        </div>
+        <p class="text-p-small mt-macro">Start from any Git context.</p>
       </div>
     </div>
   </div>
