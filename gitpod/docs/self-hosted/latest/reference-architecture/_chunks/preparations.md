@@ -74,7 +74,7 @@ To deploy Gitpod on [Amazon Elastic Kubernetes Service (Amazon EKS)](https://doc
 
 Specifically for Gitpod's use, you will also need permissions to create these additional components:
 
-- Route53 DNS Zone for the intended Gitpod domain name (for use with Letsencrypt certificate generation)
+- Route53 DNS Zone for the intended Gitpod domain name (for use with Let's Encrypt certificate generation)
 - RDS Instance running MySQL 5.7 for Gitpod's database
 - S3 Bucket: Hosting Gitpod's workspace images and object storage
 - AWS IAM Service account: To enable access to the S3 bucket
@@ -83,15 +83,14 @@ This guide uses the following tools:
 
 - [AWS CLI](https://aws.amazon.com/cli/) for creating none EKS specific services
 - [EKS CLI `eksctl`](https://eksctl.io/) for creating the EKS cluster and nodegroups themselves
-- [Kubectl](https://kubernetes.io/docs/tasks/tools/) for performing kubernetes administration commands
-- [Helm](https://helm.sh/docs/intro/install/) for installing and configuring [cert-manager](https://cert-manager.io/docs/installation/helm/)
 
-Amazon has a brief run-through on how to [deploy a basic cluster](https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html) using the eksctl tooling if you'd like to familiarize yourself before deploying the Gitpod reference architecture.
+Amazon has a brief run-through on how to [deploy a basic cluster](https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html) using the `eksctl` tooling if you'd like to familiarize yourself before deploying the Gitpod reference architecture.
 
-Make sure you are logged in and are connected to the proper AWS account. Ensure AWS is configured and working with the command `aws sts get-caller-identity`. For later steps you will need to ensure that Kubectl is properly configured to authenticate to the newly provisioned EKS environment, you can review how those are credentials are [set here](https://docs.aws.amazon.com/eks/latest/userguide/create-kubeconfig.html).
+Make sure you are logged in and are connected to the proper AWS account. Ensure AWS is configured and working with the command `aws sts get-caller-identity`. For later steps you will need to ensure that `kubectl` is [properly configured to authenticate to the newly provisioned EKS environment](https://docs.aws.amazon.com/eks/latest/userguide/create-kubeconfig.html).
 
 **AWS Region Setting**
-All commands that follow assume you have set an environment variable of `AWS_REGION` to your appropriate region or have it configured in your profile already and so will not include `--region` or `--profile` when running the aws command. Refer to the [AWS CLI documentation](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-envvars.html) for more information.
+
+All commands that follow assume you have set an environment variable of `AWS_REGION` to your appropriate region or have it configured in your profile already and so will not include `--region` or `--profile` when running the `aws` command. Refer to the [AWS CLI documentation](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-envvars.html) for more information.
 
 </div>
 

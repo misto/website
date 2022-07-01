@@ -32,9 +32,9 @@ For Gitpod, we support Calico as CNI only. You need to make sure that you DO NOT
 </div>
 <div slot="aws">
 
-It is suggested to create a dedicated VPC (and EKS instance) for Gitpod. eksctl can do this for you, but if VPCs have to be configured separately, follow eksctl’s [suggestions](https://eksctl.io/usage/vpc-configuration/).
+It is suggested to create a dedicated VPC (and EKS instance) for Gitpod. `eksctl` can do this for you, but if VPCs have to be configured separately, follow `eksctl`’s [suggestions](https://eksctl.io/usage/vpc-configuration/).
 
-- You also customize eksctl’s [vpc](https://eksctl.io/usage/vpc-subnet-settings/#custom-subnet-topology) creation to suit your existing configurations.
+- You also customize `eksctl`’s [vpc](https://eksctl.io/usage/vpc-subnet-settings/#custom-subnet-topology) creation to suit your existing configurations.
 
 The VPC needs public and private subnets. All managed node groups and Gitpod services should run in the private subnet. Inbound access to the services should be through ALB/ELB services auto-provisioned by AWS based on the configuration used (standard LoadBalancer roles or creation of an Ingress). If running a jump host or vpn endpoint, it should be deployed in the public subnet.
 
@@ -113,21 +113,24 @@ gcloud dns managed-zones describe ${CLUSTER_NAME} --format json | jq '.nameServe
 </div>
 <div slot="aws">
 
-If the route53 zone has not yet been created, you can do so with the following command (replace `aws.gitpod-self-hosted.com.` with the intended zone):
+If the Route53 zone has not yet been created, you can do so with the following command (replace `gitpod.example.com.` with the intended zone):
 
 ```
 export ROUTE53_CALLER=$(cat /proc/sys/kernel/random/uuid)
-aws route53 create-hosted-zone --name aws.gitpod-self-hosted.com. --caller-reference $ROUTE53_CALLER --hosted-zone-config Comment="gitpod-zone"
+aws route53 create-hosted-zone \\
+    --name gitpod.example.com. \\
+    --caller-reference $ROUTE53_CALLER \\
+    --hosted-zone-config Comment="gitpod-zone"
 ```
 
-Once the domain has been provisioned, you can get the details with the below command and record the Id for use later:
+Once the domain has been provisioned, you can get the details with the following command and record `Id` for later usage:
 
 ```
-aws route53 list-hosted-zones --query 'HostedZones[?Name==`aws.gitpod-self-hosted.com.`]'
+aws route53 list-hosted-zones --query 'HostedZones[?Name==`gitpod.example.com.`]'
 [
     {
         "Id": "/hostedzone/Z1230498123094",
-        "Name": "aws.gitpod-self-hosted.com.",
+        "Name": "gitpod.example.com.",
         "CallerReference": "c43f5dfd-87d9-45fc-bb1f-33bf35d8244b",
         "Config": {
             "Comment": "",
@@ -138,18 +141,19 @@ aws route53 list-hosted-zones --query 'HostedZones[?Name==`aws.gitpod-self-hoste
 ]
 ```
 
-With route 53 created, you can now proceed to install cert-manager. Cert-manager is needed for Gitpod's internal networking even if you are managing DNS yourself.
+With Route53 created, you can now proceed to install cert-manager. Cert-manager is needed for Gitpod's internal networking even if you are managing DNS yourself.
 
 </div>
 </CloudPlatformToggle>
 
 Gitpod secures its internal communication between components with **TLS certificates**. You need to have a **[cert-manager](https://cert-manager.io/)** instance in your cluster that is responsible for issuing these certificates. There are different ways to install cert-manager. If you don’t have a cert-manager instance in your cluster, please refer to the [cert-manager docs](https://cert-manager.io/docs/) to choose an installation method.
 
-<details>
-  <summary  class="text-p-medium">Example on how to install cert-manager with helm</summary>
+<CloudPlatformToggle>
+<div slot="gcp">
+
+Example on how to installe cert-manager on GCP:
 
 ```
-# See the AWS section below for deploying cert-manager in EKS
 helm repo add jetstack https://charts.jetstack.io
 helm repo update
 helm upgrade \\
@@ -166,7 +170,41 @@ helm upgrade \\
     jetstack/cert-manager
 ```
 
-</details>
+</div>
+<div slot="aws">
+
+Due to the networking behavior and service accounts in EKS, cert-manager needs a different installation procedure. First, install cert-manager with the following command:
+
+```
+helm repo add jetstack https://charts.jetstack.io
+helm repo update
+helm upgrade \\
+    --atomic \\
+    --cleanup-on-fail \\
+    --create-namespace \\
+    --install \\
+    --namespace cert-manager \\
+    --reset-values \\
+    --set installCRDs=true \\
+    --set webhook.hostNetwork=true \\
+    --set serviceAccount.create=false \\
+    --set webhook.securePort=10260 \\
+    --set serviceAccount.name=cert-manager \\
+    --wait \\
+    cert-manager \\
+    jetstack/cert-manager
+```
+
+Once installation has completed, you will need to update the cert-manager security context setting for the service account provisioned for cert-manager by `eksctl`:
+
+```
+kubectl patch deployment cert-manager -n cert-manager -p \\
+  '{"spec":{"template":{"spec":{"securityContext":{"fsGroup":1001,"runAsNonRoot": true}}}}}'
+
+```
+
+</div>
+</CloudPlatformToggle>
 
 In this reference architecture, we use cert-manager to also create **TLS certificates for the Gitpod domain**. Since we need wildcard certificates for the subdomains, you must use the [DNS-01 challenge](https://letsencrypt.org/docs/challenge-types/#dns-01-challenge). In case you already have TLS certificates for your domain, you can skip this step and use your own certificates during the installation.
 
@@ -218,61 +256,29 @@ kubectl apply -f issuer.yaml
 </div>
 <div slot="aws">
 
-Due to the networking behavior and service accounts in EKS, cert-manager needs a different installation procedure. First, install cert-manager with the following command:
-
-```
-helm repo add jetstack https://charts.jetstack.io
-helm repo update
-helm upgrade \
-    --atomic \
-    --cleanup-on-fail \
-    --create-namespace \
-    --install \
-    --namespace cert-manager \
-    --reset-values \
-    --set installCRDs=true \
-    --set webhook.hostNetwork=true \
-    --set serviceAccount.create=false \
-    --set webhook.securePort=10260 \
-    --set serviceAccount.name=cert-manager \
-    --wait \
-    cert-manager \
-    jetstack/cert-manager
-```
-
-Once installation has completed, you will need to update the cert-manager security context setting for the service account provisioned for cert-manager by eksctl:
-
-```
-kubectl patch deployment cert-manager -n cert-manager -p \
-  '{"spec":{"template":{"spec":{"securityContext":{"fsGroup":1001,"runAsNonRoot": true}}}}}'
-
-```
-
-If using eksctl and the cert-manager service account along with well-known policies AND you have your intended zone hosted in Route53, then follow the [cert-manager](https://cert-manager.io/docs/configuration/acme/dns01/route53/) configuration steps. An example ClusterIssuer using the hosted zone and cert-manager service account created by eksctl is below:
+If using `eksctl` and the cert-manager service account along with well-known policies AND you have your intended zone hosted in Route53, then follow the [cert-manager](https://cert-manager.io/docs/configuration/acme/dns01/route53/) configuration steps. An example cluster issuer using the hosted zone and cert-manager service account created by `eksctl` is below:
 
 ```yaml
 apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
 metadata:
-  name: letsencrypt
+  name: gitpod-issuer
   namespace: cert-manager
 spec:
   acme:
     server: https://acme-v02.api.letsencrypt.org/directory
-    email: "email@aws.gitpod-self-hosted.com"
+    email: "email@gitpod.example.com"
     privateKeySecretRef:
       name: letsencrypt
     solvers:
       - selector:
           dnsZones:
-            - "aws.gitpod-self-hosted.com"
+            - "gitpod.example.com"
         dns01:
           route53:
             region: us-east-1
             hostedZoneID: Z1230498123094
 ```
-
-In using this example, one would use `letsencrypt-prod` in the Gitpod self-hosted installer UI when asked for the name of the certificate ClusterIssuer.
 
 </div>
 </CloudPlatformToggle>

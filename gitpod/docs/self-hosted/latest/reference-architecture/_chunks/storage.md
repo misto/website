@@ -50,23 +50,24 @@ echo $S3_BUCKET_NAME
 ### Create the S3 Bucket and ensure it is private
 
 ```
-aws s3api create-bucket \
-    --bucket $S3_BUCKET_NAME \
-    --region eu-west-1 --create-bucket-configuration LocationConstraint=eu-west-1 \
+aws s3api create-bucket \\
+    --bucket $S3_BUCKET_NAME \\
+    --region eu-west-1 --create-bucket-configuration LocationConstraint=eu-west-1 \\
     --object-ownership BucketOwnerEnforced
-aws s3api put-public-access-block \
-    --bucket $S3_BUCKET_NAME \
+aws s3api put-public-access-block \\
+    --bucket $S3_BUCKET_NAME \\
     --public-access-block-configuration "BlockPublicAcls=true,IgnorePublicAcls=true,BlockPublicPolicy=true,RestrictPublicBuckets=true"
 ```
 
 ### Create an IAM user for credentials with access just to this bucket
 
 ```
-aws iam create-user --user-name gitpod-s3-access \
+aws iam create-user \\
+  --user-name gitpod-s3-access \\
   --tags Key=project,Value=gitpod
 ```
 
-Save the following file as S3_policy.json, replacing the resource name with the S3 bucket you created:
+Save the following file as `S3_policy.json`, replacing the resource name with the S3 bucket you created:
 
 ```json
 {
@@ -101,8 +102,11 @@ Save the following file as S3_policy.json, replacing the resource name with the 
 Create the policy, taking note of the ARN in the output:
 
 ```
-aws iam create-policy --policy-name gitpod_s3_access_policy --policy-document file://S3_policy.json \
-  --tags Key=project,Value=gitpod
+aws iam create-policy \\
+    --policy-name gitpod_s3_access_policy \\
+    --policy-document file://S3_policy.json \
+    --tags Key=project,Value=gitpod
+
 {
     "Policy": {
         "PolicyName": "gitpod_s3_access_policy",
@@ -128,13 +132,14 @@ aws iam create-policy --policy-name gitpod_s3_access_policy --policy-document fi
 Attach the policy to the IAM user you just created:
 
 ```
-aws iam attach-user-policy --user-name gitpod-s3-access \
-  --policy-arn 'arn:aws:iam::691173103445:policy/gitpod_s3_access_policy'
+aws iam attach-user-policy \\
+    --user-name gitpod-s3-access \\
+    --policy-arn 'arn:aws:iam::691173103445:policy/gitpod_s3_access_policy'
 ```
 
 ### Create and store user access token
 
-Be prepared to store the AccessKeyId and SecretAccessKey securely once you execute the following command:
+Be prepared to store the `AccessKeyId` and `SecretAccessKey` securely once you execute the following command:
 
 ```
 aws iam create-access-key --user-name gitpod-s3-access
@@ -154,7 +159,7 @@ This should result in an output similar to the following:
 }
 ```
 
-To test that this works, open a new shell session and configure it to use the AccessKeyId and SecretAccessKey you've just retrieved, and attempt to upload a file and then delete it:
+To test that this works, open a new shell session and configure it to use the `AccessKeyId` and `SecretAccessKey` you've just retrieved, and attempt to upload a file and then delete it:
 
 ```sh
 export AWS_ACCESS_KEY_ID=----------

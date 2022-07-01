@@ -58,5 +58,4 @@ Keep cert-manager selected for the TLS certificates options.
 
 </div>
 
-<div slot="aws"></div>
 </CloudPlatformToggle>

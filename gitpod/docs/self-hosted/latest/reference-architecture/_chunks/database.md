@@ -62,14 +62,16 @@ gcloud iam service-accounts keys create --iam-account "${MYSQL_SA_EMAIL}" \\
 </div>
 <div slot="aws">
 
-We will create an RDS MySQL db.m5g.large instance running MySQL 5.7. Before deploying an RDS instance, additional configuration has to be done to the VPC created by the eksctl command:
+We will create an RDS MySQL `db.m5g.large` instance running MySQL 5.7. Before deploying an RDS instance, additional configuration has to be done to the VPC created by the `eksctl` command:
 
 ### Create a RDS security group
 
 First find the subnet IDs for the public subnets in your environment. For deploying RDS in private subnets replace true with false in the below command:
 
-```sh
-aws ec2 describe-subnets  --filters "Name=tag:project,Values=gitpod" --query 'Subnets[?MapPublicIpOnLaunch==`true`] | [*].[SubnetId, AvailabilityZone, CidrBlock, MapPublicIpOnLaunch]'
+```
+aws ec2 describe-subnets \\
+    --filters "Name=tag:project,Values=gitpod" \\
+    --query 'Subnets[?MapPublicIpOnLaunch==`true`] | [*].[SubnetId, AvailabilityZone, CidrBlock, MapPublicIpOnLaunch]'
 ```
 
 This should give you an output similar to the following:
@@ -97,22 +99,22 @@ This should give you an output similar to the following:
 ]
 ```
 
-Using the three subnet IDs, create an RDS subnet group, with the name gitpod-rds:
+Using the three subnet IDs, create an RDS subnet group, with the name `gitpod-rds`:
 
-```sh
-aws rds create-db-subnet-group \
-    --db-subnet-group-name gitpod-rds \
-    --db-subnet-group-description "Subnet for the Gitpod RDS deployment in VPC" \
-    --subnet-ids '[ "subnet-0686443f3f2782453", "subnet-010ea25d0e398f6df", "subnet-0f0370a5697d85df2" ]' \
+```
+aws rds create-db-subnet-group \\
+    --db-subnet-group-name gitpod-rds \\
+    --db-subnet-group-description "Subnet for the Gitpod RDS deployment in VPC" \\
+    --subnet-ids '[ "subnet-0686443f3f2782453", "subnet-010ea25d0e398f6df", "subnet-0f0370a5697d85df2" ]' \\
     --tags Key=project,Value=gitpod
 ```
 
 Now you will need to create a security group for the RDS instance, running a similar command as before:
 
 ```
-aws ec2 create-security-group --description 'Gitpod RDS' --group-name 'gitpod-rds' \
---vpc-id vpc-09a109f23dad0a298 \
---tag-specifications 'ResourceType=security-group,Tags=[{Key=Name,Value=gitpod-rds-sg},{Key=project,Value=gitpod},{Key=team,Value=cs}]'
+aws ec2 create-security-group --description 'Gitpod RDS' --group-name 'gitpod-rds' \\
+    --vpc-id vpc-09a109f23dad0a298 \\
+    --tag-specifications 'ResourceType=security-group,Tags=[{Key=Name,Value=gitpod-rds-sg},{Key=project,Value=gitpod},{Key=team,Value=cs}]'
 
 {
     "GroupId": "sg-0e538ccac25bb1387",
@@ -147,7 +149,7 @@ export MYSQL_GITPOD_PW=$(openssl rand -hex 18)
 echo $MYSQL_GITPOD_PW
 ```
 
-Now you can create the [Multi-AZ RDS instance](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.MultiAZSingleStandby.html) using the mysql password, the security group, and rds subnet you created in the previous steps:
+Now you can create the [Multi-AZ RDS instance](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.MultiAZSingleStandby.html) using the MySQL password, the security group, and RDS subnet you created in the previous steps:
 
 ```
 aws rds create-db-instance \
