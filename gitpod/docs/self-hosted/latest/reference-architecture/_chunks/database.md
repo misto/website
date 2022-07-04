@@ -6,7 +6,7 @@ layout: false
   import CloudPlatformToggle from "$lib/components/docs/cloud-platform-toggle.svelte";
 </script>
 
-Gitpod uses a **relational database management system** to store structural data. Gitpod supports MySQL. The database is a central component in Gitpod where all metadata about users and workspaces as well as settings of the Gitpod instance (as auth providers) are stored. That makes the database a critical component. In case of a database outage, you are not able to log in, use the Gitpod dashboard, or start workspaces.
+Gitpod uses a **relational database management system** to store structural data. Gitpod supports MySQL. The database is a central component in Gitpod where all metadata about users and workspaces as well as settings of the Gitpod instance (as auth providers) are stored. That makes the database a critical component. In case of a database outage, you will not be able to log in, use the Gitpod dashboard, or start workspaces.
 
 In this reference architecture, we use the managed databases by the cloud providers.
 

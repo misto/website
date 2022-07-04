@@ -50,7 +50,7 @@ You also need to configure your **DNS server**. If you have your own DNS server 
 
 In this reference architecture, we use [Google Cloud DNS](https://cloud.google.com/dns) for domain name resolution. To automatically configure Cloud DNS, we use [External DNS for Kubernetes](https://github.com/kubernetes-sigs/external-dns).
 
-At first, we need a **service account** with role `roles/dns.admin`. This service account is needed by cert-manager to alter the DNS settings for the DNS-01 resolution.
+First, we need a **service account** with role `roles/dns.admin`. This service account is needed by cert-manager to alter the DNS settings for the DNS-01 resolution.
 
 ```
 DNS_SA=gitpod-dns01-solver
