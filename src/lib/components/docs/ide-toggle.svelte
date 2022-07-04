@@ -139,4 +139,11 @@
       </article>
     {/if}
   {/if}
+  {#if $$slots.commandline}
+    {#if activeValue === 4}
+      <article class="box bg-white dark:bg-card" role="tabpanel">
+        <slot name="commandline" />
+      </article>
+    {/if}
+  {/if}
 </div>
