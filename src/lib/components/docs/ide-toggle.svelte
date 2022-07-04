@@ -124,12 +124,12 @@
         <slot name="vscodebrowser" />
       </article>
     {/if}
-    {#if $$slots.vscodedesktop}
-      {#if activeValue === 2}
-        <article class="box bg-white dark:bg-card" role="tabpanel">
-          <slot name="vscodedesktop" />
-        </article>
-      {/if}
+  {/if}
+  {#if $$slots.vscodedesktop}
+    {#if activeValue === 2}
+      <article class="box bg-white dark:bg-card" role="tabpanel">
+        <slot name="vscodedesktop" />
+      </article>
     {/if}
   {/if}
   {#if $$slots.jetbrains}
