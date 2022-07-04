@@ -86,7 +86,7 @@
       for each task, in the cloud, in seconds.
     </p>
     <div class="hero__action">
-      <ButtonsWrapper class="mt-small mb-x-small">
+      <ButtonsWrapper class="mt-x-small lg:mt-small mb-x-small">
         <LinkButton
           variant="primary"
           href="https://gitpod.io/workspaces/"
