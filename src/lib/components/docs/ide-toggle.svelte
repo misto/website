@@ -49,10 +49,14 @@
 <div class="my-8 mt-0">
   <header>
     <nav>
-      <ul class="flex flex-wrap !pl-0 !mb-0">
+      <ul class="flex flex-wrap !pl-0 !mb-0" role="tablist">
         {#each items as item}
           {#if Object.keys($$slots).includes(item.slotName)}
-            <li class="!before:hidden">
+            <li
+              class="!before:hidden"
+              role="tab"
+              aria-selected={item.value === activeValue}
+            >
               <span
                 tabindex="0"
                 class="rounded-t-2xl cursor-pointer px-4 py-2 hidden md:block {activeValue ===
@@ -77,13 +81,13 @@
   </header>
   {#if $$slots.vscodebrowser}
     {#if activeValue === 1}
-      <article class="box bg-white dark:bg-card">
+      <article class="box bg-white dark:bg-card" role="tabpanel">
         <slot name="vscodebrowser" />
       </article>
     {/if}
     {#if $$slots.vscodedesktop}
       {#if activeValue === 2}
-        <article class="box bg-white dark:bg-card">
+        <article class="box bg-white dark:bg-card" role="tabpanel">
           <slot name="vscodedesktop" />
         </article>
       {/if}
@@ -91,7 +95,7 @@
   {/if}
   {#if $$slots.jetbrains}
     {#if activeValue === 3}
-      <article class="box bg-white dark:bg-card">
+      <article class="box bg-white dark:bg-card" role="tabpanel">
         <slot name="jetbrains" />
       </article>
     {/if}
