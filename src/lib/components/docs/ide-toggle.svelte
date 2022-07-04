@@ -33,6 +33,40 @@
 
   const clickHandler = (tabValue: number) => () => (activeValue = tabValue);
 
+  const switchableIndexes = items
+    .filter((item) => Object.keys($$slots).includes(item.slotName))
+    .map((item) => item.value);
+
+  const switchHandler = (e: KeyboardEvent) => {
+    const currentIndex = switchableIndexes.indexOf(activeValue);
+    //@ts-ignore
+    const siblings = e.target.parentElement.children;
+    switch (e.code) {
+      case "ArrowRight":
+        {
+          e.preventDefault();
+          const willOverflow = currentIndex === switchableIndexes.length - 1;
+          activeValue = willOverflow
+            ? switchableIndexes[0]
+            : switchableIndexes[currentIndex + 1];
+          siblings[willOverflow ? 0 : currentIndex + 1].focus();
+        }
+        break;
+      case "ArrowLeft":
+        {
+          e.preventDefault();
+          const willOverflow = currentIndex === 0;
+          activeValue = willOverflow
+            ? switchableIndexes[switchableIndexes.length - 1]
+            : switchableIndexes[currentIndex - 1];
+          siblings[
+            willOverflow ? switchableIndexes.length - 1 : currentIndex - 1
+          ].focus();
+        }
+        break;
+    }
+  };
+
   export let id = "ide-toggle";
 </script>
 
@@ -49,22 +83,27 @@
 <div class="my-8 mt-0">
   <header>
     <nav>
-      <ul class="flex flex-wrap !pl-0 !mb-0" role="tablist">
+      <ul
+        class="flex flex-wrap !pl-0 !mb-0"
+        role="tablist"
+        on:keydown={switchHandler}
+      >
         {#each items as item}
           {#if Object.keys($$slots).includes(item.slotName)}
             <li
               class="!before:hidden"
               role="tab"
               aria-selected={item.value === activeValue}
+              tabindex="0"
+              on:click={clickHandler(item.value)}
+              on:focus={clickHandler(item.value)}
             >
               <span
-                tabindex="0"
                 class="rounded-t-2xl cursor-pointer px-4 py-2 hidden md:block {activeValue ===
                 item.value
                   ? 'bg-white dark:bg-card'
                   : 'bg-sand-dark dark:bg-light-black'} transition-all duration-200"
-                on:click={clickHandler(item.value)}
-                on:focus={clickHandler(item.value)}>{item.title}</span
+                >{item.title}</span
               >
               <span
                 class="rounded-t-2xl cursor-pointer px-4 py-2 md:hidden block {activeValue ===
