@@ -5,27 +5,27 @@
 
   export let items: comparisonItem[] = [
     {
-      mobileTitle: "JetBrains",
-      title: "JetBrains",
-      value: 1,
-      slotName: "jetbrains",
-    },
-    {
       mobileTitle: "VS Code Web",
       title: "VS Code Browser",
-      value: 2,
+      value: 1,
       slotName: "vscodebrowser",
     },
     {
       mobileTitle: "VS Code",
       title: "VS Code Desktop",
-      value: 3,
+      value: 2,
       slotName: "vscodedesktop",
+    },
+    {
+      mobileTitle: "JetBrains",
+      title: "JetBrains",
+      value: 3,
+      slotName: "jetbrains",
     },
     {
       mobileTitle: "Command Line",
       title: "Command Line",
-      value: 3,
+      value: 4,
       slotName: "commandline",
     },
   ];
@@ -75,24 +75,24 @@
       </ul>
     </nav>
   </header>
-  {#if $$slots.jetbrains}
-    {#if activeValue === 1}
-      <article class="box bg-white dark:bg-card">
-        <slot name="jetbrains" />
-      </article>
-    {/if}
-  {/if}
   {#if $$slots.vscodebrowser}
-    {#if activeValue === 2}
+    {#if activeValue === 1}
       <article class="box bg-white dark:bg-card">
         <slot name="vscodebrowser" />
       </article>
     {/if}
+    {#if $$slots.vscodedesktop}
+      {#if activeValue === 2}
+        <article class="box bg-white dark:bg-card">
+          <slot name="vscodedesktop" />
+        </article>
+      {/if}
+    {/if}
   {/if}
-  {#if $$slots.vscodedesktop}
+  {#if $$slots.jetbrains}
     {#if activeValue === 3}
       <article class="box bg-white dark:bg-card">
-        <slot name="vscodedesktop" />
+        <slot name="jetbrains" />
       </article>
     {/if}
   {/if}
