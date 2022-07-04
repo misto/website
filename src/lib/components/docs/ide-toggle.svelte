@@ -47,28 +47,34 @@
 </style>
 
 <div class="my-8 mt-0">
-  <ul class="flex flex-wrap !pl-0 !mb-0">
-    {#each items as item}
-      {#if Object.keys($$slots).includes(item.slotName)}
-        <li class="!before:hidden">
-          <span
-            class="rounded-t-2xl cursor-pointer px-4 py-2 hidden md:block {activeValue ===
-            item.value
-              ? 'bg-white dark:bg-card'
-              : 'bg-sand-dark dark:bg-light-black'} transition-all duration-200"
-            on:click={clickHandler(item.value)}>{item.title}</span
-          >
-          <span
-            class="rounded-t-2xl cursor-pointer px-4 py-2 md:hidden block {activeValue ===
-            item.value
-              ? 'bg-white dark:bg-card'
-              : 'bg-sand-dark dark:bg-light-black'} transition-all duration-200"
-            on:click={clickHandler(item.value)}>{item.mobileTitle}</span
-          >
-        </li>
-      {/if}
-    {/each}
-  </ul>
+  <header>
+    <nav>
+      <ul class="flex flex-wrap !pl-0 !mb-0">
+        {#each items as item}
+          {#if Object.keys($$slots).includes(item.slotName)}
+            <li class="!before:hidden">
+              <span
+                tabindex="0"
+                class="rounded-t-2xl cursor-pointer px-4 py-2 hidden md:block {activeValue ===
+                item.value
+                  ? 'bg-white dark:bg-card'
+                  : 'bg-sand-dark dark:bg-light-black'} transition-all duration-200"
+                on:click={clickHandler(item.value)}
+                on:focus={clickHandler(item.value)}>{item.title}</span
+              >
+              <span
+                class="rounded-t-2xl cursor-pointer px-4 py-2 md:hidden block {activeValue ===
+                item.value
+                  ? 'bg-white dark:bg-card'
+                  : 'bg-sand-dark dark:bg-light-black'} transition-all duration-200"
+                on:click={clickHandler(item.value)}>{item.mobileTitle}</span
+              >
+            </li>
+          {/if}
+        {/each}
+      </ul>
+    </nav>
+  </header>
   {#if $$slots.jetbrains}
     {#if activeValue === 1}
       <div class="box bg-white dark:bg-card">
