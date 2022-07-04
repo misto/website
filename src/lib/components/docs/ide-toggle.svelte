@@ -77,23 +77,23 @@
   </header>
   {#if $$slots.jetbrains}
     {#if activeValue === 1}
-      <div class="box bg-white dark:bg-card">
+      <article class="box bg-white dark:bg-card">
         <slot name="jetbrains" />
-      </div>
+      </article>
     {/if}
   {/if}
   {#if $$slots.vscodebrowser}
     {#if activeValue === 2}
-      <div class="box bg-white dark:bg-card">
+      <article class="box bg-white dark:bg-card">
         <slot name="vscodebrowser" />
-      </div>
+      </article>
     {/if}
   {/if}
   {#if $$slots.vscodedesktop}
     {#if activeValue === 3}
-      <div class="box bg-white dark:bg-card">
+      <article class="box bg-white dark:bg-card">
         <slot name="vscodedesktop" />
-      </div>
+      </article>
     {/if}
   {/if}
 </div>
