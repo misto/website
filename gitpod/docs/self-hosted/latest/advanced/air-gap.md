@@ -1,5 +1,6 @@
 ---
 section: self-hosted/latest
+subsection: installation-guides
 title: Install Gitpod in an Air-Gapped Network
 ---
 

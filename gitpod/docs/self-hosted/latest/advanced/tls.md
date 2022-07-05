@@ -1,5 +1,6 @@
 ---
 section: self-hosted/latest
+subsection: installation-guides
 title: TLS configuration for Gitpod Self-Hosted
 ---
 
