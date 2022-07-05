@@ -12,7 +12,7 @@
     description = "Spin up fresh, automated dev environments for each task, in the cloud, in seconds.",
     note = "",
     link = {
-      text: "Try Now",
+      text: "Try now",
       href: "https://gitpod.io/workspaces",
     },
     secondaryLink = {

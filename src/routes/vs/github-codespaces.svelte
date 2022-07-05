@@ -92,7 +92,7 @@
       text: "Simply add your build command into a .gitpod.yml file and let Gitpod do the heavy-lifting. Once you’ve experienced the freedom of ephemeral workspaces, you’ll never want to go back to long-lived manually-maintained environments.",
       link: {
         href: "https://gitpod.io/workspaces/",
-        text: "Try Now",
+        text: "Try now",
       },
     }}
     variant="primary"

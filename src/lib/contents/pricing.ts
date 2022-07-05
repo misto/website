@@ -29,7 +29,7 @@ export const pricingPlans: Pricing[] = [
           "Workspaces are stopped automatically after 30min of inactivity.",
       },
     ],
-    btnText: "Try Now",
+    btnText: "Try now",
     btnHref: "https://gitpod.io/workspaces/",
     trackingName: "free",
   },

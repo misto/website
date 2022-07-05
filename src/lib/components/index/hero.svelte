@@ -90,7 +90,7 @@
         <LinkButton
           variant="primary"
           href="https://gitpod.io/workspaces/"
-          size="large">Try Now</LinkButton
+          size="large">Try now</LinkButton
         >
         <LinkButton variant="cta" href="/contact/sales?get-a-demo" size="large"
           >Get a demo</LinkButton
