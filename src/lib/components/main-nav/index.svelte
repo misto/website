@@ -12,15 +12,8 @@
   import SignUpButtonTablet from "./sign-up-button-tablet.svelte";
   import AnnouncementBanner from "$lib/components/banners/announcement.svelte";
   import SkipToContent from "../skip-to-content.svelte";
-  import { onMount } from "svelte";
-  let githubStarsEl: HTMLAnchorElement;
+  import GithubStars from "./github-stars.svelte";
 
-  onMount(async () => {
-    const githubButtons = await import("github-buttons");
-    githubButtons.render(githubStarsEl, (el) => {
-      githubStarsEl.parentNode.replaceChild(el, githubStarsEl);
-    });
-  });
   // import { session } from "$app/stores";
 
   let scroll: number;
@@ -115,8 +108,10 @@
     @apply border-0;
   }
 
-  :global(body.dark) .stars {
-    filter: invert(90%);
+  .stars {
+    @media (min-width: 1190px) {
+      @apply hidden;
+    }
   }
 </style>
 
@@ -153,17 +148,7 @@
       {/each}
     </div>
     <div class="login-wrapper items-center hidden space-x-x-small">
-      <div class="stars h-7">
-        <a
-          bind:this={githubStarsEl}
-          class="github-button"
-          href="https://github.com/gitpod-io/gitpod"
-          data-icon="octicon-star"
-          data-size="large"
-          data-show-count="true"
-          aria-label="Star the Gitpod Repo on GitHub">Star</a
-        >
-      </div>
+      <GithubStars />
       {#if isLoggedIn}
         <DashboardButton />
       {:else}
@@ -171,7 +156,10 @@
         <DemoButton />
       {/if}
     </div>
-    <div class="flex items-center">
+    <div class="flex items-center space-x-micro">
+      <div class="stars">
+        <GithubStars />
+      </div>
       {#if !$menuState && !isLoggedIn}
         <SignUpButtonTablet />
       {/if}
