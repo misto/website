@@ -119,31 +119,47 @@
     </nav>
   </header>
   {#if $$slots.vscodebrowser}
-    {#if activeValue === 1}
-      <article class="box bg-white dark:bg-card" role="tabpanel">
-        <slot name="vscodebrowser" />
-      </article>
-    {/if}
+    <article
+      class={`box bg-white dark:bg-card ${activeValue !== 1 ? "hidden" : ""}`}
+      {...activeValue !== 1
+        ? { hidden: true, "aria-hidden": "true" }
+        : { hidden: false, "aria-hidden": "false" }}
+      role="tabpanel"
+    >
+      <slot name="vscodebrowser" />
+    </article>
   {/if}
   {#if $$slots.vscodedesktop}
-    {#if activeValue === 2}
-      <article class="box bg-white dark:bg-card" role="tabpanel">
-        <slot name="vscodedesktop" />
-      </article>
-    {/if}
+    <article
+      class={`box bg-white dark:bg-card ${activeValue !== 2 ? "hidden" : ""}`}
+      {...activeValue !== 2
+        ? { hidden: true, "aria-hidden": "true" }
+        : { hidden: false, "aria-hidden": "false" }}
+      role="tabpanel"
+    >
+      <slot name="vscodedesktop" />
+    </article>
   {/if}
   {#if $$slots.jetbrains}
-    {#if activeValue === 3}
-      <article class="box bg-white dark:bg-card" role="tabpanel">
-        <slot name="jetbrains" />
-      </article>
-    {/if}
+    <article
+      class={`box bg-white dark:bg-card ${activeValue !== 3 ? "hidden" : ""}`}
+      {...activeValue !== 3
+        ? { hidden: true, "aria-hidden": "true" }
+        : { hidden: false, "aria-hidden": "false" }}
+      role="tabpanel"
+    >
+      <slot name="jetbrains" />
+    </article>
   {/if}
   {#if $$slots.commandline}
-    {#if activeValue === 4}
-      <article class="box bg-white dark:bg-card" role="tabpanel">
-        <slot name="commandline" />
-      </article>
-    {/if}
+    <article
+      class={`box bg-white dark:bg-card ${activeValue !== 4 ? "hidden" : ""}`}
+      {...activeValue !== 4
+        ? { hidden: true, "aria-hidden": "true" }
+        : { hidden: false, "aria-hidden": "false" }}
+      role="tabpanel"
+    >
+      <slot name="commandline" />
+    </article>
   {/if}
 </div>
