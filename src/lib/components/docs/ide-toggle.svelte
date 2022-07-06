@@ -79,11 +79,11 @@
           ].focus();
         }
         break;
-      case "Numpad7":
+      case "Home":
         e.preventDefault();
         activeValue = switchableIndexes[0];
         break;
-      case "Numpad1":
+      case "End":
         e.preventDefault();
         activeValue = switchableIndexes[switchableIndexes.length - 1];
         break;
@@ -118,7 +118,7 @@
               role="tab"
               aria-selected={item.value === activeValue}
               aria-controls={ariaIds.tabpanel[item.slotName]}
-              tabindex="0"
+              tabindex={item.value === activeValue ? 0 : -1}
               on:click={clickHandler(item.value)}
               on:focus={clickHandler(item.value)}
               id={getUnusedId(item.slotName, "tab")}
@@ -147,8 +147,8 @@
     <article
       class={`box bg-white dark:bg-card ${activeValue !== 1 ? "hidden" : ""}`}
       {...activeValue !== 1
-        ? { hidden: true, "aria-hidden": "true" }
-        : { hidden: false, "aria-hidden": "false" }}
+        ? { hidden: true, "aria-hidden": "true", tabindex: -1 }
+        : { hidden: false, "aria-hidden": "false", tabindex: 0 }}
       aria-labelledby={ariaIds?.tab?.vscodebrowser}
       id={getUnusedId("vscodebrowser", "tabpanel")}
       role="tabpanel"
@@ -160,8 +160,8 @@
     <article
       class={`box bg-white dark:bg-card ${activeValue !== 2 ? "hidden" : ""}`}
       {...activeValue !== 2
-        ? { hidden: true, "aria-hidden": "true" }
-        : { hidden: false, "aria-hidden": "false" }}
+        ? { hidden: true, "aria-hidden": "true", tabindex: -1 }
+        : { hidden: false, "aria-hidden": "false", tabindex: 0 }}
       aria-labelledby={ariaIds?.tab?.vscodedesktop}
       id={getUnusedId("vscodedesktop", "tabpanel")}
       role="tabpanel"
@@ -173,8 +173,8 @@
     <article
       class={`box bg-white dark:bg-card ${activeValue !== 3 ? "hidden" : ""}`}
       {...activeValue !== 3
-        ? { hidden: true, "aria-hidden": "true" }
-        : { hidden: false, "aria-hidden": "false" }}
+        ? { hidden: true, "aria-hidden": "true", tabindex: -1 }
+        : { hidden: false, "aria-hidden": "false", tabindex: 0 }}
       aria-labelledby={ariaIds?.tab?.jetbrains}
       id={getUnusedId("jetbrains", "tabpanel")}
       role="tabpanel"
@@ -186,8 +186,8 @@
     <article
       class={`box bg-white dark:bg-card ${activeValue !== 4 ? "hidden" : ""}`}
       {...activeValue !== 4
-        ? { hidden: true, "aria-hidden": "true" }
-        : { hidden: false, "aria-hidden": "false" }}
+        ? { hidden: true, "aria-hidden": "true", tabindex: -1 }
+        : { hidden: false, "aria-hidden": "false", tabindex: 0 }}
       aria-labelledby={ariaIds?.tab?.commandline}
       id={getUnusedId("commandline", "tabpanel")}
       role="tabpanel"
