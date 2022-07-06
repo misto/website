@@ -36,12 +36,12 @@
   let ariaIds: any = { tab: {}, tabpanel: {} };
 
   const getUnusedId = (() => {
-    let counter = 1;
+    let counter = { tab: 1, tabpanel: 1 };
     return (name: string, role: "tab" | "tabpanel") => {
       let theId: string;
       while (
         globalThis["document"] &&
-        document?.getElementById((theId = `${role}-${counter++}`))
+        document?.getElementById((theId = `${role}-${counter[role]++}`))
       );
       ariaIds[role][name] = theId;
       return theId;
