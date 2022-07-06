@@ -33,6 +33,21 @@
 
   const clickHandler = (tabValue: number) => () => (activeValue = tabValue);
 
+  let ariaIds: any = { tab: {}, tabpanel: {} };
+
+  const getUnusedId = (() => {
+    let counter = 1;
+    return (name: string, role: "tab" | "tabpanel") => {
+      let theId: string;
+      while (
+        globalThis["document"] &&
+        document?.getElementById((theId = `${role}-${counter++}`))
+      );
+      ariaIds[role][name] = theId;
+      return theId;
+    };
+  })();
+
   const switchableIndexes = items
     .filter((item) => Object.keys($$slots).includes(item.slotName))
     .map((item) => item.value);
@@ -94,9 +109,11 @@
               class="!before:hidden"
               role="tab"
               aria-selected={item.value === activeValue}
+              aria-controls={ariaIds.tabpanel[item.slotName]}
               tabindex="0"
               on:click={clickHandler(item.value)}
               on:focus={clickHandler(item.value)}
+              id={getUnusedId(item.slotName, "tab")}
             >
               <span
                 class="rounded-t-2xl cursor-pointer px-4 py-2 hidden md:block {activeValue ===
@@ -124,6 +141,8 @@
       {...activeValue !== 1
         ? { hidden: true, "aria-hidden": "true" }
         : { hidden: false, "aria-hidden": "false" }}
+      aria-labelledby={ariaIds?.tab?.vscodebrowser}
+      id={getUnusedId("vscodebrowser", "tabpanel")}
       role="tabpanel"
     >
       <slot name="vscodebrowser" />
@@ -135,6 +154,8 @@
       {...activeValue !== 2
         ? { hidden: true, "aria-hidden": "true" }
         : { hidden: false, "aria-hidden": "false" }}
+      aria-labelledby={ariaIds?.tab?.vscodedesktop}
+      id={getUnusedId("vscodedesktop", "tabpanel")}
       role="tabpanel"
     >
       <slot name="vscodedesktop" />
@@ -146,6 +167,8 @@
       {...activeValue !== 3
         ? { hidden: true, "aria-hidden": "true" }
         : { hidden: false, "aria-hidden": "false" }}
+      aria-labelledby={ariaIds?.tab?.jetbrains}
+      id={getUnusedId("jetbrains", "tabpanel")}
       role="tabpanel"
     >
       <slot name="jetbrains" />
@@ -157,6 +180,8 @@
       {...activeValue !== 4
         ? { hidden: true, "aria-hidden": "true" }
         : { hidden: false, "aria-hidden": "false" }}
+      aria-labelledby={ariaIds?.tab?.commandline}
+      id={getUnusedId("commandline", "tabpanel")}
       role="tabpanel"
     >
       <slot name="commandline" />
