@@ -79,6 +79,14 @@
           ].focus();
         }
         break;
+      case "Numpad7":
+        e.preventDefault();
+        activeValue = switchableIndexes[0];
+        break;
+      case "Numpad1":
+        e.preventDefault();
+        activeValue = switchableIndexes[switchableIndexes.length - 1];
+        break;
     }
   };
 
