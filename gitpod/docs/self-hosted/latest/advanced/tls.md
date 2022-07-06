@@ -10,7 +10,7 @@ title: TLS configuration for Gitpod Self-Hosted
 
 # TLS configuration for Gitpod Self-Hosted
 
-To run your own Gitpod instance, you need a TLS certificate for your Gitpod domain. There are the following three options to provide these TLS certificates.
+To run your own Gitpod instance, you need a TLS certificate for your Gitpod domain. There are three options to provide these TLS certificates.
 
 ## Option 1: Cert-Manager
 

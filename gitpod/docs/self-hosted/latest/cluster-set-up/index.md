@@ -35,7 +35,7 @@ After completing the guides you will still need to configure [DNS](./requirement
 
 ### Supported Kubernetes Distributions
 
-Gitpod requires Kubernetes as an orchestration technology in order to spin up and down workspaces--ideally in combination with cluster autoscaling to minimise cost. We strongly recommend deploying a dedicated Kubernetes cluster just for Gitpod Self-Hosted.
+Gitpod requires Kubernetes as an orchestration technology in order to spin workspaces up and down--ideally in combination with cluster autoscaling to minimise cost. We strongly recommend deploying a dedicated Kubernetes cluster just for Gitpod Self-Hosted.
 
 > Kubernetes version `1.21` or above is required
 

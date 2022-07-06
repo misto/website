@@ -21,7 +21,7 @@ Before you can start with the installation, you need to prepare the following:
 1. You need to have a Docker registry available in your network where you can push images to and where your Kubernetes cluster can pull images from.
 1. You need to download installation bundles.
 
-We provide you with a URL and password to a download portal. There you find the following bundles that you need to download:
+We provide you with a URL and password to a download portal. There you will find the following bundles that you need to download:
 
 1. KOTS CLI package `kots_linux_amd64.tar.gz` <br/> (provides you with the `kubectl kots` CLI binary)
 2. KOTS Airgap Bundle `kotsadm.tar.gz` <br/> (provides you with the Docker images you need for the Gitpod KOTS installer)

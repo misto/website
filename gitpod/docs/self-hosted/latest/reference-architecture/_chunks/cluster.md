@@ -29,7 +29,7 @@ The following table gives an overview of the node types for the different cloud 
 
 <div slot="gcp">
 
-At first, we [create a **service account**](https://cloud.google.com/iam/docs/creating-managing-service-accounts) for the cluster. The service account needs to have the following roles:
+First, we [create a **service account**](https://cloud.google.com/iam/docs/creating-managing-service-accounts) for the cluster. The service account needs to have the following roles:
 
 | Roles                         |
 | ----------------------------- |
