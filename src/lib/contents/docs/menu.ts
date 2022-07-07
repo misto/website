@@ -119,7 +119,7 @@ export const MENU: MenuEntry[] = [
       M("Support Patches", "self-hosted/latest/support-patches", []),
     ]),
     M("Background", "self-hosted/latest/background", [
-      M("Disaster Recovery", "self-hosted/latest/disaster recovery"),
+      M("Disaster Recovery", "self-hosted/latest/disaster-recovery"),
     ]),
     M("Reference", "self-hosted/latest/reference", [
       M("Required Components", "self-hosted/latest/required-components"),
