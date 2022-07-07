@@ -1,0 +1,97 @@
+---
+section: self-hosted/latest
+subsection: operational-guides
+title: How to backup and restore Gitpod
+---
+
+<script context="module">
+  export const prerender = true;
+</script>
+
+# How to Backup and Restore Gitpod
+
+For [business continuity](https://en.wikipedia.org/wiki/Business_continuity_planning) purposes, it is important to think about how you might restore your ability to use Gitpod, and thus develop software in the event of a catastrophic failure of Gitpod or the underlying infrastructure it runs on. This guide assumes that you will be using the backup and restore strategy for disaster recovery and will guide you towards what needs to be backed up and how to restore using said backup. Please see our background reading around [disaster recovery](./disaster-recovery) for more background and context.
+
+> **Important:** When using Gitpod in a production setting (i.e. you depend on it), we expect you to use external dependencies akin to how they are configured in our [single cluster reference architecture](./reference-architecture/production-ready-single-cluster). Using the in-cluster, auto-configured dependencies is not recommended due to the fact that we do not provide an out-of-the-box way to back these up and the fact that they run in cluster, meaning that they are within the blast radius of a cluster failure.
+
+> **Note:** We recommend to regularly trial run a recovery using this method in order to ensure that it actually works in practice and to give yourself the chance to spot any unforeseen issues. Note: if you feel that the overhead of continuously executing agains this is too much, you can consider our SaaS offering.
+
+## What to back up
+
+It is critical to consider what needs to be backed up and ensure you take the necessary steps to back up each of the listed elements. What needs to be backed up is closely aligned with [Gitpod’s architecture](./reference-architecture/production-ready-single-cluster#overview) and how it runs.
+
+> **Note:** These are in order of priority. However you should consider ensuring a reliable way to backup all of these.
+
+### Database
+
+The database is a central component in Gitpod where all metadata about users and workspaces as well as settings of the Gitpod instance (such as auth providers) are stored. This makes the database a critical component. In case of a database outage, you are not able to log in, use the Gitpod dashboard, or start workspaces. We recommend using a cloud provider native relational database service that supports MySQL (ToDo: add link to product comp matrix). This means that you can rely on the best practices of each service for disaster recovery. For example:
+
+- **AWS Relational Database Service**: You can rely on RDS’s [backup and restore mechanisms](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_CommonTasks.BackupRestore.html) and set it up to run in [multiple availability zones](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/create-multi-az-db-cluster.html) to allow for higher availability. You can also consider other [disaster best practices](https://medium.com/tensult/amazon-rds-disaster-recovery-8a40dd8350ea).
+- **Google Cloud SQL:** You can rely on Cloud SQLs [backup and restore features](https://cloud.google.com/sql/docs/mysql/backup-recovery/backups) and run the instance in [high availability configuration](https://cloud.google.com/sql/docs/mysql/high-availability) to decrease the chance of failure. You can also refer to general [Google Cloud disaster recovery best practices](https://cloud.google.com/architecture/dr-scenarios-planning-guide).
+
+### Object Storage
+
+Gitpod uses **object storage** to store blob data. This includes workspace backups that are created when a workspace stops and are used to restore state upon restart. As such, in order to store the work of your users, it is critical to think about backing up this data and/or relying on the best practices for disaster recovery of the object storage service being used. For example:
+
+- **AWS S3:** You can consider using [cross-region replication](https://docs.aws.amazon.com/AmazonS3/latest/userguide/replication.html) to further increase reliability - although S3 already stores your data across multiple geographically distant _Availability Zones_ by default.
+- **Google Cloud Storage:** Consider using the [Multi-Regional Storage option](https://cloud.google.com/storage/docs/storage-classes) for additional availability.
+
+### OCI Image Registry
+
+This image registry is used by Gitpod to cache images, and store images it builds on behalf of users. _Note: This is **not** the registry that contains the images of Gitpod’s services._ As such, losing this data means that workspace starts may take longer because images need to be re-built. As such you can again rely on the best practices around disaster recovery of the image registry you are using. Some examples:
+
+- **AWS Elastic Container Registry (ECR):** Consider configuring your ECR instance with [Cross-Region replication](https://docs.aws.amazon.com/AmazonECR/latest/userguide/replication.html).
+
+### Application Config
+
+Although you could simply re-install Gitpod using the regular [installation path](./getting-started), this can take some time and you would need to re-configure it to the state you had last had it in. In order to minimize your recovery time, you can persist the application configuration by running the following (ideally on a regular basis):
+
+Run the following to get the current config values and store them in a `config.yml` file of your Gitpod installation:
+
+```bash
+kubectl kots get config --namespace <namespace> --appslug gitpod > config.yaml
+```
+
+Now get the current version label of the installed gitpod Version:
+
+```bash
+kubectl kots get app gitpod --namespace <namespace> -o json
+```
+
+This gives you something like this:
+
+```json
+[
+  {
+    "slug": "gitpod",
+    "state": "ready",
+    "versionlabel": "2022.6.0"
+  }
+]
+```
+
+See the [how to restore](backup-restore#how-to-restore) section for instructions on using the above to restore Gitpod.
+
+### Cluster Configuration
+
+In order to reduce the time it takes you to re-create a cluster, you can move to an infrastructure as code flow, e.g. by codifying the infrastructure you need within terraform scripts. Going forward, Gitpod will provide you with example terraform scripts (which are also use internally for testing) to create our reference architectures that you can use as a starting point.
+
+## How to restore
+
+The following explains how you might restore Gitpod after its underlying cluster fails.
+
+1. Recreate your infrastructure. Ideally, you do this using the terraform scripts you created before.
+2. Re-install gitpod, ideally using the config file that you stored using the instructions [above](./backup-restore#application-config). Then you run the following command to restore Gitpod to the previous state:
+
+   ```bash
+   kubectl kots install gitpod \
+           --app-version-label=<versionlabel>
+   	      --namespace <namespace> \
+           --name gitpod \
+           --shared-password <admin-console-password> \
+         	--license-file license.yaml \
+           --no-port-forward \
+           --config-values config.yaml
+   ```
+
+3. This should result in your Gitpod instance having the same state as before, thus allowing your users to pick up where they left off.
