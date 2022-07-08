@@ -35,14 +35,15 @@
 
   let ariaIds: any = { tab: {}, tabpanel: {} };
 
+  if (!globalThis.counter) {
+    globalThis.counter = { tab: 1, tabpanel: 1 };
+  }
+
   const getUnusedId = (() => {
-    let counter = { tab: 1, tabpanel: 1 };
+    //@ts-ignore
+    let { counter } = globalThis;
     return (name: string, role: "tab" | "tabpanel") => {
-      let theId: string;
-      while (
-        globalThis["document"] &&
-        document?.getElementById((theId = `${role}-${counter[role]++}`))
-      );
+      const theId = `${role}-${counter[role]++}`;
       ariaIds[role][name] = theId;
       return theId;
     };
