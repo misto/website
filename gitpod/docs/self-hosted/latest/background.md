@@ -1,14 +1,14 @@
 ---
 section: self-hosted/latest
 subsection: background
-title: Installation Guides
+title: Background
 ---
 
 <script context="module">
   export const prerender = true;
 </script>
 
-# Installation Guides
+# Background
 
 This section gives you relevant background information about Gitpod Self-Hosted:
 
