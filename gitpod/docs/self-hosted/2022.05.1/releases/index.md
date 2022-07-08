@@ -1,5 +1,6 @@
 ---
 section: self-hosted
+subsection: reference
 title: Self-Hosted Gitpod Releases and Versioning
 ---
 

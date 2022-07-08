@@ -111,7 +111,7 @@ Environment variables which are defined in [project](/docs/teams-and-projects#pr
 Important notes:
 
 - [Project-Specific Environment Variables](#project-specific-environment-variables) will take precedence over [User-Specific Environment Variables](#user-specific-environment-variables)
-- The `gp env` command is only linked with [User-Specific Environment Variables](#user-specific-environment-variables) but not [User-Specific Environment Variables](#project-specific-environment-variables). That means, if you set an environment variable with the `gp env` command, it will be saved in [your account settings](https://gitpod.io/variables).
+- The `gp env` command is only linked with [User-Specific Environment Variables](#user-specific-environment-variables) but not [Project-Specific Environment Variables](#project-specific-environment-variables). That means, if you set an environment variable with the `gp env` command, it will be saved in [your account settings](https://gitpod.io/variables).
 
 > **Warning:** Care should be taken with secrets. Allowing secrets to be accessed from workspaces will expose those secrets to anyone who can open the workspace.
 

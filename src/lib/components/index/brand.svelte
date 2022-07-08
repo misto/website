@@ -14,7 +14,7 @@
     display: flex;
     border: 2px solid transparent;
     justify-content: center;
-    margin: 0.75rem;
+    margin: var(--micro) 0.75rem;
   }
 </style>
 

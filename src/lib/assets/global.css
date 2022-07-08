@@ -126,6 +126,12 @@
     }
   }
 
+  .stroked-sand {
+    &::after {
+      @apply bg-sand-dark dark:bg-card;
+    }
+  }
+
   h2,
   h3,
   h4,

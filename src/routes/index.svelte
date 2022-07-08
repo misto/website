@@ -17,11 +17,12 @@
   import Testimonials from "$lib/components/index/testimonials.svelte";
   import GetStarted from "$lib/components/index/get-started/index.svelte";
   import OpenGraph from "$lib/components/open-graph.svelte";
-  import UsedBy from "$lib/components/index/used-by.svelte";
   import SpinUp from "$lib/components/index/spin-up.svelte";
   import Section from "$lib/components/section.svelte";
   import Resources from "$lib/components/resources.svelte";
+  import AnimatedLogos from "$lib/components/animated-logos.svelte";
   import Benefits from "$lib/components/benefits.svelte";
+  import UsedBy from "$lib/components/index/used-by.svelte";
 </script>
 
 <OpenGraph
@@ -45,6 +46,7 @@
 </svelte:head>
 
 <Hero />
+<AnimatedLogos />
 <Section>
   <Benefits {benefits} />
 </Section>

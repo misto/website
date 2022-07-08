@@ -145,6 +145,20 @@ jetbrains:
 The `version` property allows you to control whether to index for `stable`, `latest`, or `both` versions of {title} compatible with Gitpod.
 Users can switch between `stable` and `latest` versions of {title} on the [user preferences](https://gitpod.io/preferences) page.
 
+## Configure JVM options
+
+> Configuration of JVM options is currently in [Alpha](/docs/references/gitpod-releases) · [Send feedback](https://github.com/gitpod-io/gitpod/issues/8704).
+
+You can adjust JVM options for {title} backend, especially if you want to increase the `-Xmx` memory size. For example:
+
+```yaml
+jetbrains:
+  goland:
+    vmoptions: "-Xmx4g"
+```
+
+For more detailed information on JVM options, refer to [Common JVM Options](https://www.jetbrains.com/help/go/tuning-the-ide.html#common-jvm-options) from JetBrains documentation.
+
 ## FAQ
 
 - For the questions about supported IDEs and Editors in Gitpod, refer to [FAQs](/docs/ides-and-editors/faqs).

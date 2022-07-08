@@ -1,5 +1,6 @@
 ---
 section: self-hosted
+subsection: reference
 title: Required Components
 ---
 

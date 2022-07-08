@@ -49,6 +49,14 @@ export const programFeatures: Card[] = [
       src: "/svg/icons/file.svg",
     },
   },
+  {
+    title: "Provenance",
+    text: "<p> Gitpod generates SLSA level 1 compliant provenance. Starting with this level, build systems are required to keep a record of their involvement, which sources went into the build process, and which process was used. All this data is recorded using in-toto attestations and published alongside the actual build artifacts.</p>",
+    icon: {
+      src: "/svg/security/provenance.svg",
+    },
+    transform: "scale(1.5) translateY(.2rem)",
+  },
 ];
 
 export const thanksAction: Action = {

@@ -5,3 +5,8 @@ export type comparisonItem = {
   slotName: string;
   hidden?: boolean;
 };
+
+export type AvailabilityItem = {
+  label: string;
+  isSaas: boolean;
+};

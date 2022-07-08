@@ -80,22 +80,22 @@ Let's Encrypt offers a program called [certbot](https://certbot.eff.org/) to mak
 
 Assuming you have [certbot](https://certbot.eff.org/) installed, the following script will generate and configure the required certificates (notice the placeholders):
 
-```
+```bash
 export DOMAIN=your-domain.com
 export EMAIL=your@email.here
 export WORKDIR=$PWD/letsencrypt
 
-certbot certonly \\
-    --config-dir $WORKDIR/config \\
-    --work-dir $WORKDIR/work \\
-    --logs-dir $WORKDIR/logs \\
-    --manual \\
-    --preferred-challenges=dns \\
-    --email $EMAIL \\
-    --server https://acme-v02.api.letsencrypt.org/directory \\
-    --agree-tos \\
-    -d *.ws.$DOMAIN \\
-    -d *.$DOMAIN \\
+certbot certonly \
+    --config-dir $WORKDIR/config \
+    --work-dir $WORKDIR/work \
+    --logs-dir $WORKDIR/logs \
+    --manual \
+    --preferred-challenges=dns \
+    --email $EMAIL \
+    --server https://acme-v02.api.letsencrypt.org/directory \
+    --agree-tos \
+    -d *.ws.$DOMAIN \
+    -d *.$DOMAIN \
     -d $DOMAIN
 
 # move them into place

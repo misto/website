@@ -1,5 +1,6 @@
 ---
 section: self-hosted
+subsection: installation-guides
 title: Self-Hosted Reference Architectures
 ---
 

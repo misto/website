@@ -45,6 +45,7 @@ module.exports = {
         "less-important": "var(--less-important)",
 
         "sand-dark": "var(--sand-dark)",
+        "sand-dark-hover": "var(--sand-dark-hover)",
         "sand-light": "var(--sand-light)",
         white: "var(--white)",
 
@@ -62,6 +63,7 @@ module.exports = {
         black: "var(--black)",
         "off-black": "var(--off-black)",
         "light-black": "var(--light-black)",
+        "light-black-hover": "var(--light-black-hover)",
         "dark-grey": "var(--dark-grey)",
       },
       fontSize: {

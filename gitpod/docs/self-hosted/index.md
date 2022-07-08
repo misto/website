@@ -1,5 +1,5 @@
 ---
-section: self-hosted/latest
+section: self-hosted
 title: Gitpod Self-Hosted
 ---
 

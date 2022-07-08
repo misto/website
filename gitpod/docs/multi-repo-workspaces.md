@@ -11,68 +11,64 @@ title: Multi-repo Workspaces
 
 > {title} is currently in [Beta](/docs/references/gitpod-releases) · [Send feedback](https://github.com/gitpod-io/gitpod/issues/8623).
 
-If you use multiple repositories in your software project, you may find it useful to clone and develop in a single workspace. This avoids having to run multiple workspaces, and makes it easier to configure services which need to be aware of each other.
+If your software project is comprised of multiple source control repositories it is possible to configure Gitpod to clone these additional repositories through the configuration keys of `additionalRepositories` and `mainConfiguration` in the [.gitpod.yml](/docs/references/gitpod-yml) file which removes the need to run multiple workspaces, and makes it easier to configure services which need to be aware of each other.
 
-By configuring your repositories as described below, starting a new multi-repo workspace "just works", giving you a full dev environment with all the repositories cloned, properly checked out and prebuilt.
+## Cloning additional repositories
 
-There are two .gitpod.yml configuration keys, to support multi-repo workspaces.
-
-1. `additionalRepositories` - Used in the main .gitpod.yml, this holds a list of repository URLs to clone into the same workspace.
-
-2. `mainConfiguration` - Used in all the other repositories, this points to the repository with the main .gitpod.yaml. This is optional, but makes it possible to open the same workspace from any issue, branch or other context URL from any of the participating repositories.
-
-## Example
-
-Consider a fullstack scenerio, with a frontend and a backend repository. In this case we chose the frontend repo to store the main Gitpod workspace configuration.
-
-The `additionalRepositories` list contains an entry with the `url` of the backend repo, which will be cloned at the same directory level as the frontend repo, i.e. at `/workspace`. An optional `checkoutLocation` can override that path, relative to `/workspace`.
-
-If you open a workspace on a branch, Gitpod will try to check out the same-named branch in all repositories. If such a branch doesn’t exist Gitpod checks out the default branch.
-
-There are init and command [tasks](/docs/config-start-tasks) for **both** frontend and backend inside the main configuration. This is very similar to the configuration if frontend and backend were maintained in a [monorepo](https://github.com/jldec/fullstack).
-
-A `workspaceLocation` points to a VS Code .code-workspace file, so that both repos are opened in the IDE.
-
-### fullstack-frontend .gitpod.yml
+The `additionalRepositories` key is an array of repositories which contains two properties which define the source control `url` to clone and the `checkoutLocation` of where the repository is cloned is under `/workspaces`
 
 ```yaml
-# fullstack frontend .gitpod.yml
-# multi-repo
+# example .gitpod.yml from https://github.com/gitpod-io/demo-multi-repo-frontend
 additionalRepositories:
-  - url: https://github.com/jldec/fullstack-backend
-    checkoutLocation: fullstack-backend
+  - url: https://github.com/gitpod-io/demo-multi-repo-backend
+    # checkoutLocation is relative to /workspaces
+    checkoutLocation: backend
+```
+
+When the above configuration is defined then the following additional steps happen when Gitpod workspace is started:
+
+1. If you open a workspace on a branch, Gitpod will clone the same-named branch in all repositories. If such a branch doesn’t exist Gitpod checks out the default branch.
+1. The contents of `https://github.com/gitpod-io/demo-multi-repo-frontend` is cloned to `/workspaces/demo-multi-repo-frontend`
+1. The contents of `https://github.com/gitpod-io/demo-multi-repo-backend` is cloned to `/workspaces/backend`
+
+After all of the source control repositories have been cloned then the `before`, `init` and `command` [tasks](https://www.gitpod.io/docs/config-start-tasks) are executed as per normal. If you need to run commands (such as package installation or compilation) on the source control repositories which have been cloned then change your working directory the `checkoutLocation` location using the `before` task.
+
+```yaml
+# example .gitpod.yml from https://github.com/gitpod-io/demo-multi-repo-frontend
+additionalRepositories:
+  - url: https://github.com/gitpod-io/demo-multi-repo-backend
+    checkoutLocation: backend
 
 tasks:
+  - name: backend
+    # change working directory as per configured in `checkoutLocation`
+    # which is configured above as `/workspaces/backend`
+    before: |
+      cd ../backend
+    init: |
+      echo npm install
+    command: |
+      echo npm run dev
+
+    # changing of working directory is not required as these tasks will
+    # by default by executed in `/workspaces/demo-multi-repo-frontend`
   - name: frontend
     init: |
-      npm install
-      npm run build
+      echo npm install
+      echo npm run build
     command: |
-      # Configure the backend API
-      export FULLSTACK_BACKEND=`gp url 3001`
-      npm run dev
-
-  - name: backend
-    before: |
-      cd ../fullstack-backend
-    init: |
-      npm install
-    command: |
-      # configure the frontend for CORS
-      export FULLSTACK_FRONTEND=`gp url 3000`
-      npm start
-
-workspaceLocation: fullstack-frontend/fullstack.code-workspace
+      echo npm run dev
 ```
 
-### fullstack-backend .gitpod.yml
+Try it out at https://github.com/gitpod-io/demo-multi-repo-frontend
 
-The [fullstack-backend](https://github.com/jldec/fullstack-backend) repo delegates to the configuration from [fullstack-frontend](https://github.com/jldec/fullstack-frontend).
+## Delegating configuration
+
+The optional `mainConfiguration` configuration key when configured in additional repositories points to the repository with the main [.gitpod.yml](/docs/references/gitpod-yml) file and makes it possible to open the same workspace from any issue, branch or other context URL from any of the participating repositories. Since the main configuration is used for prebuilds, those will show up under the main project.
 
 ```yaml
-# fullstack backend .gitpod.yml
-# multi-repo
-mainConfiguration: https://github.com/jldec/fullstack-frontend
+# example .gitpod.yml from https://github.com/gitpod-io/demo-multi-repo-backend
+mainConfiguration: https://github.com/gitpod-io/demo-multi-repo-frontend
 ```
 
-Since the main configuration is used for prebuilds, those will show up under the main project.
+Try it out at https://github.com/gitpod-io/demo-multi-repo-backend

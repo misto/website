@@ -37,15 +37,30 @@ The best way to configure Gitpod is by using Gitpod - you could perform the foll
 
 **Congratulations**, you have started your first of many ephemeral developer environments 🎉!
 
+### Contribute with Gitpod badge
+
+To make it easy for anyone to start a Gitpod workspace based on your project, we recommend you add a badge to your `README.md`.
+
+<img src="https://img.shields.io/badge/Contribute%20with-Gitpod-908a85?logo=gitpod" alt="Contribute with Gitpod"/>
+
+```html
+<a href="https://gitpod.io/#<your-project-url>">
+  <img
+    src="https://img.shields.io/badge/Contribute%20with-Gitpod-908a85?logo=gitpod"
+    alt="Contribute with Gitpod"
+  />
+</a>
+```
+
 ### Open in Gitpod button
 
-To make it easy for anyone to start a Gitpod workspace based on your project, we recommend you add an "Open in Gitpod" button to your `README.md`.
+You can add the following button to your Development/Setup Docs so that users can launch projects in Gitpod and begin working on them without having to go through the entire setup process.
+
+<img src="https://gitpod.io/button/open-in-gitpod.svg" alt="Open with Gitpod"/>
 
 ```markdown
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#<your-project-url>)
 ```
-
-Remember to replace `<your-project-url>` with the URL to your GitHub, GitLab or Bitbucket repository.
 
 Next, let's help Gitpod understand your repository to automate the developer environment and turn on prebuilds to supercharge your development workflow.
 

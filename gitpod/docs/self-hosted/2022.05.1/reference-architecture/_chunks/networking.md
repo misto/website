@@ -50,29 +50,29 @@ You also need to configure your **DNS server**. If you have your own DNS server 
 
 In this reference architecture, we use [Google Cloud DNS](https://cloud.google.com/dns) for domain name resolution. To automatically configure Cloud DNS, we use [External DNS for Kubernetes](https://github.com/kubernetes-sigs/external-dns).
 
-At first, we need a **service account** with role `roles/dns.admin`. This service account is needed by cert-manager to alter the DNS settings for the DNS-01 resolution.
+First, we need a **service account** with role `roles/dns.admin`. This service account is needed by cert-manager to alter the DNS settings for the DNS-01 resolution.
 
-```
+```bash
 DNS_SA=gitpod-dns01-solver
 DNS_SA_EMAIL="${DNS_SA}"@"${PROJECT_NAME}".iam.gserviceaccount.com
 gcloud iam service-accounts create "${DNS_SA}" --display-name "${DNS_SA}"
-gcloud projects add-iam-policy-binding "${PROJECT_NAME}" \\
+gcloud projects add-iam-policy-binding "${PROJECT_NAME}" \
     --member serviceAccount:"${DNS_SA_EMAIL}" --role="roles/dns.admin"
 ```
 
 Save the service account key to the file `./dns-credentials.json`:
 
-```
-gcloud iam service-accounts keys create --iam-account "${DNS_SA_EMAIL}" \\
+```bash
+gcloud iam service-accounts keys create --iam-account "${DNS_SA_EMAIL}" \
     ./dns-credentials.json
 ```
 
 After that, we create a [managed zone](https://cloud.google.com/dns/docs/zones).
 
-```
+```bash
 DOMAIN=gitpod.example.com
-gcloud dns managed-zones create "${CLUSTER_NAME}" \\
-    --dns-name "${DOMAIN}." \\
+gcloud dns managed-zones create "${CLUSTER_NAME}" \
+    --dns-name "${DOMAIN}." \
     --description "Automatically managed zone by kubernetes.io/external-dns"
 ```
 
@@ -81,22 +81,22 @@ Now we are ready to install External DNS. Please refer to the [External DNS GKE 
 <details>
   <summary  class="text-p-medium">Example on how to install External DNS with helm</summary>
 
-```
+```bash
 helm repo add bitnami https://charts.bitnami.com/bitnami
 helm repo update
-helm upgrade \\
-    --atomic \\
-    --cleanup-on-fail \\
-    --create-namespace \\
-    --install \\
-    --namespace external-dns \\
-    --reset-values \\
-    --set provider=google \\
-    --set google.project="${PROJECT_NAME}" \\
-    --set logFormat=json \\
-    --set google.serviceAccountSecretKey=dns-credentials.json \\
-    --wait \\
-    external-dns \\
+helm upgrade \
+    --atomic \
+    --cleanup-on-fail \
+    --create-namespace \
+    --install \
+    --namespace external-dns \
+    --reset-values \
+    --set provider=google \
+    --set google.project="${PROJECT_NAME}" \
+    --set logFormat=json \
+    --set google.serviceAccountSecretKey=dns-credentials.json \
+    --wait \
+    external-dns \
     bitnami/external-dns
 ```
 
@@ -119,20 +119,20 @@ Gitpod secures its internal communication between components with **TLS certific
 <details>
   <summary  class="text-p-medium">Example on how to install cert-manager with helm</summary>
 
-```
+```bash
 helm repo add jetstack https://charts.jetstack.io
 helm repo update
-helm upgrade \\
-    --atomic \\
-    --cleanup-on-fail \\
-    --create-namespace \\
-    --install \\
-    --namespace cert-manager \\
-    --reset-values \\
-    --set installCRDs=true \\
-    --set 'extraArgs={--dns01-recursive-nameservers-only=true,--dns01-recursive-nameservers=8.8.8.8:53\,1.1.1.1:53}' \\
-    --wait \\
-    cert-manager \\
+helm upgrade \
+    --atomic \
+    --cleanup-on-fail \
+    --create-namespace \
+    --install \
+    --namespace cert-manager \
+    --reset-values \
+    --set installCRDs=true \
+    --set 'extraArgs={--dns01-recursive-nameservers-only=true,--dns01-recursive-nameservers=8.8.8.8:53\,1.1.1.1:53}' \
+    --wait \
+    cert-manager \
     jetstack/cert-manager
 ```
 
@@ -145,17 +145,17 @@ In this reference architecture, we use cert-manager to also create **TLS certifi
 
 Now, we are configuring [Google Cloud DNS for the DNS-01 challenge](https://cert-manager.io/docs/configuration/acme/dns01/google/). For this, we need to create a secret that contains the key for the DNS service account:
 
-```
+```bash
 CLOUD_DNS_SECRET=clouddns-dns01-solver
-kubectl create secret generic "${CLOUD_DNS_SECRET}" \\
-    --namespace=cert-manager \\
+kubectl create secret generic "${CLOUD_DNS_SECRET}" \
+    --namespace=cert-manager \
     --from-file=key.json="./dns-credentials.json"
 ```
 
 After that, we are telling cert-manager which service account it should use:
 
-```
-kubectl annotate serviceaccount --namespace=cert-manager cert-manager \\
+```bash
+kubectl annotate serviceaccount --namespace=cert-manager cert-manager \
     --overwrite "iam.gke.io/gcp-service-account=${DNS_SA_EMAIL}"
 ```
 
