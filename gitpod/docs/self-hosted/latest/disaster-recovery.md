@@ -16,7 +16,7 @@ title: Disaster Recovery
 
 Thinking about disaster recovery with Gitpod is essential for business continuity and compliance reasons given how critical Gitpod is within your business’ practices (it is not only used to write code for new features but also e.g. to fix a security vulnerability).
 
-When evaluating different disaster recovery strategies, it is important to keep in mind the business impact of different strategies. This impact is often defined by three key metrics that can influence each other:
+When evaluating different disaster recovery strategies, it is important to keep in mind the business impact of different strategies. This impact is often defined by these interconnected metrics:
 
 - **Recovery Time Objective (RTO):** this is the amount of time it takes to recover from a catastrophic failure. Applying this to Gitpod, this would be the time between a major outage that renders Gitpod unusable and the point at which Gitpod is restored and developers can develop again using it.
 - **Recovery Point Objective (RPO):** This is the maximum amount of data loss (measured by time) during an outage that is acceptable to the organisation. In Gitpod’s case, given that it deals with the work of developers, an acceptable time frame here is usually quite short because you do not want to lose any developer’s ongoing work.
@@ -38,7 +38,7 @@ This strategy has the benefit of being cost-effective because you only operate a
 
 ### Pilot Light (Medium RTO)
 
-With this strategy, you keep a secondary Kubernetes cluster running that is identical to the one used in production - but in a separate AZ and scaled down to the minimum set of nods. In case of a recovery, this means that you do not need to first spin up a cluster - but can use the one already running to install Gitpod onto (using the same external dependencies and thus data as your production cluster) and then shift traffic to. This can significantly reduce your time to recovery and is beneficial if you are aiming for a low RTO. However, this comes with the cost of running an additional cluster.
+With this strategy, you keep a secondary Kubernetes cluster running that is identical to the one used in production - but in a separate data center and scaled down to the minimum set of nods. In case of a recovery, this means that you do not need to first spin up a cluster - but can use the one already running to install Gitpod onto (using the same external dependencies and thus data as your production cluster) and then shift traffic to. This can significantly reduce your time to recovery and is beneficial if you are aiming for a low RTO. However, this comes with the cost of running an additional cluster.
 
 ### Warm Standby (Lowest RTO)
 
