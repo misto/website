@@ -26,7 +26,7 @@ Gitpod can be deployed and operated on your own infrastructure. It supports diff
 ## Prerequisites to Install Gitpod Self-Hosted
 
 - **Kubernetes expertise** <br />
-  Gitpod is a Kubernetes application that makes heavy use of various Kubernetes features. It is highly recommended to have sufficient Kubernetes experience in order to install Gitpod. These docs expect that you are able to create and maintain a Kubernetes cluster that meets our [requirements](./ /cluster-set-up) on your own.
+  Gitpod is a Kubernetes application that makes heavy use of various Kubernetes features. It is highly recommended to have sufficient Kubernetes experience in order to install Gitpod. These docs expect that you are able to create and maintain a Kubernetes cluster that meets our [requirements](./latest/cluster-set-up) on your own.
 
 - **Compatible Kubernetes cluster** <br />
   To install Gitpod you need to have a Kubernetes cluster up and running. There are a few [requirements](./latest/cluster-set-up) that must be met. For the three main supported cloud providers (_Google Kubernetes Engine_, _Amazon Elastic Kubernetes Service_, and _Microsoft Azure Kubernetes Service_) we provide [samples on how to create compatible clusters](./latest/cluster-set-up#cluster-set-up-guides).
