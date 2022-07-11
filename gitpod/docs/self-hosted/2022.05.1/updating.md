@@ -22,7 +22,7 @@ Open `http://localhost:8800` (port `8800` is opened on your node on `localh
 
 When an update is available, you will be asked to deploy the new version. You can run preflight checks on the new version and when you press deploy your current running version will be updated.
 
-In most cases, updates should work without further effort - and your existing data is carried over. In some cases (with breaking changes) we will provide instructions on how to upgrade to a specific version in our [Update Guides](../latest/releases#upgrade-guides).
+In most cases, updates should work without further effort - and your existing data is carried over. In some cases (with breaking changes) we will provide instructions on how to upgrade to a specific version in our [Update Guides](./releases#upgrade-guides).
 
 ![kots-admin-dashboard](../../static/images/docs/self-hosted/kots-admin-dashboard.png)
 
@@ -40,4 +40,4 @@ In this strategy, you run the newest version of Gitpod on a secondary (staging) 
 
 ### Live update (No downtime, higher risk, low cost)
 
-In this strategy, an update is applied to the live cluster hosting your production Gitpod installation. This incurs no downtime and no complexities around having to install Gitpod on two clusters, however, if something does go wrong you will need to be able to roll back (this is possible via the installation admin console). This strategy may not work if there are breaking changes that need to be addressed by you from one release to the next (see [Update Guides](../latest/releases#upgrade-guides)).
+In this strategy, an update is applied to the live cluster hosting your production Gitpod installation. This incurs no downtime and no complexities around having to install Gitpod on two clusters, however, if something does go wrong you will need to be able to roll back (this is possible via the installation admin console). This strategy may not work if there are breaking changes that need to be addressed by you from one release to the next (see [Update Guides](./releases#upgrade-guides)).

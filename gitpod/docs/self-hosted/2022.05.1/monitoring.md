@@ -93,4 +93,4 @@ The goal is that this metric stays as close to 0 as possible. If it starts to in
 
 ## Troubleshooting
 
-Please refer to the [troubleshooting](https://www.gitpod.io/docs/self-hosted/latest/troubleshooting) docs.
+Please refer to the [troubleshooting](./troubleshooting) docs.

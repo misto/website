@@ -68,6 +68,13 @@ export const mdsvexGlobalComponents = (options = {}) => {
       }
       return { code: `${imports}\n${content}` };
     },
+    markup({ content, filename }) {
+      if (!filename.match(extensionsRegex)) {
+        return { code: content };
+      }
+      const replaced = content.replace(/---/, `---\nfilepath: ${filename}`);
+      return { code: replaced };
+    },
   };
   return preprocessor;
 };
