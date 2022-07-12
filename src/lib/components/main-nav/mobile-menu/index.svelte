@@ -7,7 +7,6 @@
   import NavItem from "../nav-item.svelte";
   import DashboardButton from "../dashboard-button.svelte";
   import menuState from "./state";
-  import ContactLinkMobile from "./contact-link-mobile.svelte";
   import DemoButton from "../demo-button.svelte";
 
   export let navItems = [];
@@ -58,7 +57,6 @@
     {#each navItems as navItem}
       <NavItem {navItem} />
     {/each}
-    <ContactLinkMobile />
     {#if isLoggedIn}
       <DashboardButton />
     {:else}

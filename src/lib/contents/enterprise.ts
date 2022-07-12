@@ -7,7 +7,12 @@ import GitProviders from "../components/svgs/enterprise/git-providers.svelte";
 import { linuxSource } from "./terminal";
 import Jetbrains from "$lib/components/svgs/brands/jetbrains.svelte";
 import type { Quote } from "$lib/types/quote.type";
-import { redwoodJsQuote, sharesIoQuote, vizlibQuote } from "./customers";
+import {
+  factorialQuote,
+  redwoodJsQuote,
+  sharesIoQuote,
+  vizlibQuote,
+} from "./customers";
 import { jetbrainsQuote } from "./jetbrains-space";
 
 export const exploreContents: ExploreSection = {
@@ -32,7 +37,7 @@ export const featureCards: Card[] = [
     },
   },
   {
-    title: "Saas",
+    title: "SaaS",
     text: "Gitpod, managed in the cloud for you. Secure data storage in the cloud and minimal setup cost. Scale users as you need with full flexibility.",
     icon: {
       src: "/svg/icons/cloud.svg",
@@ -155,7 +160,7 @@ export const otherFeatures: Feature[] = [
 ];
 
 export const quotes: Quote[] = [
-  redwoodJsQuote,
+  factorialQuote,
   jetbrainsQuote,
   sharesIoQuote,
   vizlibQuote,

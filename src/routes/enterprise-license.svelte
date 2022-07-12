@@ -3,7 +3,6 @@
 </script>
 
 <script lang="ts">
-  import { goto } from "$app/navigation";
   import type { Form } from "$lib/types/form.type";
   import OpenGraph from "$lib/components/open-graph.svelte";
   import Textarea from "$lib/components/ui-library/textarea";
@@ -19,6 +18,7 @@
   import Checkbox from "$lib/components/ui-library/checkbox";
   import { tick } from "svelte";
   import { scrollToElement } from "../lib/utils/helpers";
+  import SubmissionSuccess from "$lib/components/submission-success.svelte";
 
   const formData: Form = {
     firstName: {
@@ -65,9 +65,10 @@
 
   let isSubmissionInProgress: boolean = false;
   let toType: EmailToType = "sales";
-
   let isFormDirty: boolean = false;
   let form: HTMLElement;
+  let isEmailSent = false;
+  let sectionStart: HTMLElement;
 
   $: isFormValid = Object.values(formData).every((field) => field.valid);
 
@@ -123,7 +124,10 @@
         body: JSON.stringify(emailToSend),
       });
       if (response.ok) {
-        goto("/docs/self-hosted/latest");
+        isEmailSent = true;
+        setTimeout(() => {
+          sectionStart.scrollIntoView();
+        });
       } else {
         console.error(response.statusText);
       }
@@ -161,8 +165,13 @@
 
 <Header tight={true}>
   <div slot="content">
-    <h1 class="h2">Fill this out to get additional users.</h1>
-    <p>Tell us how we can help and your license will be emailed shortly.</p>
+    <h1 class="h2">
+      Contact sales to get a professional license for Self-Hosted
+    </h1>
+    <p class="max-w-xl mx-auto">
+      Licenses for up to 10 users are free and will be emailed to you directly.
+      Tell us how we can help and our team gets back to you shortly.
+    </p>
   </div>
 </Header>
 
@@ -170,167 +179,172 @@
   size="small"
   class="shadow-normal p-xx-small sm:py-small sm:px-x-small md:p-medium mb-32 sm:mx-8"
 >
-  <form bind:this={form} on:submit|preventDefault={handleSubmit} novalidate>
-    <h2 class="h4 title">Customer Information</h2>
-
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-small">
-      <div>
-        <Input
-          label="First Name*"
-          hasError={isFormDirty && !formData.firstName.valid}
-          name="first-name"
-          id="first-name"
-          type="text"
-          bind:value={formData.firstName.value}
-          bind:element={formData.firstName.el}
-          on:change={() => {
-            formData.firstName.valid =
-              formData.firstName.value && formData.firstName.el.checkValidity();
-          }}
-          autocomplete="given-name"
-        />
-      </div>
-      <div>
-        <Input
-          hasError={isFormDirty && !formData.lastName.valid}
-          label="Last Name*"
-          name="last-name"
-          id="last-name"
-          type="text"
-          bind:value={formData.lastName.value}
-          bind:element={formData.lastName.el}
-          on:change={() => {
-            formData.lastName.valid =
-              formData.lastName.value && formData.lastName.el.checkValidity();
-          }}
-          autocomplete="family-name"
-        />
-      </div>
-      <div>
-        <Input
-          label="Work Email*"
-          hasError={isFormDirty && !formData.email.valid}
-          type="email"
-          name="e-mail"
-          id="email"
-          bind:value={formData.email.value}
-          bind:element={formData.email.el}
-          on:change={() => {
-            formData.email.valid =
-              formData.email.value && formData.email.el.checkValidity();
-          }}
-          autocomplete="email"
-        />
-      </div>
-      <div>
-        <Input
-          hasError={isFormDirty && !formData.company.valid}
-          label="Company*"
-          name="company"
-          id="company"
-          bind:value={formData.company.value}
-          bind:element={formData.company.el}
-          on:change={() => {
-            formData.company.valid =
-              formData.company.value && formData.company.el.checkValidity();
-          }}
-          type="text"
-          autocomplete="organization"
-        />
-      </div>
-      <div>
-        <Select
-          hasError={isFormDirty && !formData.country.valid}
-          label="Country*"
-          name="country"
-          bind:value={formData.country.value}
-          bind:element={formData.country.el}
-          on:change={() => {
-            formData.country.valid =
-              formData.country.value && formData.country.el.checkValidity();
-          }}
-          class="option"
-          autocomplete="country"
-          options={countryList}
-          placeholder="Select..."
-        />
-      </div>
-      <div>
-        <Select
-          placeholder="Select..."
-          options={noOfEngineers}
-          label="Total number of engineers*"
-          hasError={isFormDirty && !formData.noOfEngineers.valid}
-          name="noOfEngineers"
-          bind:value={formData.noOfEngineers.value}
-          bind:element={formData.noOfEngineers.el}
-          on:change={() => {
-            formData.noOfEngineers.valid =
-              formData.noOfEngineers.value &&
-              formData.noOfEngineers.el.checkValidity();
-          }}
-        />
-      </div>
-    </div>
-    <div class="mt-4">
-      <Textarea
-        label="Optionally, tell us more about your interest in Gitpod. What challenges
-        are you looking to solve? How can we help?"
-        cols="30"
-        rows="4"
-        bind:value={formData.message.value}
-        bind:element={formData.message.el}
-        name="message"
-        id="message"
+  <div bind:this={sectionStart}>
+    {#if isEmailSent}
+      <SubmissionSuccess
+        title={toType === "community-license"
+          ? "Check your email"
+          : "Thanks for your request, we'll be in touch shortly."}
+        text={toType === "community-license"
+          ? "We've just sent you your license key via email. Enjoy!"
+          : "Check out the Self-Hosted <a href='/docs/self-hosted/latest/getting-started'>getting started guide</a>."}
       />
-      <div class="my-4">
-        <Checkbox
-          hasError={isFormDirty && !formData.country.valid}
-          label="I consent to having this website store my submitted information so that the sales team can respond to my inquiry."
-          bind:checked={formData.consent.checked}
-          bind:element={formData.consent.el}
-          on:change={() => {
-            formData.consent.valid =
-              formData.consent.checked && formData.consent.el.validity.valid;
-          }}
-        />
-      </div>
-      <div class="mt-4">
-        <p class="text-sm my-4">
-          By submitting this form I acknowledge that I have read and understood <a
-            class="link"
-            href="/privacy">Gitpod’s Privacy Policy.</a
-          >
-        </p>
-        <Button
-          variant="cta"
-          size="medium"
-          type="submit"
-          isLoading={isSubmissionInProgress}
-          disabled={(isFormDirty && !isFormValid) || isSubmissionInProgress}
-        >
-          {#if toType === "community-license"}
-            Receive license
-          {:else}
-            Contact sales
+    {:else}
+      <form bind:this={form} on:submit|preventDefault={handleSubmit} novalidate>
+        <h2 class="h4 title">Customer Information</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-small">
+          <div>
+            <Input
+              label="First Name*"
+              hasError={isFormDirty && !formData.firstName.valid}
+              name="first-name"
+              id="first-name"
+              type="text"
+              bind:value={formData.firstName.value}
+              bind:element={formData.firstName.el}
+              on:change={() => {
+                formData.firstName.valid =
+                  formData.firstName.value &&
+                  formData.firstName.el.checkValidity();
+              }}
+              autocomplete="given-name"
+            />
+          </div>
+          <div>
+            <Input
+              hasError={isFormDirty && !formData.lastName.valid}
+              label="Last Name*"
+              name="last-name"
+              id="last-name"
+              type="text"
+              bind:value={formData.lastName.value}
+              bind:element={formData.lastName.el}
+              on:change={() => {
+                formData.lastName.valid =
+                  formData.lastName.value &&
+                  formData.lastName.el.checkValidity();
+              }}
+              autocomplete="family-name"
+            />
+          </div>
+          <div>
+            <Input
+              label="Work Email*"
+              hasError={isFormDirty && !formData.email.valid}
+              type="email"
+              name="e-mail"
+              id="email"
+              bind:value={formData.email.value}
+              bind:element={formData.email.el}
+              on:change={() => {
+                formData.email.valid =
+                  formData.email.value && formData.email.el.checkValidity();
+              }}
+              autocomplete="email"
+            />
+          </div>
+          <div>
+            <Input
+              hasError={isFormDirty && !formData.company.valid}
+              label="Company*"
+              name="company"
+              id="company"
+              bind:value={formData.company.value}
+              bind:element={formData.company.el}
+              on:change={() => {
+                formData.company.valid =
+                  formData.company.value && formData.company.el.checkValidity();
+              }}
+              type="text"
+              autocomplete="organization"
+            />
+          </div>
+          <div>
+            <Select
+              hasError={isFormDirty && !formData.country.valid}
+              label="Country*"
+              name="country"
+              bind:value={formData.country.value}
+              bind:element={formData.country.el}
+              on:change={() => {
+                formData.country.valid =
+                  formData.country.value && formData.country.el.checkValidity();
+              }}
+              class="option"
+              autocomplete="country"
+              options={countryList}
+              placeholder="Select..."
+            />
+          </div>
+          <div>
+            <Select
+              placeholder="Select..."
+              options={noOfEngineers}
+              label="Total number of engineers*"
+              hasError={isFormDirty && !formData.noOfEngineers.valid}
+              name="noOfEngineers"
+              bind:value={formData.noOfEngineers.value}
+              bind:element={formData.noOfEngineers.el}
+              on:change={() => {
+                formData.noOfEngineers.valid =
+                  formData.noOfEngineers.value &&
+                  formData.noOfEngineers.el.checkValidity();
+              }}
+            />
+          </div>
+        </div>
+        <div class="mt-4">
+          <Textarea
+            label="Optionally, tell us more about your interest in Gitpod. What challenges
+          are you looking to solve? How can we help?"
+            cols="30"
+            rows="4"
+            bind:value={formData.message.value}
+            bind:element={formData.message.el}
+            name="message"
+            id="message"
+          />
+          <div class="my-4">
+            <Checkbox
+              hasError={isFormDirty && !formData.country.valid}
+              label="I consent to having this website store my submitted information so that the sales team can respond to my inquiry."
+              bind:checked={formData.consent.checked}
+              bind:element={formData.consent.el}
+              on:change={() => {
+                formData.consent.valid =
+                  formData.consent.checked &&
+                  formData.consent.el.validity.valid;
+              }}
+            />
+          </div>
+          <div class="mt-4">
+            <p class="text-sm my-4">
+              By submitting this form I acknowledge that I have read and
+              understood <a class="link" href="/privacy"
+                >Gitpod’s Privacy Policy.</a
+              >
+            </p>
+            <Button
+              variant="cta"
+              size="medium"
+              type="submit"
+              isLoading={isSubmissionInProgress}
+              disabled={(isFormDirty && !isFormValid) || isSubmissionInProgress}
+            >
+              {#if toType === "community-license"}
+                Receive license
+              {:else}
+                Contact sales
+              {/if}
+            </Button>
+          </div>
+          {#if isFormDirty && !isFormValid}
+            <legend class="text-xs text-error block mt-1 mb-2">
+              Please fill out all required fields above
+            </legend>
           {/if}
-        </Button>
-      </div>
-      {#if isFormDirty && !isFormValid}
-        <legend class="text-xs text-error block mt-1 mb-2">
-          Please fill out all required fields above
-        </legend>
-      {/if}
-    </div>
-  </form>
-
-  <div class="mt-6">
-    <div>
-      <p>
-        <a href="/docs/self-hosted/latest"
-          >Skip the extra users and just go directly to the installation guides.</a
-        >
-      </p>
-    </div>
+        </div>
+      </form>
+    {/if}
   </div>
 </Card>

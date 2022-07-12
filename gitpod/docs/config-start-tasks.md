@@ -54,7 +54,7 @@ As displayed in the diagram above, we highly recommend you enable Prebuilds for 
 
 By the time you start a new workspace, all that's left to do is execute the `before` (optional) and `command` tasks. The latter most often starts a database and/or development server.
 
-> Let Gitpod run the time-consuming `init` tasks continously behind the scene so you and anyone who opens your project on Gitpod doesn't have to wait.
+> Let Gitpod run the time-consuming `init` tasks continuously behind the scene so you and anyone who opens your project on Gitpod doesn't have to wait.
 
 ### Restart a Workspace
 

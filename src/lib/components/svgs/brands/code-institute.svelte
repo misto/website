@@ -7,7 +7,6 @@
   version="1.1"
   viewBox="0 0 237.4 104.4"
   xml:space="preserve"
-  style="transform:scale(.7)"
   ><style>
     .st0,
     .st1 {

@@ -40,13 +40,13 @@ Gitpod can be deployed and operated on your own infrastructure. It supports diff
 - **Gitpod product license** <br />
   To install Gitpod, you need a license which you can get [here](/community-license).
 
+## Local Preview
+
+The [Local Preview](./latest/local-preview) provides you with a way to run Gitpod Self-Hosted locally on your machine to be able to experience it without having to spin up a Kubernetes cluster.
+
 ## Getting Started
 
 The [getting started guide](./latest/getting-started) provides you with step-by-step instructions on how to install Gitpod on your infrastructure.
-
-## Preview Installation
-
-The [preview installation](./latest/preview-install) provides you with step-by-step instructions on how to install Gitpod on your infrastructure.
 
 <!-- ## Advanced Installation
 
@@ -54,4 +54,4 @@ You want to use your own database, registry, object storage, or source control m
 
 ## Troubleshooting
 
-The [troubleshooting guide](./latest/troubleshooting) shows you how to create a support bundle. Take a look at our [support page](/support) to learn how to reach our community and support team.
+Refer to the [troubleshooting section](./latest/troubleshooting) for help with your Gitpod Self-Hosted Instance. You can also take a look at our [support page](/support) to learn how to reach our community and support team.

@@ -1,5 +1,6 @@
 ---
 section: self-hosted/latest
+subsection: installation-guides
 title: "Single-Cluster Production-Ready Reference Architecture"
 ---
 

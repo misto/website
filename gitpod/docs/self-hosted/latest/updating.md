@@ -1,5 +1,6 @@
 ---
 section: self-hosted/latest
+subsection: operational-guides
 title: Updating Gitpod Self-Hosted
 ---
 
@@ -7,9 +8,7 @@ title: Updating Gitpod Self-Hosted
   export const prerender = true;
 </script>
 
-# Updating your Gitpod Installation
-
-## How To Update
+# How to Update your Gitpod Installation
 
 At first, you need to start the installation admin console. In a terminal with configured `kubectl` run the following command (`<namespace>` is the Kubernetes namespace your Gitpod installation has been installed to):
 

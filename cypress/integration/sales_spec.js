@@ -18,6 +18,6 @@ describe("Test the sales contact form", () => {
     cy.findByLabelText(
       "I consent to having this website store my submitted information so that the sales team can respond to my inquiry."
     ).click({ force: true });
-    cy.findByText("Contact sales").click();
+    cy.findByText("Receive license").click();
   });
 });

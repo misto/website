@@ -13,6 +13,8 @@
   export let section;
   /** @type {string} */
   export let title;
+  /** @type {string} */
+  export let feature_owner;
 
   /** @type {string}*/
   export let subsection;
@@ -20,12 +22,6 @@
   $: $docsCurrentSectionStore = section;
   $: $docsCurrentSubSectionStore = subsection;
 </script>
-
-<style lang="postcss">
-  :global(pre[class*="language-"]) {
-    @apply rounded-xl;
-  }
-</style>
 
 <svelte:head>
   <link rel="stylesheet" href="/prism-solarized-light.min.css" />

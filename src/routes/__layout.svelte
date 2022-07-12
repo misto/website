@@ -31,9 +31,10 @@
   import CookieConsent from "$lib/components/banners/cookie-consent.svelte";
   import { key } from "$lib/components/banners/announcement.svelte";
   import type { BannerData } from "$lib/types/banner.type";
-  import { removeTrailingSlash } from "$lib/utils/helpers";
+  import { isEurope, removeTrailingSlash } from "$lib/utils/helpers";
   import Cookies from "js-cookie";
   import { cookies } from "$lib/constants";
+  import ContactWidget from "$lib/components/contact-widget.svelte";
 
   export let bannerData: BannerData;
 
@@ -45,6 +46,9 @@
     document.cookie = `gitpod-marketing-website-visited=true; Domain=.gitpod.io; Path=/; max-age=${
       365 * 24 * 60 * 60
     }`;
+    if (Cookies.get(cookies.ANALYTICAL) !== "false" && !isEurope()) {
+      Cookies.set(cookies.ANALYTICAL, "true", { expires: 365 });
+    }
   });
 
   $: if ($page.url.pathname) {
@@ -79,6 +83,7 @@
 
 <LayoutRoot>
   <Nav />
+  <ContactWidget />
   <LayoutMain>
     <slot />
   </LayoutMain>

@@ -11,7 +11,6 @@
   import { showHideOverflowY } from "$lib/utils/helpers";
   import SignUpButtonTablet from "./sign-up-button-tablet.svelte";
   import AnnouncementBanner from "$lib/components/banners/announcement.svelte";
-  import ContactLink from "./contact-link.svelte";
   import SkipToContent from "../skip-to-content.svelte";
   // import { session } from "$app/stores";
 
@@ -141,7 +140,6 @@
       {/each}
     </div>
     <div class="login-wrapper items-center hidden space-x-x-small">
-      <ContactLink />
       {#if isLoggedIn}
         <DashboardButton />
       {:else}

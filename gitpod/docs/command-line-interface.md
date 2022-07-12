@@ -145,6 +145,10 @@ Extends the current workspace's timeout.
 
 The default timeout, and the ability to extend a workspace timeout depends on your [plan](https://gitpod.io/plans) or [team plan](https://gitpod.io/teams).
 
+### show
+
+Shows the current workspace's timeout. The workspace timeout may be extended using `gp timeout extend` if available on the user's [plan](https://gitpod.io/plans) or [team plan](https://gitpod.io/teams).
+
 ## ports
 
 Provides a way to manage a workspace's ports. Applies to both: ports defined in [.gitpod.yml](/docs/references/gitpod-yml) and ports that are undeclared but are opened during the lifetime of the workspace.

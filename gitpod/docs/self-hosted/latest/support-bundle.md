@@ -1,7 +1,7 @@
 ---
 section: self-hosted/latest
 subsection: troubleshooting
-title: Support Patches
+title: Support Bundles
 ---
 
 <script context="module">

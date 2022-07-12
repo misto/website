@@ -1,7 +1,6 @@
 <svg
   {...$$props}
   xmlns="http://www.w3.org/2000/svg"
-  style="transform:scale(.5)"
   viewBox="0 0 926.906 321.777"
   ><g class="fill-sub dark:fill-divider-light"
     ><path

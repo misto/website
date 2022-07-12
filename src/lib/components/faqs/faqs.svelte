@@ -7,6 +7,7 @@
   import { writable } from "svelte/store";
   import Faq from "./faq.svelte";
   import type { FAQ } from "$lib/types/faq.type";
+  import StructuredData from "./structured-data.svelte";
 
   export let faq: FAQ;
 
@@ -23,3 +24,5 @@
     {/each}
   </div>
 </div>
+
+<StructuredData {faq} />
