@@ -30,7 +30,7 @@
     },
     {
       src: "/images/gitpod-editor.jpg",
-      alt: "Gitpod",
+      alt: "Gitpod Light Theme",
       text: "light theme screenshot",
       btnText: "JPG",
       imgClass: "shadow-brand",

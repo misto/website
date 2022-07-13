@@ -4,8 +4,8 @@ date: Friday, 6 May 2022 11:00:00 UTC
 title: Connect Multiple Repositories on Gitpod using Tailscale
 slug: connect-multiple-repositories-using-tailscale
 excerpt: Tailscale’s secure mesh technology based on WireGuard can connect machines securely across the internet, frictionlessly. ✨ This article will show how easy it is to connect Gitpod workspaces over a secure tunnel provided by Tailscale.
-teaserImage: header.png
-image: teaser.png
+teaserImage: header.jpg
+image: teaser.jpg
 ---
 
 <script context="module">
@@ -167,7 +167,7 @@ tasks:
         API_URL="http://$API_IP:5000/api" npm run dev
       else
         echo "🐳 Failed to connect to $REPO_NAME. Make sure a $REPO_NAME workspace is active and logged into Tailscale."
-        
+
         npm run dev
       fi
     env:

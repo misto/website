@@ -13,6 +13,7 @@ export type Quote = {
         alt: string;
       }
     | any;
+  companyLogoProps?: any;
   img?: {
     src: string;
     alt: string;

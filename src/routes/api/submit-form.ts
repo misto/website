@@ -1,5 +1,6 @@
 import type { RequestHandler } from "@sveltejs/kit";
 import * as client from "@sendgrid/mail";
+import save from "$lib/api/save-to-spreadsheet";
 import type { Email, EmailToType } from "$lib/api/api";
 
 const determineToEmail = (toType: EmailToType = "contact") => {
@@ -7,6 +8,8 @@ const determineToEmail = (toType: EmailToType = "contact") => {
     case "contact":
       return process.env.SENDGRID_TO_EMAIL_CONTACT;
     case "sales":
+      return process.env.SENDGRID_TO_EMAIL_SALES;
+    case "community-license":
       return process.env.SENDGRID_TO_EMAIL_SALES;
     default:
       return "contact-test@gitpod.io";
@@ -55,6 +58,20 @@ async function sendEmail(
   }
 }
 
+async function saveToSheet(sheetTitle: string, data: any) {
+  const isSaved = await save({
+    sheetTitle,
+    data,
+  });
+
+  const statusCode = isSaved ? 200 : 500;
+
+  return {
+    statusCode,
+    body: JSON.stringify(data) + " added",
+  };
+}
+
 export const post: RequestHandler = async ({ request }) => {
   const body = await request.json();
   console.log(JSON.stringify(body));
@@ -72,19 +89,46 @@ export const post: RequestHandler = async ({ request }) => {
     name: "Gitpod",
   };
 
-  client.setApiKey(SENDGRID_API_KEY);
+  const dontEmail =
+    email.data && email.data.noOfEngineers !== undefined
+      ? email.data.noOfEngineers === "1-10"
+      : false;
 
-  try {
-    const sendResponse = await sendEmail(client, email);
+  if (!dontEmail) {
+    client.setApiKey(SENDGRID_API_KEY);
+    const dontEmailResponse = await sendEmail(client, email);
     return {
-      status: sendResponse.statusCode,
+      status: dontEmailResponse.statusCode,
       body: JSON.stringify(email) + " added",
     };
-  } catch (err) {
-    console.error(err);
-    return {
-      status: 500,
-      body: err,
-    };
+  }
+
+  if (email.toType === "community-license") {
+    const data = [
+      new Date(),
+      email.replyTo.name,
+      email.replyTo.email,
+      email.data.company,
+      email.data.noOfEngineers,
+      email.data.cloudInfrastructure,
+      email.data.message,
+    ];
+
+    try {
+      const saveResponse = await saveToSheet(
+        "Free Self-Hosted Community License",
+        data
+      );
+      return {
+        status: saveResponse.statusCode,
+        body: JSON.stringify(email) + " added",
+      };
+    } catch (err) {
+      console.error(err);
+      return {
+        status: 500,
+        body: err,
+      };
+    }
   }
 };

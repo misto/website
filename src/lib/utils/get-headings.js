@@ -6,8 +6,14 @@ export default () => (tree, vFile) => {
   visit(tree, (node) => {
     if (node.type === "heading") {
       if (node.depth !== 1) {
+        const sanitizedString = toString(node).replace(
+          /{(.*?)}/,
+          (_, token) => {
+            return vFile.data.fm[token] || token;
+          }
+        );
         headers.push({
-          title: toString(node),
+          title: sanitizedString,
           level: node.depth,
           slug: node.data.id,
           children: [],

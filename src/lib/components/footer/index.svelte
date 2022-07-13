@@ -1,7 +1,9 @@
-<script>
+<script lang="ts">
   import ThemeSwitcher from "../theme-switcher.svelte";
   import FooterLink from "./link.svelte";
   import Section from "./section.svelte";
+  import Modal from "../ui-library/modal/modal.svelte";
+  import CookieSettings from "../cookie-settings.svelte";
 
   const socialLinks = [
     {
@@ -20,13 +22,19 @@
       icon: "/svg/brands/discord.svg",
     },
   ];
+
+  let isModalOpen: boolean = false;
+
+  const handleClose = () => (isModalOpen = false);
 </script>
 
 <div class="pb-8 bg-card text-p-footer" data-id="footer">
   <footer
     class="py-large m-auto px-xx-small md:max-w-4xl md:py-small md:px-xx-small"
   >
-    <div class="flex justify-between flex-wrap pb-micro md:pb-small">
+    <div
+      class="flex gap-x-x-small sm:gap-x-medium md:gap-0 justify-between flex-wrap pb-micro md:pb-small"
+    >
       <Section title="Gitpod">
         <li><FooterLink href="/">Home</FooterLink></li>
         <li><FooterLink href="/pricing">Pricing</FooterLink></li>
@@ -40,6 +48,16 @@
         <li>
           <FooterLink href="/for/opensource" class="flex items-center"
             >Gitpod for Open Source</FooterLink
+          >
+        </li>
+        <li>
+          <FooterLink href="/for/enterprise" class="flex items-center"
+            >Gitpod for Enterprises</FooterLink
+          >
+        </li>
+        <li>
+          <FooterLink href="/for/education" class="flex items-center"
+            >Gitpod for Education</FooterLink
           >
         </li>
         <li>
@@ -107,6 +125,14 @@
         <li>
           <FooterLink href="/privacy">Privacy Policy</FooterLink>
         </li>
+        <li>
+          <FooterLink href="/cookies">Cookie Policy</FooterLink>
+        </li>
+        <li>
+          <button on:click={() => (isModalOpen = true)}
+            >Cookie Preferences</button
+          >
+        </li>
       </Section>
     </div>
     <div
@@ -150,3 +176,7 @@
     </div>
   </footer>
 </div>
+
+<Modal on:close={handleClose} isOpen={isModalOpen}>
+  <CookieSettings {handleClose} />
+</Modal>

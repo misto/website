@@ -48,6 +48,7 @@
   image={{
     src: "/images/jetbrains-space/git-providers.png",
     alt: "Git Providers",
+    isCut: false,
   }}
   btnPrimary={{
     href: "https://www.gitpod.io/docs/ides-and-editors/jetbrains-gateway",

@@ -12,7 +12,7 @@
   >
     <img src={imgSrc} alt="Gitpod founders group" class="rounded-4xl mx-auto" />
     <p class="py-xx-small">Download founders group picture</p>
-    <LinkButton variant="cta" size="large" href={imgSrc} download
+    <LinkButton variant="cta" size="large" href={imgSrc} download="founders"
       >PNG</LinkButton
     >
   </div>

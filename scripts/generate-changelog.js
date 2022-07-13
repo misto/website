@@ -25,7 +25,8 @@ const parseReleaseNote = (pr) => {
   const releaseNoteMatch = pr.body
     .replace(/\r\n/g, "")
     .match(/```release-notes?(.+?)```/);
-  if (!releaseNoteMatch || releaseNoteMatch[1].trim() === "NONE") return;
+  if (!releaseNoteMatch || releaseNoteMatch[1].trim().toUpperCase() === "NONE")
+    return;
   return releaseNoteMatch[1];
 };
 
@@ -50,6 +51,7 @@ const main = async () => {
   const releaseDate = process.argv[2];
   const from = process.argv[3];
   const to = process.argv[4];
+  const searchQuery = `repo:gitpod-io/gitpod is:pr is:merged merged:${from}..${to} sort:updated-desc`;
 
   if (!process.env.CHANGELOG_GITHUB_ACCESS_TOKEN) {
     console.warn(
@@ -89,7 +91,7 @@ const main = async () => {
     }
   }`,
     {
-      searchQuery: `repo:gitpod-io/gitpod is:pr is:merged merged:${from}..${to} sort:updated-desc`,
+      searchQuery,
     }
   );
 

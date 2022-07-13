@@ -54,3 +54,14 @@ This issue can be resolved by disabling "ETag filtering" in ClearURLs’ setting
 
 1. Ensure you are using the latest version of [JetBrains Gateway](https://www.jetbrains.com/help/idea/remote-development-a.html#gateway)
 2. Ensure you are using the latest version of the [Gitpod JetBrains Gateway plugin](https://plugins.jetbrains.com/plugin/18438-gitpod-gateway)
+
+## What can I do if I have unsynced data inside a workspace but it's not starting?
+
+While this is a very critical issue, our workspace-team would eventually look into why it's happening but on the other hand you might not be able to wait while things get fixed. As an user you can try and get your workspace data yourself:
+
+1. Go to the [Gitpod Dashboard](https://gitpod.io/workspaces)
+2. Find your workspace from the list
+3. Download your workspace like so:
+   ![Download a workspace](../../../static/images/docs/troubleshooting/download_a_workspace.png)
+4. You can now either try opening a new workspace or use your local machine for a while.
+5. The downloaded workspace is a `tar` file which can be extracted with `tar -xf <your-workspace-filename-here>` command on a new Gitpod workspace or in your Linux/MacOS machine. You can use `7-zip` to extract if you're on windows and don't have `tar`.

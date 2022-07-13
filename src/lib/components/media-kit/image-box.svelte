@@ -11,7 +11,7 @@
 >
   <img {src} {alt} class="h-auto md:h-72 rounded m-auto w-full {imgClass}" />
   <p class="mt-small mb-micro max-w-sm mx-auto">Download {text}</p>
-  <LinkButton variant="cta" size="large" href={src} download
+  <LinkButton variant="cta" size="large" href={src} download={alt}
     >{btnText}</LinkButton
   >
 </div>

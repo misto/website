@@ -7,9 +7,7 @@ title: Dotfiles
   export const prerender = true;
 </script>
 
-# Dotfiles
-
-> Dotfiles support is in BETA. If you experience issues, or have feedback, please [share in this issue](https://github.com/gitpod-io/gitpod/issues/7603).
+# {title}
 
 Dotfiles are a way to customize your developer environment according to your personal needs.
 

@@ -120,7 +120,7 @@
   <Card size="small" class="youtube" stroked={false}>
     <iframe
       id={randomId}
-      src={`https://www.youtube.com/embed/${embedId}?enablejsapi=1`}
+      src={`https://www.youtube-nocookie.com/embed/${embedId}?enablejsapi=1`}
       {title}
       width="560"
       height="315"

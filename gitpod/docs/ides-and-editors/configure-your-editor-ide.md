@@ -9,18 +9,24 @@ title: Configure your IDE/editor
 
 # {title}
 
-There are many ways to refine your IDE/editor experience in Gitpod.
+Customise the IDE or editor experience for a project, or yourself.
 
-## Configuring an IDE preference
+## Per Project
 
-### Per Project
+Updating per-project settings are shared with anyone who starts a new gitpod workspace.
 
-There are multiple ways to configure an IDE/editor per [project](/docs/teams-and-projects). Via the [.gitpod.yml](/docs/config-gitpod-file) file, e.g. by [installing default VS Code extensions](/docs/ides-and-editors/vscode-extensions), or by adding custom scripts. You can also use [Docker](/docs/config-docker) as part of your per-project IDE/editor configuration.
+- Update the projects [.gitpod.yml](/docs/config-gitpod-file) file to install [VS Code extensions](/docs/references/gitpod-yml#vscode), or [JetBrains plugins](/docs/references/gitpod-yml#jetbrains).
+- Update the projects [start tasks](/docs/config-start-tasks) in `.gitpod.yml`
+- Add a custom [base image](/docs/config-docker) to your project
 
-### Per User
+## Per User
 
-To configure an IDE/editor as a default user preference for all new workspaces, you will need to update your [user preferences](https://gitpod.io/preferences). **Please note: ** If you've already started a workspace already with a preference for a given editor/IDE, you'll need to restart your workspace for the changes to take effect. If you want, you can also configure your own personal [dotfiles](/docs/config-dotfiles) repository.
+Updating per-user settings are shared only with the current user of a gitpod workspace.
 
-### Per Team
+To configure a specific IDE or editor as a default user preference for all new workspaces, you will need to update your [user preferences](https://gitpod.io/preferences). There is currently no way to configure Gitpod to open different editors or IDEs for different projects. IDE and editor preferences only take effect for new or restarted workspaces. Changing your editor or IDE preference will not affect running workspaces.
+
+Set up additional per-user configurations using [dotfiles](/docs/config-dotfiles).
+
+## Per Team
 
 There are currently no ways to configure IDE/editor's on a per-team basis.

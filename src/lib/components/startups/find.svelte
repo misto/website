@@ -41,7 +41,7 @@
 
 <Section class="relative">
   <h2 class="h3 text-center">Find your VC or accelerator</h2>
-  <Search bind:value={searchTerm} />
+  <Search label="Search  your VC or accelerator" bind:value={searchTerm} />
   <div>
     <SideNav {froms} />
     <div class="wrapper {!searchTerm ? 'space-y-32 sm:space-y-40' : ''}">

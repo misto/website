@@ -54,7 +54,7 @@ As displayed in the diagram above, we highly recommend you enable Prebuilds for 
 
 By the time you start a new workspace, all that's left to do is execute the `before` (optional) and `command` tasks. The latter most often starts a database and/or development server.
 
-> Let Gitpod run the time-consuming `init` tasks continously behind the scene so you and anyone who opens your project on Gitpod doesn't have to wait.
+> Let Gitpod run the time-consuming `init` tasks continuously behind the scene so you and anyone who opens your project on Gitpod doesn't have to wait.
 
 ### Restart a Workspace
 
@@ -171,7 +171,7 @@ tasks:
 
 Let's say you have a web app dev server that takes a moment to start up to listen on port 3000. Once it's up and running, you want to run end-to-end tests against `http://localhost:3000`.
 
-You can achieve this with two terminals and the `gp await-port` CLI command.
+You can achieve this with two terminals and the `gp ports await` CLI command.
 
 ```yaml
 tasks:
@@ -181,7 +181,7 @@ tasks:
 
   - name: e2e Tests
     command: |
-      gp await-port 3000
+      gp ports await 3000
       npm run test
 ```
 

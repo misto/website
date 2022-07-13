@@ -15,7 +15,7 @@
   select {
     background-position: right 1em top 50%, 0 0;
     background-image: url("/arrow-grey.svg");
-    background-size: 1.25em auto, 100%;
+    background-size: 1em auto, 100%;
     background-repeat: no-repeat, repeat;
     -moz-appearance: none;
     -webkit-appearance: none;
@@ -35,7 +35,7 @@
   class:error={hasError}
   bind:this={element}
   id={label}
-  class="box-border bg-card text-important border-divider border-[1px] px-4 py-2 rounded-lg appearance-none  w-full {className}"
+  class="box-border bg-card text-important border-divider border-[1px] pl-4 pr-10 py-2 rounded-lg appearance-none  w-full {className}"
   {name}
   aria-label={name}
   bind:value

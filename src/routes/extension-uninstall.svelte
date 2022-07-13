@@ -167,7 +167,7 @@
                       formData.reason.el.validity.valid;
                   }}
                 />
-                <label for={id}>{label}</label>
+                <label for={id}><span />{label}</label>
               </li>
             {/each}
           </ul>

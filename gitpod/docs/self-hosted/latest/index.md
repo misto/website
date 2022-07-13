@@ -38,7 +38,11 @@ Gitpod can be deployed and operated on your own infrastructure. It supports diff
   For your Gitpod installation you need a properly configured domain. The domain itself and the wildcard subdomain `*.example.com`, `*.ws.example.com` (replace `example.com` with your Gitpod domain) need to point to the cluster ingress.
 
 - **Gitpod product license** <br />
-  To install Gitpod, you need a license. We provide a community license for free (right click and save link as [here](https://raw.githubusercontent.com/gitpod-io/gitpod/main/install/licenses/Community.yaml)). To get an enterprise license, [fill out this form](/enterprise-license).
+  To install Gitpod, you need a license which you can get [here](/community-license).
+
+## Local Preview
+
+The [Local Preview](./latest/local-preview) provides you with a way to run Gitpod Self-Hosted locally on your machine to be able to experience it without having to spin up a Kubernetes cluster.
 
 ## Getting Started
 
@@ -50,4 +54,4 @@ You want to use your own database, registry, object storage, or source control m
 
 ## Troubleshooting
 
-The [troubleshooting guide](./latest/troubleshooting) shows you how to create a support bundle. Take a look at our [support page](/support) to learn how to reach our community and support team.
+Refer to the [troubleshooting section](./latest/troubleshooting) for help with your Gitpod Self-Hosted Instance. You can also take a look at our [support page](/support) to learn how to reach our community and support team.

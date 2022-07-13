@@ -2,15 +2,20 @@
   let clazz = "";
   export { clazz as class };
   export let quote: string;
-  export let author: { name: string; jobTitle: string };
+  export let author: { name: string; jobTitle: string } = null;
+  export let type: "blog" | "" = "";
   import Card from "$lib/components/ui-library/card";
 
-  const { name, jobTitle } = author;
+  const { name, jobTitle } = author || {};
 </script>
 
 <style lang="postcss">
   [class|="kumquat"] {
     @apply absolute;
+  }
+
+  .quote {
+    @apply text-h5 mt-0 text-black;
   }
 
   .kumquat-left {
@@ -51,7 +56,7 @@
       /></svg
     >
     <div class="mt-x-small">
-      <p class="h3 text-important font-bold">
+      <p class="h3 text-important font-bold" class:quote={type === "blog"}>
         {@html quote}”
       </p>
       <p class="mt-x-small">

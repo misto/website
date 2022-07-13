@@ -46,6 +46,7 @@
   image={{
     src: "/images/customers/hero.png",
     alt: "Gitpod Illustration image",
+    isCut: false,
   }}
   btnPrimary={{
     href: "#stories",
@@ -78,7 +79,12 @@
   class="max-w-7xl lg:grid-cols-3 xl:px-4"
 />
 
-<UsedBy isCard={false} class="py-small" title="Trusted by +500k developers" />
+<UsedBy
+  isCard={false}
+  class="py-small"
+  title="Trusted by +500k developers"
+  isCustomerStoriesLinkShown={false}
+/>
 
 <Testimonials {testimonials} style="margin-top: var(--small);" />
 

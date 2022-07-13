@@ -3,7 +3,7 @@ import type { Project } from "$lib/types/project.type";
 import type { Testimonial } from "$lib/types/testimonial.type";
 import type { Ide } from "$lib/types/ide.type";
 import GitlabLogo from "$lib/components/svgs/brands/gitlab-logo.svelte";
-import Freecodecamp from "$lib/components/svgs/brands/freecodecamp.svelte";
+import FreecodecampLogo from "$lib/components/svgs/brands/freecodecamp.svelte";
 import Google from "$lib/components/svgs/brands/google.svelte";
 import Uber from "$lib/components/svgs/brands/uber.svelte";
 import Datastax from "$lib/components/svgs/brands/datastax.svelte";
@@ -12,55 +12,104 @@ import Shares from "$lib/components/svgs/brands/shares.svelte";
 import Astrato from "$lib/components/svgs/brands/astrato.svelte";
 import CodeInstitute from "$lib/components/svgs/brands/code-institute.svelte";
 import Redwood from "$lib/components/svgs/brands/redwood.svelte";
+import Jetbrains from "$lib/components/svgs/brands/jetbrains.svelte";
+import FourGeeks from "$lib/components/svgs/brands/fourgeeks.svelte";
+import type { Card } from "$lib/types/card.type";
+
+export const gitlab: Brand = {
+  alt: "GitLab",
+  logo: GitlabLogo,
+};
+
+export const freeCodeCamp: Brand = {
+  alt: "freeCodeCamp",
+  logo: FreecodecampLogo,
+  transform: "scale(1.1)",
+};
+
+export const google: Brand = {
+  alt: "Google",
+  logo: Google,
+  transform: "scale(0.9)",
+};
+
+export const uber: Brand = {
+  alt: "Uber",
+  logo: Uber,
+  transform: "scale(.8)",
+};
+
+export const dataStax: Brand = {
+  alt: "DataStax",
+  logo: Datastax,
+  transform: "scale(1.1)",
+};
+
+export const amazon: Brand = {
+  alt: "Amazon",
+  logo: Amazon,
+  transform: "scale(0.9) translateY(5px)",
+};
+
+export const shares: Brand = {
+  alt: "Shares",
+  logo: Shares,
+  transform: "scale(1.1)",
+};
+
+export const astrato: Brand = {
+  alt: "Astrato",
+  logo: Astrato,
+  transform: "scale(1.1)",
+};
+
+export const redwood: Brand = {
+  alt: "Redwood",
+  logo: Redwood,
+  transform: "scale(1.1)",
+};
+
+export const codeInstitute: Brand = {
+  alt: "Code Institute",
+  logo: CodeInstitute,
+};
+
+export const jetbrains: Brand = {
+  logo: Jetbrains,
+  alt: "JetBrains",
+};
+
+export const fourGeeks: Brand = {
+  logo: FourGeeks,
+  alt: "Four Geeks",
+};
 
 export const brands: Brand[] = [
-  {
-    alt: "GitLab",
-    logo: GitlabLogo,
-  },
-  {
-    alt: "freeCodeCamp",
-    logo: Freecodecamp,
-    className: "fcc",
-  },
-  {
-    alt: "Google",
-    logo: Google,
-    transform: "scale(0.9)",
-  },
-  {
-    alt: "Uber",
-    logo: Uber,
-  },
-  {
-    alt: "DataStax",
-    logo: Datastax,
-    transform: "scale(1.1)",
-  },
-  {
-    alt: "Amazon",
-    logo: Amazon,
-    transform: "scale(0.9) translateY(5px)",
-  },
-  {
-    alt: "Shares",
-    logo: Shares,
-    transform: "scale(1.1)",
-  },
-  {
-    alt: "Astrato",
-    logo: Astrato,
-    transform: "scale(1.1)",
-  },
-  {
-    alt: "Redwood",
-    logo: Redwood,
-    transform: "scale(1.1)",
-  },
-  {
-    alt: "Code Institute",
-    logo: CodeInstitute,
-  },
+  gitlab,
+  freeCodeCamp,
+  google,
+  uber,
+  dataStax,
+  amazon,
+  shares,
+  astrato,
+  redwood,
+  codeInstitute,
+];
+
+export const logosAnimated: Brand[] = [
+  gitlab,
+  jetbrains,
+  google,
+  redwood,
+  uber,
+  shares,
+  dataStax,
+  freeCodeCamp,
+  amazon,
+  astrato,
+  fourGeeks,
+  codeInstitute,
 ];
 
 export const projects: Project[] = [
@@ -494,5 +543,24 @@ export const ides: Ide[] = [
       desktop: "",
     },
     icon: "webstorm.svg",
+  },
+];
+
+export const benefits: Card[] = [
+  {
+    title: "5h",
+    text: "weekly productivity gain per engineer",
+  },
+  {
+    title: "4x",
+    text: "faster time from zero to first PR",
+  },
+  {
+    title: "61%",
+    text: "cost savings compared to a VDI solution",
+  },
+  {
+    title: "500k",
+    text: "developers are using Gitpod",
   },
 ];

@@ -1,8 +1,9 @@
 <script lang="ts">
   import type { Pricing } from "$lib/types/pricing.type";
-  import QaTooltip from "../qa-tooltip.svelte";
   import LinkButton from "$lib/components/ui-library/link-button";
   import Card from "$lib/components/ui-library/card";
+  import FeaturesList from "./features-list.svelte";
+  import MostPopular from "./most-popular.svelte";
 
   export let pricing: Pricing;
   const {
@@ -16,6 +17,7 @@
     learnMoreHref,
     footnote,
     trackingName,
+    plans,
   } = pricing;
 </script>
 
@@ -24,19 +26,16 @@
     margin-bottom: 0.25rem;
   }
 
-  li::before {
-    content: url("/tick.svg");
-    @apply absolute inline-block -left-7 sm:-left-9;
-    height: 1.375rem;
-    width: 1.375rem;
-
-    @media (max-width: 375px) {
-      @apply h-5 w-5;
-    }
-  }
-
   .learn-more {
     @apply underline;
+  }
+
+  :global(.plan) {
+    @apply bg-white;
+  }
+
+  :global(body.dark) :global(.plan) {
+    @apply dark:bg-bg;
   }
 
   :global(.crossed-out) {
@@ -51,23 +50,21 @@
 
 <Card
   size="small"
-  class="box flex w-full max-w-xs sm:w-[320px] gap-small {spiced
+  class="box flex w-full {!plans
+    ? 'sm:w-[320px] max-w-xs'
+    : 'md:max-w-[720px] max-w-xs'} gap-small {spiced
     ? 'pt-xx-small'
     : 'pt-x-small'} pb-small flex-col justify-between items-center bg-card px-0 mt-0 mx-macro mb-x-small text-center transition-all duration-200"
   brandShadow={spiced}
   stroked={false}
 >
-  <div class="flex flex-col">
+  <div class="flex flex-col" class:w-full={plans}>
     {#if spiced}
-      <div
-        class="text-xs bg-black dark:bg-light-black text-white py-1 rounded-2xl w-28 mx-auto mb-macro shadow-light dark:shadow-none"
-      >
-        Most Popular
-      </div>
+      <MostPopular class="mb-macro" />
     {/if}
     <h2 class="h4 !mb-0">{title}</h2>
     <div
-      class="h2 font-bold text-important flex items-center justify-center mt-macro"
+      class="h4 text-[#666564] dark:text-[#999795] font-bold text-important flex items-center justify-center mt-macro"
     >
       {@html price}
     </div>
@@ -79,19 +76,24 @@
       {/if}
     </div>
     {#if features}
-      <ul
-        class="inline-flex flex-col ml-x-small mt-xx-small space-y-micro text-left"
+      <FeaturesList {features} />
+    {/if}
+    {#if plans}
+      <div
+        class="plans flex flex-wrap justify-center gap-micro md:gap-xx-small mx-micro md:mx-x-small"
       >
-        {#each features as feature}
-          <li class="relative inline-flex text-important">
-            {#if typeof feature !== "string"}
-              <QaTooltip text={feature.text} tooltip={feature.tooltip} />
-            {:else}
-              {feature}
-            {/if}
-          </li>
+        {#each plans as { title, features }}
+          <Card
+            size="small"
+            class="pt-x-small px-micro sm:px-x-small pb-small max-w-[310px]"
+            background="white"
+            stroked={false}
+          >
+            <h3 class="h4">{title}</h3>
+            <FeaturesList {features} />
+          </Card>
         {/each}
-      </ul>
+      </div>
     {/if}
     {#if learnMoreHref}
       <div class="flex flex-1 justify-center items-center">

@@ -34,11 +34,45 @@ legend {
   border-radius: 0.5em;
 }
 
-[type="checkbox"] + label::before {
-  content: "";
-  @apply block h-6 rounded text-center mr-micro transition border border-solid border-divider;
-  flex: 0 0 24px;
-  line-height: 1.1;
+[type="checkbox"] + label {
+  @apply relative;
+
+  &::after,
+  span {
+    @apply block h-6 w-6 transition duration-300;
+  }
+
+  &::after {
+    content: "";
+    @apply flex bg-center absolute left-0 opacity-0;
+    background-image: url("/tick-dark.svg");
+    transform: scale(0);
+  }
+
+  &::before {
+    content: none;
+  }
+
+  span {
+    flex: 0 0 24px;
+    @apply relative rounded border border-solid border-divider mr-micro overflow-hidden transition-all duration-300;
+
+    &::before {
+      content: "";
+      @apply block h-full w-full absolute transition-all duration-200;
+    }
+  }
+}
+
+[type="checkbox"]:checked + label {
+  &::after {
+    @apply opacity-100;
+    transform: scale(1);
+  }
+
+  span {
+    @apply bg-primary;
+  }
 }
 
 [type="checkbox"] + label::before,

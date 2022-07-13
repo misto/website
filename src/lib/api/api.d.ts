@@ -1,5 +1,3 @@
-export declare type EmailToType = "contact" | "sales";
-
 export declare interface Email {
   to?: {
     email: string;
@@ -18,6 +16,9 @@ export declare interface Email {
   message?: string;
   feedback?: string;
   otherFeedback?: string;
+  data?: {
+    [key: string]: string;
+  };
 }
 
 export declare interface SheetInfo {
@@ -43,3 +44,5 @@ export declare interface ExtensionFeedback {
   feedback: string;
   note?: string;
 }
+
+export type EmailToType = "contact" | "sales" | "community-license";

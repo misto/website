@@ -116,7 +116,7 @@
   </p>
   <p class="mt-4 text-p-large">
     <LinkIconExternal href="https://www.gitpod.io/values" icon="✨"
-      >Brand &amp; Values</LinkIconExternal
+      >Core Values & Differentiators</LinkIconExternal
     >
   </p>
 </div>

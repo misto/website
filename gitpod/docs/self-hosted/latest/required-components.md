@@ -1,5 +1,6 @@
 ---
 section: self-hosted/latest
+subsection: reference
 title: Required Components
 ---
 
@@ -11,13 +12,13 @@ title: Required Components
 
 Gitpod relies on certain components and services for it to function. By default, most of these can be automatically installed in-cluster during installation. However, you can also configure Gitpod to use your own version of these that may or may not live inside the cluster. <!--- todo: When do we advise these to be run outside of cluster? --->
 
-| Component                                                                                  | Required?                     |
-| ------------------------------------------------------------------------------------------ | ----------------------------- |
-| [Bucket Storage](./required-components#bucket-storage)                                     | Use default or bring your own |
-| [Database](./required-components#database)                                                 | Use default or bring your own |
-| [Image Registry](./required-components#image-registry)                                     | Use default or bring your own |
-| [Source Control Management System](./required-components#source-control-management-system) | Use default or bring your own |
-| [Cert-manager](./required-components#cert-manager)                                         | Yes                           |
+| Component                                                                                  | Required?                      |
+| ------------------------------------------------------------------------------------------ | ------------------------------ |
+| [Bucket Storage](./required-components#bucket-storage)                                     | Use default or bring your own  |
+| [Database](./required-components#database)                                                 | Use default or bring your own  |
+| [Image Registry](./required-components#image-registry)                                     | Use default or bring your own  |
+| [Source Control Management System](./required-components#source-control-management-system) | Yes (cloud or self-hosted SCM) |
+| [Cert-manager](./required-components#cert-manager)                                         | Yes                            |
 
 ## Bucket Storage
 
@@ -70,4 +71,4 @@ Gitpod expects to be connected to a Source Control Management System (SCM) such 
 
 ## Cert Manager
 
-[Cert-manager](https://cert-manager.io/) must be installed in your cluster before you can install Gitpod. It is used to create and manage certificates needed to secure communication between the various internal Gitpod components. See the [getting started guide](./getting-started#step-2-install-cert-manager) for details on how to install cert-manager.
+[Cert-manager](https://cert-manager.io/) must be installed in your cluster before you can install Gitpod. It is used to create and manage certificates needed to secure communication between the various internal Gitpod components. It can also be used to fetch a TLS certificate for your Gitpod instance from Let's Encrypt for example. See the [getting started guide](./getting-started#step-2-install-cert-manager) for details on how to install cert-manager.

@@ -17,7 +17,7 @@ export declare type ButtonVariations =
   | "cta"
   | "tertiary"
   | "unstyled"
-  | "white"
-  | "gray";
+  | "gray"
+  | "white";
 
 export declare type ButtonSizes = "small" | "normal" | "medium" | "large";

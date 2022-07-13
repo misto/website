@@ -19,7 +19,7 @@ Gitpod is a Remote Developer Environment which can be launched from any GitHub p
 
 Within seconds, Gitpod provides you with a fully working developer environment, including a VS Code-powered IDE and a cloud-based Linux container configured specifically for the project at hand.
 
-<center><iframe width="560" height="315" src="https://www.youtube.com/embed/D41zSHJthZI" title="Gitpod introduction" frameborder="0" allowfullscreen></iframe></center>
+<center><iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/D41zSHJthZI" title="Gitpod introduction" frameborder="0" allowfullscreen></iframe></center>
 
 ## **Yet Another Cloud IDE?**
 

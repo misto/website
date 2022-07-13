@@ -16,4 +16,5 @@ The following links describe how to develop on Gitpod and elaborate on topics br
 - [Contexts](/docs/context-urls)
 - [Collaboration & Sharing](/docs/sharing-and-collaboration)
 - [Teams & Projects](/docs/teams-and-projects)
+- [Team Billing](/docs/team-billing)
 - [Create a team plan](/docs/teams)

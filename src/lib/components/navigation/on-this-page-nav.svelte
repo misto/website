@@ -76,7 +76,9 @@
 
 <svelte:window bind:scrollY={scroll} />
 {#if checkHeaders($docsMeta)}
-  <div class="on-this-page  overflow-x-hidden overflow-y-auto text-sm">
+  <div
+    class="on-this-page max-h-[calc(100vh-6rem)] pb-[100px] overflow-auto text-sm"
+  >
     <div class="flex gap-2 items-center">
       <div class="bg-secondary w-2 h-[2px]" />
       <div class="font-semibold text-important leading-6">On this Page</div>

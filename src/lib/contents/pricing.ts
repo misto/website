@@ -122,62 +122,66 @@ export const freePlanTableData: FeatureTableColumn = {
     headline: "Free",
     subtitle: `${isEurope() ? "€" : "$"}0 per user/month`,
   },
-  items: [
+  enteries: [
     {
-      term: "Public & Private Repos",
-      text: "limited to 50h",
-    },
-    {
-      term: "Team Plans",
-      availability: false,
-    },
-    {
-      term: "Inactivity timeout",
-      text: "30min",
-    },
-    {
-      term: "timeout Boost",
-      availability: false,
-    },
-    {
-      term: "Parallel Workspaces",
-      text: "4",
-    },
-    {
-      term: "prebuilds",
-      availability: true,
-    },
-    {
-      term: "Shared workspaces",
-      availability: true,
-    },
-    {
-      term: "Snapshots",
-      availability: true,
-    },
-    {
-      term: "Admin Dashboard",
-      availability: false,
-    },
-    {
-      term: "Encrypted backups",
-      availability: true,
-    },
-    {
-      term: "multi-ide support",
-      availability: true,
-    },
-    {
-      term: "GitLab",
-      availability: true,
-    },
-    {
-      term: "GitHub",
-      availability: true,
-    },
-    {
-      term: "Bitbucket",
-      availability: true,
+      items: [
+        {
+          term: "Public & Private Repos",
+          text: "limited to 50h",
+        },
+        {
+          term: "Team Plans",
+          availability: false,
+        },
+        {
+          term: "Inactivity timeout",
+          text: "30min",
+        },
+        {
+          term: "timeout Boost",
+          availability: false,
+        },
+        {
+          term: "Parallel Workspaces",
+          text: "4",
+        },
+        {
+          term: "prebuilds",
+          availability: true,
+        },
+        {
+          term: "Shared workspaces",
+          availability: true,
+        },
+        {
+          term: "Snapshots",
+          availability: true,
+        },
+        {
+          term: "Admin Dashboard",
+          availability: false,
+        },
+        {
+          term: "Encrypted backups",
+          availability: true,
+        },
+        {
+          term: "multi-ide support",
+          availability: true,
+        },
+        {
+          term: "GitLab",
+          availability: true,
+        },
+        {
+          term: "GitHub",
+          availability: true,
+        },
+        {
+          term: "Bitbucket",
+          availability: true,
+        },
+      ],
     },
   ],
 };
@@ -191,62 +195,66 @@ export const personalPlanTableData: FeatureTableColumn = {
     headline: "Personal",
     subtitle: `${isEurope() ? "€8" : "$9"} per user/month`,
   },
-  items: [
+  enteries: [
     {
-      term: "Public & Private Repos",
-      text: "limited to 100h",
-    },
-    {
-      term: "Team Plans",
-      availability: false,
-    },
-    {
-      term: "Inactivity timeout",
-      text: "30min",
-    },
-    {
-      term: "timeout Boost",
-      availability: false,
-    },
-    {
-      term: "Parallel Workspaces",
-      text: "4",
-    },
-    {
-      term: "prebuilds",
-      availability: true,
-    },
-    {
-      term: "Shared workspaces",
-      availability: true,
-    },
-    {
-      term: "Snapshots",
-      availability: true,
-    },
-    {
-      term: "Admin Dashboard",
-      availability: false,
-    },
-    {
-      term: "Encrypted backups",
-      availability: true,
-    },
-    {
-      term: "multi-ide support",
-      availability: true,
-    },
-    {
-      term: "GitLab",
-      availability: true,
-    },
-    {
-      term: "GitHub",
-      availability: true,
-    },
-    {
-      term: "Bitbucket",
-      availability: true,
+      items: [
+        {
+          term: "Public & Private Repos",
+          text: "limited to 100h",
+        },
+        {
+          term: "Team Plans",
+          availability: false,
+        },
+        {
+          term: "Inactivity timeout",
+          text: "30min",
+        },
+        {
+          term: "timeout Boost",
+          availability: false,
+        },
+        {
+          term: "Parallel Workspaces",
+          text: "4",
+        },
+        {
+          term: "prebuilds",
+          availability: true,
+        },
+        {
+          term: "Shared workspaces",
+          availability: true,
+        },
+        {
+          term: "Snapshots",
+          availability: true,
+        },
+        {
+          term: "Admin Dashboard",
+          availability: false,
+        },
+        {
+          term: "Encrypted backups",
+          availability: true,
+        },
+        {
+          term: "multi-ide support",
+          availability: true,
+        },
+        {
+          term: "GitLab",
+          availability: true,
+        },
+        {
+          term: "GitHub",
+          availability: true,
+        },
+        {
+          term: "Bitbucket",
+          availability: true,
+        },
+      ],
     },
   ],
 };
@@ -260,64 +268,69 @@ export const professionalPlanTableData: FeatureTableColumn = {
   header: {
     headline: "Professional",
     subtitle: `${isEurope() ? "€23" : "$25"} per user/month`,
+    isMostPopular: true,
   },
-  items: [
+  enteries: [
     {
-      term: "Public & Private Repos",
-      text: "unlimited",
-    },
-    {
-      term: "Team Plans",
+      items: [
+        {
+          term: "Public & Private Repos",
+          text: "unlimited",
+        },
+        {
+          term: "Team Plans",
 
-      availability: true,
-    },
-    {
-      term: "Inactivity timeout",
-      text: "30min",
-    },
-    {
-      term: "timeout Boost",
-      availability: false,
-    },
-    {
-      term: "Parallel Workspaces",
-      text: "8",
-    },
-    {
-      term: "prebuilds",
-      availability: true,
-    },
-    {
-      term: "Shared workspaces",
-      availability: true,
-    },
-    {
-      term: "Snapshots",
-      availability: true,
-    },
-    {
-      term: "Admin Dashboard",
-      availability: false,
-    },
-    {
-      term: "Encrypted backups",
-      availability: true,
-    },
-    {
-      term: "multi-ide support",
-      availability: true,
-    },
-    {
-      term: "GitLab",
-      availability: true,
-    },
-    {
-      term: "GitHub",
-      availability: true,
-    },
-    {
-      term: "Bitbucket",
-      availability: true,
+          availability: true,
+        },
+        {
+          term: "Inactivity timeout",
+          text: "30min",
+        },
+        {
+          term: "timeout Boost",
+          availability: false,
+        },
+        {
+          term: "Parallel Workspaces",
+          text: "8",
+        },
+        {
+          term: "prebuilds",
+          availability: true,
+        },
+        {
+          term: "Shared workspaces",
+          availability: true,
+        },
+        {
+          term: "Snapshots",
+          availability: true,
+        },
+        {
+          term: "Admin Dashboard",
+          availability: false,
+        },
+        {
+          term: "Encrypted backups",
+          availability: true,
+        },
+        {
+          term: "multi-ide support",
+          availability: true,
+        },
+        {
+          term: "GitLab",
+          availability: true,
+        },
+        {
+          term: "GitHub",
+          availability: true,
+        },
+        {
+          term: "Bitbucket",
+          availability: true,
+        },
+      ],
     },
   ],
 };
@@ -331,62 +344,66 @@ export const unleashedPlanTableData: FeatureTableColumn = {
     headline: "Unleashed",
     subtitle: `${isEurope() ? "€35" : "$39"} per user/month`,
   },
-  items: [
+  enteries: [
     {
-      term: "Public & Private Repos",
-      text: "unlimited",
-    },
-    {
-      term: "Team Plans",
-      availability: true,
-    },
-    {
-      term: "Inactivity timeout",
-      text: "1h",
-    },
-    {
-      term: "timeout Boost",
-      text: "3h",
-    },
-    {
-      term: "Parallel Workspaces",
-      text: "16",
-    },
-    {
-      term: "prebuilds",
-      availability: true,
-    },
-    {
-      term: "Shared workspaces",
-      availability: true,
-    },
-    {
-      term: "Snapshots",
-      availability: true,
-    },
-    {
-      term: "Admin Dashboard",
-      availability: false,
-    },
-    {
-      term: "Encrypted backups",
-      availability: true,
-    },
-    {
-      term: "multi-ide support",
-      availability: true,
-    },
-    {
-      term: "GitLab",
-      availability: true,
-    },
-    {
-      term: "GitHub",
-      availability: true,
-    },
-    {
-      term: "Bitbucket",
-      availability: true,
+      items: [
+        {
+          term: "Public & Private Repos",
+          text: "unlimited",
+        },
+        {
+          term: "Team Plans",
+          availability: true,
+        },
+        {
+          term: "Inactivity timeout",
+          text: "1h",
+        },
+        {
+          term: "timeout Boost",
+          text: "3h",
+        },
+        {
+          term: "Parallel Workspaces",
+          text: "16",
+        },
+        {
+          term: "prebuilds",
+          availability: true,
+        },
+        {
+          term: "Shared workspaces",
+          availability: true,
+        },
+        {
+          term: "Snapshots",
+          availability: true,
+        },
+        {
+          term: "Admin Dashboard",
+          availability: false,
+        },
+        {
+          term: "Encrypted backups",
+          availability: true,
+        },
+        {
+          term: "multi-ide support",
+          availability: true,
+        },
+        {
+          term: "GitLab",
+          availability: true,
+        },
+        {
+          term: "GitHub",
+          availability: true,
+        },
+        {
+          term: "Bitbucket",
+          availability: true,
+        },
+      ],
     },
   ],
 };

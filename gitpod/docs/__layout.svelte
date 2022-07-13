@@ -45,7 +45,7 @@
 <div class="pb-10 lg:flex lg:pt-10">
   <div
     class:extended-sticky={extendSticky}
-    class="hidden z-20 sticky top-12 self-start lg:block lg:w-1/5 lg:pt-12"
+    class="hidden z-20 sticky top-24 self-start lg:block lg:w-1/5"
   >
     <Search docSearchInputSelector="algolia-mobile" />
     <Menu {MENU} />
@@ -61,7 +61,7 @@
   </div>
   <div
     class:extended-sticky={extendSticky}
-    class="lg:w-1/5 flex-col top-12 self-start sticky gap-4 pl-8 hidden lg:flex max-w-none flex-auto min-w-0 lg:pt-12"
+    class="lg:w-1/5 flex-col top-24 self-start sticky gap-4 pl-8 hidden lg:flex max-w-none flex-auto min-w-0"
   >
     <div class="lg:mb-4">
       <EditInGitpod />

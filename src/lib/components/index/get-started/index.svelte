@@ -21,7 +21,7 @@
   .cards-container {
     @apply flex;
 
-    @media (max-width: 944px) {
+    @media (max-width: 1075px) {
       @apply flex-col mx-auto;
       max-width: 600px;
     }

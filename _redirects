@@ -54,7 +54,8 @@
 /docs/editors/intellij /docs/ides-and-editors/intellij
 /docs/editors/vscode /docs/ides-and-editors/vscode
 /docs/editors/clion /docs/ides-and-editors/clion
-/docs/editors/datagrip /docs/ides-and-editors/datagrip
+/docs/editors/datagrip /docs/ides-and-editors
+/docs/ides-and-editors/datagrip /docs/ides-and-editors
 /docs/editors/phpstorm /docs/ides-and-editors/phpstorm
 /docs/editors/pycharm /docs/ides-and-editors/pycharm
 /docs/editors/rider /docs/ides-and-editors/rider
@@ -68,7 +69,8 @@
 /docs/java-in-gitpod /docs/languages/java 301
 /docs/julia_in_gitpod /docs/julia-in-gitpod 301
 /docs/julia-in-gitpod /docs/languages/julia 301
-/docs/languages_and_frameworks /docs/languages-and-frameworks 301
+/docs/languages_and_frameworks /docs/languages 301
+/docs/languages-and-frameworks /docs/languages 301
 /docs/languages/pandas /docs/languages/python#pandas 301
 /docs/php-in-gitpod /docs/languages/php 301
 /docs/professional-open-source /for/opensource 301
@@ -104,3 +106,6 @@
 /preferences https://gitpod.io/preferences 301
 /gitpod-vs-github-codespaces /vs/github-codespaces 301
 /changelog/introducing-teams-&-projects /changelog/introducing-teams-and-projects
+/github-teacher-toolbox /pricing 301
+/customers/4geeks /for/education/4geeks 301
+/customers/bruno-rocha /for/education/bruno-rocha 301

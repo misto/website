@@ -15,7 +15,24 @@ const feedbackTypetoSheetTitle = {
   digests: "Digests - Raw Feedback",
 };
 
+const allowedEmotions = [1, 2, 3, 4];
+
 export const submitFeedback = async (body: Feedback) => {
+  if (!allowedEmotions.includes(body.emotion)) {
+    return {
+      statusCode: 400,
+      body: "Please provide a valid emotion",
+    };
+  }
+  const hasURLPrefix = ["http://", "https://"].some((value) =>
+    body.url.startsWith(value)
+  );
+  if (!hasURLPrefix) {
+    return {
+      statusCode: 400,
+      body: "Please provide valid URL",
+    };
+  }
   const isSavedInSheet = await saveFeedbackInSheet({
     sheetTitle: feedbackTypetoSheetTitle[body.type],
     data: [new Date(), body.emotion, body.url, body.note],

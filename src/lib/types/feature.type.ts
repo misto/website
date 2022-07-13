@@ -28,3 +28,9 @@ export type Feature = {
   showTheMediaFirstOnMobile?: boolean;
   headingLevel?: "h2" | "h3";
 };
+
+export type verticalFeature = {
+  title: string;
+  paragraph: string;
+  previewComponent?: any;
+};

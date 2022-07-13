@@ -16,12 +16,18 @@ export type FeatureItemDetail = {
 export type FeatureTableHeader = {
   headline: string;
   subtitle?: string;
+  isMostPopular?: boolean;
   image?: FeatureImage;
 };
 
 export type FeatureImage = {
   path: string;
   alt: string;
+};
+
+export type FeatureTableColumnEntry = {
+  users?: string;
+  items?: FeatureItemDetail[];
 };
 
 export type FeatureTableColumn = {
@@ -31,7 +37,7 @@ export type FeatureTableColumn = {
   };
   isHighlighted?: boolean;
   header: FeatureTableHeader;
-  items: FeatureItemDetail[];
+  enteries: FeatureTableColumnEntry[];
 };
 
 export type FeatureTableToc = {

@@ -76,53 +76,57 @@ export const bobTableData: FeatureTableColumn = {
       alt: "Bob",
     },
   },
-  items: [
+  enteries: [
     {
-      term: "Setup new Project",
-      list: [
-        "clones the source code",
-        "ensures the correct runtime versions are installed (e.g. Java, Node, .NET)",
-        "makes sure the project supports his operating system",
-        "follows onboarding instructions, potentially spending up to a few days on this",
+      items: [
+        {
+          term: "Setup new Project",
+          list: [
+            "clones the source code",
+            "ensures the correct runtime versions are installed (e.g. Java, Node, .NET)",
+            "makes sure the project supports his operating system",
+            "follows onboarding instructions, potentially spending up to a few days on this",
+          ],
+        },
+        {
+          term: "Develop a new feature",
+          list: [
+            "pulls latest default branch",
+            "creates feature branch",
+            "ensures correct runtimes",
+            "ensures correct dependencies",
+            "starts database and dev servers",
+          ],
+        },
+        {
+          term: "Switch context",
+          list: [
+            "git stash",
+            "git pull",
+            "changes branch",
+            "ensures correct runtimes",
+            "ensures correct dependencies",
+            "review code",
+            "changes back to previous branch",
+            "get stashed files",
+            "ensures correct runtimes",
+            "ensures correct dependencies",
+          ],
+        },
+        {
+          term: "Set up a new computer",
+          list: [
+            "installs runtimes",
+            "installs editors",
+            "install editor extensions",
+            "configures git",
+          ],
+        },
+        {
+          term: "Contribute to open-source projects",
+          list: ["repeating all steps of SETUP NEW PROJECT 🥱"],
+        },
       ],
-    },
-    {
-      term: "Develop a new feature",
-      list: [
-        "pulls latest default branch",
-        "creates feature branch",
-        "ensures correct runtimes",
-        "ensures correct dependencies",
-        "starts database and dev servers",
-      ],
-    },
-    {
-      term: "Switch context",
-      list: [
-        "git stash",
-        "git pull",
-        "changes branch",
-        "ensures correct runtimes",
-        "ensures correct dependencies",
-        "review code",
-        "changes back to previous branch",
-        "get stashed files",
-        "ensures correct runtimes",
-        "ensures correct dependencies",
-      ],
-    },
-    {
-      term: "Set up a new computer",
-      list: [
-        "installs runtimes",
-        "installs editors",
-        "install editor extensions",
-        "configures git",
-      ],
-    },
-    {
-      term: "Contribute to open-source projects",
-      list: ["repeating all steps of SETUP NEW PROJECT 🥱"],
     },
   ],
 };
@@ -136,46 +140,50 @@ export const aliceTableData: FeatureTableColumn = {
       alt: "alice",
     },
   },
-  items: [
+  enteries: [
     {
-      term: "Setup new Project",
-      list: [
-        "creates a .gitpod.yml file at the root of her project",
-        `
-        adds start task, e.g.
-        <div class="code">
-          <span>tasks:</span><br />
-          <span>&nbsp;&nbsp;- init:</span> npm install<br />
-          <span>&nbsp;&nbsp;&nbsp;&nbsp;command:</span> npm run dev
-        </div>
-        `,
-        "enables Prebuilds",
-      ],
-    },
-    {
-      term: "Develop a new feature",
-      list: [
-        "opens new browser tab",
-        'prefixes the issue URL with gitpod.io/#&lang;issue-url&rang; or uses the Gitpod <a href="/docs/browser-extension">browser extension</a>',
-      ],
-    },
-    {
-      term: "Switch context",
-      list: [
-        "opens new browser tab",
-        'prefixes the PR URL with gitpod.io/#&lang;issue-url&rang; or uses the Gitpod <a href="/docs/browser-extension">browser extension</a>',
-        "reviews code within Gitpod",
-        "closes browser tab",
-      ],
-    },
-    {
-      term: "Set up a new computer",
-      list: ["only needs a browser"],
-    },
-    {
-      term: "Contribute to open-source projects",
-      list: [
-        "launches workspace with a single click for all project with a gitpod.yml configured",
+      items: [
+        {
+          term: "Setup new Project",
+          list: [
+            "creates a .gitpod.yml file at the root of her project",
+            `
+            adds start task, e.g.
+            <div class="code">
+              <span>tasks:</span><br />
+              <span>&nbsp;&nbsp;- init:</span> npm install<br />
+              <span>&nbsp;&nbsp;&nbsp;&nbsp;command:</span> npm run dev
+            </div>
+            `,
+            "enables Prebuilds",
+          ],
+        },
+        {
+          term: "Develop a new feature",
+          list: [
+            "opens new browser tab",
+            'prefixes the issue URL with gitpod.io/#&lang;issue-url&rang; or uses the Gitpod <a href="/docs/browser-extension">browser extension</a>',
+          ],
+        },
+        {
+          term: "Switch context",
+          list: [
+            "opens new browser tab",
+            'prefixes the PR URL with gitpod.io/#&lang;issue-url&rang; or uses the Gitpod <a href="/docs/browser-extension">browser extension</a>',
+            "reviews code within Gitpod",
+            "closes browser tab",
+          ],
+        },
+        {
+          term: "Set up a new computer",
+          list: ["only needs a browser"],
+        },
+        {
+          term: "Contribute to open-source projects",
+          list: [
+            "launches workspace with a single click for all project with a gitpod.yml configured",
+          ],
+        },
       ],
     },
   ],

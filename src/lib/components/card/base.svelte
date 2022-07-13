@@ -12,7 +12,7 @@
   const { title, text, link, icon, modal, transform } = card;
   const target = link && isAnExternalLink(link.href) ? "_blank" : undefined;
   export let headingLevel: "h3" | "h2" = "h3";
-  export let titleClassNames: "h4" | "h5" = "h4";
+  export let titleClassNames: "h2" | "h3" | "h4" | "h5" = "h4";
   export let iconClassNames: string = "h-16 w-20";
   export let btnClassNames: string = "mt-x-small";
   export let variant: "primary" | "secondary" | "cta" = "cta";
@@ -30,7 +30,7 @@
 </script>
 
 <div
-  class="flex flex-col justify-between h-full w-full items-center text-center {clazz}"
+  class="flex flex-col justify-between w-full items-center text-center {clazz}"
   style={styles}
 >
   <div>
@@ -64,8 +64,8 @@
     <LinkButton
       href={link.href}
       {target}
-      {variant}
-      size={btnSize}
+      variant={link.variant || variant}
+      size={link.btnSize || btnSize}
       class={btnClassNames}>{link.text}</LinkButton
     >
   {/if}

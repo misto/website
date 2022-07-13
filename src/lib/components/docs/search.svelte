@@ -22,6 +22,7 @@
   export let containerClasses = "";
   export let iconClasses = "";
   export let placeholder = "Quick search";
+  export let isBgWhite: boolean = false;
 
   const docSearchJSVersion = "2.6.3";
   export let docSearchInputSelector = "search-doc-input";
@@ -48,6 +49,7 @@
 
   const handleBodyKeyDown = (event: KeyboardEvent) => {
     if ((event.ctrlKey || event.metaKey) && event.key === "k") {
+      event.preventDefault();
       docSearchInput.focus();
     }
   };
@@ -140,7 +142,9 @@
         type="search"
         {placeholder}
         id={docSearchInputSelector}
-        class="box-border text-base rounded-2xl dark:bg-light-black bg-sand-dark  block w-full text-p-medium h-small pl-11 pr-3 py-2 border border-transparent leading-5 text-important placeholder:text-body dark:active:shadow-slight focus:outline-none focus:bg-none focus:border-transparent focus:shadow-md focus:bg-card focus:ring-transparent focus:text-important {clazz}"
+        class="box-border text-base rounded-2xl {isBgWhite
+          ? 'bg-card'
+          : 'dark:bg-light-black bg-sand-dark'} block w-full text-p-medium h-small pl-11 pr-3 py-2 border border-transparent leading-5 text-important placeholder:text-body dark:active:shadow-slight focus:outline-none focus:bg-none focus:border-transparent focus:shadow-md focus:bg-card focus:ring-transparent focus:text-important {clazz}"
       />
     </div>
   </div>

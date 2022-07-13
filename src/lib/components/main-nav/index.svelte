@@ -5,14 +5,14 @@
   import NavItem from "./nav-item.svelte";
   import menuState from "./mobile-menu/state";
   import LoginButton from "./login-button.svelte";
-  import SignUpButton from "./sign-up-button.svelte";
+  import DemoButton from "./demo-button.svelte";
   import DashboardButton from "./dashboard-button.svelte";
   import Logo from "../svgs/logo.svelte";
   import { showHideOverflowY } from "$lib/utils/helpers";
   import SignUpButtonTablet from "./sign-up-button-tablet.svelte";
   import AnnouncementBanner from "$lib/components/banners/announcement.svelte";
-  import ContactLink from "./contact-link.svelte";
   import SkipToContent from "../skip-to-content.svelte";
+  // import { session } from "$app/stores";
 
   let scroll: number;
 
@@ -21,9 +21,13 @@
   };
 
   const navItems = [
+    // {
+    //   href: "/screencasts/getting-started-with-gitpod",
+    //   label: "Screencasts",
+    // },
     {
-      href: "/screencasts/getting-started-with-gitpod",
-      label: "Screencasts",
+      href: "/for/enterprise",
+      label: "Enterprise",
     },
     {
       href: "/blog",
@@ -48,6 +52,7 @@
     },
   ];
 
+  // const isLoggedIn = $session.loggedIn;
   const isLoggedIn =
     typeof document === "undefined"
       ? false
@@ -135,12 +140,11 @@
       {/each}
     </div>
     <div class="login-wrapper items-center hidden space-x-x-small">
-      <ContactLink />
       {#if isLoggedIn}
         <DashboardButton />
       {:else}
         <LoginButton />
-        <SignUpButton />
+        <DemoButton />
       {/if}
     </div>
     <div class="flex items-center">

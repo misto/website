@@ -3,17 +3,12 @@
   import LinkButton from "$lib/components/ui-library/link-button";
   import Card from "$lib/components/ui-library/card";
   import FeatureTableHeaderMobile from "./feature-table-header-mobile.svelte";
-  import type {
-    FeatureTableColumn,
-    FeatureTableToc,
-  } from "../feature-table.types";
-  export let tocData: FeatureTableToc[];
+  import type { FeatureTableColumn } from "../feature-table.types";
 
   export let featureData: FeatureTableColumn;
+  const hasASingleEntry = featureData.enteries.length === 1;
+  const firstEntry = featureData.enteries[0];
 
-  const items = featureData.items.map((item, index) => {
-    return { ...item, ...tocData[index] };
-  });
   let isShown: boolean = false;
 </script>
 
@@ -24,23 +19,50 @@
 >
   <FeatureTableHeaderMobile headerData={featureData.header} bind:isShown>
     {#if isShown}
-      <section
-        class="grid grid-cols-1 auto-rows-[4rem] gap-8 pt-4 mb-4 inner-grid-mobile"
+      <div
+        class="{!hasASingleEntry
+          ? 'space-y-micro'
+          : 'grid grid-cols-1 auto-rows-[4rem] gap-8'} pt-4 mb-4 text-center inner-grid-mobile"
       >
-        {#each items as item}
-          <FeatureTableItemMobile definition={item} />
-        {/each}
-        {#if featureData.link}
-          <div class="flex justify-center items-center">
-            <LinkButton
-              size="large"
-              href={featureData.link.href}
-              variant={featureData.isHighlighted ? "primary" : "cta"}
-              >{featureData.link.label}</LinkButton
+        {#if hasASingleEntry}
+          {#if firstEntry.users}
+            <h4 class="h5 text-center mt-x-small">
+              {firstEntry.users}
+            </h4>
+          {/if}
+          {#each firstEntry.items as item}
+            <FeatureTableItemMobile definition={item} />
+          {/each}
+        {:else}
+          {#each featureData.enteries as entry}
+            <div
+              class="grid grid-cols-1 auto-rows-[4rem] gap-8 bg-white dark:bg-bg rounded-2xl p-xx-small text-center"
             >
-          </div>
+              {#if firstEntry.users}
+                <h4 class="h5 text-center border-b border-divider mt-micro">
+                  {entry.users}
+                </h4>
+              {/if}
+              {#each entry.items as item}
+                <FeatureTableItemMobile definition={item} />
+              {/each}
+            </div>
+          {/each}
         {/if}
-      </section>
+      </div>
+      {#if featureData.link}
+        <div
+          class="flex justify-center items-center"
+          class:mt-x-small={!hasASingleEntry}
+        >
+          <LinkButton
+            size="large"
+            href={featureData.link.href}
+            variant={featureData.isHighlighted ? "primary" : "cta"}
+            >{featureData.link.label}</LinkButton
+          >
+        </div>
+      {/if}
     {/if}
   </FeatureTableHeaderMobile>
 </Card>

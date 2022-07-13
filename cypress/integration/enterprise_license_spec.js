@@ -12,13 +12,13 @@ describe("Test the enterprise license form", () => {
       .click()
       .type("gitpod.io");
     cy.findByLabelText("country").select("Pakistan");
-    cy.findByLabelText(/noofdevelopers/i).select("1-10");
+    cy.findByLabelText(/noofengineers/i).select("1-10");
     cy.findByLabelText(/how can we help?/i)
       .click()
       .type("Gitpod is Awesome!");
     cy.findByLabelText(
       "I consent to having this website store my submitted information so that the sales team can respond to my inquiry."
     ).click({ force: true });
-    cy.findByText("Install Now").click();
+    cy.findByText("Receive license").click();
   });
 });

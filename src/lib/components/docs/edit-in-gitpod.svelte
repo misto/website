@@ -9,6 +9,7 @@
       ? `${$page.url.pathname}/index`
       : $page.url.pathname;
   const href = `${BASE_PATH}${currentPage}.md`;
+  export let renderedOn: "desktop" | "mobile" = "desktop";
 </script>
 
 <style lang="postcss">
@@ -26,7 +27,7 @@
     data-analytics={`{"variant":"open_in_gitpod"}`}
   >
     <span>
-      <LogoTextless />
+      <LogoTextless {renderedOn} />
     </span> <span class="ml-macro">Edit in Gitpod</span>
   </a>
 </div>

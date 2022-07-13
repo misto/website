@@ -54,7 +54,12 @@
   tight={true}
 />
 
-<Search bind:value={searchTerm} class="md:mt-medium" />
+<Search
+  bind:value={searchTerm}
+  label="Search Screencasts"
+  placeholder="Search Screencasts"
+  class="md:mt-medium"
+/>
 
 <SuggestedTopics currentTopic={tag} on:setTopic={(e) => (tag = e.detail)} />
 

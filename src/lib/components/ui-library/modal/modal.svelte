@@ -1,8 +1,9 @@
 <script lang="ts">
   import { showHideOverflowY } from "$lib/components/ui-library/utils/show-hide-overflow-y";
 
-  import { createEventDispatcher } from "svelte";
+  import { createEventDispatcher, onMount } from "svelte";
   import { focusTrap } from "svelte-focus-trap";
+  let backdrop: HTMLElement;
 
   export let isOpen: boolean = false;
 
@@ -38,6 +39,20 @@
       closeModal();
     }
   };
+
+  const handleBackDropClick = (e: Event) => {
+    if (e.target === backdrop) {
+      closeModal();
+    }
+  };
+
+  onMount(() => {
+    window.addEventListener("click", handleBackDropClick);
+
+    return () => {
+      window.removeEventListener("click", handleBackDropClick);
+    };
+  });
 </script>
 
 <style lang="postcss">
@@ -52,8 +67,8 @@
 {#if isOpen}
   <div
     class="modal z-50 fixed top-0 left-0 w-full h-screen flex justify-center items-center"
-    on:click={closeModal}
     use:focusTrap
+    bind:this={backdrop}
   >
     <div class="flex justify-center items-center relative">
       <button

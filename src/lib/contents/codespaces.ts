@@ -150,78 +150,82 @@ export const gitpodColumns: FeatureTableColumn = {
       path: "/images/gitpod-logo.svg",
     },
   },
-  items: [
+  enteries: [
     {
-      term: "Pricing (Hosted)",
-      text: "Free for Open-Source",
-    },
-    {
-      term: "Free Tier",
-      text: "50h per month",
-    },
-    {
-      term: "License",
-      text: "Open Source",
-    },
-    {
-      term: "Availability",
-      text: "Everyone",
-    },
-    {
-      term: "GitHub Integration",
-      availability: true,
-    },
-    {
-      term: "GitLab Integration",
-      availability: true,
-    },
-    {
-      term: "Bitbucket Integration",
-      availability: true,
-    },
-    {
-      term: "Self-Host on GKE",
-      availability: true,
-    },
-    {
-      term: "Self-Host on EKS",
-      availability: true,
-    },
-    {
-      term: "Self-Host on AKS",
-      availability: true,
-    },
-    {
-      term: "Self-Host on Kubernetes",
-      availability: true,
-    },
-    {
-      term: "Prebuilds",
-      availability: true,
-    },
-    {
-      term: "Snapshots",
-      availability: true,
-    },
-    {
-      term: "VS Code Extensions",
-      availability: true,
-    },
-    {
-      term: "iPad Support",
-      availability: true,
-    },
-    {
-      term: "Virtual Desktop (VNC)",
-      availability: true,
-    },
-    {
-      term: "Desktop VS Code",
-      availability: true,
-    },
-    {
-      term: "Multi-IDE Support",
-      availability: true,
+      items: [
+        {
+          term: "Pricing (Hosted)",
+          text: "Free for Open-Source",
+        },
+        {
+          term: "Free Tier",
+          text: "50h per month",
+        },
+        {
+          term: "License",
+          text: "Open Source",
+        },
+        {
+          term: "Availability",
+          text: "Everyone",
+        },
+        {
+          term: "GitHub Integration",
+          availability: true,
+        },
+        {
+          term: "GitLab Integration",
+          availability: true,
+        },
+        {
+          term: "Bitbucket Integration",
+          availability: true,
+        },
+        {
+          term: "Self-Host on GKE",
+          availability: true,
+        },
+        {
+          term: "Self-Host on EKS",
+          availability: true,
+        },
+        {
+          term: "Self-Host on AKS",
+          availability: true,
+        },
+        {
+          term: "Self-Host on Kubernetes",
+          availability: true,
+        },
+        {
+          term: "Prebuilds",
+          availability: true,
+        },
+        {
+          term: "Snapshots",
+          availability: true,
+        },
+        {
+          term: "VS Code Extensions",
+          availability: true,
+        },
+        {
+          term: "iPad Support",
+          availability: true,
+        },
+        {
+          term: "Virtual Desktop (VNC)",
+          availability: true,
+        },
+        {
+          term: "Desktop VS Code",
+          availability: true,
+        },
+        {
+          term: "Multi-IDE Support",
+          availability: true,
+        },
+      ],
     },
   ],
 };
@@ -232,78 +236,82 @@ export const codespacesColumn: FeatureTableColumn = {
     headline: "Codespaces",
     image: githubMarkSvelte,
   },
-  items: [
+  enteries: [
     {
-      term: "Pricing (Hosted)",
-      text: "$$$",
-    },
-    {
-      term: "Free Tier",
-      availability: false,
-    },
-    {
-      term: "License",
-      text: "Proprietary",
-    },
-    {
-      term: "Availability",
-      text: "Teams, Enterprise",
-    },
-    {
-      term: "GitHub Integration",
-      availability: true,
-    },
-    {
-      term: "GitLab Integration",
-      availability: false,
-    },
-    {
-      term: "Bitbucket Integration",
-      availability: false,
-    },
-    {
-      term: "Self-Host on GKE",
-      availability: false,
-    },
-    {
-      term: "Self-Host on EKS",
-      availability: false,
-    },
-    {
-      term: "Self-Host on AKS",
-      availability: false,
-    },
-    {
-      term: "Self-Host on Kubernetes",
-      availability: false,
-    },
-    {
-      term: "Prebuilds",
-      availability: false,
-    },
-    {
-      term: "Snapshots",
-      availability: false,
-    },
-    {
-      term: "VS Code Extensions",
-      availability: true,
-    },
-    {
-      term: "iPad Support",
-      availability: true,
-    },
-    {
-      term: "Virtual Desktop (VNC)",
-      availability: true,
-    },
-    {
-      term: "Desktop VS Code",
-      availability: true,
-    },
-    {
-      term: "Multi-IDE Support",
-      availability: false,
+      items: [
+        {
+          term: "Pricing (Hosted)",
+          text: "$$$",
+        },
+        {
+          term: "Free Tier",
+          availability: false,
+        },
+        {
+          term: "License",
+          text: "Proprietary",
+        },
+        {
+          term: "Availability",
+          text: "Teams, Enterprise",
+        },
+        {
+          term: "GitHub Integration",
+          availability: true,
+        },
+        {
+          term: "GitLab Integration",
+          availability: false,
+        },
+        {
+          term: "Bitbucket Integration",
+          availability: false,
+        },
+        {
+          term: "Self-Host on GKE",
+          availability: false,
+        },
+        {
+          term: "Self-Host on EKS",
+          availability: false,
+        },
+        {
+          term: "Self-Host on AKS",
+          availability: false,
+        },
+        {
+          term: "Self-Host on Kubernetes",
+          availability: false,
+        },
+        {
+          term: "Prebuilds",
+          availability: false,
+        },
+        {
+          term: "Snapshots",
+          availability: false,
+        },
+        {
+          term: "VS Code Extensions",
+          availability: true,
+        },
+        {
+          term: "iPad Support",
+          availability: true,
+        },
+        {
+          term: "Virtual Desktop (VNC)",
+          availability: true,
+        },
+        {
+          term: "Desktop VS Code",
+          availability: true,
+        },
+        {
+          term: "Multi-IDE Support",
+          availability: false,
+        },
+      ],
     },
   ],
 };

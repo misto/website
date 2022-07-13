@@ -30,7 +30,7 @@
   <h1>Imprint</h1>
   <p class="mb-4">
     Gitpod&nbsp;GmbH
-    <br /> Managing Directors: Sven Efftinge, Moritz Eysholdt, Dr. Jan Köhnlein
+    <br /> Managing Directors: Sven Efftinge, Moritz Eysholdt
     <br /> Am Germaniahafen 1
     <br /> 24143 Kiel
     <br /> Germany

@@ -14,14 +14,7 @@
     display: flex;
     border: 2px solid transparent;
     justify-content: center;
-    margin: 0.75rem;
-
-    :global(.fcc) {
-      @media (min-width: 841px) {
-        width: 8.125rem !important;
-        transform: translateX(-0.625rem);
-      }
-    }
+    margin: var(--micro) 0.75rem;
   }
 </style>
 

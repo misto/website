@@ -1,5 +1,5 @@
 ---
-section: references
+section: languages
 title: Deno in Gitpod
 ---
 

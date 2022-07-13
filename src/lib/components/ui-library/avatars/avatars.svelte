@@ -60,6 +60,12 @@
       : `https://github.com/${username}`;
 </script>
 
+<style lang="postcss">
+  a::after {
+    @apply !hidden;
+  }
+</style>
+
 <span class:-space-x-2={!displayNames}>
   {#each trimmedUsernames as username}
     {#if displayNames}

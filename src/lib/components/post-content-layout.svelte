@@ -104,25 +104,25 @@
       alt={`${title}`}
       class="max-h-[540px] rounded-tl-2xl rounded-tr-[1.3rem]"
     />
-    <p class="mt-[1.875rem] mb-6 text-body">{dateDisplay}</p>
-    {#if type === "digest"}
-      <Pill text="DevX Digest" class="mb-micro" />
-    {/if}
-    <h1 class="mb-6 text-h3">{title}</h1>
-    <p>
-      <span
-        ><Avatars
-          usernames={author}
-          displayNames={authorDisplayNames}
-          socialMediaLinks={authorSocialMediaLinks}
-          socialMediaLinkClasses="inline-flex mr-2 px-2 bg-white dark:bg-card rounded-xl text-body focus:bg-card focus:text-important hover:bg-card hover:text-important"
-          socialMediaImgClasses="mr-2 h-6 w-6 place-self-center"
-        /></span
-      >
-    </p>
     <div
       class="content-blog prose prose-img:rounded-tl-2xl prose-img:rounded-tr-[1.3rem] max-w-none mt-10"
     >
+      <p class="mt-[1.875rem] mb-6 text-body">{dateDisplay}</p>
+      {#if type === "digest"}
+        <Pill text="DevX Digest" class="mb-micro" />
+      {/if}
+      <h1>{title}</h1>
+      <p>
+        <span
+          ><Avatars
+            usernames={author}
+            displayNames={authorDisplayNames}
+            socialMediaLinks={authorSocialMediaLinks}
+            socialMediaLinkClasses="inline-flex mr-2 px-2 bg-white dark:bg-card rounded-xl text-body focus:bg-card focus:text-important hover:bg-card hover:text-important"
+            socialMediaImgClasses="mr-2 h-6 w-6 place-self-center"
+          /></span
+        >
+      </p>
       <slot />
     </div>
     <Share

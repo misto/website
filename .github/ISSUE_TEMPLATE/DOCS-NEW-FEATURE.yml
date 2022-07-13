@@ -1,7 +1,7 @@
-name: Docs - New Feature
+name: Docs Enhancement - New Feature
 description: Use this template to make sure your new feature will be well documented.
-title: "[Docs - New Feature]: <your feature name here>"
-labels: [documentation]
+title: "[Docs Enhacement - New Feature]: <your feature name here>"
+labels: ["docs-enhancement"]
 body:
   - type: markdown
     attributes:
@@ -10,14 +10,21 @@ body:
   - type: textarea
     id: description
     attributes:
-      label: Describe your feature
-      description: In as much detail as possible, please tell us about your feature.
+      label: Describe your feature request
+      description: In as much detail as possible, please tell us about your feature request.
     validations:
       required: true
   - type: textarea
-    id: howtotest
+    id: userimpact
     attributes:
-      label: How to test
-      description: What are the steps required to test this feature?
+      label: User impact
+      description: How does this new feature impact the user experience?
     validations:
       required: true
+  - type: textarea
+    id: addcontext
+    attributes:
+      label: Additional context
+      description: If there is any additional context required, to entirely understand the feature, let us know here.
+    validations:
+      required: false

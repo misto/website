@@ -1,26 +1,24 @@
 ---
 section: develop
-title: Create a Team
+title: Teams & Projects
 ---
 
 <script context="module">
   export const prerender = true;
 </script>
 
-> **NEW FEATURE** —
-> Teams & Projects is still in **Beta**. [Send feedback](https://github.com/gitpod-io/gitpod/issues/5095).
+# {title}
 
-# Teams & Projects
-
-In Gitpod, you can use teams to manage multiple projects and also collaborate with your team using more efficient workflows.
+> {title} is currently in [Beta](/docs/references/gitpod-releases) · [Send feedback](https://github.com/gitpod-io/gitpod/issues/5095).
 
 When you sign up for Gitpod the first time, you automatically gain access to a **Personal Account** where you can also add projects.
-To collaborate with others on projects you can to create a **Team** and invite others as team members.
+To collaborate with others on projects you can create a **Team** and invite others as team members.
 
 ## Teams
 
-You can use teams to group and manage one or more projects and invite team members.
-Users with access to a team can view branches, prebuilds, and configuration for all projects within a team as well as open new workspaces directly from a branch or a prebuild from the dashboard.
+Teams are used to share projects amongst team members. All users with access to a team can view branches and prebuilds for the projects in the team. They can also open new workspaces directly from a branch in the dashboard.
+
+Owners of a team can manage other members, reset the invite URL, and setup [Team Billing](/docs/team-billing).
 
 ### View teams
 
@@ -94,14 +92,17 @@ You can remove a project by using the more actions button while hovering over a 
 
 ## Roles
 
-| Permission          | Owner | Member |
-| ------------------- | ----- | ------ |
-| Manage Team Members | Yes   | No     |
-| Delete Team         | Yes   | No     |
-| Invite Team Members | Yes   | Yes    |
-| Add Projects        | Yes   | Yes    |
-| Remove Projects     | Yes   | Yes    |
-| Add Projects        | Yes   | Yes    |
-| View Branches       | Yes   | Yes    |
-| View Prebuilds      | Yes   | Yes    |
-| Trigger Prebuilds   | Yes   | Yes    |
+| Permission             | Owner | Member |
+| ---------------------- | ----- | ------ |
+| Manage Team Members    | Yes   | No     |
+| Delete Team            | Yes   | No     |
+| Manage Team Billing    | Yes   | No     |
+| Edit Project Settings  | Yes   | No     |
+| Edit Project Variables | Yes   | No     |
+| Invite Team Members    | Yes   | Yes    |
+| Add Projects.          | Yes   | Yes    |
+| Remove Projects.       | Yes   | Yes    |
+| Add Projects           | Yes   | Yes    |
+| View Branches          | Yes   | Yes    |
+| View Prebuilds         | Yes   | Yes    |
+| Trigger Prebuilds      | Yes   | Yes    |

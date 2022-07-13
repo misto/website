@@ -33,7 +33,7 @@
       style="min-width: 0"
       variant="primary"
       size="large"
-      download
+      download={src}
       href={svgSrc}>SVG</LinkButton
     >
     <LinkButton
@@ -41,7 +41,9 @@
       variant="cta"
       size="large"
       href={`/images/media-kit/${srcPNG}`}
-      download>PNG</LinkButton
+      download={srcPNG}
     >
+      PNG
+    </LinkButton>
   </div>
 </div>

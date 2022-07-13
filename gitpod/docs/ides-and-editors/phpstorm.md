@@ -15,16 +15,14 @@ title: PhpStorm
 <!-- prettier-ignore -->
 # PhpStorm
 
-Gitpod enables code editing using JetBrains {title} currently via [JetBrains Gateway](jetbrains-gateway).
-
-> **Please note:** JetBrains {title} is currently in beta. If you experience any issues, or have feedback, please [get in touch](/contact/support).
+> {title} is currently in [Beta](/docs/references/gitpod-releases) · [Send feedback](https://github.com/gitpod-io/gitpod/issues/6576).
 
 ## Getting Started
 
 1. **Install [JetBrains Gateway](https://www.jetbrains.com/help/phpstorm/remote-development-a.html#gateway)** - With the [JetBrains Gateway and Gitpod](jetbrains-gateway) plugin you can create and manage your latest 20 Gitpod workspaces.
 2. **Install the Gitpod plugin** - Open JetBrains Gateway and you'll see the Gitpod logo on the main page. Click "install" to install the [Gitpod plugin](https://plugins.jetbrains.com/plugin/18438-gitpod-gateway) for JetBrains Gateway.
 3. **Update your Gitpod preferences** - Select {title} on the [Gitpod preferences page](https://gitpod.io/preferences) which will set {title} as your default IDE for future workspace starts.
-4. **Start (or restart) your workspace** - Either start a workspace directly from within the [JetBrains Gateway](jetbrains-gateway) via the Gitpod plugin **OR** open a new workspace direclty in Gitpod where on workspace start you will be prompted to open {title} for that workspace.
+4. **Start (or restart) your workspace** - Either start a workspace directly from within the [JetBrains Gateway](jetbrains-gateway) via the Gitpod plugin **OR** open a new workspace directly in Gitpod where on workspace start you will be prompted to open {title} for that workspace.
 
 <figure>
 <video playsinline autoplay no-controls loop muted class="shadow-medium w-full rounded-xl max-w-3xl mt-x-small" alt="Updating Gitpod IDE preferences to {title}" src="/images/editors/select-jetbrains-ide.mp4"></video>
@@ -96,7 +94,7 @@ You can install a plugin only for **your current workspace** following these ste
 
 #### Preconfigure for repository
 
-> **Please note:** This feature is currently experimental and is a subject to change. [Send feedback](https://github.com/gitpod-io/gitpod/issues/6576).
+> JetBrains plugin support is currently in [Beta](/docs/references/gitpod-releases) · [Send feedback](https://github.com/gitpod-io/gitpod/issues/6576).
 
 You can share a plugin on **{title} backend** with everybody working on the repository by adding it to [.gitpod.yml](/docs/config-gitpod-file) and pushing to your Git repository.
 Each workspace is preconfigured with plugins from the `gitpod.yml` configuration file. For example:
@@ -121,13 +119,13 @@ It is not yet possible to install plugins on **{title} backend** for your user t
 
 ## Indexing using Prebuilds
 
-> **Please note:** This feature is currently experimental and is a subject to change. [Send feedback](https://github.com/gitpod-io/gitpod/issues/6740).
+> JetBrains Prebuilds is currently in [Alpha](/docs/references/gitpod-releases) · [Send feedback](https://github.com/gitpod-io/gitpod/issues/6576).
 
 When you open the project {title} starts indexing to load modules and
 enable the core functionality like code completion and navigation.
 Depending on the size of your project indexing speed can vary significantly.
 
-You can speed up the indexing of a project by applying these [general recommendations](https://www.jetbrains.com/help/go/indexing.html).
+You can speed up the indexing of a project by applying these [general recommendations](https://www.jetbrains.com/help/phpstorm/indexing.html).
 Gitpod prebuilds allow you to improve it further by indexing before you start a new workspace.
 
 To leverage it:
@@ -147,8 +145,28 @@ jetbrains:
 The `version` property allows you to control whether to index for `stable`, `latest`, or `both` versions of {title} compatible with Gitpod.
 Users can switch between `stable` and `latest` versions of {title} on the [user preferences](https://gitpod.io/preferences) page.
 
+## Configure JVM options
+
+> Configuration of JVM options is currently in [Alpha](/docs/references/gitpod-releases) · [Send feedback](https://github.com/gitpod-io/gitpod/issues/8704).
+
+You can adjust JVM options for {title} backend, especially if you want to increase the `-Xmx` memory size. For example:
+
+```yaml
+jetbrains:
+  phpstorm:
+    vmoptions: "-Xmx4g"
+```
+
+For more detailed information on JVM options, refer to [Common JVM Options](https://www.jetbrains.com/help/phpstorm/tuning-the-ide.html#common-jvm-options) from JetBrains documentation.
+
 ## FAQ
 
 - For the questions about supported IDEs and Editors in Gitpod, refer to [FAQs](/docs/ides-and-editors/faqs).
 
 - For the general questions about JetBrains Remote Development, refer to refer to <a href="https://www.jetbrains.com/help/phpstorm/faq-about-remote-development.html" target="_blank">{title} FAQ</a>.
+
+## Troubleshooting
+
+- [What should I do if JetBrains Gateway and Gitpod aren’t working?](/docs/troubleshooting#what-should-i-do-if-jetbrains-gateway-and-gitpod-arent-working)
+- [Gitpod logs in JetBrains Client](/docs/troubleshooting#gitpod-logs-in-jetbrains-client)
+- [Gitpod logs in JetBrains Gateway](/docs/troubleshooting#gitpod-logs-in-jetbrains-gateway)

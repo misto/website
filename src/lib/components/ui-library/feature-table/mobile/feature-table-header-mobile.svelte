@@ -1,4 +1,6 @@
 <script lang="ts">
+  import MostPopular from "$lib/components/pricing/most-popular.svelte";
+
   import Arrow from "$lib/components/svgs/arrow.svelte";
 
   import type { FeatureTableHeader } from "../feature-table.types";
@@ -21,7 +23,10 @@
         class="h-10"
       />
     {/if}
-    <div class="text-center ">
+    <div class="text-center">
+      {#if headerData.isMostPopular}
+        <MostPopular class="mb-macro" />
+      {/if}
       <h3>{headerData.headline}</h3>
       {#if headerData.subtitle}
         <p>{headerData.subtitle}</p>

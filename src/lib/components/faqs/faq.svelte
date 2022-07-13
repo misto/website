@@ -123,6 +123,10 @@
     @apply pt-0;
   }
 
+  .faq__text :global(p) + :global(p) {
+    @apply mt-x-small;
+  }
+
   @media (max-width: 375px) {
     .faq__top {
       @apply p-micro;

@@ -16,7 +16,6 @@ title: Tailscale x Gitpod
 **TL;DR**
 
 - Tailscale and Gitpod partner to enable secure, professional software development from anywhere
-- Paying Tailscale customers get 1 year of Gitpod Professional for free 🎁
 
 > We mentioned this already a [couple of times](/blog/cloud-based-development-for-everyone): in retrospect **the second half of 2021 will mark the tipping point for remote, cloud-based development.**
 
@@ -45,10 +44,6 @@ With Gitpod and Tailscale you can:
 - Complete a coding interview
 
 What Big Tech such as [Google, Facebook or Shopify](https://twitter.com/jmwind/status/1331364214582222854?s=20) has been doing for years is now accessible for the rest of the world: secure remote development in the cloud.
-
-If you are a paying Tailscale customer (on any [paid pricing plan](https://tailscale.com/pricing/)), then great news — you get access to [Gitpod Professional](/pricing) free for a year.
-
-> **To redeem access, fill out the [📑 Google form](https://bit.ly/tailscale-gitpod-code) and we'll send you a coupon code if you're eligible.**
 
 ## Securing your software supply chain in a distributed world
 

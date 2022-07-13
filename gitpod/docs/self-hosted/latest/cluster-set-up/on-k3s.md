@@ -46,7 +46,7 @@ Now, you have to install [Calico](https://www.tigera.io/project-calico/). Downlo
 "container_settings": { "allow_ip_forwarding": true }
 ```
 
-The section in the `calico-vsxlan.yaml` file should look like this:
+The section in the `calico-vxlan.yaml` file should look like this:
 
 ```json
 [...]

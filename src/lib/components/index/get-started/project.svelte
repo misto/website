@@ -45,7 +45,7 @@
         width="24"
         height="24"
       />
-      <h4 class="text-important">
+      <h4 class="text-important transition-all duration-200 delay-[50ms]">
         {title}
       </h4>
     </div>
