@@ -11,7 +11,7 @@
   import Button from "$lib/components/ui-library/button";
   import Card from "$lib/components/ui-library/card";
 
-  import type { Email } from "../../functions/submit-form";
+  import type { Email } from "$lib/api/api";
   import Header from "$lib/components/header.svelte";
   import { cloudPlatforms, noOfEngineers } from "$lib/contents/contact";
   import Checkbox from "$lib/components/ui-library/checkbox";
