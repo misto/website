@@ -10,6 +10,6 @@ title: Self-Hosted Reference Architectures
 
 # Reference Architectures
 
-- Proof-of-Concept Reference Architecture (coming soon)
+- Proof-of-Value Reference Architecture (coming soon)
 - [Single-Cluster Production-Ready Reference Architecture](./reference-architecture/production-ready-single-cluster)
 - Multi-Cluster Production-Ready Reference Architecture (coming soon)
