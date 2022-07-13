@@ -78,3 +78,12 @@ export const reportAction: Action = {
     text: "View report process",
   },
 };
+export const assessmentAction: Action = {
+  title: "View our Security Self-Assessment",
+  description:
+    "You can find our CAIQ self-asssessment inside the Cloud Security Alliance STAR Registry. A framework dedicated to providing an industry-accepted way of transperency around cloud security controls.",
+  link: {
+    href: "https://cloudsecurityalliance.org/star/registry/gitpod-gmbh",
+    text: "View our Self-Assessment",
+  },
+};
