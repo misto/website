@@ -17,11 +17,10 @@ title: Local Preview of Gitpod Self-Hosted
 
 > - **Intended for:** The Local Preview allows you to experience Gitpod Self-Hosted on your local machine without having to set up a Kubernetes cluster. It is purely intended for testing purposes. Please see [getting Started](./getting-started) for recommended sustainable installation methods.
 > - **Limitations:**
-
-- Performance is bound by the capabilities of your machine. Your experience is likely to be better when using the SaaS version ([gitpod.io](gitpod.io)) or when running on one of our [reference architectures](./reference-architecture)
-- [Prebuilds](../../prebuilds) are not supported because they require webhooks
-- **Macs with Apple Silicon (e.g. M1) are currently not supported.** See [the relevant issue](https://github.com/gitpod-io/gitpod/issues/9075) for more information
-- Local Preview is currently in `alpha`
+>   - Performance is bound by the capabilities of your machine. Your experience is likely to be better when using the SaaS version ([gitpod.io](gitpod.io)) or when running on one of our [reference architectures](./reference-architecture)
+>   - [Prebuilds](../../prebuilds) are not supported because they require webhooks
+>   - **Macs with Apple Silicon (e.g. M1) are currently not supported.** See [the relevant issue](https://github.com/gitpod-io/gitpod/issues/9075) for more information
+>   - Local Preview is currently in `alpha`
 
 <br />
 
