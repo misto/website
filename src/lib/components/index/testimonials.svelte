@@ -2,18 +2,19 @@
   import Section from "../section.svelte";
   import Testimonial from "./testimonial.svelte";
   import type { Testimonial as TestimonialType } from "$lib/types/testimonial.type";
+  import Carousel from "../carousel.svelte";
 
   export let testimonials: TestimonialType[];
   export let title: string = "";
   export let text: string = "";
-  const sequence: number[] = [];
-  export let isDirectionNegative: boolean = false;
+  // const sequence: number[] = [];
+  // export let isDirectionNegative: boolean = false;
 
-  for (let i = 0; i < testimonials.length; i += 3) {
-    sequence.push(i);
-  }
+  // for (let i = 0; i < testimonials.length; i += 3) {
+  //   sequence.push(i);
+  // }
 
-  let activeSequenceNumber = 0;
+  // let activeSequenceNumber = 0;
 
   let clazz = "";
   export { clazz as class };
@@ -47,27 +48,12 @@
       {/if}
     </div>
 
-    {#key activeSequenceNumber}
-      <div class="flex justify-between max-w-[1200px] mx-auto h-[340px]">
-        <Testimonial
-          {isDirectionNegative}
-          testimonial={testimonials[activeSequenceNumber]}
-        />
-        {#if testimonials[activeSequenceNumber + 1] !== undefined}
-          <Testimonial
-            {isDirectionNegative}
-            testimonial={testimonials[activeSequenceNumber + 1]}
-          />
-        {/if}
-        {#if testimonials[activeSequenceNumber + 2] !== undefined}
-          <Testimonial
-            {isDirectionNegative}
-            testimonial={testimonials[activeSequenceNumber + 2]}
-          />
-        {/if}
-      </div>
-    {/key}
-    <div class="flex justify-center space-x-micro">
+    <Carousel>
+      {#each testimonials as testimonial}
+        <Testimonial {testimonial} />
+      {/each}
+    </Carousel>
+    <!-- <div class="flex justify-center space-x-micro">
       {#each sequence as number}
         <button
           on:click={() => {
@@ -78,6 +64,6 @@
           class:active={number === activeSequenceNumber}
         />
       {/each}
-    </div>
+    </div> -->
   </div>
 </Section>

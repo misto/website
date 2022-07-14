@@ -3,8 +3,6 @@
   export let testimonial: Testimonial;
 
   const { name, avatar, role, org, text } = testimonial;
-  export let isDirectionNegative: boolean;
-  import { fly } from "svelte/transition";
 </script>
 
 <style lang="scss">
@@ -47,15 +45,7 @@
   }
 </style>
 
-<!-- in:fade={{duration: 500}} -->
-<div
-  class="my-2 text-small"
-  in:fly={{
-    x: isDirectionNegative ? -1 * 400 : 400,
-    duration: 1500,
-    opacity: 0,
-  }}
->
+<div class="my-2 text-small">
   <div
     class="testimonial stroked stroked-light w-96 p-xx-small overflow-hidden rounded-2xl bg-white dark:bg-card transition-shadow duration-300 ease-in-out text-body"
   >
