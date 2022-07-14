@@ -30,7 +30,7 @@
   }
 
   .active {
-    @apply bg-gray-400 dark:bg-divider;
+    @apply bg-sub dark:bg-divider;
   }
 </style>
 
@@ -67,19 +67,14 @@
         {/if}
       </div>
     {/key}
-    <div class="flex justify-center space-x-2">
+    <div class="flex justify-center space-x-micro">
       {#each sequence as number}
         <button
           on:click={() => {
             isDirectionNegative = activeSequenceNumber > number;
             activeSequenceNumber = number;
-            console.log(
-              number === activeSequenceNumber,
-              number,
-              activeSequenceNumber
-            );
           }}
-          class="inline-block h-4 w-4 bg-divider-light dark:bg-light-black rounded-full transition-all duration-200"
+          class="inline-block h-[15px] w-[15px] bg-divider dark:bg-light-black rounded-full transition-all duration-200"
           class:active={number === activeSequenceNumber}
         />
       {/each}
