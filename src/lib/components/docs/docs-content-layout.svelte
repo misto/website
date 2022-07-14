@@ -6,21 +6,22 @@
   import OpenGraph from "../open-graph.svelte";
   import FeedbackWidget from "./feedback-widget.svelte";
   import docsCurrentSectionStore from "$lib/stores/docs-current-section";
+  import docsCurrentSubSectionStore from "$lib/stores/docs-current-subsection";
   import PrevNext from "./prev-next.svelte";
 
   /** @type {string} */
   export let section;
   /** @type {string} */
   export let title;
+  /** @type {string} */
+  export let feature_owner;
+
+  /** @type {string}*/
+  export let subsection;
 
   $: $docsCurrentSectionStore = section;
+  $: $docsCurrentSubSectionStore = subsection;
 </script>
-
-<style lang="postcss">
-  :global(pre[class*="language-"]) {
-    @apply rounded-xl;
-  }
-</style>
 
 <svelte:head>
   <link rel="stylesheet" href="/prism-solarized-light.min.css" />

@@ -14,6 +14,7 @@ The `.gitpod.yml` file at the root of your project is where you tell Gitpod how 
 Below is a full reference of all available properties. To see the underlying schema, please refer to [`gitpod-io/gitpod`](https://github.com/gitpod-io/gitpod/blob/main/components/gitpod-protocol/data/gitpod-schema.json) in the [gitpod-io/gitpod](https://github.com/gitpod-io/gitpod) repository.
 
 - [.gitpod.yml Reference](#gitpodyml-reference)
+  - [`additionalRepositories`](#additionalrepositories)
   - [`checkoutLocation`](#checkoutlocation)
   - [`gitConfig`](#gitconfig)
   - [`github`](#github)
@@ -33,7 +34,11 @@ Below is a full reference of all available properties. To see the underlying sch
     - [`jetbrains.[product]`](#jetbrainsproduct)
     - [`jetbrains.[product].plugins`](#jetbrainsproductplugins)
     - [`jetbrains.[product].prebuilds`](#jetbrainsproductprebuilds)
+    - [`jetbrains.[product].vmoptions`](#jetbrainsproductvmoptions)
+  - [`mainConfiguration`](#mainconfiguration)
   - [`ports`](#ports)
+    - [`ports[n].name`](#portsnname)
+    - [`ports[n].description`](#portsndescription)
     - [`ports[n].onOpen`](#portsnonopen)
     - [`ports[n].port`](#portsnport)
     - [`ports[n].visibility`](#portsnvisibility)
@@ -49,6 +54,75 @@ Below is a full reference of all available properties. To see the underlying sch
   - [`vscode`](#vscode)
     - [`vscode.extensions`](#vscodeextensions)
   - [`workspaceLocation`](#workspacelocation)
+
+## `additionalRepositories`
+
+> additionalRepositories is currently in [Beta](/docs/references/gitpod-releases). [Send feedback](https://github.com/gitpod-io/gitpod/issues/8623).
+
+Defines additional source control repositories to clone and where the repository is cloned under `/workspaces`
+
+<div class="overflow-x-auto">
+
+| Type     | Default   |
+| -------- | --------- |
+| `object` | `<empty>` |
+
+</div>
+
+**Demo**
+
+<a href="https://gitpod.io/#https://github.com/gitpod-io/demo-multi-repo-frontend"><img src="https://gitpod-staging.com/button/open-in-gitpod.svg"/></a>
+
+**Example**
+
+```yaml
+additionalRepositories:
+  - url: https://github.com/gitpod-io/demo-multi-repo-backend
+    # checkoutLocation is optional and relative to /workspaces.
+    # by default the location defaults to the repository name.
+    checkoutLocation: backend
+```
+
+When the above configuration is defined then the following additional steps happen when Gitpod workspace is started:
+
+1. If you open a workspace on a branch, Gitpod will clone the same-named branch in all repositories. If such a branch doesn’t exist Gitpod checks out the default branch.
+1. The contents of the branch is cloned under `/workspaces/`
+1. The contents of `https://github.com/gitpod-io/demo-multi-repo-backend` is cloned to `/workspaces/backend`
+
+After all of the source control repositories have been cloned then the `before`, `init` and `command` [tasks](https://www.gitpod.io/docs/config-start-tasks) are executed as per normal.
+
+If you need to run commands (such as package installation or compilation) on the source control repositories which have been cloned then change your working directory to the use configured or default `checkoutLocation` location using the `before` task.
+
+**Example**
+
+```yaml
+# example .gitpod.yml from https://github.com/gitpod-io/demo-multi-repo-frontend
+additionalRepositories:
+  - url: https://github.com/gitpod-io/demo-multi-repo-backend
+    # checkoutLocation is optional and relative to /workspaces.
+    # by default the location defaults to the repository name.
+    checkoutLocation: backend
+
+tasks:
+  - name: backend
+    # change working directory as per configured in `checkoutLocation`
+    # which is configured above as `/workspaces/backend`
+    before: |
+      cd ../backend
+    init: |
+      echo npm install
+    command: |
+      echo npm run dev
+
+    # changing of working directory is not required as these tasks will
+    # by default by executed in `/workspaces/demo-multi-repo-frontend`
+  - name: frontend
+    init: |
+      echo npm install
+      echo npm run build
+    command: |
+      echo npm run dev
+```
 
 ## `checkoutLocation`
 
@@ -352,7 +426,7 @@ jetbrains:
 
 ### `jetbrains.[product].prebuilds`
 
-> JetBrains prebuilds support (via gitpod.yml) is currently in [Beta](/docs/references/gitpod-releases) · [Send feedback](https://github.com/gitpod-io/gitpod/issues/6576).
+> JetBrains prebuilds support (via gitpod.yml) is currently in [Alpha](/docs/references/gitpod-releases) · [Send feedback](https://github.com/gitpod-io/gitpod/issues/6576).
 
 Define whether Gitpod enables prebuilds for a specific JetBrains IDE.
 
@@ -383,6 +457,28 @@ The `version` is defined as follows:
 
 </div>
 
+### `jetbrains.[product].vmoptions`
+
+> Configuration of JVM options (via gitpod.yml) is currently in [Alpha](/docs/references/gitpod-releases) · [Send feedback](https://github.com/gitpod-io/gitpod/issues/8704).
+
+Configure JVM options for a specific JetBrains IDE.
+
+<div class="overflow-x-auto">
+
+| Type     | Default   |
+| -------- | --------- |
+| `string` | `<empty>` |
+
+</div>
+
+**Example**
+
+```yaml
+jetbrains:
+  intellij:
+    vmoptions: "-Xmx4g"
+```
+
 ## `ports`
 
 Configure how Gitpod treats various ports your application may listen on. You can learn more about this in the [Exposing Ports](/docs/config-ports) documentation.
@@ -399,11 +495,41 @@ Configure how Gitpod treats various ports your application may listen on. You ca
 
 ```yaml
 ports:
-  - port: 3000
+  - name: Website
+    port: 3000
     onOpen: open-preview
-  - port: 10000
+  - name: VNC
+    description: full GUI Virtual Desktop
+    port: 6080
+    onOpen: open-browser
+  - name: Server
+    port: 10000
     onOpen: ignore
 ```
+
+### `ports[n].name`
+
+Define a name for the port, will be shown as a column in the output of `gp ports list` and as a title of port in the `Remote Explorer` under the VS Code Browser sidebar. [More detail](/docs/config-ports#specifying-port-names--descriptions)
+
+<div class="overflow-x-auto">
+
+| Type     | Default   |
+| -------- | --------- |
+| `string` | `<empty>` |
+
+</div>
+
+### `ports[n].description`
+
+Adds a description to the port, will be shown as a column in the output of `gp ports list` and as a tooltip (on hover) of the port in the `Remote Explorer` in VS Code Browser sidebar.
+
+<div class="overflow-x-auto">
+
+| Type     | Default   |
+| -------- | --------- |
+| `string` | `<empty>` |
+
+</div>
 
 ### `ports[n].onOpen`
 
@@ -565,6 +691,30 @@ Note: `split-top` and `split-bottom` are deprecated values.
 ### `tasks[n].prebuild`
 
 Deprecated. Please use the [`init`](#tasksninit) task instead.
+
+### `mainConfiguration`
+
+> mainConfiguration is currently in [Beta](/docs/references/gitpod-releases). [Send feedback](https://github.com/gitpod-io/gitpod/issues/8623).
+
+Defines the repository with the main `.gitpod.yml` file and makes it possible to open the same workspace from any issue, branch or other context URL from any repository defined in a multi repository configuration.
+
+<div class="overflow-x-auto">
+
+| Type     | Default   |
+| -------- | --------- |
+| `string` | `<empty>` |
+
+</div>
+
+**Demo**
+
+<a href="https://gitpod.io/#https://github.com/gitpod-io/demo-multi-repo-backend"><img src="https://gitpod-staging.com/button/open-in-gitpod.svg"/></a>
+
+**Example**
+
+```yaml
+mainConfiguration: https://github.com/gitpod-io/demo-multi-repo-frontend
+```
 
 ## `vscode`
 

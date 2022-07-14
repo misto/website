@@ -28,6 +28,7 @@
   title="Compare features"
   text="Choose the plan that fits your needs. You can always start for free."
   textClassNames="mb-xx-small"
+  isTitleADeepLink={true}
 >
   <FeatureTable slot="content" tableData={pricingTable} />
 </SectionCommon>

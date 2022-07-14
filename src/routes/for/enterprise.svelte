@@ -5,10 +5,8 @@
 <script lang="ts">
   import UsedBy from "$lib/components/index/used-by.svelte";
   import Explore from "$lib/components/explore.svelte";
-  import Card from "$lib/components/card/card.svelte";
   import {
     exploreContents,
-    cards,
     featureCards,
     partnershipCards,
     integrateFeatures,
@@ -24,6 +22,8 @@
   import OpenGraph from "$lib/components/open-graph.svelte";
   import Hero from "$lib/components/hero.svelte";
   import SectionFeatures from "$lib/components/section-features.svelte";
+  import Benefits from "$lib/components/benefits.svelte";
+  import { benefits } from "$lib/contents/home";
 </script>
 
 <OpenGraph
@@ -55,16 +55,7 @@
   }}
 />
 
-<div class="flex justify-center flex-wrap gap-micro">
-  {#each cards as card}
-    <Card
-      headingLevel="h2"
-      class="flex items-center w-[270px] sm:w-[296px] sm:px-large"
-      titleClassNames="h2"
-      {card}
-    />
-  {/each}
-</div>
+<Benefits {benefits} />
 
 <UsedBy
   class="py-small"

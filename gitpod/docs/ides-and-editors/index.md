@@ -26,13 +26,11 @@ In line with [our ambition to "remove all friction from the developer experience
 
 ## Connecting an IDE/editor to Gitpod
 
-Currently, there are five ways to connect an IDE, editor or command-line session to access your Gitpod workspace:
+The three main ways to edit code or access a Gitpod workspace:
 
-1. **Browser (VS Code)** - Open a Gitpod workspace directly in your browser. The default editor in the browser is VS Code ([configure VS Code with Gitpod](ides-and-editors/vscode-browser)).
-2. **Desktop (SSH copy/paste)** - Simply [copy/paste an SSH command](ides-and-editors/command-line) for a running workspace from the Gitpod dashboard.
-3. **Desktop (VS Code Desktop or JetBrains Gateway)** - Open a Gitpod workspace on desktop using [VS Code Desktop](ides-and-editors/vscode) or using the [JetBrains Gateway](/docs/ides-and-editors/jetbrains-gateway) custom Gitpod plugin.
-4. **Desktop (Local Companion)** - You can also connect to a Gitpod workspace via SSH by installing the [Local Companion](/docs/ides-and-editors/local-companion).
-5. **Browser (Docker Image)** - As [Gitpod supports Docker](config-docker), you can install a custom IDE/editor via a Docker image, and run the IDE/editor as a web server.
+1. **Browser** - Using [VS Code Browser](/docs/ides-and-editors/vscode-browser).
+2. **SSH** - Using an [SSH key](/docs/ides-and-editors/command-line#ssh-key-access) or an [Access Token](/docs/ides-and-editors/command-line#access-token-ssh).
+3. **Desktop** - Using [VS Code Desktop](ides-and-editors/vscode) or [JetBrains Gateway](/docs/ides-and-editors/jetbrains-gateway).
 
 ### Supported IDE/editors
 

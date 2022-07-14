@@ -21,7 +21,10 @@
 </style>
 
 <div class="comparison-wrapper m-0 p-0">
-  <SectionCommon title="How does the setup affect their work?">
+  <SectionCommon
+    title="How does the setup affect their work?"
+    isTitleADeepLink={true}
+  >
     <FeatureTable slot="content" tableData={localComparison} />
   </SectionCommon>
 </div>

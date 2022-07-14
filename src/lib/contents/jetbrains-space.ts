@@ -309,6 +309,7 @@ export const jetbrainsQuote: Quote = {
   jobTitle: "CEO at JetBrains",
   companyLogo: Jetbrains,
   companyLogoProps: {
+    isAQuoteLogo: true,
     isDark: true,
   },
   img: {

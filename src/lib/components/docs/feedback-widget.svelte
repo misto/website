@@ -17,12 +17,16 @@
   const submitFeedback = async () => {
     isSubmittedOnce = true;
 
-    trackEvent("feedback_submitted", {
-      score: selectedEmotion,
-      feedback: note,
-      url: window.location.href,
-      path: window.location.pathname,
-    });
+    trackEvent(
+      "feedback_submitted",
+      {
+        score: selectedEmotion,
+        feedback: note,
+        url: window.location.href,
+        path: window.location.pathname,
+      },
+      true
+    );
 
     const response = await fetch("/.netlify/functions/feedback", {
       method: "post",

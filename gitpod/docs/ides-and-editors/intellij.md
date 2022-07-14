@@ -22,7 +22,7 @@ title: IntelliJ IDEA
 1. **Install [JetBrains Gateway](https://www.jetbrains.com/help/idea/remote-development-a.html#gateway)** - With the [JetBrains Gateway and Gitpod](jetbrains-gateway) plugin you can create and manage your latest 20 Gitpod workspaces.
 2. **Install the Gitpod plugin** - Open JetBrains Gateway and you'll see the Gitpod logo on the main page. Click "install" to install the [Gitpod plugin](https://plugins.jetbrains.com/plugin/18438-gitpod-gateway) for JetBrains Gateway.
 3. **Update your Gitpod preferences** - Select {title} on the [Gitpod preferences page](https://gitpod.io/preferences) which will set {title} as your default IDE for future workspace starts.
-4. **Start (or restart) your workspace** - Either start a workspace directly from within the [JetBrains Gateway](jetbrains-gateway) via the Gitpod plugin **OR** open a new workspace direclty in Gitpod where on workspace start you will be prompted to open {title} for that workspace.
+4. **Start (or restart) your workspace** - Either start a workspace directly from within the [JetBrains Gateway](jetbrains-gateway) via the Gitpod plugin **OR** open a new workspace directly in Gitpod where on workspace start you will be prompted to open {title} for that workspace.
 
 <figure>
 <video playsinline autoplay no-controls loop muted class="shadow-medium w-full rounded-xl max-w-3xl mt-x-small" alt="Updating Gitpod IDE preferences to {title}" src="/images/editors/select-jetbrains-ide.mp4"></video>
@@ -125,7 +125,7 @@ When you open the project {title} starts indexing to load modules and
 enable the core functionality like code completion and navigation.
 Depending on the size of your project indexing speed can vary significantly.
 
-You can speed up the indexing of a project by applying these [general recommendations](https://www.jetbrains.com/help/go/indexing.html).
+You can speed up the indexing of a project by applying these [general recommendations](https://www.jetbrains.com/help/idea/indexing.html).
 Gitpod prebuilds allow you to improve it further by indexing before you start a new workspace.
 
 To leverage it:
@@ -144,6 +144,20 @@ jetbrains:
 
 The `version` property allows you to control whether to index for `stable`, `latest`, or `both` versions of {title} compatible with Gitpod.
 Users can switch between `stable` and `latest` versions of {title} on the [user preferences](https://gitpod.io/preferences) page.
+
+## Configure JVM options
+
+> Configuration of JVM options is currently in [Alpha](/docs/references/gitpod-releases) · [Send feedback](https://github.com/gitpod-io/gitpod/issues/8704).
+
+You can adjust JVM options for {title} backend, especially if you want to increase the `-Xmx` memory size. For example:
+
+```yaml
+jetbrains:
+  intellij:
+    vmoptions: "-Xmx4g"
+```
+
+For more detailed information on JVM options, refer to [Common JVM Options](https://www.jetbrains.com/help/idea/tuning-the-ide.html#common-jvm-options) from JetBrains documentation.
 
 ## FAQ
 

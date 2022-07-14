@@ -10,15 +10,15 @@ body:
   - type: textarea
     id: description
     attributes:
-      label: Describe your feature
-      description: In as much detail as possible, please tell us about your feature.
+      label: Describe your feature request
+      description: In as much detail as possible, please tell us about your feature request.
     validations:
       required: true
   - type: textarea
     id: userimpact
     attributes:
       label: User impact
-      description: How does your feature impact the user experience?
+      description: How does this new feature impact the user experience?
     validations:
       required: true
   - type: textarea

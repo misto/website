@@ -174,9 +174,9 @@ Then add a new file called `.gitpod.dockerfile` at the root of your repository, 
 ```dockerfile
 FROM gitpod/workspace-full
 
-RUN sudo apt-get update \\
- && sudo apt-get install -y \\
-    tool \\
+RUN sudo apt-get update \
+ && sudo apt-get install -y \
+    tool \
  && sudo rm -rf /var/lib/apt/lists/*
 ```
 
@@ -195,7 +195,7 @@ To get PostgreSQL for your project, you can use our dedicated [PostgreSQL image]
 Simply base your `.gitpod.dockerfile` on:
 
 ```dockerfile
-FROM gitpod/workspace-postgres
+FROM gitpod/workspace-postgresql
 ```
 
 <br>
@@ -240,9 +240,9 @@ To install Redis for your project, simply add these instructions to your `.gitpo
 FROM gitpod/workspace-full
 
 # Install Redis.
-RUN sudo apt-get update \\
- && sudo apt-get install -y \\
-  redis-server \\
+RUN sudo apt-get update \
+ && sudo apt-get install -y \
+  redis-server \
  && sudo rm -rf /var/lib/apt/lists/*
 ```
 
@@ -348,13 +348,13 @@ However, if the preview opens too soon, you might see an error like this:
 
 > Port 8080 didn't respond
 
-If you'd like a task to run only when a given port becomes active, you can use `gp await-port <port>` like so:
+If you'd like a task to run only when a given port becomes active, you can use `gp ports await <port>` like so:
 
 ```yml
 tasks:
   - init: npm install
     command: npm run server 3000
-  - command: gp await-port 3000 && gp preview $(gp url 3000)
+  - command: gp ports await 3000 && gp preview $(gp url 3000)
 ```
 
 <br>

@@ -36,11 +36,14 @@
 
     isSubmittedOnce = true;
 
-    trackIdentity({
-      email_untrusted: formData.email.value,
-    });
+    trackIdentity(
+      {
+        email_untrusted: formData.email.value,
+      },
+      true
+    );
 
-    trackEvent("email_submitted", {});
+    trackEvent("email_submitted", {}, true);
 
     const response = await fetch("/.netlify/functions/signup", {
       method: "post",

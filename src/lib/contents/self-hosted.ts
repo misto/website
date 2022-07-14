@@ -14,7 +14,7 @@ export const pricingPlans: Pricing[] = [
     title: "Community",
     price: `${isEurope() ? "€" : "$"}0`,
     btnText: "Install now",
-    btnHref: "/docs/self-hosted/latest",
+    btnHref: "/community-license",
     trackingName: "community",
     plans: [
       {
@@ -47,8 +47,8 @@ export const pricingPlans: Pricing[] = [
   },
   {
     title: "Professional",
-    price: isEurope() ? "€29" : "$35",
-    duration: "per user/month",
+    price: isEurope() ? "Custom" : "Custom",
+    duration: "",
     features: [
       "Starts after the 11th user",
       {
@@ -245,7 +245,7 @@ export const professionalPlanTableData: FeatureTableColumn = {
   isHighlighted: true,
   header: {
     headline: "Professional",
-    subtitle: `${isEurope() ? "€29" : "$35"} per user/month`,
+    subtitle: `${isEurope() ? "Custom Pricing" : "Custom Pricing"}`,
     isMostPopular: true,
   },
   link: {
@@ -499,12 +499,12 @@ export const selfhostedFAQ: FAQ = {
     {
       title: "How do I move from plan to plan?",
       content:
-        '<p> You can use Gitpod Self-Hosted Community on your own infrastructure for free for unlimited users. If you have less than 10 users, you will automatically be able to also use additional features like unlimited prebuilds, shared workspaces, snapshots and an admin dashboard.  You lose these features once you go above 10 users.</p> <p> In case you want to enjoy these features with more than 10 users, you can upgrade to to the Professional Plan at any time by contacting our sales team: Either request a license <a href="/enterprise-license" >request a license</a > key directly or <a href="/contact/sales">get in touch</a> if you have any questions. </p>',
+        '<p> You can use Gitpod Self-Hosted Community on your own infrastructure for free for unlimited users. If you have less than 10 users, you will automatically be able to also use additional features like unlimited prebuilds, shared workspaces, snapshots and an admin dashboard.  You lose these features once you go above 10 users.</p> <p> In case you want to enjoy these features with more than 10 users, you can upgrade to the Professional Plan at any time by contacting our sales team: Either <a href="/enterprise-license" >request a license</a > key directly or <a href="/contact/sales">get in touch</a> if you have any questions. </p>',
     },
     {
       title: "What is the difference between the two Community plans?",
       content:
-        "<p> On an implementation level, these plans are the same. You use the same actual license for both. However, the feature set differs depending on the amount of users you have. For up to ten users you gain access to additional features. If you have more users than this, you automatically loose access to these features. Alternatively, you can purchase the Professional plan.</p>",
+        "<p> On an implementation level, these plans are the same and you use the same actual license for both. However, the feature set differs depending on the amount of users you have. For up to ten users you gain access to additional features. If you have more than ten users, you automatically lose access to these features. Alternatively, you can purchase the Professional plan.</p>",
     },
     {
       title: "Can I add more users to my plan at any time?",

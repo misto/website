@@ -39,7 +39,8 @@ export const MENU: MenuEntry[] = [
     M("Contexts", "context-urls"),
     M("Collaboration & Sharing", "sharing-and-collaboration"),
     M("Teams & Projects", "teams-and-projects", [], "beta"),
-    M("Create a team plan", "teams"),
+    M("Team Billing", "team-billing", [], "beta"),
+    M("Create a Team Plan", "teams", []),
   ]),
   M("IDEs & Editors", "ides-and-editors", [
     M("VS Code Browser", "ides-and-editors/vscode-browser"),
@@ -56,7 +57,7 @@ export const MENU: MenuEntry[] = [
     M("JetBrains Gateway", "ides-and-editors/jetbrains-gateway", [], "beta"),
     M("VS Code Extensions", "ides-and-editors/vscode-extensions"),
     M("VS Code Settings Sync", "ides-and-editors/settings-sync"),
-    M("Command Line (e.g. Vim)", "ides-and-editors/command-line", []),
+    M("Command Line (SSH)", "ides-and-editors/command-line", []),
     M(
       "Configure your IDE/editor",
       "ides-and-editors/configure-your-editor-ide",
@@ -96,14 +97,31 @@ export const MENU: MenuEntry[] = [
     M("Browser Extension", "browser-extension"),
   ]),
   M("Gitpod Self-Hosted", "self-hosted/latest", [
-    M("Getting Started", "self-hosted/latest/getting-started"),
-    M("Cluster Set-Up", "self-hosted/latest/cluster-set-up"),
-    M("Required Components", "self-hosted/latest/required-components"),
-    M("Advanced Installation", "self-hosted/latest/advanced"),
-    M("Updating Gitpod", "self-hosted/latest/updating"),
-    M("Troubleshooting", "self-hosted/latest/troubleshooting"),
-    M("Telemetry", "self-hosted/latest/telemetry"),
-    M("Monitoring", "self-hosted/latest/monitoring"),
+    M("Installation Guides", "self-hosted/latest/installation-guides", [
+      M("Local Preview", "self-hosted/latest/local-preview", [], "alpha"),
+      M("Getting Started", "self-hosted/latest/getting-started"),
+      M(
+        "Reference Architectures",
+        "self-hosted/latest/reference-architecture",
+        [],
+        "alpha"
+      ),
+      M("Cluster Set-Up", "self-hosted/latest/cluster-set-up"),
+      M("Advanced Installation", "self-hosted/latest/advanced"),
+    ]),
+    M("Operational Guides", "self-hosted/latest/operational-guides", [
+      M("Updating", "self-hosted/latest/updating"),
+      M("Monitoring", "self-hosted/latest/monitoring"),
+    ]),
+    M("Troubleshooting", "self-hosted/latest/troubleshooting", [
+      M("Support Bundles", "self-hosted/latest/support-bundle", []),
+      M("Support Patches", "self-hosted/latest/support-patches", []),
+    ]),
+    M("Reference", "self-hosted/latest/reference", [
+      M("Required Components", "self-hosted/latest/required-components"),
+      M("Releases", "self-hosted/latest/releases"),
+      M("Telemetry", "self-hosted/latest/telemetry"),
+    ]),
   ]),
   M("References", "references", [
     M(".gitpod.yml", "references/gitpod-yml"),
@@ -114,6 +132,7 @@ export const MENU: MenuEntry[] = [
     M("Gitpod Releases", "references/gitpod-releases"),
   ]),
   M("Contribute", "contribute", [
+    M("Content", "contribute/content"),
     M("Documentation", "contribute/documentation"),
     M("Features & Patches", "contribute/features-and-patches"),
   ]),

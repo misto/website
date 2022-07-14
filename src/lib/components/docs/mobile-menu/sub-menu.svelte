@@ -5,11 +5,12 @@
 
   // States
   import topicsState from "../states/topics-state";
-  import subMenuState from "../states/sub-menu-state";
+  let subMenuState: boolean = false;
 
   import type { MenuEntry } from "$lib/types/menu-entry.type";
   import Arrow from "$lib/components/svgs/arrow.svelte";
   export let currentSection: MenuEntry = null;
+  export let displayNavigation: boolean = true;
 </script>
 
 <style lang="scss">
@@ -55,35 +56,36 @@
   }
 </style>
 
-<button
-  class="back-button flex items-center text-important w-full py-3"
-  type="button"
-  on:click={() => {
-    $topicsState = true;
-    $subMenuState = false;
-  }}
->
-  <div class="back-button__icon">
-    <Arrow width="12" height="12" class="rotate-90" />
-  </div>
-  All topics
-</button>
-
+{#if displayNavigation}
+  <button
+    class="back-button flex items-center text-important w-full py-3"
+    type="button"
+    on:click={() => {
+      $topicsState = true;
+      subMenuState = false;
+    }}
+  >
+    <div class="back-button__icon">
+      <Arrow width="12" height="12" class="rotate-90" />
+    </div>
+    All topics
+  </button>
+{/if}
 {#if currentSection?.subMenu}
   <div class="sub-menu-container bg-card">
     <button
       class="toggle-button w-full"
       type="button"
       aria-controls="sub-menu"
-      aria-expanded={$subMenuState}
-      on:click={() => ($subMenuState = !$subMenuState)}
+      aria-expanded={subMenuState}
+      on:click={() => (subMenuState = !subMenuState)}
     >
       <div class="toggle-button__label text-important">
         {currentSection?.title}
       </div>
       <div class="toggle-button__icon">
         <Arrow
-          class={$subMenuState ? "rotate-180" : ""}
+          class={subMenuState ? "rotate-180" : ""}
           height="15"
           width="15"
         />
@@ -93,12 +95,12 @@
     <div
       aria-label={currentSection?.title}
       role="navigation"
-      class={`px-4 ${$subMenuState ? "block" : "hidden"}`}
+      class={`px-4 ${subMenuState ? "block" : "hidden"}`}
       id="sub-menu"
     >
       <ul class="divide-y divide-divider">
         {#each currentSection?.subMenu as sub}
-          <MenuItem href={sub.path} onClick={() => ($subMenuState = false)}>
+          <MenuItem href={sub.path} onClick={() => (subMenuState = false)}>
             {sub.title}
             {#if sub.status}
               <Pill

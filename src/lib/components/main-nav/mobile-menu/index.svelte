@@ -5,10 +5,9 @@
 
   import LoginButton from "../login-button.svelte";
   import NavItem from "../nav-item.svelte";
-  import SignUpButton from "../sign-up-button.svelte";
   import DashboardButton from "../dashboard-button.svelte";
   import menuState from "./state";
-  import ContactLinkMobile from "./contact-link-mobile.svelte";
+  import DemoButton from "../demo-button.svelte";
 
   export let navItems = [];
   export let isLoggedIn: boolean;
@@ -58,12 +57,11 @@
     {#each navItems as navItem}
       <NavItem {navItem} />
     {/each}
-    <ContactLinkMobile />
     {#if isLoggedIn}
       <DashboardButton />
     {:else}
       <LoginButton />
-      <SignUpButton
+      <DemoButton
         class="text-lg h-8 w-28 button flex-shrink-0"
         on:click={toggle}
       />

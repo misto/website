@@ -35,6 +35,12 @@
         }
       }
     }
+
+    if (storageKey === "cookie-consent-bar" && showBanner) {
+      document.body.classList.add("consent-is-shown");
+    } else {
+      document.body.classList.remove("consent-is-shown");
+    }
   });
 </script>
 

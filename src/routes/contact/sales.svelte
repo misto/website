@@ -4,7 +4,7 @@
 
 <script lang="ts">
   import type { Form } from "$lib/types/form.type";
-  import type { Email } from "../../functions/submit-form";
+  import type { Email, EmailToType } from "../../functions/submit-form";
   import OpenGraph from "$lib/components/open-graph.svelte";
   import SubmissionSuccess from "$lib/components/submission-success.svelte";
   import Section from "$lib/components/section.svelte";
@@ -16,11 +16,12 @@
   import Select from "$lib/components/ui-library/select";
   import Card from "$lib/components/ui-library/card";
   import Button from "$lib/components/ui-library/button";
-  import { noOfEngineers } from "$lib/contents/contact";
+  import { cloudPlatforms, noOfEngineers } from "$lib/contents/contact";
   import { scrollToElement } from "$lib/utils/helpers";
   import { tick } from "svelte";
   import Unleashing from "$lib/components/contact/unleashing.svelte";
   import { afterNavigate } from "$app/navigation";
+  import InputsHalf from "./inputs-half.svelte";
 
   const selfHostingSubject = "Self-hosting";
   const otherSubject = "Other";
@@ -32,12 +33,6 @@
     "Reselling",
     otherSubject,
   ];
-  const cloudPlatforms = [
-    "Amazon Elastic Kubernetes Service (EKS)",
-    "Google Kubernetes Engine (GKE)",
-    "Kubernetes",
-    "Microsoft Azure Kubernetes Service (AKS)",
-  ];
 
   let sectionStart: HTMLElement;
   let isCloudPlatformsSelectShown = false;
@@ -46,6 +41,10 @@
     valid: false,
     value: "",
   };
+
+  let isSubmissionInProgress: boolean = false;
+
+  let toType: EmailToType = "sales";
 
   const formData: Form = {
     selectedSubject: {
@@ -111,18 +110,26 @@
       scrollToElement(sectionStart, ".error");
       return;
     }
+    isSubmissionInProgress = true;
 
-    trackIdentity({
-      name_untrusted: formData.name.value,
-      email_untrusted: formData.workEmail.value,
-    });
+    trackIdentity(
+      {
+        name_untrusted: formData.name.value,
+        email_untrusted: formData.workEmail.value,
+      },
+      true
+    );
 
-    trackEvent("message_submitted", {
-      subject: formData.selectedSubject.value,
-    });
+    trackEvent(
+      "message_submitted",
+      {
+        subject: formData.selectedSubject.value,
+      },
+      true
+    );
 
     const email: Email = {
-      toType: "sales",
+      toType,
       replyTo: {
         email: formData.workEmail.value,
         name: formData.name.value,
@@ -149,9 +156,23 @@
     };
 
     try {
+      const emailToSend =
+        toType === "community-license"
+          ? {
+              ...email,
+              data: {
+                company: formData.companyWebsite.value,
+                noOfEngineers: formData.noOfEngineers.value,
+                cloudInfrastructure: formData.cloudInfrastructure
+                  ? formData.cloudInfrastructure.value
+                  : "",
+                message: formData.message.value,
+              },
+            }
+          : email;
       const response = await fetch("/.netlify/functions/submit-form", {
         method: "POST",
-        body: JSON.stringify(email),
+        body: JSON.stringify(emailToSend),
       });
       if (response.ok) {
         isEmailSent = true;
@@ -165,6 +186,18 @@
       console.error(error);
     }
   };
+
+  $: {
+    if (
+      formData.noOfEngineers.value === "1-10" &&
+      (formData.selectedSubject.value === selfHostingSubject ||
+        formData.selectedSubject.value === demoSubject)
+    ) {
+      toType = "community-license";
+    } else {
+      toType = "sales";
+    }
+  }
 </script>
 
 <style lang="postcss">
@@ -198,15 +231,6 @@
       min-width: 650px;
     }
   }
-
-  .input-halfs {
-    @apply sm:flex sm:justify-between;
-
-    & > * {
-      flex: 0 0 46%;
-      @apply mt-x-small sm:mt-0;
-    }
-  }
 </style>
 
 <OpenGraph
@@ -235,8 +259,12 @@
       <div bind:this={sectionStart} data-analytics={`{"dnt":true}`}>
         {#if isEmailSent}
           <SubmissionSuccess
-            title="Thank you for your message"
-            text="We received your message. Our team will take a look and get back to you as soon as possible."
+            title={toType === "community-license"
+              ? "Check your email"
+              : "Thank you for your message"}
+            text={toType === "community-license"
+              ? "We've just sent you your license key via email. Enjoy!"
+              : "We received your message. Our team will take a look and get back to you as soon as possible."}
           />
         {:else}
           <form on:submit|preventDefault={handleSubmit} novalidate>
@@ -284,7 +312,7 @@
                   class="max-w-md"
                 />
               {/if}
-              <div class="input-halfs">
+              <InputsHalf>
                 <div>
                   <Input
                     hasError={isFormDirty && !formData.name.valid}
@@ -318,8 +346,8 @@
                     autocomplete="email"
                   />
                 </div>
-              </div>
-              <div class="input-halfs">
+              </InputsHalf>
+              <InputsHalf>
                 <div>
                   <Input
                     label="Company website*"
@@ -352,7 +380,7 @@
                     options={noOfEngineers}
                   />
                 </div>
-              </div>
+              </InputsHalf>
               <div>
                 <Textarea
                   label="Your message*"
@@ -391,8 +419,15 @@
                 variant="cta"
                 size="medium"
                 type="submit"
-                disabled={isFormDirty && !isFormValid}>Contact sales</Button
+                disabled={isFormDirty && !isFormValid}
+                isLoading={isSubmissionInProgress}
               >
+                {#if toType === "community-license"}
+                  Receive license
+                {:else}
+                  Contact sales
+                {/if}
+              </Button>
               {#if isFormDirty && !isFormValid}
                 <legend class="text-xs text-error block mt-1 mb-2">
                   Please fill out all required fields above

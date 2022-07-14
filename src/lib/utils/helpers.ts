@@ -43,3 +43,9 @@ export const isAnExternalLink = (href: string) => href.startsWith("http");
 export const removeTrailingSlash = (site: string) => {
   return site.replace(/\/$/, "");
 };
+
+export const sanitizeSelfHosted = (testString: string) => {
+  return /self-hosted\/\d\.\d\.\d/.test(testString)
+    ? testString.replace(/\d\.\d\.\d/, "latest")
+    : testString;
+};

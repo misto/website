@@ -9,6 +9,9 @@ import remarkEmbedVideo from "./src/lib/utils/remark-embed-video.js";
 import remarkLinkWithImageAsOnlyChild from "./src/lib/utils/remark-link-with-image-as-only-child.js";
 import remarkHeadingsPermaLinks from "./src/lib/utils/remark-headings-permalinks.js";
 import { toString } from "mdast-util-to-string";
+import rehypeWrap from "rehype-wrap-all";
+import { highlightCode } from "./src/lib/utils/highlight.js";
+import { mdsvexGlobalComponents } from "./src/lib/utils/mdsvex-global-components.js";
 import { h } from "hastscript";
 
 /** @type {import('@sveltejs/kit').Config} */
@@ -56,8 +59,16 @@ const config = {
   // options passed to svelte.preprocess (https://svelte.dev/docs#svelte_preprocess)
   preprocess: [
     sveltePreprocess({ postcss: true, scss: true, preserve: ["ld+json"] }),
+    mdsvexGlobalComponents({
+      dir: `$lib/components`,
+      list: [["CodeFence", "code-fence.svelte"]],
+      extensions: [".md"],
+    }),
     mdsvex({
       extensions: [".md"],
+      highlight: {
+        highlighter: highlightCode,
+      },
       layout: {
         blog: "./src/lib/components/blog/blog-content-layout.svelte",
         docs: "./src/lib/components/docs/docs-content-layout.svelte",
@@ -65,7 +76,9 @@ const config = {
         customers:
           "./src/lib/components/customers/customers-content-layout.svelte",
       },
-      rehypePlugins: [],
+      rehypePlugins: [
+        [rehypeWrap, { selector: "table", wrapper: "div.overflow-auto" }],
+      ],
       remarkPlugins: [
         [
           remarkExternalLinks,

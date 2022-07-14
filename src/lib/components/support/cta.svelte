@@ -9,7 +9,16 @@
   class="max-w-[810px] mx-auto shadow-normal p-xx-small sm:p-x-small md:p-small"
 >
   <section class="flex flex-col sm:flex-row items-center sm:max-w-2xl mx-auto">
-    <img src="/images/support/monitor.png" alt="Monitor" class="w-36" />
+    <img
+      src="/images/support/monitor.png"
+      alt="Monitor"
+      class="w-40 dark:hidden"
+    />
+    <img
+      src="/images/support/monitor-dark.png"
+      alt="Monitor"
+      class="w-40 hidden dark:block transform scale-110"
+    />
     <div class="mt-medium sm:ml-large sm:mt-0">
       <h2 class="h4">Did you face a bug or do you have a support request?</h2>
       <p class="mb-x-small">

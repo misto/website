@@ -60,3 +60,10 @@ export const noOfEngineers = [
   "501-1000",
   "+1000",
 ];
+
+export const cloudPlatforms = [
+  "Amazon Elastic Kubernetes Service (EKS)",
+  "Google Kubernetes Engine (GKE)",
+  "Kubernetes",
+  "Microsoft Azure Kubernetes Service (AKS)",
+];

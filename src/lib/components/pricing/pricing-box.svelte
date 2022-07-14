@@ -64,7 +64,7 @@
     {/if}
     <h2 class="h4 !mb-0">{title}</h2>
     <div
-      class="h2 font-bold text-important flex items-center justify-center mt-macro"
+      class="h4 text-[#666564] dark:text-[#999795] font-bold text-important flex items-center justify-center mt-macro"
     >
       {@html price}
     </div>

@@ -7,6 +7,6 @@
 
 <h2 class="h3 text-center mb-8">{title}</h2>
 <p class="text-center">
-  {text}
+  {@html text}
 </p>
 <GitpodIllustration />
