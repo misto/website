@@ -1,3 +1,3 @@
 # Architecture Decision Records
 
-- [1. multicloud-support](0001-multicloud-support.md)
+- [1. migrate-to-sveltekit-endpoints](0001-migrate-to-sveltekit-endpoints.md)
