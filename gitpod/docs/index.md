@@ -37,5 +37,3 @@ data={{
 <Timeline />
 
 To see all updates view our [changelog](/changelog)
-
-<!-- Test Test Test -->

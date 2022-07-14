@@ -3,10 +3,10 @@ import { commentMarker } from "mdast-comment-marker";
 
 export default () => (tree) => {
   visit(tree, (node) => {
-    const isComment = commentMarker(node);
-    if (isComment) {
+    const comment = commentMarker(node);
+    if (comment && comment.name === "Component") {
       node.type = "html";
-      node.value = `<Test value="test"/>`;
+      node.value = `<${comment.attributes}/>`;
     }
   });
   return tree;
