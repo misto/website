@@ -13,6 +13,7 @@ import rehypeWrap from "rehype-wrap-all";
 import { highlightCode } from "./src/lib/utils/highlight.js";
 import { mdsvexGlobalComponents } from "./src/lib/utils/mdsvex-global-components.js";
 import { h } from "hastscript";
+import parseComponents from "./src/lib/utils/parse-components.js";
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -61,7 +62,10 @@ const config = {
     sveltePreprocess({ postcss: true, scss: true, preserve: ["ld+json"] }),
     mdsvexGlobalComponents({
       dir: `$lib/components`,
-      list: [["CodeFence", "code-fence.svelte"]],
+      list: [
+        ["CodeFence", "code-fence.svelte"],
+        ["Test", "test.svelte"],
+      ],
       extensions: [".md"],
     }),
     mdsvex({
@@ -104,6 +108,8 @@ const config = {
         remarkSetImagePath,
         remarkLinkWithImageAsOnlyChild,
         remarkHeadingsPermaLinks,
+        parseComponents,
+
         [
           remarkEmbedVideo,
           {

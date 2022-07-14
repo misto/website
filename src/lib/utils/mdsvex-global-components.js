@@ -66,7 +66,8 @@ export const mdsvexGlobalComponents = (options = {}) => {
       if (!isValidPass) {
         return { code: content };
       }
-      return { code: `${imports}\n${content}` };
+      const code = `${imports}\n${content}`;
+      return { code };
     },
   };
   return preprocessor;
