@@ -1,12 +1,19 @@
 <script lang="ts">
   import Arrow from "$lib/components/svgs/arrow.svelte";
   import { links } from "$lib/contents/dropdown";
+  import { page } from "$app/stores";
 
   let shown: boolean = false;
 </script>
 
+<style lang="postcss">
+  .active {
+    @apply text-important;
+  }
+</style>
+
 <button
-  class="flex items-center text-p-large text-left text-important hover:bg-sand-dark focus:bg-sand-dark dark:hover:bg-light-black dark:focus:bg-light-black"
+  class="flex items-center text-p-large text-left text-important dark:text-body dark:hover:text-important dark:focus:text-important hover:bg-sand-light focus:bg-sand-light dark:hover:bg-light-black dark:focus:bg-light-black"
   on:click={() => (shown = !shown)}
 >
   Resources
@@ -21,7 +28,10 @@
     {#each links as { href, text }}
       <a
         {href}
-        class="py-macro no-underline text-important hover:bg-sand-dark focus:bg-sand-dark dark:hover:bg-light-black dark:focus:bg-light-black"
+        class="py-macro no-underline text-important hover:bg-sand-light focus:bg-sand-light dark:hover:bg-light-black dark:focus:bg-light-black"
+        class:active={$page.url.pathname === "/"
+          ? /\/$/.test(href)
+          : href.indexOf($page.url.pathname) >= 0}
       >
         {text}
       </a>

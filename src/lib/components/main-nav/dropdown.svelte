@@ -33,7 +33,14 @@
   a {
     &:hover,
     &:focus {
-      @apply border-divider text-body bg-card;
+      @apply border-divider text-body bg-sand-light;
+    }
+  }
+
+  :global(body.dark) a {
+    &:hover,
+    &:focus {
+      @apply bg-card;
     }
   }
 
