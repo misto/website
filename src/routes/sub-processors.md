@@ -20,5 +20,8 @@
 | Google, LLC             | United States of America | Business Emails and Collaboration                                                                  |
 | Slack Technologies, LLC | United States of America | Instant Messaging and Collaboration                                                                |
 | FrontApp, Inc           | United States of America | Platform to handle customer support inquiries and questions                                        |
+| Salesforce, Inc         | United States of America | Customer Relationship Management                                                                   |
+| Twillo, Inc             | United States of America | Customer Data Platform                                                                             |
+| Pearberry Software, Inc | United States of America | Email service for Account Notifications, Product Updates and Newsletters                           |
 
 </div>
