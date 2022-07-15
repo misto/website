@@ -7,7 +7,7 @@
   export { clazz as class };
   export let storageKey: string;
   export let display: boolean = false;
-  export let location: "top" | "bottom" = "top";
+  export let location: "top" | "bottom" | "custom";
 
   let showBanner = false;
 
@@ -65,7 +65,9 @@
 {#if showBanner}
   <div
     transition:slide
-    class="{location} px-4 py-2 flex justify-between items-center w-full bg-sand-dark dark:bg-card shadow-sm text-xs sm:text-sm md:text-base {clazz}"
+    class:top={location === "top"}
+    class:bottom={location === "bottom"}
+    class={clazz}
   >
     <slot {closeBanner} />
   </div>

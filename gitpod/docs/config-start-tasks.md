@@ -21,6 +21,8 @@ To get the most out of ephemeral developer environments, it is important to let 
 
 Tasks are shell scripts that run on top of the Docker image you configure (learn more about [custom Docker images](/docs/config-docker)).
 
+`youtube: fA2fpqP1xaM`
+
 ## Execution order
 
 With Gitpod, you have the following three types of tasks:

@@ -109,13 +109,12 @@
 
     &::after {
       content: "";
-      @apply absolute;
+      @apply absolute bg-card transition-all duration-200;
       border-radius: inherit;
       top: 1px;
       bottom: 1px;
       left: 1px;
       right: 1px;
-      @apply bg-card;
       z-index: -2;
     }
   }
@@ -129,6 +128,12 @@
   .stroked-sand {
     &::after {
       @apply bg-sand-dark dark:bg-card;
+    }
+  }
+
+  .stroked-divider {
+    &::after {
+      @apply bg-divider dark:bg-card;
     }
   }
 

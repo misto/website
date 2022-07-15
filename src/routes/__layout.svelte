@@ -43,7 +43,7 @@
   onMount(() => {
     Cookies.set(cookies.NECESSARY, "true", { expires: 365 });
 
-    if (Cookies.get(cookies.ANALYTICAL) !== "false" && !isEurope()) {
+    if (Cookies.get(cookies.ANALYTICAL) !== undefined && !isEurope()) {
       Cookies.set(cookies.ANALYTICAL, "true", { expires: 365 });
     }
 

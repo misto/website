@@ -34,8 +34,8 @@ export function highlightCode(code, lang, meta) {
   const highlighted = _lang
     ? escapeSvelte(Prism.highlight(code, Prism.languages[_lang], _lang))
     : code;
-  return `<CodeFence code={${JSON.stringify(highlighted)}} 
-  rawCode={${JSON.stringify(code)}} 
+  return `<CodeFence code={${JSON.stringify(highlighted)}}
+  rawCode={${JSON.stringify(code)}}
   lang={"${_lang}"}
   ${title ? `title={"${title}"}` : ""}
   />`;

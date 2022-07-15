@@ -43,19 +43,19 @@
   class:disabled
   class:loading={isLoading}
   class="
-    transition-all 
-    duration-200 
-    delay-[50ms] 
-    inline-block 
-    text-center 
+    transition-all
+    duration-200
+    delay-[50ms]
+    inline-block
+    text-center
     shadow-light
     {variant !== 'gray' ? 'dark:shadow-none' : 'dark:shadow-slight'}
-    font-semibold 
+    font-semibold
     whitespace-nowrap
     bg-none
     text-black
-    {classMap[variant]} 
-    {classMap[size]} 
+    {classMap[variant]}
+    {classMap[size]}
     {className}
     {disabled ? classMap.disabled : ''}
   "

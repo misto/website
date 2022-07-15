@@ -7,6 +7,7 @@ export type FeatureTocItem = {
 };
 
 export type FeatureItemDetail = {
+  isHeadline?: boolean;
   term: string;
   list?: string[];
   text?: string;
@@ -41,8 +42,10 @@ export type FeatureTableColumn = {
 };
 
 export type FeatureTableToc = {
-  type: FeatureTocItemType;
-  data: FeatureTocItem;
+  isHeadline?: boolean;
+  headlineText?: string;
+  type?: FeatureTocItemType;
+  data?: FeatureTocItem;
 };
 
 export type FeatureTable = {

@@ -95,6 +95,7 @@
   afterNavigate(() => {
     if (window.location.search.includes("get-a-demo")) {
       formData.selectedSubject.value = demoSubject;
+      formData.selectedSubject.valid = true;
     }
   });
 

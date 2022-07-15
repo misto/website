@@ -31,6 +31,8 @@ For these to be applied to a resource, these must match the `apiVersion`, `kind`
 
 Any properties in `metadata.annotations` and `metadata.labels` are then applied to the matching resource(s). These are key/value maps, where both key and value are strings.
 
+**IMPORTANT** You cannot directly customize the properties on a `Pod`. Instead, these will inherit the annotation/label customization from its parent (`Deployment`, `DaemonSet`, `StatefulSet`, `Job` etc).
+
 ### Environment variables
 
 For environment variables, these must match `metadata.name`. `apiVersion` and `kind` are ignored as these are only implemented on resources with containers.
@@ -87,7 +89,6 @@ metadata:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  creationTimestamp: null
   labels:
     app: gitpod
     component: ws-manager
@@ -99,6 +100,18 @@ metadata:
   name: ws-manager
 spec:
   template:
+    # The custom annotations/labels are inherited from the Deployment spec
+    metadata:
+      annotations:
+        appliedToAll: value
+        gitpod.io/checksum_config: xxxx
+        hello: ws-manager
+      labels:
+        app: gitpod
+        component: ws-manager
+        appliedToAll: value
+        hello: ws-manager
+      name: ws-manager
     spec:
       containers:
         - env:

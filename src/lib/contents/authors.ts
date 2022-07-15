@@ -365,6 +365,14 @@ export const authors: { [idx: string]: Author } = {
     },
     description: "",
   },
+  "Siddhant-K-code": {
+    name: "Siddhant Khare",
+    socialProfiles: {
+      github: "Siddhant-K-code",
+      twitter: "Siddhant_K_code",
+    },
+    description: "",
+  },
 };
 
 export const authorSocialMediaLinks: SocialMediaLinks = Object.entries(
