@@ -108,4 +108,4 @@ Here is how to register your Self-Hosted GitLab installation:
 
 <img alt="link new GitLab app to Gitpod" src="https://user-images.githubusercontent.com/372735/91142160-9f54f880-e6b0-11ea-8436-6a9c8bc67d9f.png">
 
-7. Press _Connect_ and go through the GitHub authentication flow to connect your user account.
+7. Press _Connect_ and go through the GitLab authentication flow to connect your user account.
