@@ -13,8 +13,6 @@
   const handleClickOutside = (e: Event) => {
     const target = e.target;
 
-    console.log(target, buttonEl, wrapperEl);
-
     if (target !== buttonEl && target !== wrapperEl && target !== linksGrid) {
       shown = false;
     }
